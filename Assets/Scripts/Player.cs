@@ -23,7 +23,7 @@ public class Player : Entity
     public float MoveSpeed = 1f;
     public float MoveSpeedAir = 0.8f;
     public float JumpHeight = 3f;
-    public float JumpHoldForce = 0.1f;
+    public float JumpHoldHeight = 2f;
 
     [Header("Ground Check")]
     public bool IsGrounded;

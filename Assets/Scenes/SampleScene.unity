@@ -839,14 +839,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Rb: {fileID: 1614462010}
   InputSystem: {fileID: 1614462006}
-  JumpWindow: 0.18
+  JumpWindow: 0.22
   JumpDelay: 0.08
   JumpGravity: 3
   FallGravity: 5
   MoveSpeed: 5
   MoveSpeedAir: 5
   JumpHeight: 1.8
-  JumpHoldForce: 0.35
+  JumpHoldHeight: 0.01
   IsGrounded: 0
   _groundCheck: {fileID: 14778943}
   _groundLayer:

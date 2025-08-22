@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Player_AirState : Player_BaseState
 {
-    public Player_AirState(Player player, StateMachine stateMachine, string stateName) : base(player, stateMachine, stateName){}
+    public Player_AirState(Player player, StateMachine stateMachine, string stateName) : base(player, stateMachine, stateName) { }
 
     public override void Enter()
     {
@@ -15,7 +15,7 @@ public class Player_AirState : Player_BaseState
     }
     public override void LogicUpdate()
     {
-        // Reset IsJumping, enter fallState
+        // Reset IsJumping to enable ground check, enter fallState
         if (_player.Rb.linearVelocityY <= 0f && _stateMachine.CurrentState != _player.FallState)
         {
             _player.IsJumping = false;

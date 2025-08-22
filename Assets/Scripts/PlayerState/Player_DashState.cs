@@ -1,15 +1,24 @@
 using UnityEngine;
 
-public class Player_DashState : MonoBehaviour
+public class Player_DashState : Player_GroundState
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public Player_DashState(Player player, StateMachine stateMachine, string stateName) : base(player, stateMachine, stateName) { }
+
+    public override void Enter()
     {
         
     }
+    
+    public override void PhysicsUpdate()
+    {
 
-    // Update is called once per frame
-    void Update()
+    }
+    public override void LogicUpdate()
+    {
+        base.LogicUpdate();
+    }
+
+    public override void Exit()
     {
         
     }
