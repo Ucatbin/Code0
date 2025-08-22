@@ -23,7 +23,7 @@ public class Player_GroundState : Player_BaseState
         }
 
         // Enter airState as soon as leave the ground
-        if (!_player.IsGrounded)
+        if (!_player.Checker.IsGrounded)
         {
             _stateMachine.ChangeState(_player.AirState);
             return;

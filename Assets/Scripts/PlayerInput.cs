@@ -6,6 +6,7 @@ using UnityEngine.Rendering;
 public class PlayerInput : MonoBehaviour
 {
     [SerializeField] Player _player;
+    
     // Public Input
     public Vector2 MoveInput { get; private set; }
     public bool JumpTrigger { get; private set; }

@@ -8,12 +8,14 @@ public class Player : Entity
     public Player_AirState AirState { get; private set; }
     public Player_JumpState JumpState { get; private set; }
     public Player_FallState FallState { get; private set; }
+    public Player_EdgeState EdgeState { get; private set; }
 
     [Header("Player Component")]
     public Rigidbody2D Rb;
+    public PlayerChecker Checker;
+    public PlayerInput InputSystem;
 
     [Header("InputSystem")]
-    public PlayerInput InputSystem;
     public float JumpWindow = 0.2f;
     public float JumpDelay = 0.06f;
     public float JumpGravity = 3f;
@@ -25,14 +27,9 @@ public class Player : Entity
     public float JumpHeight = 3f;
     public float JumpHoldHeight = 2f;
 
-    [Header("Ground Check")]
-    public bool IsGrounded;
-    [SerializeField] Transform _groundCheck;
-    [SerializeField] LayerMask _groundLayer;
-    [SerializeField] float _groundCheckRadius;
-
     [Header("StateMark")]
     public bool IsJumping;
+    public bool IsHoldingEdge;
 
     protected override void Awake()
     {
@@ -44,6 +41,7 @@ public class Player : Entity
         AirState = new Player_AirState(this, _stateMachine, "InAir");
         JumpState = new Player_JumpState(this, _stateMachine, "Jump");
         FallState = new Player_FallState(this, _stateMachine, "Fall");
+        EdgeState = new Player_EdgeState(this, _stateMachine, "Edged");
 
         _stateMachine.InitState(IdleState);
     }
@@ -59,23 +57,5 @@ public class Player : Entity
     protected override void Update()
     {
         base.Update();
-
-        GroundCheck();
-    }
-
-    void GroundCheck()
-    {
-        IsGrounded = !IsJumping &&
-            Physics2D.OverlapCircle(
-                _groundCheck.position,
-                _groundCheckRadius,
-                _groundLayer
-            );
-    }
-
-    void OnDrawGizmos()
-    {
-        Gizmos.color = IsGrounded ? Color.green : Color.red;
-        Gizmos.DrawWireSphere(_groundCheck.position, _groundCheckRadius);
     }
 }
