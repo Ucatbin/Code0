@@ -19,8 +19,12 @@ public class Player_IdleState : Player_GroundState
         base.LogicUpdate();
 
         // Change to moveState when have InputX and is not holding jump
-        if (_player.InputSystem.MoveInput.x != 0f && !_player.InputSystem.JumpTrigger)
+        if (_player.InputSystem.MoveInput.x != 0f)
+        {
+            if (_player.IsJumping)
+                return;
             _stateMachine.ChangeState(_player.MoveState);
+        }
     }
 
     public override void Exit()

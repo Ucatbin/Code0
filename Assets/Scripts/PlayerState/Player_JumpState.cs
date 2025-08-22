@@ -38,9 +38,6 @@ public class Player_JumpState : Player_AirState
     {
         base.PhysicsUpdate();
 
-        // Apply jump force
-        if (_shouldApplyForce)
-            _player.Rb.AddForce(Vector2.up * _jumpHoldForce, ForceMode2D.Force);
     }
     public override void LogicUpdate()
     {
@@ -53,12 +50,16 @@ public class Player_JumpState : Player_AirState
                         _timer < jumpWindowTime && 
                         _player.InputSystem.JumpTrigger;
 
+        // Apply jump force
+        if (_shouldApplyForce)
+            _player.Rb.AddForce(Vector2.up * _jumpHoldForce, ForceMode2D.Force);
+            
         // Cant add force after jumpWindow
-            if (_timer < 0f)
-            {
-                _stateMachine.ChangeState(_player.AirState);
-                _shouldApplyForce = false;
-            }
+        if (_timer < 0f)
+        {
+            _stateMachine.ChangeState(_player.AirState);
+            _shouldApplyForce = false;
+        }
     }
 
     public override void Exit()
