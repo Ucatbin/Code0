@@ -1367,12 +1367,12 @@ GameObject:
   - component: {fileID: 1614462008}
   - component: {fileID: 1614462007}
   - component: {fileID: 1614462006}
-  - component: {fileID: 1614462010}
   - component: {fileID: 1614462004}
+  - component: {fileID: 1614462010}
   - component: {fileID: 1614462005}
   - component: {fileID: 1614462009}
   - component: {fileID: 1614462013}
-  - component: {fileID: 1614462012}
+  - component: {fileID: 1614462014}
   - component: {fileID: 1614462011}
   m_Layer: 0
   m_Name: Player
@@ -1438,6 +1438,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 961dba7d-6c9b-48fb-94ad-a28f6670e65a
     m_ActionName: 'Normal/Jump[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1614462006}
+        m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
+        m_MethodName: HandleGrapper
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 58875624-e257-4240-85f7-7f938ab5255b
+    m_ActionName: 'Normal/Grapper[/Mouse/rightButton]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Normal
@@ -1526,7 +1542,7 @@ MonoBehaviour:
   Rb: {fileID: 1614462010}
   Checker: {fileID: 1875388750}
   InputSystem: {fileID: 1614462006}
-  JumpWindow: 0.25
+  JumpWindow: 0.28
   JumpDelay: 0.1
   JumpGravity: 3
   FallGravity: 5
@@ -1650,7 +1666,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1733,21 +1749,6 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
---- !u!114 &1614462012
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1614462003}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8be58b3f6bbd6cc48a05ffdf7a35a041, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainCamera: {fileID: 519420031}
-  _lineRenderer: {fileID: 1614462011}
-  _distanceJoint: {fileID: 1614462013}
 --- !u!232 &1614462013
 DistanceJoint2D:
   m_ObjectHideFlags: 0
@@ -1755,7 +1756,7 @@ DistanceJoint2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1614462003}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_EnableCollision: 1
   m_ConnectedRigidBody: {fileID: 0}
@@ -1768,6 +1769,28 @@ DistanceJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 3
   m_MaxDistanceOnly: 0
+--- !u!114 &1614462014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614462003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6b4939baa6e4cf49b720027a5a18355, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 1614462007}
+  _mainCam: {fileID: 519420031}
+  _lineRenderer: {fileID: 1614462011}
+  _distanceJoint: {fileID: 1614462013}
+  _hookLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  jointDistance: 0.8
+  jointDamping: 0.2
+  jointFrequency: 4.5
 --- !u!1 &1685203365
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,10 +6,11 @@ using UnityEngine.Rendering;
 public class PlayerInput : MonoBehaviour
 {
     [SerializeField] Player _player;
-    
+
     // Public Input
     public Vector2 MoveInput { get; private set; }
     public bool JumpTrigger { get; private set; }
+    public bool GrapperTrigger { get; private set; }
 
     public void HandleMove(InputAction.CallbackContext context)
     {
@@ -18,9 +19,11 @@ public class PlayerInput : MonoBehaviour
 
     public void HandleJump(InputAction.CallbackContext context)
     {
-        if (context.performed)
-            JumpTrigger = true;
-        else if (context.canceled)
-            JumpTrigger = false;
+        JumpTrigger = context.performed;
+    }
+
+    public void HandleGrapper(InputAction.CallbackContext contex)
+    {
+        GrapperTrigger = contex.performed;
     }
 }

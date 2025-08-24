@@ -30,11 +30,11 @@ public class Player_AirState : Player_BaseState
         );
 
         // Grab edge
-        if (moveInputX != 0 && _player.Checker.EdgeTransform != null)
-        {
-            _player.transform.position = _player.Checker.EdgeTransform.position;
-            _stateMachine.ChangeState(_player.EdgeState);
-        }
+        // if (moveInputX != 0 && _player.Checker.EdgeTransform != null)
+        // {
+        //     _player.transform.position = _player.Checker.EdgeTransform.position;
+        //     _stateMachine.ChangeState(_player.EdgeState);
+        // }
 
         // Exit when detect the ground
             if (_player.Checker.IsGrounded)

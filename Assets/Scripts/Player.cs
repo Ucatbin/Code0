@@ -9,6 +9,7 @@ public class Player : Entity
     public Player_JumpState JumpState { get; private set; }
     public Player_FallState FallState { get; private set; }
     public Player_EdgeState EdgeState { get; private set; }
+    public Player_HookedState HookedState { get; private set; }
 
     [Header("Player Component")]
     public Rigidbody2D Rb;
@@ -30,6 +31,18 @@ public class Player : Entity
     [Header("StateMark")]
     public bool IsJumping;
     public bool IsHoldingEdge;
+    public bool IsAttacking;
+
+    void OnEnable()
+    {
+        GrappleEvent.OnHookAttached += HandleHookAtteched;
+        GrappleEvent.OnHookReleased += HandleHookReleased;
+    }
+    void OnDisable()
+    {
+        GrappleEvent.OnHookAttached -= HandleHookAtteched;
+        GrappleEvent.OnHookReleased -= HandleHookReleased;
+    }
 
     protected override void Awake()
     {
@@ -42,6 +55,7 @@ public class Player : Entity
         JumpState = new Player_JumpState(this, _stateMachine, "Jump");
         FallState = new Player_FallState(this, _stateMachine, "Fall");
         EdgeState = new Player_EdgeState(this, _stateMachine, "Edged");
+        HookedState = new Player_HookedState(this, _stateMachine, "Hooked");
 
         _stateMachine.InitState(IdleState);
     }
@@ -57,5 +71,15 @@ public class Player : Entity
     protected override void Update()
     {
         base.Update();
+    }
+
+    void HandleHookAtteched()
+    {
+        if (!IsAttacking)
+            _stateMachine.ChangeState(HookedState);
+    }
+    void HandleHookReleased()
+    {
+        _stateMachine.ChangeState(IdleState);
     }
 }
