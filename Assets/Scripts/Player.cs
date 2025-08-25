@@ -23,8 +23,11 @@ public class Player : Entity
     public float FallGravity = 5f;
 
     [Header("Player Attribute")]
-    public float MoveSpeed = 1f;
-    public float MoveSpeedAir = 0.8f;
+    public float GroundMoveForce = 20f;
+    public float AirMoveForce = 10f;
+    public float MaxGroundSpeed = 8f;
+    public float MaxAirSpeed = 6f;
+    
     public float JumpHeight = 3f;
     public float JumpHoldHeight = 2f;
 

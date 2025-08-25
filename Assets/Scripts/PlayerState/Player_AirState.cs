@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Player_AirState : Player_BaseState
 {
+    bool _shouldAddForce;
+
     public Player_AirState(Player player, StateMachine stateMachine, string stateName) : base(player, stateMachine, stateName) { }
 
     public override void Enter()
@@ -11,7 +13,13 @@ public class Player_AirState : Player_BaseState
     
     public override void PhysicsUpdate()
     {
+        base.PhysicsUpdate();
 
+        if (_shouldAddForce)
+            _player.Rb.AddForce(new Vector2(
+                _player.InputSystem.MoveInput.x * _player.AirMoveForce,
+                0f
+            ), ForceMode2D.Force);
     }
     public override void LogicUpdate()
     {
@@ -22,19 +30,8 @@ public class Player_AirState : Player_BaseState
             _stateMachine.ChangeState(_player.FallState);
         }
             
-        // Can move slowly when in air
-        float moveInputX = _player.InputSystem.MoveInput.x;
-        _player.Rb.linearVelocity = new Vector2(
-            moveInputX * _player.MoveSpeedAir,
-            _player.Rb.linearVelocityY
-        );
-
-        // Grab edge
-        // if (moveInputX != 0 && _player.Checker.EdgeTransform != null)
-        // {
-        //     _player.transform.position = _player.Checker.EdgeTransform.position;
-        //     _stateMachine.ChangeState(_player.EdgeState);
-        // }
+        // If current velocity less than max speed, can add force
+        _shouldAddForce = Mathf.Abs(_player.Rb.linearVelocity.x) < _player.MaxAirSpeed;
 
         // Exit when detect the ground
             if (_player.Checker.IsGrounded)
