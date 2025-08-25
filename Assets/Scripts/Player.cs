@@ -33,7 +33,7 @@ public class Player : Entity
 
     [Header("StateMark")]
     public bool IsJumping;
-    public bool IsHoldingEdge;
+    public bool IsAttached;
     public bool IsAttacking;
 
     void OnEnable()

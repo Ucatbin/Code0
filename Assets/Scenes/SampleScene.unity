@@ -128,6 +128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 14778943}
+  - component: {fileID: 14778944}
   m_Layer: 0
   m_Name: GroundChecker
   m_TagString: Untagged
@@ -144,12 +145,58 @@ Transform:
   m_GameObject: {fileID: 14778942}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalPosition: {x: 0, y: -0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1875388749}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &14778944
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14778942}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: -0.38570422}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.98, y: 0.04212773}
+  m_EdgeRadius: 0
 --- !u!1 &358686531
 GameObject:
   m_ObjectHideFlags: 0
@@ -1322,7 +1369,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1231872022
+--- !u!1 &1078320049
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1330,29 +1377,76 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1231872023}
+  - component: {fileID: 1078320050}
+  - component: {fileID: 1078320051}
   m_Layer: 0
-  m_Name: EdgeChecker
+  m_Name: GrappleChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1231872023
+--- !u!4 &1078320050
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1231872022}
+  m_GameObject: {fileID: 1078320049}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.65, y: 0.25, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1875388749}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1078320051
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1078320049}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1.1, y: 1.1}
+  m_EdgeRadius: 0
 --- !u!1 &1614462003
 GameObject:
   m_ObjectHideFlags: 0
@@ -1363,13 +1457,13 @@ GameObject:
   m_Component:
   - component: {fileID: 1614462008}
   - component: {fileID: 1614462007}
+  - component: {fileID: 1614462014}
   - component: {fileID: 1614462006}
   - component: {fileID: 1614462004}
   - component: {fileID: 1614462010}
   - component: {fileID: 1614462005}
   - component: {fileID: 1614462009}
   - component: {fileID: 1614462013}
-  - component: {fileID: 1614462014}
   - component: {fileID: 1614462011}
   m_Layer: 0
   m_Name: Player
@@ -1543,14 +1637,14 @@ MonoBehaviour:
   JumpDelay: 0.1
   JumpGravity: 3
   FallGravity: 5
-  GroundMoveForce: 30
-  AirMoveForce: 25
+  GroundMoveForce: 40
+  AirMoveForce: 10
   MaxGroundSpeed: 8
   MaxAirSpeed: 6
   JumpHeight: 1.2
   JumpHoldHeight: 15
   IsJumping: 0
-  IsHoldingEdge: 0
+  IsAttached: 0
   IsAttacking: 0
 --- !u!4 &1614462008
 Transform:
@@ -1692,7 +1786,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.2
+    widthMultiplier: 0.1
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -1768,7 +1862,7 @@ DistanceJoint2D:
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
   m_Distance: 3
-  m_MaxDistanceOnly: 0
+  m_MaxDistanceOnly: 1
 --- !u!114 &1614462014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1789,9 +1883,7 @@ MonoBehaviour:
   _hookLayer:
     serializedVersion: 2
     m_Bits: 64
-  jointDistance: 0.8
-  jointDamping: 0.2
-  jointFrequency: 4.5
+  _grappleCD: 2
 --- !u!1 &1685203365
 GameObject:
   m_ObjectHideFlags: 0
@@ -1957,7 +2049,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 14778943}
-  - {fileID: 1231872023}
+  - {fileID: 1078320050}
   m_Father: {fileID: 1614462008}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1875388750
@@ -1974,17 +2066,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 1614462007}
   IsGrounded: 0
-  _groundCheck: {fileID: 14778943}
+  _groundCheckCollider: {fileID: 14778944}
   _groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  _groundCheckRadius: 0.25
-  EdgeTransform: {fileID: 0}
-  _edgeCheck: {fileID: 1231872023}
-  _edgeLayer:
+  GrappleCheckCollider: {fileID: 1078320051}
+  _grappleLayer:
     serializedVersion: 2
-    m_Bits: 0
-  _edgeCheckRadius: 0.5
+    m_Bits: 64
 --- !u!1 &1898253073
 GameObject:
   m_ObjectHideFlags: 0

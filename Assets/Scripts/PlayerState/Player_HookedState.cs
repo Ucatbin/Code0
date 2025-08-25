@@ -6,9 +6,9 @@ public class Player_HookedState : Player_BaseState
 
     public override void Enter()
     {
-        
+        _player.Checker.GrappleCheckCollider.enabled = true;
     }
-    
+
     public override void PhysicsUpdate()
     {
 
@@ -20,6 +20,6 @@ public class Player_HookedState : Player_BaseState
 
     public override void Exit()
     {
-        
+        _player.Checker.GrappleCheckCollider.enabled = false;
     }
 }

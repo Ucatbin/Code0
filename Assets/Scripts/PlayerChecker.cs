@@ -1,4 +1,12 @@
+using System;
 using UnityEngine;
+
+public static class CheckerEvent
+{
+    public static event Action OnGrappleStopped;
+
+    public static void TriggerGrappleStopped() => OnGrappleStopped?.Invoke();
+}
 
 public class PlayerChecker : MonoBehaviour
 {
@@ -6,48 +14,27 @@ public class PlayerChecker : MonoBehaviour
 
     [Header("Ground Check")]
     public bool IsGrounded;
-    [SerializeField] Transform _groundCheck;
+    [SerializeField] Collider2D _groundCheckCollider;
     [SerializeField] LayerMask _groundLayer;
-    [SerializeField] float _groundCheckRadius;
 
-    [Header("Edge Checker")]
-    public Transform EdgeTransform;
-    [SerializeField] Transform _edgeCheck;
-    [SerializeField] LayerMask _edgeLayer;
-    [SerializeField] float _edgeCheckRadius;
-
+    [Header("Grapple Check")]
+    public Collider2D GrappleCheckCollider;
+    [SerializeField] LayerMask _grappleLayer;
 
     void Update()
     {
         GroundCheck();
-        EdgeCheck();
+        GrappleCheck();
     }
 
     void GroundCheck()
     {
-        IsGrounded = !_player.IsJumping &&
-            Physics2D.OverlapCircle(
-                _groundCheck.position,
-                _groundCheckRadius,
-                _groundLayer
-            );
+        IsGrounded = !_player.IsJumping && _groundCheckCollider.IsTouchingLayers(_groundLayer);
     }
-    void EdgeCheck()
-    {
-        Collider2D hitCollider = Physics2D.OverlapCircle(
-            _edgeCheck.position,
-            _edgeCheckRadius,
-            _edgeLayer
-        );
 
-        EdgeTransform = hitCollider != null ? hitCollider.transform : null;
-    }
-    void OnDrawGizmos()
+    void GrappleCheck()
     {
-        Gizmos.color = IsGrounded ? Color.green : Color.red;
-        Gizmos.DrawWireSphere(_groundCheck.position, _groundCheckRadius);
-
-        Gizmos.color = EdgeTransform? Color.yellow : Color.blue;
-        Gizmos.DrawWireSphere(_edgeCheck.position, _edgeCheckRadius);
+        if (_player.IsAttached && GrappleCheckCollider.IsTouchingLayers(_grappleLayer))
+            CheckerEvent.TriggerGrappleStopped();
     }
 }
