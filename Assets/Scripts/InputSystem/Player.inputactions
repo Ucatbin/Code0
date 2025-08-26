@@ -25,13 +25,22 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Grapper",
+                    "name": "GrappingHook",
                     "type": "Button",
                     "id": "58875624-e257-4240-85f7-7f938ab5255b",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "GrappingHookActions",
+                    "type": "PassThrough",
+                    "id": "f62e2735-af70-4778-9a07-6b2fe8ef79c8",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -108,7 +117,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Grapper",
+                    "action": "GrappingHook",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dce25a58-3003-408b-877c-5e659a9b62ba",
+                    "path": "<Mouse>/scroll",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GrappingHookActions",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -3,9 +3,6 @@ using UnityEngine;
 
 public static class CheckerEvent
 {
-    public static event Action OnGrappleStopped;
-
-    public static void TriggerGrappleStopped() => OnGrappleStopped?.Invoke();
 }
 
 public class PlayerChecker : MonoBehaviour
@@ -18,13 +15,13 @@ public class PlayerChecker : MonoBehaviour
     [SerializeField] LayerMask _groundLayer;
 
     [Header("Grapple Check")]
-    public Collider2D GrappleCheckCollider;
+    public Collider2D GrappingLineCheck;
     [SerializeField] LayerMask _grappleLayer;
 
     void Update()
     {
         GroundCheck();
-        GrappleCheck();
+        GrapLineCheck();
     }
 
     void GroundCheck()
@@ -32,9 +29,8 @@ public class PlayerChecker : MonoBehaviour
         IsGrounded = !_player.IsJumping && _groundCheckCollider.IsTouchingLayers(_groundLayer);
     }
 
-    void GrappleCheck()
+    void GrapLineCheck()
     {
-        if (_player.IsAttached && GrappleCheckCollider.IsTouchingLayers(_grappleLayer))
-            CheckerEvent.TriggerGrappleStopped();
+
     }
 }

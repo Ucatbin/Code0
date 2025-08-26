@@ -185,7 +185,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.38570422}
+  m_Offset: {x: 0, y: -0.42}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -331,6 +331,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &390987057
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 390987058}
+  m_Layer: 0
+  m_Name: Controllers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &390987058
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 390987057}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1614462008}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &445309550
 GameObject:
   m_ObjectHideFlags: 0
@@ -1435,7 +1466,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.05}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1445,7 +1476,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.1, y: 1.1}
+  m_Size: {x: 1.1, y: 0.9}
   m_EdgeRadius: 0
 --- !u!1 &1614462003
 GameObject:
@@ -1457,13 +1488,13 @@ GameObject:
   m_Component:
   - component: {fileID: 1614462008}
   - component: {fileID: 1614462007}
-  - component: {fileID: 1614462014}
   - component: {fileID: 1614462006}
+  - component: {fileID: 1614462013}
   - component: {fileID: 1614462004}
   - component: {fileID: 1614462010}
   - component: {fileID: 1614462005}
   - component: {fileID: 1614462009}
-  - component: {fileID: 1614462013}
+  - component: {fileID: 1614462012}
   - component: {fileID: 1614462011}
   m_Layer: 0
   m_Name: Player
@@ -1545,6 +1576,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 58875624-e257-4240-85f7-7f938ab5255b
     m_ActionName: 'Normal/Grapper[/Mouse/rightButton]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1614462006}
+        m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
+        m_MethodName: HandleScroll
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f62e2735-af70-4778-9a07-6b2fe8ef79c8
+    m_ActionName: 'Normal/GrappingHookActions[/Mouse/scroll]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Normal
@@ -1633,10 +1680,13 @@ MonoBehaviour:
   Rb: {fileID: 1614462010}
   Checker: {fileID: 1875388750}
   InputSystem: {fileID: 1614462006}
+  GrappingHook: {fileID: 1614462013}
   JumpWindow: 0.25
   JumpDelay: 0.1
   JumpGravity: 3
   FallGravity: 5
+  AirGlideGravity: 1.2
+  AirGlideThreshold: 6
   GroundMoveForce: 40
   AirMoveForce: 10
   MaxGroundSpeed: 8
@@ -1661,6 +1711,7 @@ Transform:
   m_Children:
   - {fileID: 893872116}
   - {fileID: 1875388749}
+  - {fileID: 390987058}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1614462009
@@ -1843,14 +1894,14 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
---- !u!232 &1614462013
+--- !u!232 &1614462012
 DistanceJoint2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1614462003}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   m_EnableCollision: 1
   m_ConnectedRigidBody: {fileID: 0}
@@ -1862,8 +1913,8 @@ DistanceJoint2D:
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
   m_Distance: 3
-  m_MaxDistanceOnly: 1
---- !u!114 &1614462014
+  m_MaxDistanceOnly: 0
+--- !u!114 &1614462013
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1876,14 +1927,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 1614462007}
-  _mainCam: {fileID: 519420031}
-  _lineRenderer: {fileID: 1614462011}
-  _distanceJoint: {fileID: 1614462013}
-  _maxDetectDist: 20
-  _hookLayer:
+  MainCam: {fileID: 519420031}
+  LineRenderer: {fileID: 1614462011}
+  _distanceJoint: {fileID: 1614462012}
+  ScrollSpeed: 45
+  MaxDetectDist: 20
+  HookPoint: {x: 0, y: 0}
+  CanHookLayer:
     serializedVersion: 2
     m_Bits: 64
-  _grappleCD: 2
+  GrappleCD: 1
+  CanUseGrapple: 1
 --- !u!1 &1685203365
 GameObject:
   m_ObjectHideFlags: 0
@@ -2070,7 +2124,7 @@ MonoBehaviour:
   _groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  GrappleCheckCollider: {fileID: 1078320051}
+  GrappingLineCheck: {fileID: 1078320051}
   _grappleLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -2086,7 +2140,7 @@ GameObject:
   - component: {fileID: 1898253076}
   - component: {fileID: 1898253075}
   m_Layer: 6
-  m_Name: Ground1 (1)
+  m_Name: roof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

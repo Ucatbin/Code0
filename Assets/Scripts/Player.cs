@@ -10,17 +10,21 @@ public class Player : Entity
     public Player_FallState FallState { get; private set; }
     public Player_EdgeState EdgeState { get; private set; }
     public Player_HookedState HookedState { get; private set; }
+    public Player_AirGlideState AirGlideState { get; private set; }
 
     [Header("Player Component")]
     public Rigidbody2D Rb;
     public PlayerChecker Checker;
     public PlayerInput InputSystem;
+    public GrappingHook GrappingHook;
 
     [Header("InputSystem")]
     public float JumpWindow = 0.2f;
     public float JumpDelay = 0.06f;
     public float JumpGravity = 3f;
     public float FallGravity = 5f;
+    public float AirGlideGravity = 1.5f;
+    public float AirGlideThreshold = 4f;
 
     [Header("Player Attribute")]
     public float GroundMoveForce = 20f;
@@ -59,6 +63,7 @@ public class Player : Entity
         FallState = new Player_FallState(this, _stateMachine, "Fall");
         EdgeState = new Player_EdgeState(this, _stateMachine, "Edged");
         HookedState = new Player_HookedState(this, _stateMachine, "Hooked");
+        AirGlideState = new Player_AirGlideState(this, _stateMachine, "AirGlide");
 
         _stateMachine.InitState(IdleState);
     }
@@ -83,6 +88,10 @@ public class Player : Entity
     }
     void HandleHookReleased()
     {
-        _stateMachine.ChangeState(IdleState);
+        if (Mathf.Abs(Rb.linearVelocity.x) > AirGlideThreshold)
+            _stateMachine.ChangeState(AirGlideState);
+        else
+            _stateMachine.ChangeState(IdleState);
+        StartCoroutine(GrappingHook.CDTimer(GrappingHook.GrappleCD));
     }
 }

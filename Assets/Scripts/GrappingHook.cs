@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
@@ -16,108 +17,82 @@ public static class GrappleEvent
 public class GrappingHook : MonoBehaviour
 {
     [Header("Necessary Component")]
-    public Player _player;
-    [SerializeField] Camera _mainCam;
-    [SerializeField] LineRenderer _lineRenderer;
-    [SerializeField] DistanceJoint2D _distanceJoint;
+    public Player _player; // Reference to the player script
+    public Camera MainCam;
+    public LineRenderer LineRenderer;
+    public DistanceJoint2D _distanceJoint;
 
     [Header("Grapper Attribute")]
-    [SerializeField] float _maxDetectDist = 20f;
-    Vector2 _hookPoint;
-    [SerializeField] LayerMask _hookLayer;
-    [SerializeField] float _grappleCD = 5f;
+    public float ScrollSpeed = 1f;
+    public float MaxDetectDist = 20f; // Maximum distance to detect grapple points
+    public Vector2 HookPoint; // The point where the hook is attached
+    public LayerMask CanHookLayer; // Which layer can the hook attach to
+    public float GrappleCD = 2f; // Cooldown time between grapples
 
-    float _timer;
-
-    void OnEnable()
-    {
-        CheckerEvent.OnGrappleStopped += ReleaseHook;
-    }
-    void OnDisable()
-    {
-        CheckerEvent.OnGrappleStopped -= ReleaseHook;
-    }
+    [Header("Other Component")]
+    public bool CanUseGrapple = true;
 
     void Awake()
     {
         // Disable grapping hook when awake
         _distanceJoint.enabled = false;
-        _lineRenderer.enabled = false;
+        LineRenderer.enabled = false;
     }
 
-    void FixedUpdate()
-    {
-        if (!_player.IsAttached)
-            return;
-        // 检测从玩家到钩点之间是否有地面层障碍物
-        RaycastHit2D[] hit = Physics2D.RaycastAll(
-            transform.position,
-            _hookPoint - (Vector2)transform.position,
-            _distanceJoint.distance,
-            _hookLayer
-        );
-        // 如果检测到障碍物，断开连接
-        if (hit.Count() > 2)
-        {
-            ReleaseHook();
-        }
-    }
     void Update()
     {
-        _timer -= Time.deltaTime;
-
-        if (_player.InputSystem.GrapperTrigger && !_player.IsAttached && _timer < 0f)
+        // Press button when not attached and cooldown is over, shoot the hook
+        if (_player.InputSystem.GrapperTrigger && !_player.IsAttached && CanUseGrapple)
         {
             FireHook();
         }
 
-        if (!_player.InputSystem.GrapperTrigger && _player.IsAttached)
-        {
-            ReleaseHook();
-        }
-
-        // Update line renderer position
-        if (_distanceJoint.enabled)
-        {
-            _lineRenderer.SetPosition(1, transform.position);
-        }
     }
     void FireHook()
     {
+        // Get mouse position and calculate fire direction
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 fireDir = (mousePos - (Vector2)transform.position).normalized;
 
         RaycastHit2D hit = Physics2D.Raycast(
             transform.position,
             fireDir,
-            _maxDetectDist,
-            _hookLayer
+            MaxDetectDist,
+            CanHookLayer
         );
 
         if (hit.collider != null)
         {
-            _hookPoint = hit.point;
+            HookPoint = hit.point;
             AttachHook();
         }
     }
     void AttachHook()
     {
+        // Let state machine know the player is attached
         GrappleEvent.TriggerHookAttached();
         _player.IsAttached = true;
 
-        _distanceJoint.connectedAnchor = _hookPoint;
+        // Set connect point and enable distance joint
+        _distanceJoint.distance = Vector2.Distance(transform.position, HookPoint);
+        _distanceJoint.connectedAnchor = HookPoint;
         _distanceJoint.enabled = true;
 
-        _lineRenderer.SetPosition(0, _hookPoint);
-        _lineRenderer.SetPosition(1, transform.position);
-        _lineRenderer.enabled = true;
+        // Setup line renderer
+        LineRenderer.SetPosition(0, HookPoint);
+        LineRenderer.SetPosition(1, transform.position);
+        LineRenderer.enabled = true;
     }
-    void ReleaseHook()
+
+    public IEnumerator CDTimer(float coolDown)
     {
-        GrappleEvent.TriggerHookReleased();
-        _player.IsAttached = false;
-        _distanceJoint.enabled = false;
-        _lineRenderer.enabled = false;
-        _timer = _grappleCD;
+        float timer = 0f;
+        _player.GrappingHook.CanUseGrapple = false;
+        while (timer < coolDown)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        _player.GrappingHook.CanUseGrapple = true;
     }
 }
