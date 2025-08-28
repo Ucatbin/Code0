@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Player : Entity
 {
-    [Header("State Machine")]
+    [Header("StateMachine")]
     public Player_IdleState IdleState { get; private set; }
     public Player_MoveState MoveState { get; private set; }
     public Player_AirState AirState { get; private set; }
@@ -12,13 +12,13 @@ public class Player : Entity
     public Player_HookedState HookedState { get; private set; }
     public Player_AirGlideState AirGlideState { get; private set; }
 
-    [Header("Player Component")]
+    [Header("NecessaryComponent")]
     public Rigidbody2D Rb;
     public PlayerChecker Checker;
     public PlayerInput InputSystem;
     public GrappingHook GrappingHook;
 
-    [Header("InputSystem")]
+    [Header("JumpAttribute")]
     public float JumpWindow = 0.2f;
     public float JumpDelay = 0.06f;
     public float JumpGravity = 3f;
@@ -26,19 +26,21 @@ public class Player : Entity
     public float AirGlideGravity = 1.5f;
     public float AirGlideThreshold = 4f;
 
-    [Header("Player Attribute")]
+    [Header("PlayerAttribute")]
+    // Movement
     public float GroundMoveForce = 20f;
     public float AirMoveForce = 10f;
     public float MaxGroundSpeed = 8f;
     public float MaxAirSpeed = 6f;
-    
+    [Space(5)]
+    // Jump
     public float JumpHeight = 3f;
     public float JumpHoldHeight = 2f;
 
     [Header("StateMark")]
-    public bool IsJumping;
-    public bool IsAttached;
-    public bool IsAttacking;
+    public bool IsJumping; // Can player add force after jump
+    public bool IsAttached; // Is the grappling hook attached
+    public bool IsAttacking; // Is the player attacking
 
     void OnEnable()
     {
@@ -88,10 +90,14 @@ public class Player : Entity
     }
     void HandleHookReleased()
     {
+        // Invoke when the hook is released
+        // If speed is high enough, start air glide which can slow down falling speed
         if (Mathf.Abs(Rb.linearVelocity.x) > AirGlideThreshold)
             _stateMachine.ChangeState(AirGlideState);
         else
-            _stateMachine.ChangeState(IdleState);
+            _stateMachine.ChangeState(AirState);
+
+        // Start grapple cooldown
         StartCoroutine(GrappingHook.CDTimer(GrappingHook.GrappleCD));
     }
 }
