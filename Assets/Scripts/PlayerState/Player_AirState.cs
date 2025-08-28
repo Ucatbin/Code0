@@ -25,12 +25,15 @@ public class Player_AirState : Player_BaseState
     {
         ChangeGravityScale();
 
+        // Currently there's nothing fall state should do
+        /*
         // Reset IsJumping to enable ground check, enter fallState
-        if (_player.Rb.linearVelocityY <= 0f && _stateMachine.CurrentState != _player.FallState)
-        {
-            _player.IsJumping = false;
+        // if (_player.Rb.linearVelocityY <= 0f && _stateMachine.CurrentState != _player.FallState)
+        // {
+        //     _player.IsJumping = false;
             // _stateMachine.ChangeState(_player.FallState);
-        }
+        // }
+        */
 
         // If current velocity less than max speed, can add force
         _shouldAddForce = Mathf.Abs(_player.Rb.linearVelocity.x) < _player.MaxAirSpeed;
@@ -59,8 +62,6 @@ public class Player_AirState : Player_BaseState
                 _player.FallGravityMin,
                 Mathf.Abs(_player.Rb.linearVelocity.magnitude) / _player.MinGravityTrashold);
         }
-        // if (_targetGravity != _player.FallGravityMax)
-        //     Debug.Log("Speed" + Mathf.Abs(_player.Rb.linearVelocityX) + "   Gravity " + _targetGravity);
         _player.Rb.gravityScale = _targetGravity;
     }
 }
