@@ -16,26 +16,29 @@ public static class GrappleEvent
 
 public class GrappingHook : MonoBehaviour
 {
-    [Header("Necessary Component")]
+    [Header("NecessaryComponent")]
     public Player _player; // Reference to the player script
     public Camera MainCam;
     public LineRenderer LineRenderer;
-    public DistanceJoint2D _distanceJoint;
+    public DistanceJoint2D DistanceJoint;
 
-    [Header("Grapper Attribute")]
-    public float ScrollSpeed = 1f;
+    [Header("GHookAttribute")]
     public float MaxDetectDist = 20f; // Maximum distance to detect grapple points
-    public Vector2 HookPoint; // The point where the hook is attached
     public LayerMask CanHookLayer; // Which layer can the hook attach to
-    public float GrappleCD = 2f; // Cooldown time between grapples
+    public float GrappleCD = 1f; // Cooldown time between grapples
+    [Header("GLineControlAttribute")]
+    public float GLineSpeed = 1f;
+    public float GLineMaxSpeed = 2f; // Maximum speed to change the length of the grappling line
+    public float GLineAcceleration = 0.5f; // Acceleration when holding shift
 
-    [Header("Other Component")]
-    public bool CanUseGrapple = true;
+    [Header("OtherComponent")]
+    [HideInInspector] public Vector2 HookPoint; // The point where the hook is attached
+    [HideInInspector] public bool CanUseGrapple = true;
 
     void Awake()
     {
         // Disable grapping hook when awake
-        _distanceJoint.enabled = false;
+        DistanceJoint.enabled = false;
         LineRenderer.enabled = false;
     }
 
@@ -74,9 +77,9 @@ public class GrappingHook : MonoBehaviour
         _player.IsAttached = true;
 
         // Set connect point and enable distance joint
-        _distanceJoint.distance = Vector2.Distance(transform.position, HookPoint);
-        _distanceJoint.connectedAnchor = HookPoint;
-        _distanceJoint.enabled = true;
+        DistanceJoint.distance = Vector2.Distance(transform.position, HookPoint);
+        DistanceJoint.connectedAnchor = HookPoint;
+        DistanceJoint.enabled = true;
 
         // Setup line renderer
         LineRenderer.SetPosition(0, HookPoint);

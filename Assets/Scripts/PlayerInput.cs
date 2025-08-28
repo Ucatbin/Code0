@@ -11,7 +11,7 @@ public class PlayerInput : MonoBehaviour
     public Vector2 MoveInput { get; private set; }
     public bool JumpTrigger { get; private set; }
     public bool GrapperTrigger { get; private set; }
-    public Vector2 ScrollInput { get; private set; }
+    public bool SprintTrigger { get; private set; }
 
     public void HandleMove(InputAction.CallbackContext context)
     {
@@ -23,13 +23,13 @@ public class PlayerInput : MonoBehaviour
         JumpTrigger = context.performed;
     }
 
-    public void HandleGrapper(InputAction.CallbackContext contex)
+    public void HandleGrappingHook(InputAction.CallbackContext contex)
     {
         GrapperTrigger = contex.performed;
     }
 
-    public void HandleScroll(InputAction.CallbackContext context)
+    public void HandleSprint(InputAction.CallbackContext context)
     {
-        ScrollInput = context.ReadValue<Vector2>();
+        SprintTrigger = context.performed;
     }
 }

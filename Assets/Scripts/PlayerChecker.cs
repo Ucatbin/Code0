@@ -11,26 +11,20 @@ public class PlayerChecker : MonoBehaviour
 
     [Header("Ground Check")]
     public bool IsGrounded;
-    [SerializeField] Collider2D _groundCheckCollider;
+    [SerializeField] Collider2D _groundChecker;
     [SerializeField] LayerMask _groundLayer;
 
     [Header("Grapple Check")]
-    public Collider2D GrappingLineCheck;
-    [SerializeField] LayerMask _grappleLayer;
+    public Collider2D GLineChecker;
+    public LayerMask GLineBreakLayer;
 
     void Update()
     {
         GroundCheck();
-        GrapLineCheck();
     }
 
     void GroundCheck()
     {
-        IsGrounded = !_player.IsJumping && _groundCheckCollider.IsTouchingLayers(_groundLayer);
-    }
-
-    void GrapLineCheck()
-    {
-
+        IsGrounded = !_player.IsJumping && _groundChecker.IsTouchingLayers(_groundLayer);
     }
 }

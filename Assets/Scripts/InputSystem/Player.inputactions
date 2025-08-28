@@ -34,13 +34,13 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "GrappingHookActions",
-                    "type": "PassThrough",
-                    "id": "f62e2735-af70-4778-9a07-6b2fe8ef79c8",
-                    "expectedControlType": "Vector2",
+                    "name": "Sprint",
+                    "type": "Button",
+                    "id": "696f5ce7-26c1-4a48-aa23-c60813c86445",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -123,12 +123,12 @@
                 },
                 {
                     "name": "",
-                    "id": "dce25a58-3003-408b-877c-5e659a9b62ba",
-                    "path": "<Mouse>/scroll",
+                    "id": "9809e4ca-d268-405e-ae0c-f242496cc1ea",
+                    "path": "<Keyboard>/leftShift",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "GrappingHookActions",
+                    "action": "Sprint",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

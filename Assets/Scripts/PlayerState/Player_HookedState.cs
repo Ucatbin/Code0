@@ -4,45 +4,48 @@ using UnityEngine;
 public class Player_HookedState : Player_BaseState
 {
     GrappingHook _grappingHook;
+    DistanceJoint2D _joint;
+    PlayerChecker _checker;
+
     public Player_HookedState(Player player, StateMachine stateMachine, string stateName) : base(player, stateMachine, stateName) { }
 
     public override void Enter()
     {
-        // Enable collision check
-        _player.Checker.GrappingLineCheck.enabled = true;
-
+        // Initialize grappling hook component
         _grappingHook = _player.GrappingHook;
+        _joint = _grappingHook.DistanceJoint;
+        _checker = _player.Checker;
+
+        // Enable player collision check
+        _checker.GLineChecker.enabled = true;
+
     }
 
     public override void PhysicsUpdate()
     {
-        CheckGrappingLine();
+        CheckGLineBreak();
     }
     public override void LogicUpdate()
     {
-        // Release hook when button is released and currently attached
-        if (!_player.InputSystem.GrapperTrigger && _player.IsAttached)
-        {
-            ReleaseHook();
-        }
-        // Release hook when grapping line is broken
-        if (_player.Checker.GrappingLineCheck.IsTouchingLayers(_grappingHook.CanHookLayer))
+        /* Release hook when button is released and currently attached or
+        when grapping line is broken*/
+        if ((!_player.InputSystem.GrapperTrigger && _player.IsAttached) || 
+            _checker.GLineChecker.IsTouchingLayers(_checker.GLineBreakLayer))
         {
             ReleaseHook();
         }
         
         // Control the length of the grapping line
-        ControlGrappingHook();
+        ControlGLine();
 
         // Update line renderer position
         _grappingHook.LineRenderer.SetPosition(1, _player.transform.position);
-
     }
 
     public override void Exit()
     {
-        // Disable collision check
-        _player.Checker.GrappingLineCheck.enabled = false;
+        // Disable player collision check
+        _checker.GLineChecker.enabled = false;
     }
 
     void ReleaseHook()
@@ -52,29 +55,36 @@ public class Player_HookedState : Player_BaseState
         _player.IsAttached = false;
 
         // Disable distance joint and line renderer
-        _grappingHook._distanceJoint.enabled = false;
+        _joint.enabled = false;
         _grappingHook.LineRenderer.enabled = false;
 
     }
-    void CheckGrappingLine()
+    void CheckGLineBreak()
     {
         RaycastHit2D[] hits = new RaycastHit2D[2];
         int hitCount = Physics2D.RaycastNonAlloc(
             _player.transform.position,
             (_grappingHook.HookPoint - (Vector2)_player.transform.position).normalized,
             hits,
-            _grappingHook._distanceJoint.distance,
+            _joint.distance,
             _grappingHook.CanHookLayer
         );
 
-        if (hitCount > 1 || _grappingHook._distanceJoint.distance > _grappingHook.MaxDetectDist)
+        if (hitCount > 1 || _joint.distance > _grappingHook.MaxDetectDist)
             ReleaseHook();
     }
 
-    void ControlGrappingHook()
+    void ControlGLine()
     {
-        Vector2 input = _player.InputSystem.ScrollInput;
-        _grappingHook._distanceJoint.distance = Mathf.Clamp(_grappingHook._distanceJoint.distance, 0.5f, _grappingHook.MaxDetectDist);
-        _grappingHook._distanceJoint.distance += input.y * _grappingHook.ScrollSpeed * Time.fixedDeltaTime;
+        float inputY = _player.InputSystem.MoveInput.y;
+        bool sprint = _player.InputSystem.SprintTrigger;
+        float accelerate = sprint ? _grappingHook.GLineAcceleration : 1f;
+        if (inputY != 0)
+        {
+            _joint.distance -= Mathf.Min(
+                    _grappingHook.GLineMaxSpeed,
+                    _grappingHook.GLineSpeed * inputY * Time.deltaTime * accelerate
+            );
+        }
     }
 }
