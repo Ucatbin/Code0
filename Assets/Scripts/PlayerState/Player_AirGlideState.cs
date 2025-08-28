@@ -27,6 +27,6 @@ public class Player_AirGlideState : Player_AirState
 
     public override void Exit()
     {
-        _player.Rb.gravityScale = _player.FallGravityMax;
+
     }
 }

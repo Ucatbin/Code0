@@ -93,18 +93,11 @@ public class Player_HookedState : Player_BaseState
             _grappingHook.StartCoroutine(_grappingHook.DashCDTimer(_grappingHook.GLineDashCD));
         }
         if (inputY != 0)
-        {
-            _joint.distance -= Mathf.Min(
-                    _grappingHook.GLineMaxSpeed,
-                    _grappingHook.GLineSpeed * inputY * Time.fixedDeltaTime * _accelerate
-            );
-        }
+            _joint.distance -= _grappingHook.GLineSpeed * inputY * Time.fixedDeltaTime * _accelerate;
     }
     void ControlAcceleration()
     {
         if (_accelerate != 1f)
-        {
             _accelerate = Mathf.Lerp(_accelerate, 1f, Time.fixedDeltaTime * _grappingHook.GLineDamping);
-        }
     }
 }

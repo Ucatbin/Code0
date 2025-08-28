@@ -27,9 +27,6 @@ public class Player_JumpState : Player_AirState
             -2f
         ) * _player.Rb.mass;
 
-        // Control gravity to make it easier to control movement
-        _player.Rb.gravityScale = _player.JumpGravity;
-
         // Apply base jump once when enter
         _player.Rb.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
     }
@@ -45,6 +42,7 @@ public class Player_JumpState : Player_AirState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+        
         _timer -= Time.deltaTime;
 
         // Can jump higher if holding Space button

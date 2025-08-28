@@ -9,7 +9,7 @@ public class Player_MoveState : Player_GroundState
 
     public override void Enter()
     {
-        
+        base.Enter();
     }
 
     public override void PhysicsUpdate()

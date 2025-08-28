@@ -3,14 +3,14 @@ using UnityEngine;
 public class Player_AirState : Player_BaseState
 {
     bool _shouldAddForce;
-
+    float _targetGravity;
     public Player_AirState(Player player, StateMachine stateMachine, string stateName) : base(player, stateMachine, stateName) { }
 
     public override void Enter()
     {
 
     }
-    
+
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
@@ -23,23 +23,44 @@ public class Player_AirState : Player_BaseState
     }
     public override void LogicUpdate()
     {
+        ChangeGravityScale();
+
         // Reset IsJumping to enable ground check, enter fallState
         if (_player.Rb.linearVelocityY <= 0f && _stateMachine.CurrentState != _player.FallState)
         {
             _player.IsJumping = false;
-            _stateMachine.ChangeState(_player.FallState);
+            // _stateMachine.ChangeState(_player.FallState);
         }
-            
+
         // If current velocity less than max speed, can add force
         _shouldAddForce = Mathf.Abs(_player.Rb.linearVelocity.x) < _player.MaxAirSpeed;
 
         // Exit when detect the ground
-            if (_player.Checker.IsGrounded)
-                _stateMachine.ChangeState(_player.IdleState);
+        if (_player.Checker.IsGrounded)
+            _stateMachine.ChangeState(_player.IdleState);
     }
 
     public override void Exit()
     {
-        
+
+    }
+    void ChangeGravityScale()
+    {
+        Debug.Log(Mathf.Abs(_targetGravity));
+        if (_player.IsJumping)
+            return;
+
+        if (Mathf.Abs(_player.Rb.linearVelocity.magnitude) < _player.AirGlideThreshold)
+            _targetGravity = _player.FallGravityMax;
+        else
+        {
+            _targetGravity = Mathf.Lerp(
+                _player.FallGravityMax,
+                _player.FallGravityMin,
+                Mathf.Abs(_player.Rb.linearVelocity.magnitude) / _player.MinGravityTrashold);
+        }
+        // if (_targetGravity != _player.FallGravityMax)
+        //     Debug.Log("Speed" + Mathf.Abs(_player.Rb.linearVelocityX) + "   Gravity " + _targetGravity);
+        _player.Rb.gravityScale = _targetGravity;
     }
 }

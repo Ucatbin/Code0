@@ -105,12 +105,10 @@ public class Player : Entity
 
     void ChangeGravityScale()
     {
-        Debug.Log(Rb.gravityScale);
         if (Checker.IsGrounded || IsAttached)
-        {
-            Rb.gravityScale = FallGravityMax;
             return;
-        }
+
+        // Apply jump gravity when is in jump state
         if (_stateMachine.CurrentState == JumpState)
         {
             Rb.gravityScale = JumpGravity;

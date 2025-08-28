@@ -1686,8 +1686,8 @@ MonoBehaviour:
   JumpGravity: 3
   FallGravityMax: 4.5
   FallGravityMin: 1
-  MinGravityTrashold: 8
-  AirGlideThreshold: 2
+  MinGravityTrashold: 20
+  AirGlideThreshold: 6
   GroundMoveForce: 40
   AirMoveForce: 10
   MaxGroundSpeed: 8
@@ -1938,9 +1938,9 @@ MonoBehaviour:
   GrappleCD: 1
   GLineDashCD: 1
   GLineSpeed: 2.5
-  GLineMaxSpeed: 20
-  GLineAcceleration: 20
-  GLineDamping: 2
+  GLineMaxSpeed: 30
+  GLineAcceleration: 25
+  GLineDamping: 5
   HookPoint: {x: 0, y: 0}
   CanUseGHook: 1
   CanUseGLineDash: 1
