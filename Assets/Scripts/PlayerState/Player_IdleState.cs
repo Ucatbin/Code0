@@ -6,7 +6,7 @@ public class Player_IdleState : Player_GroundState
 
     public override void Enter()
     {
-        
+        base.Enter();
     }
 
     public override void PhysicsUpdate()

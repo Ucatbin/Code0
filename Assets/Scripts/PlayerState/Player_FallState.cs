@@ -1,18 +1,18 @@
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class Player_FallState : Player_AirState
 {
-    public Player_FallState(Player player, StateMachine stateMachine, string stateName) : base(player, stateMachine, stateName){}
+    public Player_FallState(Player player, StateMachine stateMachine, string stateName) : base(player, stateMachine, stateName) { }
 
     public override void Enter()
-    { 
-        // Control gravity to make it easier to control movement
-        _player.Rb.gravityScale = _player.FallGravity;
+    {
+        
     }
-    
+
     public override void PhysicsUpdate()
     {
-
+        base.PhysicsUpdate();
     }
     public override void LogicUpdate()
     {
@@ -21,6 +21,6 @@ public class Player_FallState : Player_AirState
 
     public override void Exit()
     {
-        
+
     }
 }

@@ -26,14 +26,17 @@ public class GrappingHook : MonoBehaviour
     public float MaxDetectDist = 20f; // Maximum distance to detect grapple points
     public LayerMask CanHookLayer; // Which layer can the hook attach to
     public float GrappleCD = 1f; // Cooldown time between grapples
+    public float GLineDashCD = 1f; // Cooldown time between grappling line dashes
     [Header("GLineControlAttribute")]
     public float GLineSpeed = 1f;
     public float GLineMaxSpeed = 2f; // Maximum speed to change the length of the grappling line
-    public float GLineAcceleration = 0.5f; // Acceleration when holding shift
+    public float GLineAcceleration = 1.5f; // Acceleration when holding shift
+    public float GLineDamping = 3f;
 
     [Header("OtherComponent")]
     [HideInInspector] public Vector2 HookPoint; // The point where the hook is attached
-    [HideInInspector] public bool CanUseGrapple = true;
+    [HideInInspector] public bool CanUseGHook = true;
+    [HideInInspector] public bool CanUseGLineDash = true;
 
     void Awake()
     {
@@ -45,7 +48,7 @@ public class GrappingHook : MonoBehaviour
     void Update()
     {
         // Press button when not attached and cooldown is over, shoot the hook
-        if (_player.InputSystem.GrapperTrigger && !_player.IsAttached && CanUseGrapple)
+        if (_player.InputSystem.GrapperTrigger && !_player.IsAttached && CanUseGHook)
         {
             FireHook();
         }
@@ -87,15 +90,26 @@ public class GrappingHook : MonoBehaviour
         LineRenderer.enabled = true;
     }
 
-    public IEnumerator CDTimer(float coolDown)
+    public IEnumerator GHookCDTimer(float coolDown)
     {
         float timer = 0f;
-        _player.GrappingHook.CanUseGrapple = false;
+        CanUseGHook = false;
         while (timer < coolDown)
         {
             timer += Time.deltaTime;
             yield return null;
         }
-        _player.GrappingHook.CanUseGrapple = true;
+        CanUseGHook = true;
+    }
+    public IEnumerator DashCDTimer(float coolDown)
+    {
+        float timer = 0f;
+        CanUseGLineDash = false;
+        while (timer < coolDown)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        CanUseGLineDash = true;
     }
 }

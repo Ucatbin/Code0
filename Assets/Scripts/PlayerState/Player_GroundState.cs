@@ -6,7 +6,7 @@ public class Player_GroundState : Player_BaseState
 
     public override void Enter()
     {
-
+        _player.Rb.gravityScale = _player.FallGravityMax;
     }
     
     public override void PhysicsUpdate()

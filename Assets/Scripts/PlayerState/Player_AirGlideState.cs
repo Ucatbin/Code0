@@ -9,8 +9,6 @@ public class Player_AirGlideState : Player_AirState
     public override void Enter()
     {
         _player.IsJumping = false;
-        // Control gravity to make it easier to control movement
-        _player.Rb.gravityScale = _player.AirGlideGravity;
     }
     
     public override void PhysicsUpdate()
@@ -29,6 +27,6 @@ public class Player_AirGlideState : Player_AirState
 
     public override void Exit()
     {
-        _player.Rb.gravityScale = _player.FallGravity;
+
     }
 }
