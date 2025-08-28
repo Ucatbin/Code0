@@ -22,8 +22,9 @@ public class Player : Entity
     public float JumpWindow = 0.2f;
     public float JumpDelay = 0.06f;
     public float JumpGravity = 3f;
-    public float FallGravity = 5f;
-    public float AirGlideGravity = 1.5f;
+    public float FallGravityMax = 4.5f;
+    public float FallGravityMin = 1f;
+    public float MinGravityTrashold = 8f;
     public float AirGlideThreshold = 4f;
 
     [Header("PlayerAttribute")]
@@ -81,6 +82,7 @@ public class Player : Entity
     protected override void Update()
     {
         base.Update();
+        ChangeGravityScale();
     }
 
     void HandleHookAtteched()
@@ -92,12 +94,27 @@ public class Player : Entity
     {
         // Invoke when the hook is released
         // If speed is high enough, start air glide which can slow down falling speed
-        if (Mathf.Abs(Rb.linearVelocity.x) > AirGlideThreshold)
-            _stateMachine.ChangeState(AirGlideState);
-        else
-            _stateMachine.ChangeState(AirState);
+        // if (Mathf.Abs(Rb.linearVelocity.x) > AirGlideThreshold)
+        //     _stateMachine.ChangeState(AirGlideState);
+        // else
+        _stateMachine.ChangeState(AirState);
 
         // Start grapple cooldown
-        StartCoroutine(GrappingHook.CDTimer(GrappingHook.GrappleCD));
+        StartCoroutine(GrappingHook.GHookCDTimer(GrappingHook.GrappleCD));
+    }
+
+    void ChangeGravityScale()
+    {
+        Debug.Log(Rb.gravityScale);
+        if (Checker.IsGrounded || IsAttached)
+        {
+            Rb.gravityScale = FallGravityMax;
+            return;
+        }
+        if (_stateMachine.CurrentState == JumpState)
+        {
+            Rb.gravityScale = JumpGravity;
+            return;
+        }
     }
 }

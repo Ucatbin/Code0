@@ -769,7 +769,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1564,7 +1564,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1614462006}
         m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
-        m_MethodName: HandleGrapper
+        m_MethodName: HandleGrappingHook
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1580,7 +1580,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1614462006}
         m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
-        m_MethodName: HandleScroll
+        m_MethodName: HandleSprint
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1590,8 +1590,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: f62e2735-af70-4778-9a07-6b2fe8ef79c8
-    m_ActionName: 'Normal/GrappingHookActions[/Mouse/scroll]'
+    m_ActionId: 696f5ce7-26c1-4a48-aa23-c60813c86445
+    m_ActionName: 'Normal/Sprint[/Keyboard/leftShift]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Normal
@@ -1684,13 +1684,14 @@ MonoBehaviour:
   JumpWindow: 0.25
   JumpDelay: 0.1
   JumpGravity: 3
-  FallGravity: 5
-  AirGlideGravity: 1.2
-  AirGlideThreshold: 6
+  FallGravityMax: 4.5
+  FallGravityMin: 1
+  MinGravityTrashold: 8
+  AirGlideThreshold: 2
   GroundMoveForce: 40
   AirMoveForce: 10
   MaxGroundSpeed: 8
-  MaxAirSpeed: 6
+  MaxAirSpeed: 20
   JumpHeight: 1.2
   JumpHoldHeight: 15
   IsJumping: 0
@@ -1929,15 +1930,20 @@ MonoBehaviour:
   _player: {fileID: 1614462007}
   MainCam: {fileID: 519420031}
   LineRenderer: {fileID: 1614462011}
-  _distanceJoint: {fileID: 1614462012}
-  ScrollSpeed: 45
+  DistanceJoint: {fileID: 1614462012}
   MaxDetectDist: 20
-  HookPoint: {x: 0, y: 0}
   CanHookLayer:
     serializedVersion: 2
     m_Bits: 64
   GrappleCD: 1
-  CanUseGrapple: 1
+  GLineDashCD: 1
+  GLineSpeed: 2.5
+  GLineMaxSpeed: 20
+  GLineAcceleration: 20
+  GLineDamping: 2
+  HookPoint: {x: 0, y: 0}
+  CanUseGHook: 1
+  CanUseGLineDash: 1
 --- !u!1 &1685203365
 GameObject:
   m_ObjectHideFlags: 0
@@ -1994,7 +2000,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2120,12 +2126,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 1614462007}
   IsGrounded: 0
-  _groundCheckCollider: {fileID: 14778944}
+  _groundChecker: {fileID: 14778944}
   _groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  GrappingLineCheck: {fileID: 1078320051}
-  _grappleLayer:
+  GLineChecker: {fileID: 1078320051}
+  GLineBreakLayer:
     serializedVersion: 2
     m_Bits: 64
 --- !u!1 &1898253073
