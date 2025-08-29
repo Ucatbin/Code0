@@ -12,9 +12,9 @@ public class StateMachine
 
     public void ChangeState(EntityState nextState)
     {
+        Debug.Log($"Exit: {CurrentState} Enter: {nextState}");
         CurrentState.Exit();
         CurrentState = nextState;
-        Debug.Log($"Enter: " + CurrentState);
         CurrentState.Enter();
     }
 }

@@ -8,6 +8,8 @@ public class Player_HookedState : Player_BaseState
     PlayerChecker _checker;
     float _accelerate = 1f;
 
+    bool _shouldAddForce;
+
     public Player_HookedState(Player player, StateMachine stateMachine, string stateName) : base(player, stateMachine, stateName) { }
 
     public override void Enter()
@@ -20,6 +22,7 @@ public class Player_HookedState : Player_BaseState
         // Enable player collision check
         _checker.GLineChecker.enabled = true;
 
+        _player.Rb.gravityScale = _player.FallGravityMax;
         _accelerate = 1f;
     }
 
@@ -29,6 +32,12 @@ public class Player_HookedState : Player_BaseState
         // Control the length of the grapping line
         ControlGLine();
         ControlAcceleration();
+
+        if (_shouldAddForce)
+            _player.Rb.AddForce(new Vector2(
+                _player.InputSystem.MoveInput.x * _player.GLineMoveForce,
+                0f
+            ), ForceMode2D.Force);
     }
     public override void LogicUpdate()
     {
@@ -39,7 +48,8 @@ public class Player_HookedState : Player_BaseState
         {
             ReleaseHook();
         }
-
+        // If current velocity less than max speed, can add force
+        _shouldAddForce = Mathf.Abs(_player.Rb.linearVelocity.x) < _player.MaxGroundSpeed;
 
         // Update line renderer position
         _grappingHook.LineRenderer.SetPosition(1, _player.transform.position);
@@ -90,10 +100,12 @@ public class Player_HookedState : Player_BaseState
         if (_grappingHook.CanUseGLineDash && sprint)
         {
             _accelerate = _grappingHook.GLineAcceleration;
-            _grappingHook.StartCoroutine(_grappingHook.DashCDTimer(_grappingHook.GLineDashCD));
+            Player_TimerManager.Instance.GLineDashTimer.StartTimer(_grappingHook.GLineDashCD);
         }
-        if (inputY != 0)
-            _joint.distance -= _grappingHook.GLineSpeed * inputY * Time.fixedDeltaTime * _accelerate;
+        if (inputY != 0 && !sprint)
+            _joint.distance -= _grappingHook.GLineSpeed * inputY * Time.fixedDeltaTime;
+        else if (_accelerate != 1f)
+            _joint.distance -= _grappingHook.GLineSpeed * _accelerate * Time.fixedDeltaTime;
     }
     void ControlAcceleration()
     {

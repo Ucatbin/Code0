@@ -39,7 +39,7 @@ public class Player_AirState : Player_BaseState
         _shouldAddForce = Mathf.Abs(_player.Rb.linearVelocity.x) < _player.MaxAirSpeed;
 
         // Exit when detect the ground
-        if (_player.Checker.IsGrounded)
+        if (_player.Checker.IsGrounded && _player.Rb.linearVelocity.y <= 0f)
             _stateMachine.ChangeState(_player.IdleState);
     }
 
@@ -49,7 +49,7 @@ public class Player_AirState : Player_BaseState
     }
     void ChangeGravityScale()
     {
-        Debug.Log(Mathf.Abs(_targetGravity));
+        Debug.Log(Mathf.Abs(_player.Rb.gravityScale));
         if (_player.IsJumping)
             return;
 
