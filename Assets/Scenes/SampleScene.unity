@@ -128,7 +128,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 14778943}
-  - component: {fileID: 14778944}
   m_Layer: 0
   m_Name: GroundChecker
   m_TagString: Untagged
@@ -145,58 +144,87 @@ Transform:
   m_GameObject: {fileID: 14778942}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.1, z: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1875388749}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &14778944
-BoxCollider2D:
+--- !u!1 &301599176
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 14778942}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 301599177}
+  - component: {fileID: 301599178}
+  - component: {fileID: 301599179}
+  - component: {fileID: 301599180}
+  m_Layer: 0
+  m_Name: Timers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &301599177
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301599176}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 390987058}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &301599178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301599176}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.42}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 0.98, y: 0.04212773}
-  m_EdgeRadius: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8f41bf00bae8d243a36a2b55d015a20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentTimerVal: 0
+  _grappingHook: {fileID: 1614462013}
+--- !u!114 &301599179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301599176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fdcba72155688f4cb4c9d25d96e5224, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentTimerVal: 0
+  _grappingHook: {fileID: 1614462013}
+--- !u!114 &301599180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301599176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e93d0c68b4f55e49af537c2ffbc5a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentTimerVal: 0
 --- !u!1 &358686531
 GameObject:
   m_ObjectHideFlags: 0
@@ -359,7 +387,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 301599177}
   m_Father: {fileID: 1614462008}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &445309550
@@ -1478,6 +1507,50 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.1, y: 0.9}
   m_EdgeRadius: 0
+--- !u!1 &1564471960
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1564471961}
+  - component: {fileID: 1564471962}
+  m_Layer: 0
+  m_Name: Managers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1564471961
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1564471960}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1614462008}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1564471962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1564471960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d8cccb96062b8d499cda0b72ed52cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1614462003
 GameObject:
   m_ObjectHideFlags: 0
@@ -1681,19 +1754,21 @@ MonoBehaviour:
   Checker: {fileID: 1875388750}
   InputSystem: {fileID: 1614462006}
   GrappingHook: {fileID: 1614462013}
-  JumpWindow: 0.25
+  JumpWindow: 0.3
   JumpDelay: 0.1
+  MinGravityTrashold: 24
+  AirGlideThreshold: 12
+  DefaultGravity: 1
   JumpGravity: 3
   FallGravityMax: 4.5
   FallGravityMin: 1
-  MinGravityTrashold: 20
-  AirGlideThreshold: 6
-  GroundMoveForce: 40
+  GroundMoveForce: 20
   AirMoveForce: 10
-  MaxGroundSpeed: 8
+  GLineMoveForce: 5
+  MaxGroundSpeed: 5
   MaxAirSpeed: 20
-  JumpHeight: 1.2
-  JumpHoldHeight: 15
+  JumpHeight: 2.5
+  JumpHoldForce: 5
   IsJumping: 0
   IsAttached: 0
   IsAttacking: 0
@@ -1713,6 +1788,7 @@ Transform:
   - {fileID: 893872116}
   - {fileID: 1875388749}
   - {fileID: 390987058}
+  - {fileID: 1564471961}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1614462009
@@ -1776,7 +1852,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.1
-  m_GravityScale: 5
+  m_GravityScale: 1
   m_Material: {fileID: 6200000, guid: a6e7b00448a2b1f469012d383bd3bacb, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1935,9 +2011,9 @@ MonoBehaviour:
   CanHookLayer:
     serializedVersion: 2
     m_Bits: 64
-  GrappleCD: 1
+  GrappleCD: 0.5
   GLineDashCD: 1
-  GLineSpeed: 2.5
+  GLineSpeed: 4.5
   GLineMaxSpeed: 30
   GLineAcceleration: 25
   GLineDamping: 5
@@ -2126,10 +2202,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 1614462007}
   IsGrounded: 0
-  _groundChecker: {fileID: 14778944}
   _groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  _groundCheckDist: 0.1
+  _groundCheckPoint: {fileID: 14778943}
+  groundCheckWidth: 0.5
   GLineChecker: {fileID: 1078320051}
   GLineBreakLayer:
     serializedVersion: 2

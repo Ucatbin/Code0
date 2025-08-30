@@ -1,8 +1,5 @@
 using System;
 using System.Collections;
-using System.Linq;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public static class GrappleEvent
@@ -35,7 +32,7 @@ public class GrappingHook : MonoBehaviour
 
     [Header("OtherComponent")]
     [HideInInspector] public Vector2 HookPoint; // The point where the hook is attached
-    [HideInInspector] public bool CanUseGHook = true;
+    public bool CanUseGHook = true;
     [HideInInspector] public bool CanUseGLineDash = true;
 
     void Awake()
@@ -88,28 +85,5 @@ public class GrappingHook : MonoBehaviour
         LineRenderer.SetPosition(0, HookPoint);
         LineRenderer.SetPosition(1, transform.position);
         LineRenderer.enabled = true;
-    }
-
-    public IEnumerator GHookCDTimer(float coolDown)
-    {
-        float timer = 0f;
-        CanUseGHook = false;
-        while (timer < coolDown)
-        {
-            timer += Time.deltaTime;
-            yield return null;
-        }
-        CanUseGHook = true;
-    }
-    public IEnumerator DashCDTimer(float coolDown)
-    {
-        float timer = 0f;
-        CanUseGLineDash = false;
-        while (timer < coolDown)
-        {
-            timer += Time.deltaTime;
-            yield return null;
-        }
-        CanUseGLineDash = true;
     }
 }

@@ -7,9 +7,6 @@ public abstract class EntityState
     protected StateMachine _stateMachine;
     protected string _stateName;
 
-    // Utility
-    protected float _timer;
-
     public EntityState(Entity entity, StateMachine stateMachine, string stateName)
     {
         _thisEntity = entity;
