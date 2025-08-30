@@ -8,7 +8,6 @@ public class Player : Entity
     public Player_AirState AirState { get; private set; }
     public Player_JumpState JumpState { get; private set; }
     public Player_FallState FallState { get; private set; }
-    public Player_EdgeState EdgeState { get; private set; }
     public Player_HookedState HookedState { get; private set; }
     public Player_AirGlideState AirGlideState { get; private set; }
 
@@ -43,9 +42,9 @@ public class Player : Entity
     public float JumpHoldForce = 2f;
 
     [Header("StateMark")]
-    public bool IsJumping; // Can player add force after jump
-    public bool IsAttached; // Is the grappling hook attached
-    public bool IsAttacking; // Is the player attacking
+    public bool IsJumping;      // Can player add force after jump
+    public bool IsAttached;     // Is the grappling hook attached
+    public bool IsAttacking;    // Is the player attacking
 
     void OnEnable()
     {
@@ -68,7 +67,6 @@ public class Player : Entity
         AirState = new Player_AirState(this, _stateMachine, "InAir");
         JumpState = new Player_JumpState(this, _stateMachine, "Jump");
         FallState = new Player_FallState(this, _stateMachine, "Fall");
-        EdgeState = new Player_EdgeState(this, _stateMachine, "Edged");
         HookedState = new Player_HookedState(this, _stateMachine, "Hooked");
         AirGlideState = new Player_AirGlideState(this, _stateMachine, "AirGlide");
 
@@ -97,6 +95,11 @@ public class Player : Entity
     {
         _stateMachine.ChangeState(AirState);
         // Start grapple cooldown
-        Player_TimerManager.Instance.GHookTimer.StartTimer(GrappingHook.GrappleCD);
+        GrappingHook.CanUseGHook = false;
+        Player_TimerManager.Instance.AddTimer(
+            GrappingHook.GrappleCD,
+            () => {GrappingHook.CanUseGHook = true;},
+            "Player_AbilityTimer"
+            );
     }
 }

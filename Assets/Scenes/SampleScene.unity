@@ -1551,9 +1551,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d8cccb96062b8d499cda0b72ed52cb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GHookTimer: {fileID: 301599178}
-  GLineDashTimer: {fileID: 301599179}
-  JumpTimer: {fileID: 301599180}
 --- !u!1 &1614462003
 GameObject:
   m_ObjectHideFlags: 0
@@ -2014,7 +2011,7 @@ MonoBehaviour:
   CanHookLayer:
     serializedVersion: 2
     m_Bits: 64
-  GrappleCD: 1
+  GrappleCD: 0.5
   GLineDashCD: 1
   GLineSpeed: 4.5
   GLineMaxSpeed: 30

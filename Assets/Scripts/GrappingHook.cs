@@ -32,7 +32,7 @@ public class GrappingHook : MonoBehaviour
 
     [Header("OtherComponent")]
     [HideInInspector] public Vector2 HookPoint; // The point where the hook is attached
-    [HideInInspector] public bool CanUseGHook = true;
+    public bool CanUseGHook = true;
     [HideInInspector] public bool CanUseGLineDash = true;
 
     void Awake()

@@ -28,9 +28,10 @@ public class Player_HookedState : Player_BaseState
 
     public override void PhysicsUpdate()
     {
+        // Check if the grapping line is broken
         CheckGLineBreak();
         // Control the length of the grapping line
-        ControlGLine();
+        MoveOnGLine();
         ControlAcceleration();
 
         if (_shouldAddForce)
@@ -93,14 +94,19 @@ public class Player_HookedState : Player_BaseState
             ReleaseHook();
     }
 
-    void ControlGLine()
+    void MoveOnGLine()
     {
         float inputY = _player.InputSystem.MoveInput.y;
         bool sprint = _player.InputSystem.SprintTrigger;
         if (_grappingHook.CanUseGLineDash && sprint)
         {
             _accelerate = _grappingHook.GLineAcceleration;
-            Player_TimerManager.Instance.GLineDashTimer.StartTimer(_grappingHook.GLineDashCD);
+
+            _grappingHook.CanUseGLineDash = false;
+            Player_TimerManager.Instance.AddTimer(_grappingHook.GLineDashCD, () =>
+            {
+                _grappingHook.CanUseGLineDash = true;
+            });
         }
         if (inputY != 0 && !sprint)
             _joint.distance -= _grappingHook.GLineSpeed * inputY * Time.fixedDeltaTime;

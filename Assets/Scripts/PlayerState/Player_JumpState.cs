@@ -4,6 +4,7 @@ using UnityEngine;
 public class Player_JumpState : Player_AirState
 {
     bool _shouldApplyForce;
+    bool _canAddForce;
     float _jumpForce;
     float _jumpHoldForce;
     Player_JumpTimer _timer;
@@ -14,7 +15,6 @@ public class Player_JumpState : Player_AirState
     {
         // Initialize
         _player.IsJumping = true;
-        _timer = Player_TimerManager.Instance.JumpTimer;
         _player.Rb.gravityScale = _player.JumpGravity;
 
         // Calculate jump force with jump height
@@ -33,7 +33,16 @@ public class Player_JumpState : Player_AirState
         _player.Rb.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
 
         // Start jump timer
-        _timer.StartTimer(_player.JumpWindow);
+        Player_TimerManager.Instance.AddTimer(
+            _player.JumpDelay,
+            () => { _canAddForce = true; },
+            "JumpStateTimer"
+        );
+        Player_TimerManager.Instance.AddTimer(
+            _player.JumpWindow,
+            () => StopAddForce(),
+            "JumpStateTimer"
+        );
     }
 
     public override void PhysicsUpdate()
@@ -41,7 +50,7 @@ public class Player_JumpState : Player_AirState
         base.PhysicsUpdate();
 
         // Apply additional jump force
-        if (_shouldApplyForce)
+        if (_shouldApplyForce && _canAddForce)
             _player.Rb.AddForce(Vector2.up * _jumpHoldForce, ForceMode2D.Force);
     }
     public override void LogicUpdate()
@@ -49,20 +58,22 @@ public class Player_JumpState : Player_AirState
         base.LogicUpdate();
 
         // Can jump higher if holding Space button
-        _shouldApplyForce = _timer.CurrentTimerVal >= _player.JumpDelay && 
-                        _timer.CurrentTimerVal <= _player.JumpWindow && 
-                        _player.InputSystem.JumpTrigger;
+        _shouldApplyForce = _player.InputSystem.JumpTrigger;
 
         // Cant add force after jumpWindow
-        if (_timer.CurrentTimerVal > _player.JumpWindow || !_player.InputSystem.JumpTrigger)
-        {
-            _stateMachine.ChangeState(_player.AirState);
-            _shouldApplyForce = false;
-        }
+        if (!_player.InputSystem.JumpTrigger) StopAddForce();
     }
 
     public override void Exit()
     {
         _player.IsJumping = false;
+        Player_TimerManager.Instance.CancelTimersWithTag("JumpStateTimer");
+    }
+    
+    void StopAddForce()
+    {
+        _stateMachine.ChangeState(_player.AirState);
+        _canAddForce = false;
+        _shouldApplyForce = false;
     }
 }
