@@ -6,6 +6,7 @@ public class EnemyBrain : MonoBehaviour
     public Locomotion2D locomotion;
     public Vision2D vision;
     public Attack2D attack;
+    public Rigidbody2D rd;
 
     [Header("巡逻点")]
     public Transform pointA;
@@ -18,6 +19,10 @@ public class EnemyBrain : MonoBehaviour
     private enum State { Patrol, Chase, Attack }
     private State state;
 
+    private void Awake()
+    {
+        rd = GetComponent<Rigidbody2D>();
+    }
     void Start()
     {
         // 以“当前更近的巡逻点”为基准，然后把目标设成“另一个点”，保证一开局就会动
