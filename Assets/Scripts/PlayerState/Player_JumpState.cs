@@ -7,7 +7,6 @@ public class Player_JumpState : Player_AirState
     bool _canAddForce;
     float _jumpForce;
     float _jumpHoldForce;
-    Player_JumpTimer _timer;
 
     public Player_JumpState(Player player, StateMachine stateMachine, string stateName) : base(player, stateMachine, stateName) { }
 

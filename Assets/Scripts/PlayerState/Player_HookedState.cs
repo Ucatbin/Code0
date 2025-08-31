@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Player_HookedState : Player_BaseState
 {
+    // Necessary Component
     GrappingHook _grappingHook;
     DistanceJoint2D _joint;
     PlayerChecker _checker;
@@ -103,10 +104,10 @@ public class Player_HookedState : Player_BaseState
             _accelerate = _grappingHook.GLineAcceleration;
 
             _grappingHook.CanUseGLineDash = false;
-            Player_TimerManager.Instance.AddTimer(_grappingHook.GLineDashCD, () =>
-            {
-                _grappingHook.CanUseGLineDash = true;
-            });
+            Player_TimerManager.Instance.AddTimer(
+                _grappingHook.GLineDashCD,
+                () => { _grappingHook.CanUseGLineDash = true; }
+            );
         }
         if (inputY != 0 && !sprint)
             _joint.distance -= _grappingHook.GLineSpeed * inputY * Time.fixedDeltaTime;
