@@ -42,16 +42,25 @@ public class PlayerSkill_GrappingHook : Player_BaseSkill
             AttachHook();
         }
     }
+    public void CoolDownSkill(StateMachine stateMachine)
+    {
+        stateMachine.ChangeState(_player.AirState);
+        CanUseSkill = false;
+        Player_TimerManager.Instance.AddTimer(
+            CoolDown,
+            () => {CanUseSkill = true;},
+            "Player_AbilityTimer"
+        );
+    }
     public override void ResetSkill()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     void AttachHook()
     {
         // Let state machine know the player is attached
         GrappleEvent.TriggerHookAttached();
-        _player.IsAttached = true;
 
         // Set connect point and enable distance joint
         DistanceJoint.distance = Vector2.Distance(transform.position, HookPoint);
@@ -63,4 +72,5 @@ public class PlayerSkill_GrappingHook : Player_BaseSkill
         LineRenderer.SetPosition(1, transform.position);
         LineRenderer.enabled = true;
     }
+
 }

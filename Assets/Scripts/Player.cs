@@ -88,17 +88,13 @@ public class Player : Entity
     void HandleHookAtteched()
     {
         if (!IsAttacking)
+        {
             _stateMachine.ChangeState(HookedState);
+            IsAttached = true;
+        }
     }
     void HandleHookReleased()
     {
-        _stateMachine.ChangeState(AirState);
-        // Start grapple cooldown
-        Player_SkillManager.Instance.GrappingHook.CanUseSkill = false;
-        Player_TimerManager.Instance.AddTimer(
-            Player_SkillManager.Instance.GrappingHook.CoolDown,
-            () => {Player_SkillManager.Instance.GrappingHook.CanUseSkill = true;},
-            "Player_AbilityTimer"
-            );
+        Player_SkillManager.Instance.GrappingHook.CoolDownSkill(_stateMachine);
     }
 }
