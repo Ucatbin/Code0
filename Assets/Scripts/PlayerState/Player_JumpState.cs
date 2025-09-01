@@ -57,10 +57,10 @@ public class Player_JumpState : Player_AirState
         base.LogicUpdate();
 
         // Can jump higher if holding Space button
-        _shouldApplyForce = _player.InputSystem.JumpTrigger;
+        _shouldApplyForce = _player.InputSys.JumpTrigger;
 
         // Cant add force after jumpWindow
-        if (!_player.InputSystem.JumpTrigger) StopAddForce();
+        if (!_player.InputSys.JumpTrigger) StopAddForce();
     }
 
     public override void Exit()

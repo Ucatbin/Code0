@@ -14,8 +14,7 @@ public class Player : Entity
     [Header("NecessaryComponent")]
     public Rigidbody2D Rb;
     public PlayerChecker Checker;
-    public PlayerInput InputSystem;
-    public GrappingHook GrappingHook;
+    public PlayerInput InputSys;
 
     [Header("JumpAttribute")]
     public float JumpWindow = 0.2f;
@@ -95,10 +94,10 @@ public class Player : Entity
     {
         _stateMachine.ChangeState(AirState);
         // Start grapple cooldown
-        GrappingHook.CanUseGHook = false;
+        Player_SkillManager.Instance.GrappingHook.CanUseSkill = false;
         Player_TimerManager.Instance.AddTimer(
-            GrappingHook.GrappleCD,
-            () => {GrappingHook.CanUseGHook = true;},
+            Player_SkillManager.Instance.GrappingHook.CoolDown,
+            () => {Player_SkillManager.Instance.GrappingHook.CanUseSkill = true;},
             "Player_AbilityTimer"
             );
     }

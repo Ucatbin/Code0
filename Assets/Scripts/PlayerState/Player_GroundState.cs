@@ -16,7 +16,7 @@ public class Player_GroundState : Player_BaseState
     public override void LogicUpdate()
     {
         // Can jump anytime if on ground
-        if (_player.InputSystem.JumpTrigger)
+        if (_player.InputSys.JumpTrigger)
         {
             _stateMachine.ChangeState(_player.JumpState);
             return;

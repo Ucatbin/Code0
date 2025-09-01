@@ -18,7 +18,7 @@ public class Player_MoveState : Player_GroundState
 
         if (_shouldAddForce)
             _player.Rb.AddForce(new Vector2(
-                _player.InputSystem.MoveInput.x * _player.GroundMoveForce,
+                _player.InputSys.MoveInput.x * _player.GroundMoveForce,
                 0f
             ), ForceMode2D.Force);
     }
@@ -31,7 +31,7 @@ public class Player_MoveState : Player_GroundState
 
 
         // If InputX == 0f, exit MoveState
-        if (_player.InputSystem.MoveInput.x == 0f)
+        if (_player.InputSys.MoveInput.x == 0f)
             _stateMachine.ChangeState(_player.IdleState);
     }
 

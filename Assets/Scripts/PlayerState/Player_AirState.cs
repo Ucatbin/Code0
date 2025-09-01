@@ -17,7 +17,7 @@ public class Player_AirState : Player_BaseState
 
         if (_shouldAddForce)
             _player.Rb.AddForce(new Vector2(
-                _player.InputSystem.MoveInput.x * _player.AirMoveForce,
+                _player.InputSys.MoveInput.x * _player.AirMoveForce,
                 0f
             ), ForceMode2D.Force);
     }

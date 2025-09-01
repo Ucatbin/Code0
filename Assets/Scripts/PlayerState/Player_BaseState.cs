@@ -20,7 +20,7 @@ public class Player_BaseState : EntityState
     }
     public override void LogicUpdate()
     {
-
+        
     }
 
     public override void Exit()
