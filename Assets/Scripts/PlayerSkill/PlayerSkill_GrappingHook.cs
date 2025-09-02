@@ -11,7 +11,8 @@ public class PlayerSkill_GrappingHook : Player_BaseSkill
 
     [Header("GHookAttribute")]
     [SerializeField] float _lineMoveSpeed = 4.5f;
-    [field:SerializeField] public float MaxDetectDist { get; private set; } = 20f; // Maximum distance to detect grapple points
+    [SerializeField] float _breakCoolDown = 2f;
+    [field: SerializeField] public float MaxDetectDist { get; private set; } = 20f; // Maximum distance to detect grapple points
     [field:SerializeField] public LayerMask CanHookLayer { get; private set; } // Which layer can the hook attach to
     RaycastHit2D _hit;
 
@@ -87,6 +88,10 @@ public class PlayerSkill_GrappingHook : Player_BaseSkill
         RopeJoint.enabled = false;
         RopeLine.enabled = false;
         _pool.Pool.Release(HookPoint);
+    }
+    public void BreakHook()
+    {
+        
     }
 
     public void MoveOnGLine()
