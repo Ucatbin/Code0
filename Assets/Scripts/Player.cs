@@ -23,10 +23,15 @@ public class Player : Entity
     public float AirGlideThreshold = 4f;
 
     [Header("GravityScale")]
-    public float DefaultGravity = 1f;
-    public float JumpGravity = 3f;
-    public float FallGravityMax = 4.5f;
-    public float FallGravityMin = 1f;
+    [SerializeField] float _defaultGravity = 1f;
+    [SerializeField] float _jumpGravity = 3f;
+    [SerializeField] float _fallGravityMax = 4.5f;
+    [SerializeField] float _fallGravityMin = 1f;
+    
+    public float DefaultGravity => _defaultGravity;
+    public float JumpGravity => _jumpGravity;
+    public float FallGravityMax => _fallGravityMax;
+    public float FallGravityMin => _fallGravityMin;
 
     [Header("PlayerAttribute")]
     // Movement
@@ -85,8 +90,10 @@ public class Player : Entity
         base.Update();
     }
 
+    #region GrappingHook logics
     void HandleHookAtteched()
     {
+        // TODO: More check conditions
         if (!IsAttacking)
         {
             _stateMachine.ChangeState(HookedState);
@@ -95,6 +102,8 @@ public class Player : Entity
     }
     void HandleHookReleased()
     {
-        Player_SkillManager.Instance.GrappingHook.CoolDownSkill(_stateMachine);
+        _stateMachine.ChangeState(AirState);
+        Player_SkillManager.Instance.GrappingHook.CoolDownSkill();
     }
+    #endregion
 }

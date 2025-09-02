@@ -13,6 +13,7 @@ public abstract class Player_BaseSkill :MonoBehaviour
         _inputSys = _player.InputSys;
     }
 
+    public abstract void CoolDownSkill();
     public abstract void UseSkill();
     public abstract void ResetSkill();
 }

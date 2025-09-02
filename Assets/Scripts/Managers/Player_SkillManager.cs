@@ -6,6 +6,7 @@ public class Player_SkillManager : MonoBehaviour
     [SerializeField] Player _player;
 
     [field: SerializeField] public PlayerSkill_GrappingHook GrappingHook { get; private set; }
+    [field: SerializeField] public PlayerSkill_GrappingHookDash GrappingHookDash { get; private set; }
 
     void Awake()
     {
