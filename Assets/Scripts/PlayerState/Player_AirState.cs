@@ -5,7 +5,7 @@ public class Player_AirState : Player_BaseState
     bool _shouldAddForce;
     float _targetGravity;
 
-    public Player_AirState(PlayerController player, StateMachine stateMachine, int priority, string stateName) : base(player, stateMachine, priority, stateName)
+    public Player_AirState(PlayerController entity, StateMachine stateMachine, string stateName) : base(entity, stateMachine, stateName)
     {
     }
 
@@ -20,7 +20,7 @@ public class Player_AirState : Player_BaseState
 
         if (_shouldAddForce)
             _player.Rb.AddForce(new Vector2(
-                _player.InputSys.MoveInput.x * _player.PlayerSO.AirMoveForce,
+                _player.InputSys.MoveInput.x * _player.AttributeSO.AirMoveForce,
                 0f
             ), ForceMode2D.Force);
     }
@@ -39,7 +39,7 @@ public class Player_AirState : Player_BaseState
         */
 
         // If current velocity less than max speed, can add force
-        _shouldAddForce = Mathf.Abs(_player.Rb.linearVelocity.x) < _player.PlayerSO.MaxAirSpeed;
+        _shouldAddForce = Mathf.Abs(_player.Rb.linearVelocity.x) < _player.AttributeSO.MaxAirSpeed;
 
         // Exit when detect the ground
         if (_player.Checker.IsGrounded && _player.Rb.linearVelocity.y <= 0f)
@@ -56,14 +56,14 @@ public class Player_AirState : Player_BaseState
         if (_player.IsJumping)
             return;
 
-        if (Mathf.Abs(_player.Rb.linearVelocity.magnitude) < _player.PlayerSO.AirGlideThreshold)
-            _targetGravity = _player.PlayerSO.MaxFallGravity;
+        if (Mathf.Abs(_player.Rb.linearVelocity.magnitude) < _player.AttributeSO.AirGlideThreshold)
+            _targetGravity = _player.AttributeSO.MaxFallGravity;
         else
         {
             _targetGravity = Mathf.Lerp(
-                _player.PlayerSO.MaxFallGravity,
-                _player.PlayerSO.MinFallGravity,
-                Mathf.Abs(_player.Rb.linearVelocity.magnitude) / _player.PlayerSO.MinGravityTrashold);
+                _player.AttributeSO.MaxFallGravity,
+                _player.AttributeSO.MinFallGravity,
+                Mathf.Abs(_player.Rb.linearVelocity.magnitude) / _player.AttributeSO.MinGravityTrashold);
         }
         _player.Rb.gravityScale = _targetGravity;
     }

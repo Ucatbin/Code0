@@ -5,7 +5,7 @@ public class Player_MoveState : Player_GroundState
 {
     bool _shouldAddForce;
 
-    public Player_MoveState(PlayerController player, StateMachine stateMachine, int priority, string stateName) : base(player, stateMachine, priority, stateName)
+    public Player_MoveState(PlayerController entity, StateMachine stateMachine, string stateName) : base(entity, stateMachine, stateName)
     {
     }
 
@@ -20,7 +20,7 @@ public class Player_MoveState : Player_GroundState
 
         if (_shouldAddForce)
             _player.Rb.AddForce(new Vector2(
-                _player.InputSys.MoveInput.x * _player.PlayerSO.GroundMoveForce,
+                _player.InputSys.MoveInput.x * _player.AttributeSO.GroundMoveForce,
                 0f
             ), ForceMode2D.Force);
     }
@@ -29,7 +29,7 @@ public class Player_MoveState : Player_GroundState
         base.LogicUpdate();
 
         // If current velocity less than max speed, can add force
-        _shouldAddForce = Mathf.Abs(_player.Rb.linearVelocity.x) < _player.PlayerSO.MaxGroundSpeed;
+        _shouldAddForce = Mathf.Abs(_player.Rb.linearVelocity.x) < _player.AttributeSO.MaxGroundSpeed;
 
 
         // If InputX == 0f, exit MoveState

@@ -1,4 +1,6 @@
 using UnityEngine;
+using System;
+using UnityEngine.UIElements;
 
 public class PlayerController : EntityContoller
 {
@@ -10,13 +12,16 @@ public class PlayerController : EntityContoller
     public Player_FallState FallState { get; private set; }
     public Player_HookedState HookedState { get; private set; }
     public Player_AirGlideState AirGlideState { get; private set; }
+    public Player_AttackState AttackState { get; private set; }
 
     [Header("NecessaryComponent")]
     public Rigidbody2D Rb;
     public PlayerChecker Checker;
     public PlayerInput InputSys;
+
     [Header("SO")]
-    public PlayerAttributeSO PlayerSO;
+    public PlayerAttributeSO AttributeSO;
+    public PlayerStatePrioritySO StatePrioritySO;
 
     [Header("StateMark")]
     public bool IsJumping;      // Can player add force after jump
@@ -39,13 +44,14 @@ public class PlayerController : EntityContoller
         base.Awake();
 
         // Initialize StateMachine
-        IdleState = new Player_IdleState(this, _stateMachine, 0, "Idle");
-        MoveState = new Player_MoveState(this, _stateMachine, 1, "Move");
-        AirState = new Player_AirState(this, _stateMachine, 0, "InAir");
-        JumpState = new Player_JumpState(this, _stateMachine, 2, "Jump");
-        FallState = new Player_FallState(this, _stateMachine, 0, "Fall");
-        HookedState = new Player_HookedState(this, _stateMachine, 3,"Hooked");
-        AirGlideState = new Player_AirGlideState(this, _stateMachine, 1, "AirGlide");
+        IdleState = new Player_IdleState(this, _stateMachine, "Idle");
+        MoveState = new Player_MoveState(this, _stateMachine, "Move");
+        AirState = new Player_AirState(this, _stateMachine, "InAir");
+        JumpState = new Player_JumpState(this, _stateMachine, "Jump");
+        FallState = new Player_FallState(this, _stateMachine, "Fall");
+        HookedState = new Player_HookedState(this, _stateMachine, "Hooked");
+        AirGlideState = new Player_AirGlideState(this, _stateMachine, "AirGlide");
+        AttackState = new Player_AttackState(this, _stateMachine, "Attacking");
 
         _stateMachine.InitState(IdleState);
     }
@@ -61,6 +67,13 @@ public class PlayerController : EntityContoller
     protected override void Update()
     {
         base.Update();
+
+        HandleAttack();
+    }
+
+    public int GetStatePriority(Type stateType)
+    {
+        return StatePrioritySO?.GetPriority(stateType) ?? 1;
     }
 
     #region GrappingHook logics
@@ -77,6 +90,20 @@ public class PlayerController : EntityContoller
     {
         _stateMachine.ChangeState(AirState, true);
         Player_SkillManager.Instance.GrappingHook.CoolDownSkill();
+    }
+    #endregion
+
+    #region Attack logics
+    void HandleAttack()
+    {
+        if (!InputSys.AttackTrigger)
+            return;
+
+        if (Player_SkillManager.Instance.Attack.CanUseSkill)
+        {
+            Player_SkillManager.Instance.Attack.UseSkill();
+            _stateMachine.ChangeState(AttackState, false);
+        }
     }
     #endregion
 }

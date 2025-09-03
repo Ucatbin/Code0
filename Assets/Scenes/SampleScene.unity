@@ -669,7 +669,8 @@ MonoBehaviour:
   Rb: {fileID: 1614462010}
   Checker: {fileID: 1875388750}
   InputSys: {fileID: 1233298156}
-  PlayerSO: {fileID: 11400000, guid: fc0fe7c335a11f345a7dc7c3ee3db4d2, type: 2}
+  AttributeSO: {fileID: 11400000, guid: fc0fe7c335a11f345a7dc7c3ee3db4d2, type: 2}
+  StatePrioritySO: {fileID: 11400000, guid: f1dcc5e1b3ca74d42b63f30e30971e1f, type: 2}
   IsJumping: 0
   IsAttached: 0
   IsAttacking: 0
@@ -1921,6 +1922,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 696f5ce7-26c1-4a48-aa23-c60813c86445
     m_ActionName: 'Normal/Sprint[/Keyboard/leftShift]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1233298156}
+        m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
+        m_MethodName: HandleAttack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 87878111-8246-4ef4-a45d-a6d199dde472
+    m_ActionName: 'Normal/Attack[/Mouse/leftButton]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Normal
@@ -1986,6 +2003,7 @@ MonoBehaviour:
   _player: {fileID: 542567388}
   <GrappingHook>k__BackingField: {fileID: 1721889136}
   <GrappingHookDash>k__BackingField: {fileID: 1721889138}
+  <Attack>k__BackingField: {fileID: 1721889139}
 --- !u!1 &1614462003
 GameObject:
   m_ObjectHideFlags: 0
@@ -2264,6 +2282,7 @@ GameObject:
   - component: {fileID: 1721889137}
   - component: {fileID: 1721889136}
   - component: {fileID: 1721889138}
+  - component: {fileID: 1721889139}
   m_Layer: 0
   m_Name: SkillController
   m_TagString: Untagged
@@ -2333,6 +2352,23 @@ MonoBehaviour:
   <RopeJoint>k__BackingField: {fileID: 1614462011}
   _lineDashSpeed: 40
   _lineDashDamping: 10
+--- !u!114 &1721889139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1721889135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ee1cc69f0eb9cf42b0223d10042245a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 542567388}
+  _inputSys: {fileID: 1233298156}
+  CoolDown: 0.2
+  CanUseSkill: 1
+  AttackDuration: 0.2
 --- !u!1 &1744596188
 GameObject:
   m_ObjectHideFlags: 0

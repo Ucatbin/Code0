@@ -1,31 +1,18 @@
-using System.Net.Security;
+using System;
 using UnityEngine;
 
 public class Player_BaseState : EntityState
 {
     protected PlayerController _player;
 
-    public Player_BaseState(PlayerController player, StateMachine stateMachine, int priority, string stateName) : base(player, stateMachine, priority, stateName)
+    public Player_BaseState(PlayerController entity, StateMachine stateMachine,string stateName) : base(entity, stateMachine, stateName)
     {
-        _player = player;
+        _player = entity;
+        Priority = _player.GetStatePriority(GetType());
     }
 
-    public override void Enter()
-    {
-        
-    }
-    
-    public override void PhysicsUpdate()
-    {
-
-    }
-    public override void LogicUpdate()
-    {
-        
-    }
-
-    public override void Exit()
-    {
-        
-    }
+    public override void Enter() { }
+    public override void PhysicsUpdate() { }
+    public override void LogicUpdate() { }
+    public override void Exit() { }
 }

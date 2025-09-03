@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class EntityContoller : MonoBehaviour
 {
@@ -12,7 +13,6 @@ public class EntityContoller : MonoBehaviour
     {
 
     }
-
     protected virtual void FixedUpdate()
     {
         _stateMachine.CurrentState.PhysicsUpdate();

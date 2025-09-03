@@ -1,4 +1,3 @@
-using Unity.Burst.Intrinsics;
 using UnityEngine;
 
 public class Player_JumpState : Player_AirState
@@ -8,7 +7,7 @@ public class Player_JumpState : Player_AirState
     float _jumpForce;
     float _jumpHoldForce;
 
-    public Player_JumpState(PlayerController player, StateMachine stateMachine, int priority, string stateName) : base(player, stateMachine, priority, stateName)
+    public Player_JumpState(PlayerController entity, StateMachine stateMachine, string stateName) : base(entity, stateMachine, stateName)
     {
     }
 
@@ -16,16 +15,16 @@ public class Player_JumpState : Player_AirState
     {
         // Initialize
         _player.IsJumping = true;
-        _player.Rb.gravityScale = _player.PlayerSO.RiseGravity;
+        _player.Rb.gravityScale = _player.AttributeSO.RiseGravity;
 
         // Calculate jump force with jump height
         _jumpForce = Mathf.Sqrt(
-            _player.PlayerSO.JumpHeight *
+            _player.AttributeSO.JumpHeight *
             (_player.Rb.gravityScale * Physics2D.gravity.y) *
             -2f
         ) * _player.Rb.mass;
         _jumpHoldForce = Mathf.Sqrt(
-            _player.PlayerSO.JumpHoldForce *
+            _player.AttributeSO.JumpHoldForce *
             (_player.Rb.gravityScale * Physics2D.gravity.y) *
             -2f
         ) * _player.Rb.mass;
@@ -35,12 +34,12 @@ public class Player_JumpState : Player_AirState
 
         // Start jump timer
         Player_TimerManager.Instance.AddTimer(
-            _player.PlayerSO.JumpDelay,
+            _player.AttributeSO.JumpDelay,
             () => { _canAddForce = true; },
             "JumpStateTimer"
         );
         Player_TimerManager.Instance.AddTimer(
-            _player.PlayerSO.JumpWindow,
+            _player.AttributeSO.JumpWindow,
             () => StopAddForce(),
             "JumpStateTimer"
         );

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerSkill_GrappingHook : Player_BaseSkill
+public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
 {
     [SerializeField] float _breakCoolDown = 2f;
     [Header("NecessaryComponent")]
@@ -32,6 +32,8 @@ public class PlayerSkill_GrappingHook : Player_BaseSkill
     {
         if (!CanUseSkill)
             return;
+
+        CanUseSkill = false;
         // Get mouse position and calculate fire direction
         Vector2 mousePos = _mainCam.ScreenToWorldPoint(Input.mousePosition);
         Vector2 fireDir = (mousePos - (Vector2)_player.transform.position).normalized;
@@ -68,7 +70,6 @@ public class PlayerSkill_GrappingHook : Player_BaseSkill
     {
         // Let state machine know the player is attached
         GrappleEvent.TriggerHookAttached();
-        CanUseSkill = false;
         // Set connect point and enable distance joint
         RopeJoint.connectedBody = HookPoint.GetComponent<Rigidbody2D>();
         RopeJoint.distance = Vector2.Distance(_player.transform.position, HookPoint.transform.position);

@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class PlayerSkill_GrappingHookDash : Player_BaseSkill
+public class PlayerSkill_GrappingHookDash : PlayerSkill_BaseSkill
 {
     [Header("NecessaryComponent")]
     [field: SerializeField] public DistanceJoint2D RopeJoint { get; private set; }

@@ -10,7 +10,7 @@ public class Player_HookedState : Player_BaseState
 
     bool _shouldAddForce;
 
-    public Player_HookedState(PlayerController player, StateMachine stateMachine, int priority, string stateName) : base(player, stateMachine, priority, stateName)
+    public Player_HookedState(PlayerController entity, StateMachine stateMachine, string stateName) : base(entity, stateMachine, stateName)
     {
     }
 
@@ -23,7 +23,7 @@ public class Player_HookedState : Player_BaseState
         // Enable player collision check
         _checker.GLineChecker.enabled = true;
 
-        _player.Rb.gravityScale = _player.PlayerSO.MaxFallGravity;
+        _player.Rb.gravityScale = _player.AttributeSO.MaxFallGravity;
     }
 
     public override void PhysicsUpdate()

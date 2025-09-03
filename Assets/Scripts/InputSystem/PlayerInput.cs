@@ -10,6 +10,7 @@ public class PlayerInput : MonoBehaviour
     public bool JumpTrigger { get; private set; }
     public bool GrapperTrigger { get; private set; }
     public bool SprintTrigger { get; private set; }
+    public bool AttackTrigger { get; private set; }
 
     public void HandleMove(InputAction.CallbackContext context)
     {
@@ -29,5 +30,10 @@ public class PlayerInput : MonoBehaviour
     public void HandleSprint(InputAction.CallbackContext context)
     {
         SprintTrigger = context.performed;
+    }
+
+    public void HandleAttack(InputAction.CallbackContext context)
+    {
+        AttackTrigger = context.performed;
     }
 }

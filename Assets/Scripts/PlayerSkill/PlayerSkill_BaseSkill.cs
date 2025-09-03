@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public abstract class Player_BaseSkill :MonoBehaviour
+public abstract class PlayerSkill_BaseSkill :MonoBehaviour
 {
     [SerializeField] protected PlayerController _player;
     [SerializeField] protected PlayerInput _inputSys;
     public float CoolDown;
     public bool CanUseSkill;
     
-    public Player_BaseSkill(PlayerController player)
+    public PlayerSkill_BaseSkill(PlayerController player)
     {
         _player = player;
         _inputSys = _player.InputSys;

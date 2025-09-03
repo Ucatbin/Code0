@@ -3,7 +3,7 @@ using UnityEditor.EditorTools;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "DefaultSO", menuName = "Game/Player/Attributes/Player")]
-public class PlayerAttributeSO : ScriptableObject
+public class PlayerAttributeSO : EntityAttributeSO
 {
     [Header("MOVEMENT")]
     [Tooltip("Move speed on ground"), Range(1f, 100f)]
