@@ -1,15 +1,24 @@
 using UnityEngine;
-
 public abstract class EntityState
 {
     // Necessary parameter
-    protected Entity _thisEntity;
+    protected EntityContoller _thisEntity;
     protected StateMachine _stateMachine;
     protected string _stateName;
+    public int Priority;
+    private PlayerController player;
 
-    public EntityState(Entity entity, StateMachine stateMachine, string stateName)
+    public EntityState(EntityContoller entity, StateMachine stateMachine, int priority, string stateName)
     {
         _thisEntity = entity;
+        _stateMachine = stateMachine;
+        Priority = priority;
+        _stateName = stateName;
+    }
+
+    protected EntityState(PlayerController player, StateMachine stateMachine, string stateName)
+    {
+        this.player = player;
         _stateMachine = stateMachine;
         _stateName = stateName;
     }

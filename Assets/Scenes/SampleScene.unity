@@ -669,21 +669,7 @@ MonoBehaviour:
   Rb: {fileID: 1614462010}
   Checker: {fileID: 1875388750}
   InputSys: {fileID: 1233298156}
-  JumpWindow: 0.3
-  JumpDelay: 0.1
-  MinGravityTrashold: 30
-  AirGlideThreshold: 12
-  _defaultGravity: 1
-  _jumpGravity: 3
-  _fallGravityMax: 4.5
-  _fallGravityMin: 1
-  GroundMoveForce: 20
-  AirMoveForce: 10
-  GLineMoveForce: 5
-  MaxGroundSpeed: 6
-  MaxAirSpeed: 10
-  JumpHeight: 2.5
-  JumpHoldForce: 5
+  PlayerSO: {fileID: 11400000, guid: fc0fe7c335a11f345a7dc7c3ee3db4d2, type: 2}
   IsJumping: 0
   IsAttached: 0
   IsAttacking: 0
@@ -1939,7 +1925,7 @@ MonoBehaviour:
   m_DefaultControlScheme: 
   m_DefaultActionMap: Normal
   m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 519420031}
 --- !u!1 &1564471960
 GameObject:
   m_ObjectHideFlags: 0
@@ -2299,13 +2285,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 542567388}
   _inputSys: {fileID: 1233298156}
-  CoolDown: 0.5
+  CoolDown: 0.25
   CanUseSkill: 1
+  _breakCoolDown: 1.25
   _mainCam: {fileID: 519420031}
   <RopeJoint>k__BackingField: {fileID: 1614462011}
   <RopeLine>k__BackingField: {fileID: 686963752}
   _pool: {fileID: 686963755}
   _lineMoveSpeed: 4.5
+  LineSwingForce: 10
+  MaxSwingSpeed: 10
   <MaxDetectDist>k__BackingField: 20
   <CanHookLayer>k__BackingField:
     serializedVersion: 2

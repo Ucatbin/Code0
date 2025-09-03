@@ -10,11 +10,21 @@ public class StateMachine
         CurrentState.Enter();
     }
 
-    public void ChangeState(EntityState nextState)
+    public void ChangeState(EntityState nextState, bool force)
     {
-        Debug.Log($"Exit: {CurrentState} Enter: {nextState}");
-        CurrentState.Exit();
-        CurrentState = nextState;
-        CurrentState.Enter();
+        if (nextState.Priority <= CurrentState.Priority && !force)
+        {
+            Debug.Log($"Exit: {CurrentState} Enter: {nextState}");
+            CurrentState.Exit();
+            CurrentState = nextState;
+            CurrentState.Enter();
+        }
+        else
+        {
+            Debug.Log($"Exit: {CurrentState} Enter: {nextState}");
+            CurrentState.Exit();
+            CurrentState = nextState;
+            CurrentState.Enter();
+        }
     }
 }

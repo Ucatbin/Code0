@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Entity : MonoBehaviour
+public class EntityContoller : MonoBehaviour
 {
     protected StateMachine _stateMachine;
 

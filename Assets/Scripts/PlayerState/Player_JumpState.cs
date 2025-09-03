@@ -8,22 +8,24 @@ public class Player_JumpState : Player_AirState
     float _jumpForce;
     float _jumpHoldForce;
 
-    public Player_JumpState(Player player, StateMachine stateMachine, string stateName) : base(player, stateMachine, stateName) { }
+    public Player_JumpState(PlayerController player, StateMachine stateMachine, int priority, string stateName) : base(player, stateMachine, priority, stateName)
+    {
+    }
 
     public override void Enter()
     {
         // Initialize
         _player.IsJumping = true;
-        _player.Rb.gravityScale = _player.JumpGravity;
+        _player.Rb.gravityScale = _player.PlayerSO.RiseGravity;
 
         // Calculate jump force with jump height
         _jumpForce = Mathf.Sqrt(
-            _player.JumpHeight *
+            _player.PlayerSO.JumpHeight *
             (_player.Rb.gravityScale * Physics2D.gravity.y) *
             -2f
         ) * _player.Rb.mass;
         _jumpHoldForce = Mathf.Sqrt(
-            _player.JumpHoldForce *
+            _player.PlayerSO.JumpHoldForce *
             (_player.Rb.gravityScale * Physics2D.gravity.y) *
             -2f
         ) * _player.Rb.mass;
@@ -33,12 +35,12 @@ public class Player_JumpState : Player_AirState
 
         // Start jump timer
         Player_TimerManager.Instance.AddTimer(
-            _player.JumpDelay,
+            _player.PlayerSO.JumpDelay,
             () => { _canAddForce = true; },
             "JumpStateTimer"
         );
         Player_TimerManager.Instance.AddTimer(
-            _player.JumpWindow,
+            _player.PlayerSO.JumpWindow,
             () => StopAddForce(),
             "JumpStateTimer"
         );
@@ -71,7 +73,7 @@ public class Player_JumpState : Player_AirState
     
     void StopAddForce()
     {
-        _stateMachine.ChangeState(_player.AirState);
+        _stateMachine.ChangeState(_player.AirState, true);
         _canAddForce = false;
         _shouldApplyForce = false;
     }

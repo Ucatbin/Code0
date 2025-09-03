@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerSkill_GrappingHook : Player_BaseSkill
 {
+    [SerializeField] float _breakCoolDown = 2f;
     [Header("NecessaryComponent")]
     [SerializeField] Camera _mainCam;
     [field:SerializeField] public DistanceJoint2D RopeJoint { get; private set; }
@@ -11,12 +12,13 @@ public class PlayerSkill_GrappingHook : Player_BaseSkill
 
     [Header("GHookAttribute")]
     [SerializeField] float _lineMoveSpeed = 4.5f;
-    [SerializeField] float _breakCoolDown = 2f;
+    public float LineSwingForce = 10f;
+    public float MaxSwingSpeed = 10f;
     [field: SerializeField] public float MaxDetectDist { get; private set; } = 20f; // Maximum distance to detect grapple points
     [field:SerializeField] public LayerMask CanHookLayer { get; private set; } // Which layer can the hook attach to
     RaycastHit2D _hit;
 
-    public PlayerSkill_GrappingHook(Player player) : base(player) { }
+    public PlayerSkill_GrappingHook(PlayerController player) : base(player) { }
 
     void Update()
     {

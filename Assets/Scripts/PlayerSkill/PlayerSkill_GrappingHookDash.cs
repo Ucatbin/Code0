@@ -10,7 +10,7 @@ public class PlayerSkill_GrappingHookDash : Player_BaseSkill
     [SerializeField] float _lineDashSpeed = 20f; // Maximum distance to detect grapple points
     [SerializeField] float _lineDashDamping = 8f;
 
-    public PlayerSkill_GrappingHookDash(Player player) : base(player) { }
+    public PlayerSkill_GrappingHookDash(PlayerController player) : base(player) { }
 
     public override void CoolDownSkill()
     {

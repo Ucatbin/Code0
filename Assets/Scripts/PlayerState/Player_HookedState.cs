@@ -7,11 +7,12 @@ public class Player_HookedState : Player_BaseState
     PlayerSkill_GrappingHook _grappingHook;
     PlayerChecker _checker;
     bool _sprint;
-    float _accelerate = 1f;
 
     bool _shouldAddForce;
 
-    public Player_HookedState(Player player, StateMachine stateMachine, string stateName) : base(player, stateMachine, stateName) { }
+    public Player_HookedState(PlayerController player, StateMachine stateMachine, int priority, string stateName) : base(player, stateMachine, priority, stateName)
+    {
+    }
 
     public override void Enter()
     {
@@ -22,8 +23,7 @@ public class Player_HookedState : Player_BaseState
         // Enable player collision check
         _checker.GLineChecker.enabled = true;
 
-        _player.Rb.gravityScale = _player.FallGravityMax;
-        _accelerate = 1f;
+        _player.Rb.gravityScale = _player.PlayerSO.MaxFallGravity;
     }
 
     public override void PhysicsUpdate()
@@ -39,7 +39,7 @@ public class Player_HookedState : Player_BaseState
 
         if (_shouldAddForce)
             _player.Rb.AddForce(new Vector2(
-                _player.InputSys.MoveInput.x * _player.GLineMoveForce,
+                _player.InputSys.MoveInput.x * _grappingHook.LineSwingForce,
                 0f
             ), ForceMode2D.Force);
     }
@@ -53,7 +53,7 @@ public class Player_HookedState : Player_BaseState
             _grappingHook.ReleaseHook();
 
         // If current velocity less than max speed, can add force
-        _shouldAddForce = Mathf.Abs(_player.Rb.linearVelocity.x) < _player.MaxGroundSpeed;
+        _shouldAddForce = Mathf.Abs(_player.Rb.linearVelocity.magnitude) < _grappingHook.MaxSwingSpeed;
 
         // Update line renderer position
         _grappingHook.RopeLine.SetPosition(0, _player.transform.position);

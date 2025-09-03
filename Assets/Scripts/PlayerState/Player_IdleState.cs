@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class Player_IdleState : Player_GroundState
 {
-    public Player_IdleState(Player player, StateMachine stateMachine, string stateName) : base(player, stateMachine, stateName){}
+    public Player_IdleState(PlayerController player, StateMachine stateMachine, int priority, string stateName) : base(player, stateMachine, priority, stateName)
+    {
+    }
 
     public override void Enter()
     {
@@ -23,7 +25,7 @@ public class Player_IdleState : Player_GroundState
         {
             if (_player.IsJumping)
                 return;
-            _stateMachine.ChangeState(_player.MoveState);
+            _stateMachine.ChangeState(_player.MoveState, true);
         }
     }
 

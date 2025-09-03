@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Player : Entity
+public class PlayerController : EntityContoller
 {
     [Header("StateMachine")]
     public Player_IdleState IdleState { get; private set; }
@@ -15,35 +15,8 @@ public class Player : Entity
     public Rigidbody2D Rb;
     public PlayerChecker Checker;
     public PlayerInput InputSys;
-
-    [Header("JumpAttribute")]
-    public float JumpWindow = 0.2f;
-    public float JumpDelay = 0.06f;
-    public float MinGravityTrashold = 8f;
-    public float AirGlideThreshold = 4f;
-
-    [Header("GravityScale")]
-    [SerializeField] float _defaultGravity = 1f;
-    [SerializeField] float _jumpGravity = 3f;
-    [SerializeField] float _fallGravityMax = 4.5f;
-    [SerializeField] float _fallGravityMin = 1f;
-    
-    public float DefaultGravity => _defaultGravity;
-    public float JumpGravity => _jumpGravity;
-    public float FallGravityMax => _fallGravityMax;
-    public float FallGravityMin => _fallGravityMin;
-
-    [Header("PlayerAttribute")]
-    // Movement
-    public float GroundMoveForce = 20f;
-    public float AirMoveForce = 10f;
-    public float GLineMoveForce = 5f;
-    public float MaxGroundSpeed = 8f;
-    public float MaxAirSpeed = 6f;
-    [Space(5)]
-    // Jump
-    public float JumpHeight = 3f;
-    public float JumpHoldForce = 2f;
+    [Header("SO")]
+    public PlayerAttributeSO PlayerSO;
 
     [Header("StateMark")]
     public bool IsJumping;      // Can player add force after jump
@@ -66,13 +39,13 @@ public class Player : Entity
         base.Awake();
 
         // Initialize StateMachine
-        IdleState = new Player_IdleState(this, _stateMachine, "Idle");
-        MoveState = new Player_MoveState(this, _stateMachine, "Move");
-        AirState = new Player_AirState(this, _stateMachine, "InAir");
-        JumpState = new Player_JumpState(this, _stateMachine, "Jump");
-        FallState = new Player_FallState(this, _stateMachine, "Fall");
-        HookedState = new Player_HookedState(this, _stateMachine, "Hooked");
-        AirGlideState = new Player_AirGlideState(this, _stateMachine, "AirGlide");
+        IdleState = new Player_IdleState(this, _stateMachine, 0, "Idle");
+        MoveState = new Player_MoveState(this, _stateMachine, 1, "Move");
+        AirState = new Player_AirState(this, _stateMachine, 0, "InAir");
+        JumpState = new Player_JumpState(this, _stateMachine, 2, "Jump");
+        FallState = new Player_FallState(this, _stateMachine, 0, "Fall");
+        HookedState = new Player_HookedState(this, _stateMachine, 3,"Hooked");
+        AirGlideState = new Player_AirGlideState(this, _stateMachine, 1, "AirGlide");
 
         _stateMachine.InitState(IdleState);
     }
@@ -96,13 +69,13 @@ public class Player : Entity
         // TODO: More check conditions
         if (!IsAttacking)
         {
-            _stateMachine.ChangeState(HookedState);
+            _stateMachine.ChangeState(HookedState, true);
             IsAttached = true;
         }
     }
     void HandleHookReleased()
     {
-        _stateMachine.ChangeState(AirState);
+        _stateMachine.ChangeState(AirState, true);
         Player_SkillManager.Instance.GrappingHook.CoolDownSkill();
     }
     #endregion
