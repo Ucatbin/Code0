@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class Player_DashState : Player_GroundState
 {
-    public Player_DashState(Player player, StateMachine stateMachine, string stateName) : base(player, stateMachine, stateName) { }
+    public Player_DashState(PlayerController entity, StateMachine stateMachine, string stateName) : base(entity, stateMachine, stateName)
+    {
+    }
 
     public override void Enter()
     {
@@ -20,6 +22,6 @@ public class Player_DashState : Player_GroundState
 
     public override void Exit()
     {
-        
+        base.Exit();
     }
 }

@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class Player_IdleState : Player_GroundState
 {
-    public Player_IdleState(Player player, StateMachine stateMachine, string stateName) : base(player, stateMachine, stateName){}
+    public Player_IdleState(PlayerController entity, StateMachine stateMachine, string stateName) : base(entity, stateMachine, stateName)
+    {
+    }
 
     public override void Enter()
     {
@@ -19,16 +21,14 @@ public class Player_IdleState : Player_GroundState
         base.LogicUpdate();
 
         // Change to moveState when have InputX and is not holding jump
-        if (_player.InputSystem.MoveInput.x != 0f)
+        if (_player.InputSys.MoveInput.x != 0f)
         {
-            if (_player.IsJumping)
-                return;
-            _stateMachine.ChangeState(_player.MoveState);
+            _stateMachine.ChangeState(_player.MoveState, false);
         }
     }
 
     public override void Exit()
     {
-        
+        base.Exit();
     }
 }

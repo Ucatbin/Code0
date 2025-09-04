@@ -3,11 +3,13 @@ using UnityEngine;
 
 public class Player_FallState : Player_AirState
 {
-    public Player_FallState(Player player, StateMachine stateMachine, string stateName) : base(player, stateMachine, stateName) { }
+    public Player_FallState(PlayerController entity, StateMachine stateMachine, string stateName) : base(entity, stateMachine, stateName)
+    {
+    }
 
     public override void Enter()
     {
-        
+        base.Enter();
     }
 
     public override void PhysicsUpdate()
@@ -21,6 +23,6 @@ public class Player_FallState : Player_AirState
 
     public override void Exit()
     {
-
+        base.Exit();
     }
 }
