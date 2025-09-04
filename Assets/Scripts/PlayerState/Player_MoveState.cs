@@ -39,5 +39,7 @@ public class Player_MoveState : Player_GroundState
     public override void Exit()
     {
         base.Exit();
+
+        _player.Rb.linearVelocity = _player.Rb.linearVelocity * _player.AttributeSO.GroundDamping;
     }
 }

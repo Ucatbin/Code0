@@ -6,9 +6,11 @@ using UnityEngine;
 public class PlayerAttributeSO : EntityAttributeSO
 {
     [Header("MOVEMENT")]
-    [Tooltip("Move speed on ground"), Range(1f, 100f)]
+    [Tooltip("Move speed on ground"), Range(0f, 100f)]
     public float GroundMoveForce = 20f;
-    [Tooltip("Move speed in air"), Range(1f, 100f)]
+    [Tooltip("Damping whne move on the ground"), Range(0f, 1f)]
+    public float GroundDamping = 0.4f;
+    [Tooltip("Move speed in air"), Range(0f, 100f)]
     public float AirMoveForce = 10f;
     [Tooltip("If speed already larger than max speed, can't add force")]
     public float MaxGroundSpeed = 8f;
