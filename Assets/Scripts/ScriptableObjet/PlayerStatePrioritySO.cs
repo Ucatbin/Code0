@@ -14,7 +14,7 @@ public class PlayerStatePrioritySO : EntityStatePriorityCfgSO
     [Min(0)] public int AirGlidePriority = 2;
 
     [Header("Action States Priority")]
-    [Min(0)] public int HookedPriority = 4;
+    [Min(0)] public int HookedPriority = 3;
     [Min(0)] public int AttackPriority = 3;
     [Min(0)] public int DashPriority = 3;
     [Min(0)] public int UltimatePriority = 5;
@@ -36,7 +36,8 @@ public class PlayerStatePrioritySO : EntityStatePriorityCfgSO
             { typeof(Player_JumpState), JumpPriority },
             { typeof(Player_FallState), FallPriority },
             { typeof(Player_HookedState), HookedPriority },
-            { typeof(Player_AirGlideState), AirGlidePriority }
+            { typeof(Player_AirGlideState), AirGlidePriority },
+            { typeof(Player_AttackState), AttackPriority }
         };
     }
 
@@ -64,5 +65,6 @@ public class PlayerStatePrioritySO : EntityStatePriorityCfgSO
         _priorityCache[typeof(Player_FallState)] = FallPriority;
         _priorityCache[typeof(Player_HookedState)] = HookedPriority;
         _priorityCache[typeof(Player_AirGlideState)] = AirGlidePriority;
+        _priorityCache[typeof(Player_AttackState)] = AttackPriority;
     }
 }

@@ -10,6 +10,8 @@ public class Player_AirGlideState : Player_AirState
 
     public override void Enter()
     {
+        base.Enter();
+
         _player.IsJumping = false;
     }
     
@@ -29,6 +31,6 @@ public class Player_AirGlideState : Player_AirState
 
     public override void Exit()
     {
-
+        base.Exit();
     }
 }

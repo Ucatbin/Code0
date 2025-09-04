@@ -18,7 +18,7 @@ MonoBehaviour:
   JumpPriority: 2
   FallPriority: 1
   AirGlidePriority: 2
-  HookedPriority: 4
+  HookedPriority: 3
   AttackPriority: 3
   DashPriority: 3
   UltimatePriority: 5

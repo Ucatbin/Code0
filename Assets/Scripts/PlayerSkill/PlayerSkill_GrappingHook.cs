@@ -4,7 +4,6 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
 {
     [SerializeField] float _breakCoolDown = 2f;
     [Header("NecessaryComponent")]
-    [SerializeField] Camera _mainCam;
     [field:SerializeField] public DistanceJoint2D RopeJoint { get; private set; }
     [field:SerializeField] public LineRenderer RopeLine { get; private set; }
     public GameObject HookPoint { get; private set; } // The point where the hook is attached
@@ -22,20 +21,23 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
 
     void Update()
     {
-        // Do nothing when GrapperTrigger not pressed
-        if (!_inputSys.GrapperTrigger || _player.IsAttached)
+        BasicCheck();
+    }
+    public override void BasicCheck()
+    {
+        // Check input and CanUseSkill
+        if (!_inputSys.GrapperTrigger || !CanUseSkill)
             return;
-
-            UseSkill();
+        UseSkill();
     }
     public override void UseSkill()
     {
-        if (!CanUseSkill)
+        if (_player.IsAttacking)
             return;
-
         CanUseSkill = false;
+
         // Get mouse position and calculate fire direction
-        Vector2 mousePos = _mainCam.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 mousePos = _player.MainCam.ScreenToWorldPoint(Input.mousePosition);
         Vector2 fireDir = (mousePos - (Vector2)_player.transform.position).normalized;
 
         _hit = Physics2D.Raycast(
@@ -52,6 +54,8 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
             HookPoint.transform.parent = _hit.transform;
             AttachHook();
         }
+        else
+            ResetSkill();
     }
     public override void CoolDownSkill()
     {
@@ -69,7 +73,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
     void AttachHook()
     {
         // Let state machine know the player is attached
-        GrappleEvent.TriggerHookAttached();
+        SkillEvents.TriggerHookAttached();
         // Set connect point and enable distance joint
         RopeJoint.connectedBody = HookPoint.GetComponent<Rigidbody2D>();
         RopeJoint.distance = Vector2.Distance(_player.transform.position, HookPoint.transform.position);
@@ -84,7 +88,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
     public void ReleaseHook()
     {
         // Let state machine know the player is released
-        GrappleEvent.TriggerHookReleased();
+        SkillEvents.TriggerHookReleased();
         _player.IsAttached = false;
 
         // Disable distance joint and line renderer
@@ -103,4 +107,5 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
         if (inputY != 0)
             RopeJoint.distance -= _lineMoveSpeed * inputY * Time.fixedDeltaTime;
     }
+
 }

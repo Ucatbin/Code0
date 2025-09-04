@@ -22,6 +22,6 @@ public class Player_DashState : Player_GroundState
 
     public override void Exit()
     {
-        
+        base.Exit();
     }
 }

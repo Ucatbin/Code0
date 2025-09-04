@@ -7,7 +7,7 @@ public class Player_HookedState : Player_BaseState
     PlayerSkill_GrappingHook _grappingHook;
     PlayerChecker _checker;
     bool _sprint;
-
+    PlayerSkill_GrappingHookDash _dashSkill;
     bool _shouldAddForce;
 
     public Player_HookedState(PlayerController entity, StateMachine stateMachine, string stateName) : base(entity, stateMachine, stateName)
@@ -16,9 +16,12 @@ public class Player_HookedState : Player_BaseState
 
     public override void Enter()
     {
+        base.Enter();
+
         // Initialize grappling hook component
         _grappingHook = Player_SkillManager.Instance.GrappingHook;
         _checker = _player.Checker;
+        _dashSkill = Player_SkillManager.Instance.GrappingHookDash;
 
         // Enable player collision check
         _checker.GLineChecker.enabled = true;
@@ -28,14 +31,14 @@ public class Player_HookedState : Player_BaseState
 
     public override void PhysicsUpdate()
     {
-        _sprint = _player.InputSys.SprintTrigger;
+        _sprint = _player.InputSys.DashTrigger;
         // Check if the grapping line is broken
         CheckGLineBreak();
         // Control the length of the grapping line
+        _dashSkill.BasicCheck();
         if (!_sprint)
             Player_SkillManager.Instance.GrappingHook.MoveOnGLine();
-        else
-            Player_SkillManager.Instance.GrappingHookDash.UseSkill();
+
 
         if (_shouldAddForce)
             _player.Rb.AddForce(new Vector2(
@@ -61,8 +64,12 @@ public class Player_HookedState : Player_BaseState
 
     public override void Exit()
     {
+        base.Exit();
+        
         // Disable player collision check
         _checker.GLineChecker.enabled = false;
+
+        Player_SkillManager.Instance.GrappingHook.CoolDownSkill();
     }
 
     void CheckGLineBreak()

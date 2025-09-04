@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using UnityEngine.UIElements;
+using Unity.Cinemachine;
 
 public class PlayerController : EntityContoller
 {
@@ -15,9 +16,13 @@ public class PlayerController : EntityContoller
     public Player_AttackState AttackState { get; private set; }
 
     [Header("NecessaryComponent")]
-    public Rigidbody2D Rb;
-    public PlayerChecker Checker;
-    public PlayerInput InputSys;
+    [field:SerializeField] public Rigidbody2D Rb { get; private set; }
+    [field:SerializeField] public Animator Anim { get; private set; }
+    [field:SerializeField] public PlayerChecker Checker { get; private set; }
+    [field:SerializeField] public PlayerInput InputSys { get; private set; }
+    [field:SerializeField] public Camera MainCam { get; private set; }
+    [field:SerializeField] public CinemachineCamera Cam { get; private set; }
+    [field:SerializeField] public Transform Visual { get; private set; }
 
     [Header("SO")]
     public PlayerAttributeSO AttributeSO;
@@ -30,13 +35,15 @@ public class PlayerController : EntityContoller
 
     void OnEnable()
     {
-        GrappleEvent.OnHookAttached += HandleHookAtteched;
-        GrappleEvent.OnHookReleased += HandleHookReleased;
+        SkillEvents.OnHookAttached += HandleHookAtteched;
+        SkillEvents.OnHookReleased += HandleHookReleased;
+        SkillEvents.OnAttacking += HandleAttack;
     }
     void OnDisable()
     {
-        GrappleEvent.OnHookAttached -= HandleHookAtteched;
-        GrappleEvent.OnHookReleased -= HandleHookReleased;
+        SkillEvents.OnHookAttached -= HandleHookAtteched;
+        SkillEvents.OnHookReleased -= HandleHookReleased;
+        SkillEvents.OnAttacking -= HandleAttack;
     }
 
     protected override void Awake()
@@ -46,12 +53,12 @@ public class PlayerController : EntityContoller
         // Initialize StateMachine
         IdleState = new Player_IdleState(this, _stateMachine, "Idle");
         MoveState = new Player_MoveState(this, _stateMachine, "Move");
-        AirState = new Player_AirState(this, _stateMachine, "InAir");
+        AirState = new Player_AirState(this, _stateMachine, "Idle");
         JumpState = new Player_JumpState(this, _stateMachine, "Jump");
         FallState = new Player_FallState(this, _stateMachine, "Fall");
         HookedState = new Player_HookedState(this, _stateMachine, "Hooked");
         AirGlideState = new Player_AirGlideState(this, _stateMachine, "AirGlide");
-        AttackState = new Player_AttackState(this, _stateMachine, "Attacking");
+        AttackState = new Player_AttackState(this, _stateMachine, "Attack");
 
         _stateMachine.InitState(IdleState);
     }
@@ -67,8 +74,6 @@ public class PlayerController : EntityContoller
     protected override void Update()
     {
         base.Update();
-
-        HandleAttack();
     }
 
     public int GetStatePriority(Type stateType)
@@ -76,34 +81,20 @@ public class PlayerController : EntityContoller
         return StatePrioritySO?.GetPriority(stateType) ?? 1;
     }
 
-    #region GrappingHook logics
+    #region Skill Logics
     void HandleHookAtteched()
     {
-        // TODO: More check conditions
-        if (!IsAttacking)
-        {
-            _stateMachine.ChangeState(HookedState, true);
-            IsAttached = true;
-        }
+        _stateMachine.ChangeState(HookedState, true);
+        IsAttached = true;
     }
     void HandleHookReleased()
     {
         _stateMachine.ChangeState(AirState, true);
-        Player_SkillManager.Instance.GrappingHook.CoolDownSkill();
     }
-    #endregion
 
-    #region Attack logics
     void HandleAttack()
     {
-        if (!InputSys.AttackTrigger)
-            return;
-
-        if (Player_SkillManager.Instance.Attack.CanUseSkill)
-        {
-            Player_SkillManager.Instance.Attack.UseSkill();
-            _stateMachine.ChangeState(AttackState, false);
-        }
+        _stateMachine.ChangeState(AttackState, false);
     }
     #endregion
 }

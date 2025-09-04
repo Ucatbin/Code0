@@ -9,7 +9,7 @@ public class Player_FallState : Player_AirState
 
     public override void Enter()
     {
-        
+        base.Enter();
     }
 
     public override void PhysicsUpdate()
@@ -23,6 +23,6 @@ public class Player_FallState : Player_AirState
 
     public override void Exit()
     {
-
+        base.Exit();
     }
 }

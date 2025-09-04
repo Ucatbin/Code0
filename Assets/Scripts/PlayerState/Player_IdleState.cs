@@ -29,6 +29,6 @@ public class Player_IdleState : Player_GroundState
 
     public override void Exit()
     {
-        
+        base.Exit();
     }
 }

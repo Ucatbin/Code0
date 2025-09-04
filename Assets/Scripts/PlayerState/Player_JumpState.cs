@@ -13,6 +13,8 @@ public class Player_JumpState : Player_AirState
 
     public override void Enter()
     {
+        base.Enter();
+
         // Initialize
         _player.IsJumping = true;
         _player.Rb.gravityScale = _player.AttributeSO.RiseGravity;
@@ -66,6 +68,8 @@ public class Player_JumpState : Player_AirState
 
     public override void Exit()
     {
+        base.Exit();
+        
         _player.IsJumping = false;
         Player_TimerManager.Instance.CancelTimersWithTag("JumpStateTimer");
     }

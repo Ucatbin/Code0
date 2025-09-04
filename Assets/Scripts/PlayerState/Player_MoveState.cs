@@ -31,7 +31,6 @@ public class Player_MoveState : Player_GroundState
         // If current velocity less than max speed, can add force
         _shouldAddForce = Mathf.Abs(_player.Rb.linearVelocity.x) < _player.AttributeSO.MaxGroundSpeed;
 
-
         // If InputX == 0f, exit MoveState
         if (_player.InputSys.MoveInput.x == 0f)
             _stateMachine.ChangeState(_player.IdleState, true);
@@ -39,6 +38,6 @@ public class Player_MoveState : Player_GroundState
 
     public override void Exit()
     {
-        
+        base.Exit();
     }
 }

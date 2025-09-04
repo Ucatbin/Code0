@@ -12,6 +12,20 @@ public class PlayerSkill_GrappingHookDash : PlayerSkill_BaseSkill
 
     public PlayerSkill_GrappingHookDash(PlayerController player) : base(player) { }
 
+    public override void BasicCheck()
+    {
+        if (!_inputSys.DashTrigger || !CanUseSkill)
+            return;
+        UseSkill();
+    }
+    public override void UseSkill()
+    {
+        // TODO:Havent complete if yet
+        if (!CanUseSkill)
+            return;
+        CanUseSkill = false;
+        StartCoroutine(LineDash());
+    }
     public override void CoolDownSkill()
     {
         Player_TimerManager.Instance.AddTimer(
@@ -25,16 +39,9 @@ public class PlayerSkill_GrappingHookDash : PlayerSkill_BaseSkill
         CanUseSkill = true;
     }
 
-    public override void UseSkill()
-    {
-        if (!CanUseSkill)
-            return;
-        StartCoroutine(LineDash());
-    }
 
     public IEnumerator LineDash()
     {
-        CanUseSkill = false;
         float dashSpeed = _lineDashSpeed;
         while (dashSpeed != 1f && _player.IsAttached)
         {

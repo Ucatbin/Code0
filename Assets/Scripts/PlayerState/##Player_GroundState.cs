@@ -8,6 +8,8 @@ public class Player_GroundState : Player_BaseState
 
     public override void Enter()
     {
+        base.Enter();
+
         _player.Rb.gravityScale = 1f;
     }
     
@@ -32,6 +34,8 @@ public class Player_GroundState : Player_BaseState
 
     public override void Exit()
     {
+        base.Exit();
+        
         _player.Rb.linearVelocity = new Vector2(_player.Rb.linearVelocityX, 0f);
     }
 }
