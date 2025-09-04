@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4e1f3bcae20c314ea827af9a2bb181a, type: 3}
+  m_Name: GroundMelee_Config
+  m_EditorClassIdentifier: 
+  patrolSpeed: 2
+  chaseSpeed: 3.5
+  sightRange: 6
+  sightHalfAngle: 60
+  visionBlockMask:
+    serializedVersion: 2
+    m_Bits: 0
+  attackRange: 1.2
+  attackCooldown: 1
+  hoverBobAmplitude: 0.15
+  hoverBobSpeed: 2
