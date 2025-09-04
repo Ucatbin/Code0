@@ -26,3 +26,4 @@ MonoBehaviour:
   RiseGravity: 3
   MinFallGravity: 1
   MaxFallGravity: 4.5
+  AttackGravity: 0.5

@@ -11,7 +11,7 @@ public class Player_AttackState : Player_BaseState
         base.Enter();
 
         _player.IsAttacking = true;
-        _player.Rb.gravityScale = 0f;
+        _player.Rb.gravityScale = _player.AttributeSO.AttackGravity;
         Player_TimerManager.Instance.AddTimer(
             Player_SkillManager.Instance.Attack.AttackDuration,
             () => { _stateMachine.ChangeState(_player.IdleState, true); },
@@ -23,14 +23,15 @@ public class Player_AttackState : Player_BaseState
     }
     public override void PhysicsUpdate()
     {
-        _player.Rb.linearVelocity = _dir * Player_SkillManager.Instance.Attack.AttackMovement;
+        _player.Rb.AddForce(_dir * Player_SkillManager.Instance.Attack.AttackForce, ForceMode2D.Impulse);
+        // _player.Rb.linearVelocity = _dir * Player_SkillManager.Instance.Attack.AttackMovement;
     }
     public override void LogicUpdate() { }
     public override void Exit()
     {
         base.Exit();
         
-        _player.Rb.linearVelocity = Vector2.zero;
+        _player.Rb.linearVelocity = _player.Rb.linearVelocity * Player_SkillManager.Instance.Attack.ForceDamping;
         Player_SkillManager.Instance.Attack.CoolDownSkill();
         _player.IsAttacking = false;
         _player.Rb.gravityScale = _player.AttributeSO.DefaultGravity;

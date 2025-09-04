@@ -3,7 +3,11 @@ using UnityEngine;
 public class PlayerSkill_Attack : PlayerSkill_BaseSkill
 {
     public float AttackDuration = 0.2f;
-    public float AttackMovement = 3f;
+    public float AttackForce = 2.5f;
+    public float ForceDamping = 0.25f;
+    [SerializeField] Animator _anim;
+    [SerializeField] TrailRenderer _trail;
+
     public PlayerSkill_Attack(PlayerController player) : base(player)
     {
     }
@@ -25,6 +29,10 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
             return;
         CanUseSkill = false;
         SkillEvents.TriggerAttack();
+
+        _trail.enabled = true;
+        _trail.time = AttackDuration * 2.5f;
+        _anim.SetBool("Attack", true);
     }
     public override void CoolDownSkill()
     {
@@ -33,6 +41,9 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
             () => { ResetSkill(); },
             "Player_AbilityTimer"
         );
+
+        _trail.enabled = false;
+        _anim.SetBool("Attack", false);
     }
 
     public override void ResetSkill()

@@ -40,4 +40,6 @@ public class PlayerAttributeSO : EntityAttributeSO
     public float MinFallGravity = 1f;
     [Tooltip("Max gravity while falling"), Range(0f, 10f)]
     public float MaxFallGravity = 4.5f;
+    [Tooltip("Gravity when attacking"), Range(0f, 10f)]
+    public float AttackGravity = 0.4f;
 }
