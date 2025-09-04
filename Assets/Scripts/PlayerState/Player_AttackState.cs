@@ -14,7 +14,7 @@ public class Player_AttackState : Player_BaseState
         _player.Rb.gravityScale = _player.AttributeSO.AttackGravity;
         Player_TimerManager.Instance.AddTimer(
             Player_SkillManager.Instance.Attack.AttackDuration,
-            () => { _stateMachine.ChangeState(_player.IdleState, true); },
+            () => { _stateMachine.ChangeState(_player.AirState, true); },
             "Player_AbilityTimer"
         );
 
@@ -30,7 +30,7 @@ public class Player_AttackState : Player_BaseState
     public override void Exit()
     {
         base.Exit();
-        
+
         _player.Rb.linearVelocity = _player.Rb.linearVelocity * Player_SkillManager.Instance.Attack.ForceDamping;
         Player_SkillManager.Instance.Attack.CoolDownSkill();
         _player.IsAttacking = false;
