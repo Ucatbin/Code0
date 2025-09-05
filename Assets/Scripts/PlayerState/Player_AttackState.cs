@@ -10,11 +10,10 @@ public class Player_AttackState : Player_BaseState
     {
         base.Enter();
 
-        _player.IsAttacking = true;
         _player.Rb.gravityScale = _player.AttributeSO.AttackGravity;
         Player_TimerManager.Instance.AddTimer(
             Player_SkillManager.Instance.Attack.AttackDuration,
-            () => { _stateMachine.ChangeState(_player.AirState, true); },
+            () => { SkillEvents.TriggerAttackEnd(); },
             "Player_AbilityTimer"
         );
 
@@ -33,7 +32,6 @@ public class Player_AttackState : Player_BaseState
 
         _player.Rb.linearVelocity = _player.Rb.linearVelocity * Player_SkillManager.Instance.Attack.ForceDamping;
         Player_SkillManager.Instance.Attack.CoolDownSkill();
-        _player.IsAttacking = false;
         _player.Rb.gravityScale = _player.AttributeSO.DefaultGravity;
     }
 }

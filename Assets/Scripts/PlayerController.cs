@@ -16,13 +16,13 @@ public class PlayerController : EntityContoller
     public Player_AttackState AttackState { get; private set; }
 
     [Header("NecessaryComponent")]
-    [field:SerializeField] public Rigidbody2D Rb { get; private set; }
-    [field:SerializeField] public Animator Anim { get; private set; }
-    [field:SerializeField] public PlayerChecker Checker { get; private set; }
-    [field:SerializeField] public PlayerInput InputSys { get; private set; }
-    [field:SerializeField] public Camera MainCam { get; private set; }
-    [field:SerializeField] public CinemachineCamera Cam { get; private set; }
-    [field:SerializeField] public Transform Visual { get; private set; }
+    [field: SerializeField] public Rigidbody2D Rb { get; private set; }
+    [field: SerializeField] public Animator Anim { get; private set; }
+    [field: SerializeField] public PlayerChecker Checker { get; private set; }
+    [field: SerializeField] public PlayerInput InputSys { get; private set; }
+    [field: SerializeField] public Camera MainCam { get; private set; }
+    [field: SerializeField] public CinemachineCamera Cam { get; private set; }
+    [field: SerializeField] public Transform Visual { get; private set; }
 
     [Header("SO")]
     public PlayerAttributeSO AttributeSO;
@@ -37,13 +37,15 @@ public class PlayerController : EntityContoller
     {
         SkillEvents.OnHookAttached += HandleHookAtteched;
         SkillEvents.OnHookReleased += HandleHookReleased;
-        SkillEvents.OnAttacking += HandleAttack;
+        SkillEvents.OnAttackStart += HandleAttackStart;
+        SkillEvents.OnAttackEnd += HandleAttackEnd;
     }
     void OnDisable()
     {
         SkillEvents.OnHookAttached -= HandleHookAtteched;
         SkillEvents.OnHookReleased -= HandleHookReleased;
-        SkillEvents.OnAttacking -= HandleAttack;
+        SkillEvents.OnAttackStart -= HandleAttackStart;
+        SkillEvents.OnAttackEnd -= HandleAttackEnd;
     }
 
     protected override void Awake()
@@ -86,15 +88,24 @@ public class PlayerController : EntityContoller
     {
         _stateMachine.ChangeState(HookedState, true);
         IsAttached = true;
+        Checker.GLineChecker.enabled = true;
     }
     void HandleHookReleased()
     {
         _stateMachine.ChangeState(AirState, true);
+        IsAttached = false;
+        Checker.GLineChecker.enabled = false;
     }
 
-    void HandleAttack()
+    void HandleAttackStart()
     {
         _stateMachine.ChangeState(AttackState, false);
+        IsAttacking = true;
+    }
+    void HandleAttackEnd()
+    {
+        _stateMachine.ChangeState(AirState, true);
+        IsAttacking = false;
     }
     #endregion
 }

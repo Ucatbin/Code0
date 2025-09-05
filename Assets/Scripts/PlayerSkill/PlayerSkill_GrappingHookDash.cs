@@ -12,7 +12,7 @@ public class PlayerSkill_GrappingHookDash : PlayerSkill_BaseSkill
 
     public PlayerSkill_GrappingHookDash(PlayerController player) : base(player) { }
 
-    public override void BasicCheck()
+    public override void CheckLineDash()
     {
         if (!_inputSys.DashTrigger || !CanUseSkill)
             return;

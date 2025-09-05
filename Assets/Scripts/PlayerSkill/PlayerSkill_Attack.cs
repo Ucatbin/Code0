@@ -14,9 +14,9 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
 
     void Update()
     {
-        BasicCheck();
+        CheckLineDash();
     }
-    public override void BasicCheck()
+    public override void CheckLineDash()
     {
         // Check input and CanUseSkill
         if (!_inputSys.AttackTrigger || !CanUseSkill)
