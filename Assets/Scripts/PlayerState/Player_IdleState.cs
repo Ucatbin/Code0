@@ -14,7 +14,17 @@ public class Player_IdleState : Player_GroundState
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-        
+
+        _player.AttributeSO.TargetVelocity.x = Mathf.MoveTowards(
+            _player.AttributeSO.TargetVelocity.x,
+            0,
+            _player.AttributeSO.GroundDamping * Time.fixedDeltaTime
+        );
+
+        _player.Rb.linearVelocity = new Vector2(
+            _player.AttributeSO.TargetVelocity.x,
+            _player.Rb.linearVelocity.y
+        );
     }
     public override void LogicUpdate()
     {
@@ -22,9 +32,7 @@ public class Player_IdleState : Player_GroundState
 
         // Change to moveState when have InputX and is not holding jump
         if (_player.InputSys.MoveInput.x != 0f)
-        {
             _stateMachine.ChangeState(_player.MoveState, false);
-        }
     }
 
     public override void Exit()

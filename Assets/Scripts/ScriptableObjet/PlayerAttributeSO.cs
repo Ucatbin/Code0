@@ -6,16 +6,24 @@ using UnityEngine;
 public class PlayerAttributeSO : EntityAttributeSO
 {
     [Header("MOVEMENT")]
-    [Tooltip("Move speed on ground"), Range(0f, 100f)]
-    public float GroundMoveForce = 20f;
-    [Tooltip("Damping whne move on the ground"), Range(0f, 1f)]
-    public float GroundDamping = 0.4f;
-    [Tooltip("Move speed in air"), Range(0f, 100f)]
-    public float AirMoveForce = 10f;
-    [Tooltip("If speed already larger than max speed, can't add force")]
-    public float MaxGroundSpeed = 8f;
-    [Tooltip("If speed already larger than max speed, can't add force")]
-    public float MaxAirSpeed = 10f;
+    public Vector2 TargetVelocity;
+    [Tooltip("Max speed on ground")]
+    public float MaxGroundSpeed = 10f;
+    [Tooltip("Max speed can input add on ground")]
+    public float MaxGroundMoveSpeed = 8f;
+    [Tooltip("Acceration when move on the ground"), Range(0f, 100f)]
+    public float GroundAccel = 10f;
+    [Tooltip("Damping when move on the ground"), Range(0f, 100f)]
+    public float GroundDamping = 15f;
+    [Space(5)]
+    [Tooltip("Max speed in air")]
+    public float MaxAirSpeed = 20f;
+    [Tooltip("Max speed in air")]
+    public float MaxAirMoveSpeed = 10f;
+    [Tooltip("Move speed can input add in air"), Range(0f, 100f)]
+    public float AirAccel = 8f;
+    [Tooltip("Damping when move on the ground"), Range(0f, 100f)]
+    public float AirDamping = 10f;
 
     [Header("JUMP")]
     [Tooltip("The height that player can reach")]

@@ -29,9 +29,9 @@ public class PlayerController : EntityContoller
     public PlayerStatePrioritySO StatePrioritySO;
 
     [Header("StateMark")]
-    public bool IsJumping;      // Can player add force after jump
-    public bool IsAttached;     // Is the grappling hook attached
-    public bool IsAttacking;    // Is the player attacking
+    public bool IsJumping;
+    public bool IsAttached;
+    public bool IsAttacking;
 
     void OnEnable()
     {
@@ -72,6 +72,8 @@ public class PlayerController : EntityContoller
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
+
+        Debug.Log(Rb.linearVelocityX);
     }
     protected override void Update()
     {

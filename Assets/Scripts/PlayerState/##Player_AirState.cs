@@ -2,9 +2,8 @@ using UnityEngine;
 
 public class Player_AirState : Player_BaseState
 {
-    bool _shouldAddForce;
     float _targetGravity;
-
+    protected float _maxAirVelocityX;
     public Player_AirState(PlayerController entity, StateMachine stateMachine, string stateName) : base(entity, stateMachine, stateName)
     {
     }
@@ -18,11 +17,36 @@ public class Player_AirState : Player_BaseState
     {
         base.PhysicsUpdate();
 
-        if (_shouldAddForce)
-            _player.Rb.AddForce(new Vector2(
-                _player.InputSys.MoveInput.x * _player.AttributeSO.AirMoveForce,
-                0f
-            ), ForceMode2D.Force);
+        _maxAirVelocityX =
+            _player.InputSys.MoveInput.x *
+            _player.AttributeSO.MaxAirMoveSpeed;
+
+        if (_player.InputSys.MoveInput.x != 0f)
+        {
+            if (Mathf.Abs(_player.AttributeSO.TargetVelocity.x) <= _player.AttributeSO.MaxAirSpeed)
+                _player.AttributeSO.TargetVelocity.x = Mathf.MoveTowards(
+                    _player.AttributeSO.TargetVelocity.x,
+                    _maxAirVelocityX,
+                    _player.AttributeSO.AirAccel * Time.fixedDeltaTime
+                );
+            else
+                _player.AttributeSO.TargetVelocity.x = Mathf.MoveTowards(
+                    _player.AttributeSO.TargetVelocity.x,
+                    _maxAirVelocityX,
+                    _player.AttributeSO.AirDamping * Time.fixedDeltaTime
+                );
+        }
+        else
+            _player.AttributeSO.TargetVelocity.x = Mathf.MoveTowards(
+                _player.AttributeSO.TargetVelocity.x,
+                0,
+                _player.AttributeSO.AirDamping * Time.fixedDeltaTime
+            );
+
+        _player.Rb.linearVelocity = new Vector2(
+            _player.AttributeSO.TargetVelocity.x,
+            _player.Rb.linearVelocity.y
+        );
     }
     public override void LogicUpdate()
     {
@@ -31,9 +55,6 @@ public class Player_AirState : Player_BaseState
         // Reset IsJumping to enable ground check, enter fallState
         if (_player.Rb.linearVelocityY < 0f && _stateMachine.CurrentState != _player.FallState)
             _stateMachine.ChangeState(_player.FallState, false);
-
-        // If current velocity less than max speed, can add force
-        _shouldAddForce = Mathf.Abs(_player.Rb.linearVelocity.x) < _player.AttributeSO.MaxAirSpeed;
 
         // Exit when detect the ground
         if (_player.Checker.IsGrounded && _player.Rb.linearVelocity.y <= 0f)

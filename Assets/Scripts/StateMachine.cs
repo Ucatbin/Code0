@@ -10,9 +10,9 @@ public class StateMachine
         CurrentState.Enter();
     }
 
-    public virtual void ChangeState(EntityState nextState, bool force)
+    public virtual void ChangeState(EntityState nextState, bool forceChange)
     {
-        if (!force)
+        if (!forceChange)
         {
             if (nextState.Priority >= CurrentState.Priority)
             {
