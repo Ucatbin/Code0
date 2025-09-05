@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: PlayerAttribute SO
   m_EditorClassIdentifier: 
   GroundMoveForce: 20
+  GroundDamping: 0.4
   AirMoveForce: 10
   MaxGroundSpeed: 8
   MaxAirSpeed: 10
@@ -20,8 +21,8 @@ MonoBehaviour:
   JumpHoldForce: 5
   JumpWindow: 0.3
   JumpDelay: 0.06
-  MinGravityTrashold: 30
-  AirGlideThreshold: 16
+  MinGravityTrashold: 25
+  AirGlideThreshold: 10
   DefaultGravity: 1
   RiseGravity: 3
   MinFallGravity: 1

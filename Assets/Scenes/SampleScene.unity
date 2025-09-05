@@ -320,7 +320,7 @@ Transform:
   m_GameObject: {fileID: 216222361}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.38268343, w: 0.92387956}
-  m_LocalPosition: {x: -14.57, y: -0.65, z: 0}
+  m_LocalPosition: {x: -14.64, y: -2.24, z: 0}
   m_LocalScale: {x: 4.01, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2072,7 +2072,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1078320049}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -2109,7 +2109,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.1, y: 0.9}
+  m_Size: {x: 0.0001, y: 0.9}
   m_EdgeRadius: 0
 --- !u!1 &1101025356
 GameObject:
@@ -2586,8 +2586,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1614462008}
   - component: {fileID: 1614462010}
-  - component: {fileID: 1614462009}
   - component: {fileID: 1614462011}
+  - component: {fileID: 1614462012}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2616,52 +2616,6 @@ Transform:
   - {fileID: 686963751}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1614462009
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1614462003}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 1
-  m_Size: {x: 0.5, y: 1}
-  m_EdgeRadius: 0
 --- !u!50 &1614462010
 Rigidbody2D:
   serializedVersion: 5
@@ -2678,7 +2632,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.1
   m_GravityScale: 1
-  m_Material: {fileID: 6200000, guid: a6e7b00448a2b1f469012d383bd3bacb, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -2709,6 +2663,43 @@ DistanceJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 3
   m_MaxDistanceOnly: 0
+--- !u!70 &1614462012
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614462003}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: a6e7b00448a2b1f469012d383bd3bacb, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.5, y: 1}
+  m_Direction: 0
 --- !u!1 &1685203365
 GameObject:
   m_ObjectHideFlags: 0
@@ -2885,12 +2876,15 @@ MonoBehaviour:
   _lineMoveSpeed: 4.5
   LineSwingForce: 10
   MaxSwingSpeed: 10
-  <MaxDetectDist>k__BackingField: 20
+  ForceDamping: 0.85
+  <MaxDetectDist>k__BackingField: 15
   <CanHookLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 64
-  AttachForce: 1
-  BasicAttachForce: {x: 0, y: 2}
+  LineGroundMoveForce: 0.22
+  AttachForce: 15
+  BasicAttachForce: {x: 0, y: 12}
+  AttachDelay: 0.22
 --- !u!4 &1721889137
 Transform:
   m_ObjectHideFlags: 0
@@ -2943,7 +2937,7 @@ MonoBehaviour:
   CanUseSkill: 1
   AttackDuration: 0.2
   AttackForce: 2
-  ForceDamping: 0.22
+  ForceDamping: 0.18
   _anim: {fileID: 11905804}
   _trail: {fileID: 1255670805}
 --- !u!1 &1744596188

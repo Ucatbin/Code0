@@ -18,6 +18,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
     [field: SerializeField] public float MaxDetectDist { get; private set; } = 20f; // Maximum distance to detect grapple points
     [field: SerializeField] public LayerMask CanHookLayer { get; private set; }      // Which layer can the hook attach to
     RaycastHit2D _hit;
+    public float LineGroundMoveForce = 0.22f;
 
     public float AttachForce;
     public Vector2 BasicAttachForce;
@@ -87,17 +88,20 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
     }
     public void ApplyAttachForce()
     {
-        Vector2 forceDir = SurfaceNormal.x >= 0 ?
+        Vector2 forceDir = SurfaceNormal.x >= 0 && SurfaceNormal.y < 0 ?
             new Vector2(-SurfaceNormal.y, SurfaceNormal.x) :
             new Vector2(SurfaceNormal.y, -SurfaceNormal.x);
         Vector2 lineDir = HookPoint.transform.position - _player.transform.position;
+        Vector2 additionalForce = SurfaceNormal.y < 0 ?
+            BasicAttachForce :
+            Vector2.zero;
 
         // _player.Rb.AddForce(basicForce, ForceMode2D.Impulse);
-        Vector2 force = forceDir * lineDir.normalized * AttachForce + BasicAttachForce;
+        Vector2 force = forceDir * lineDir.normalized * AttachForce + additionalForce;
         _player.Rb.AddForce(force, ForceMode2D.Impulse);
         Debug.Log(force);
     }
-    public void ReleaseHook()
+    public void ReleaseGHook()
     {
         // Let state machine know the player is released
         SkillEvents.TriggerHookReleased();
@@ -108,7 +112,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
         RopeLine.enabled = false;
         _pool.Pool.Release(HookPoint);
     }
-    public void BreakHook()
+    public void BreakGHook()
     {
 
     }
@@ -121,7 +125,6 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
 
     public void SetJoint()
     {
-        Debug.Log("attach");
         RopeJoint.distance = Vector2.Distance(_player.transform.position, HookPoint.transform.position);
         RopeJoint.enabled = true;
     }

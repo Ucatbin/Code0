@@ -54,10 +54,13 @@ public class Player_HookedState : Player_BaseState
             _grappingHook.RopeJoint.distance = _realDist;
 
         if (_shouldAddForce)
-                _player.Rb.AddForce(new Vector2(
-                    _player.InputSys.MoveInput.x * _grappingHook.LineSwingForce,
-                    0f
-                ), ForceMode2D.Force);
+            _player.Rb.AddForce(new Vector2(
+                _player.InputSys.MoveInput.x * _grappingHook.LineSwingForce,
+                0f
+            ), ForceMode2D.Force);
+                
+        if (_shouldCheck)
+            GroundMove();
     }
     public override void LogicUpdate()
     {
@@ -66,10 +69,8 @@ public class Player_HookedState : Player_BaseState
         if ((!_player.InputSys.GrapperTrigger && _player.IsAttached) ||
             _checker.GLineChecker.IsTouchingLayers(_checker.GLineBreakLayer)
         )
-        _grappingHook.ReleaseHook();
+        _grappingHook.ReleaseGHook();
 
-        if (_shouldCheck)
-            GroundMove();
         _shouldMove = !_player.InputSys.DashTrigger && _realDist >= _grappingHook.RopeJoint.distance - 0.5f;
         // If current velocity less than max speed, can add force
         _shouldAddForce = Mathf.Abs(_player.Rb.linearVelocity.magnitude) < _grappingHook.MaxSwingSpeed;
@@ -88,7 +89,7 @@ public class Player_HookedState : Player_BaseState
     {
         if (_grappingHook.RopeJoint.distance > _grappingHook.MaxDetectDist)
         {
-            _grappingHook.ReleaseHook();
+            _grappingHook.ReleaseGHook();
             return;
         }
 
@@ -101,7 +102,7 @@ public class Player_HookedState : Player_BaseState
             _grappingHook.CanHookLayer
         );
         if (hitCount > 1)
-            _grappingHook.ReleaseHook();
+            _grappingHook.ReleaseGHook();
     }
     void GroundMove()
     {
@@ -109,14 +110,10 @@ public class Player_HookedState : Player_BaseState
             return;
 
         float ropeDistance = _grappingHook.RopeJoint.distance;
-        _grappingHook.RopeJoint.enabled = false;
-        _player.Rb.sharedMaterial.friction = 0.1f;
+        _grappingHook.RopeJoint.distance -= _grappingHook.LineGroundMoveForce * Time.fixedDeltaTime;
 
-        if (!_player.Checker.IsGrounded ||
-                _realDist >= ropeDistance)
-        {
-            _player.Rb.sharedMaterial.friction = 1f;
-            _grappingHook.SetJoint();
-        }
+            if (!_player.Checker.IsGrounded ||
+                    _realDist >= ropeDistance + 0.2f)
+                _grappingHook.SetJoint();
     }
 }
