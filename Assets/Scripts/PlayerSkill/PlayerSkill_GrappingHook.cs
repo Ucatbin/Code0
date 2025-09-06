@@ -80,7 +80,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
     void AttachHook()
     {
         // Let state machine know the player is attached
-        SkillEvents.TriggerHookAttached();
+        SkillEvents.TriggerHookAttach();
         // Set connect point and enable distance joint
         RopeJoint.connectedBody = HookPoint.GetComponent<Rigidbody2D>();
         // Setup line renderer
@@ -104,7 +104,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
     public void ReleaseGHook()
     {
         // Let state machine know the player is released
-        SkillEvents.TriggerHookReleased();
+        SkillEvents.TriggerHookReleas();
         _player.IsAttached = false;
 
         // Disable distance joint and line renderer

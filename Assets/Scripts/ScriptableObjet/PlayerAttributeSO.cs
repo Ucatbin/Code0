@@ -8,32 +8,35 @@ public class PlayerAttributeSO : EntityAttributeSO
     [Header("MOVEMENT")]
     public Vector2 TargetVelocity;
     [Tooltip("Max speed on ground")]
-    public float MaxGroundSpeed = 10f;
+    public float MaxGroundSpeed = 12f;
     [Tooltip("Max speed can input add on ground")]
-    public float MaxGroundMoveSpeed = 8f;
-    [Tooltip("Acceration when move on the ground"), Range(0f, 100f)]
-    public float GroundAccel = 10f;
-    [Tooltip("Damping when move on the ground"), Range(0f, 100f)]
-    public float GroundDamping = 15f;
+    public float MaxGroundMoveSpeed = 6f;
+    [Tooltip("Acceration when move on the ground")]
+    public float GroundAccel = 30f;
+    [Tooltip("Damping when move on the ground")]
+    public float GroundDamping = 25f;
     [Space(5)]
     [Tooltip("Max speed in air")]
     public float MaxAirSpeed = 20f;
     [Tooltip("Max speed in air")]
-    public float MaxAirMoveSpeed = 10f;
-    [Tooltip("Move speed can input add in air"), Range(0f, 100f)]
-    public float AirAccel = 8f;
-    [Tooltip("Damping when move on the ground"), Range(0f, 100f)]
-    public float AirDamping = 10f;
+    public float MaxAirMoveSpeed = 8f;
+    [Tooltip("Acceration when move in the air")]
+    public float AirAccel = 40f;
+    [Tooltip("Damping when move in the air")]
+    public float AirDamping = 30f;
 
     [Header("JUMP")]
-    [Tooltip("The height that player can reach")]
-    public float JumpHeight = 2.5f;
-    [Tooltip("The force add each frame while holding SPACE")]
-    public float JumpHoldForce = 5f;
+    [Tooltip("Max speed can input add to jumping")]
+    public float MaxJumpSpeed = 12.5f;
+    [Tooltip("Give player a initial speed")]
+    public float JumpInitSpeed = 2f;
+    [Tooltip("Acceration of jump speed")]
+    public float JumpAccel = 0.65f;
+    [Tooltip("Time window that can add force while holding SPACE"), Range(0f, 1f)]
+    public float JumpWindow = 0.25f;
     [Tooltip("Time window that can add force while holding SPACE")]
-    public float JumpWindow = 0.3f;
-    [Tooltip("Time delay to add additional force")]
-    public float JumpDelay = 0.06f;
+    public float MaxRaiseSpeed = 20f;
+    public float MaxFallSpeed = 25f;
 
     [Header("AIR GLIDE")]
     [Tooltip("Speed trashold of min air glide gravity")]

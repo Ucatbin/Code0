@@ -10,6 +10,8 @@ public class Player_FallState : Player_AirState
     public override void Enter()
     {
         base.Enter();
+
+        _player.Rb.gravityScale = _player.AttributeSO.MaxFallGravity;
     }
 
     public override void PhysicsUpdate()

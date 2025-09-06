@@ -35,15 +35,15 @@ public class PlayerController : EntityContoller
 
     void OnEnable()
     {
-        SkillEvents.OnHookAttached += HandleHookAtteched;
-        SkillEvents.OnHookReleased += HandleHookReleased;
+        SkillEvents.OnHookAttach += HandleHookAtteched;
+        SkillEvents.OnHookRelease += HandleHookReleased;
         SkillEvents.OnAttackStart += HandleAttackStart;
         SkillEvents.OnAttackEnd += HandleAttackEnd;
     }
     void OnDisable()
     {
-        SkillEvents.OnHookAttached -= HandleHookAtteched;
-        SkillEvents.OnHookReleased -= HandleHookReleased;
+        SkillEvents.OnHookAttach -= HandleHookAtteched;
+        SkillEvents.OnHookRelease -= HandleHookReleased;
         SkillEvents.OnAttackStart -= HandleAttackStart;
         SkillEvents.OnAttackEnd -= HandleAttackEnd;
     }
@@ -72,8 +72,6 @@ public class PlayerController : EntityContoller
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-
-        Debug.Log(Rb.linearVelocityX);
     }
     protected override void Update()
     {
@@ -85,7 +83,7 @@ public class PlayerController : EntityContoller
         return StatePrioritySO?.GetPriority(stateType) ?? 1;
     }
 
-    #region Skill Logics
+    #region Handle Skill Logics
     void HandleHookAtteched()
     {
         _stateMachine.ChangeState(HookedState, true);
@@ -106,7 +104,7 @@ public class PlayerController : EntityContoller
     }
     void HandleAttackEnd()
     {
-        _stateMachine.ChangeState(AirState, true);
+        _stateMachine.ChangeState(FallState, true);
         IsAttacking = false;
     }
     #endregion
