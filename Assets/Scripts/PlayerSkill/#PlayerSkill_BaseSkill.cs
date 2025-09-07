@@ -12,7 +12,7 @@ public abstract class PlayerSkill_BaseSkill :MonoBehaviour
         _player = player;
         _inputSys = _player.InputSys;
     }
-    public abstract void CheckLineDash();
+    public abstract void BasicSkillCheck();
     public abstract void CoolDownSkill();
     public abstract void UseSkill();
     public abstract void ResetSkill();

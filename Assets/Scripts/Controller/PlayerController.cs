@@ -92,7 +92,7 @@ public class PlayerController : EntityContoller
     }
     void HandleHookReleased()
     {
-        _stateMachine.ChangeState(AirState, true);
+        _stateMachine.ChangeState(AirGlideState, true);
         IsAttached = false;
         Checker.GLineChecker.enabled = false;
     }

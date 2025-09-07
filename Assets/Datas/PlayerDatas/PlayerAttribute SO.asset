@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 148d85893147b7e438e6ce10d363b052, type: 3}
   m_Name: PlayerAttribute SO
   m_EditorClassIdentifier: 
-  TargetVelocity: {x: 0, y: 0}
+  TargetVelocity: {x: 0, y: -4.2011566}
   MaxGroundSpeed: 12
   MaxGroundMoveSpeed: 6
   GroundAccel: 30

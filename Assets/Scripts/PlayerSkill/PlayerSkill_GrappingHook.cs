@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
@@ -17,20 +18,18 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
     public float ForceDamping = 0.5f;
     [field: SerializeField] public float MaxDetectDist { get; private set; } = 20f; // Maximum distance to detect grapple points
     [field: SerializeField] public LayerMask CanHookLayer { get; private set; }      // Which layer can the hook attach to
-    RaycastHit2D _hit;
     public float LineGroundMoveForce = 0.22f;
 
-    public float AttachForce;
-    public Vector2 BasicAttachForce;
-    public float AttachDelay = 0.1f;
+    public float InitLengthDuration = 0.1f;
+    public bool InitGLine;
 
     public PlayerSkill_GrappingHook(PlayerController player) : base(player) { }
 
     void Update()
     {
-        CheckLineDash();
+        BasicSkillCheck();
     }
-    public override void CheckLineDash()
+    public override void BasicSkillCheck()
     {
         // Check input and CanUseSkill
         if (!_inputSys.GrapperTrigger || !CanUseSkill)
@@ -44,19 +43,19 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
         CanUseSkill = false;
 
         // Get mouse position and calculate fire direction
-        _hit = Physics2D.Raycast(
+        RaycastHit2D hit = Physics2D.Raycast(
             _player.transform.position,
             _player.InputSys.MouseDir,
             MaxDetectDist,
             CanHookLayer
         );
 
-        if (_hit.collider != null)
+        if (hit.collider != null)
         {
             HookPoint = _pool.Pool.Get();
-            HookPoint.transform.position = _hit.point;
-            HookPoint.transform.parent = _hit.transform;
-            SurfaceNormal = _hit.normal;
+            HookPoint.transform.position = hit.point;
+            HookPoint.transform.parent = hit.transform;
+            SurfaceNormal = hit.normal;
             AttachHook();
         }
         else
@@ -76,27 +75,15 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
     }
     void AttachHook()
     {
-        // Let state machine know the player is attached
+        float heightDiff = HookPoint.transform.position.y - _player.transform.position.y;
+        _player.Rb.gravityScale = 0f;
+        SetLineRenderer();
+        SetJoint();
+        if (_player.Checker.IsGrounded)
+            RopeJoint.distance = heightDiff - 0.5f;
         SkillEvents.TriggerHookAttach();
         // Set connect point and enable distance joint
-        RopeJoint.connectedBody = HookPoint.GetComponent<Rigidbody2D>();
         // Setup line renderer
-        SetLineRenderer();
-    }
-    public void ApplyAttachForce()
-    {
-        Vector2 forceDir = SurfaceNormal.x >= 0 && SurfaceNormal.y < 0 ?
-            new Vector2(-SurfaceNormal.y, SurfaceNormal.x) :
-            new Vector2(SurfaceNormal.y, -SurfaceNormal.x);
-        Vector2 lineDir = HookPoint.transform.position - _player.transform.position;
-        Vector2 additionalForce = SurfaceNormal.y < 0 ?
-            BasicAttachForce :
-            Vector2.zero;
-
-        // _player.Rb.AddForce(basicForce, ForceMode2D.Impulse);
-        Vector2 force = forceDir * lineDir.normalized * AttachForce + additionalForce;
-        _player.Rb.AddForce(force, ForceMode2D.Impulse);
-        Debug.Log(force);
     }
     public void ReleaseGHook()
     {
@@ -119,9 +106,9 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
         if (inputY != 0)
             RopeJoint.distance -= _lineMoveSpeed * inputY * Time.fixedDeltaTime;
     }
-
     public void SetJoint()
     {
+        RopeJoint.connectedBody = HookPoint.GetComponent<Rigidbody2D>();
         RopeJoint.distance = Vector2.Distance(_player.transform.position, HookPoint.transform.position);
         RopeJoint.enabled = true;
     }

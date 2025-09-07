@@ -24,12 +24,13 @@ public class PlayerInput : MonoBehaviour
         JumpTrigger = context.performed;
     }
 
-    public void HandleGrappingHook(InputAction.CallbackContext contex)
+    public void HandleGrappingHook(InputAction.CallbackContext context)
     {
         Vector2 mousePos = _player.MainCam.ScreenToWorldPoint(Input.mousePosition);
         Vector2 dir = (mousePos - (Vector2)_player.transform.position).normalized;
         MouseDir = dir;
-        GrapperTrigger = contex.performed;
+        if (context.canceled) MouseDir = Vector2.zero;
+        GrapperTrigger = context.performed;
     }
 
     public void HandleSprint(InputAction.CallbackContext context)
@@ -43,5 +44,7 @@ public class PlayerInput : MonoBehaviour
         Vector2 dir = (mousePos - (Vector2)_player.transform.position).normalized;
         MouseDir = dir;
         AttackTrigger = context.performed;
+
+        if (context.canceled) MouseDir = Vector2.zero;
     }
 }

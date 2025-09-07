@@ -2883,9 +2883,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   LineGroundMoveForce: 0.22
-  AttachForce: 15
-  BasicAttachForce: {x: 0, y: 12}
-  AttachDelay: 0.22
+  InitLengthDuration: 2
+  InitGLine: 0
 --- !u!4 &1721889137
 Transform:
   m_ObjectHideFlags: 0
