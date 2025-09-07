@@ -44,12 +44,9 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
         CanUseSkill = false;
 
         // Get mouse position and calculate fire direction
-        Vector2 mousePos = _player.MainCam.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 fireDir = (mousePos - (Vector2)_player.transform.position).normalized;
-
         _hit = Physics2D.Raycast(
             _player.transform.position,
-            fireDir,
+            _player.InputSys.MouseDir,
             MaxDetectDist,
             CanHookLayer
         );

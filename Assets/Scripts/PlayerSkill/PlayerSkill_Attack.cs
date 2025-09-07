@@ -31,10 +31,7 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
         CanUseSkill = false;
         SkillEvents.TriggerAttackStart();
 
-        Vector2 mousePos = _player.MainCam.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 _dir = (mousePos - (Vector2)_player.transform.position).normalized;
-        float angleZ = Vector2.SignedAngle(Vector2.right, _dir);
-
+        float angleZ = Vector2.SignedAngle(Vector2.right, _player.InputSys.MouseDir);
         _trailController.rotation = Quaternion.Euler(0, 0, angleZ);
         _trail.enabled = true;
         _trail.time = AttackDuration * 2.5f;

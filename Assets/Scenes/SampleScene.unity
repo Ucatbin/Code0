@@ -2215,6 +2215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 472fd1d6ae699cc43bbc1ab479851c12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _player: {fileID: 542567388}
 --- !u!114 &1233298157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2843,9 +2844,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1721889137}
+  - component: {fileID: 1721889139}
   - component: {fileID: 1721889136}
   - component: {fileID: 1721889138}
-  - component: {fileID: 1721889139}
   m_Layer: 0
   m_Name: SkillController
   m_TagString: Untagged
@@ -2933,13 +2934,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 542567388}
   _inputSys: {fileID: 1233298156}
-  CoolDown: 0.18
+  CoolDown: 0.35
   CanUseSkill: 1
   AttackDuration: 0.2
-  AttackForce: 2
+  AttackForce: 5.5
   ForceDamping: 0.18
   _anim: {fileID: 11905804}
   _trail: {fileID: 1255670805}
+  _trailController: {fileID: 1573893944}
 --- !u!1 &1744596188
 GameObject:
   m_ObjectHideFlags: 0

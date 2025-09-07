@@ -5,7 +5,9 @@ using UnityEngine.Rendering;
 
 public class PlayerInput : MonoBehaviour
 {
+    [SerializeField] PlayerController _player;
     // Public Input
+    public Vector2 MouseDir { get; private set; }
     public Vector2 MoveInput { get; private set; }
     public bool JumpTrigger { get; private set; }
     public bool GrapperTrigger { get; private set; }
@@ -24,6 +26,9 @@ public class PlayerInput : MonoBehaviour
 
     public void HandleGrappingHook(InputAction.CallbackContext contex)
     {
+        Vector2 mousePos = _player.MainCam.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 dir = (mousePos - (Vector2)_player.transform.position).normalized;
+        MouseDir = dir;
         GrapperTrigger = contex.performed;
     }
 
@@ -34,6 +39,9 @@ public class PlayerInput : MonoBehaviour
 
     public void HandleAttack(InputAction.CallbackContext context)
     {
+        Vector2 mousePos = _player.MainCam.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 dir = (mousePos - (Vector2)_player.transform.position).normalized;
+        MouseDir = dir;
         AttackTrigger = context.performed;
     }
 }

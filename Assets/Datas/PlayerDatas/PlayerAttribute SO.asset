@@ -16,19 +16,21 @@ MonoBehaviour:
   MaxGroundSpeed: 12
   MaxGroundMoveSpeed: 6
   GroundAccel: 30
-  GroundDamping: 15
+  GroundDamping: 25
   MaxAirSpeed: 20
   MaxAirMoveSpeed: 8
   AirAccel: 40
-  AirDamping: 20
-  JumpHeight: 2.5
-  JumpHoldForce: 5
-  JumpWindow: 0.3
-  JumpDelay: 0.06
+  AirDamping: 30
+  MaxJumpSpeed: 12.5
+  JumpInitSpeed: 2
+  JumpAccel: 0.65
+  JumpWindow: 0.25
+  MaxRaiseSpeed: 20
+  MaxFallSpeed: 20
   MinGravityTrashold: 20
   AirGlideThreshold: 12
   DefaultGravity: 1
   RiseGravity: 3
   MinFallGravity: 1
-  MaxFallGravity: 4.5
-  AttackGravity: 0.5
+  MaxFallGravity: 4
+  AttackGravity: 0

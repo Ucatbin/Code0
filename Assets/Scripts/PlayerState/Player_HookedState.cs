@@ -21,11 +21,10 @@ public class Player_HookedState : Player_BaseState
 
         // Initialize grappling hook component
         _grappingHook = Player_SkillManager.Instance.GrappingHook;
-        _checker = _player.Checker;
         _dashSkill = Player_SkillManager.Instance.GrappingHookDash;
+        _checker = _player.Checker;
         _shouldCheck = false;
 
-        _player.Rb.linearVelocity = _player.Rb.linearVelocity * _grappingHook.ForceDamping;
         _player.Rb.gravityScale = _player.AttributeSO.MaxFallGravity;
         if (!_player.Checker.IsGrounded)
             _grappingHook.SetJoint();
