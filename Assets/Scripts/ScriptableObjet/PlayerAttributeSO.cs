@@ -1,5 +1,3 @@
-using Unity.Mathematics;
-using UnityEditor.EditorTools;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "DefaultSO", menuName = "Game/Player/Attributes/Player")]

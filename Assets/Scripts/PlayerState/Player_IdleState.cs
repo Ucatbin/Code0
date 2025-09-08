@@ -9,6 +9,7 @@ public class Player_IdleState : Player_GroundState
     public override void Enter()
     {
         base.Enter();
+        _player.AttributeSO.TargetVelocity.y = 0f;
     }
 
     public override void PhysicsUpdate()

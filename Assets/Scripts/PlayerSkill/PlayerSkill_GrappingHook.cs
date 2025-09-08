@@ -12,16 +12,15 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
     [SerializeField] HookPointPool _pool;
 
     [Header("GHookAttribute")]
-    [SerializeField] float _lineMoveSpeed = 4.5f;
-    public float LineSwingForce = 10f;
-    public float MaxSwingSpeed = 10f;
-    public float ForceDamping = 0.5f;
     [field: SerializeField] public float MaxDetectDist { get; private set; } = 20f; // Maximum distance to detect grapple points
     [field: SerializeField] public LayerMask CanHookLayer { get; private set; }      // Which layer can the hook attach to
-    public float LineGroundMoveForce = 0.22f;
+    [SerializeField] float _lineMoveSpeed = 4.5f;
+    [SerializeField] float _lineSwingForce = 10f;
+    [SerializeField] float _maxSwingSpeed = 10f;
 
-    public float InitLengthDuration = 0.1f;
-    public bool InitGLine;
+    bool _isBroken;
+
+    public float LineGroundMoveForce = 0.22f;
 
     public PlayerSkill_GrappingHook(PlayerController player) : base(player) { }
 
@@ -64,7 +63,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
     public override void CoolDownSkill()
     {
         Player_TimerManager.Instance.AddTimer(
-            CoolDown,
+            _isBroken ? _breakCoolDown : CoolDown,
             () => { ResetSkill(); },
             "Player_AbilityTimer"
         );
@@ -82,37 +81,49 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
         if (_player.Checker.IsGrounded)
             RopeJoint.distance = heightDiff - 0.5f;
         SkillEvents.TriggerHookAttach();
-        // Set connect point and enable distance joint
-        // Setup line renderer
     }
     public void ReleaseGHook()
     {
         // Let state machine know the player is released
         SkillEvents.TriggerHookReleas();
         _player.IsAttached = false;
+        _isBroken = false;
 
         // Disable distance joint and line renderer
         RopeJoint.enabled = false;
         RopeLine.enabled = false;
         _pool.Pool.Release(HookPoint);
+        CoolDownSkill();
     }
     public void BreakGHook()
     {
+        // Let state machine know the player is released
+        SkillEvents.TriggerHookReleas();
+        _player.IsAttached = false;
+        _isBroken = true;
 
+        // Disable distance joint and line renderer
+        RopeJoint.enabled = false;
+        RopeLine.enabled = false;
+        _pool.Pool.Release(HookPoint);
+        CoolDownSkill();
     }
     public void MoveOnGLine()
     {
         float inputY = _player.InputSys.MoveInput.y;
+        float inputX = _player.InputSys.MoveInput.x;
         if (inputY != 0)
             RopeJoint.distance -= _lineMoveSpeed * inputY * Time.fixedDeltaTime;
+        if (inputX != 0 && Mathf.Abs(_player.Rb.linearVelocityX) <= _maxSwingSpeed)
+            _player.Rb.AddForce(Vector2.right * inputX * _lineSwingForce);
     }
-    public void SetJoint()
+    void SetJoint()
     {
         RopeJoint.connectedBody = HookPoint.GetComponent<Rigidbody2D>();
         RopeJoint.distance = Vector2.Distance(_player.transform.position, HookPoint.transform.position);
         RopeJoint.enabled = true;
     }
-    public void SetLineRenderer()
+    void SetLineRenderer()
     {
         RopeLine.SetPosition(0, _player.transform.position);
         RopeLine.SetPosition(1, HookPoint.transform.position);

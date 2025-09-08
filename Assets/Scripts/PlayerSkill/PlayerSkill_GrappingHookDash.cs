@@ -39,7 +39,6 @@ public class PlayerSkill_GrappingHookDash : PlayerSkill_BaseSkill
         CanUseSkill = true;
     }
 
-
     public IEnumerator LineDash()
     {
         float dashSpeed = _lineDashSpeed;
