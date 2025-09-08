@@ -5,16 +5,6 @@ using Unity.Cinemachine;
 
 public class PlayerController : EntityContoller
 {
-    [Header("StateMachine")]
-    public Player_IdleState IdleState { get; private set; }
-    public Player_MoveState MoveState { get; private set; }
-    public Player_AirState AirState { get; private set; }
-    public Player_JumpState JumpState { get; private set; }
-    public Player_FallState FallState { get; private set; }
-    public Player_HookedState HookedState { get; private set; }
-    public Player_AirGlideState AirGlideState { get; private set; }
-    public Player_AttackState AttackState { get; private set; }
-
     [Header("NecessaryComponent")]
     [field: SerializeField] public Rigidbody2D Rb { get; private set; }
     [field: SerializeField] public Animator Anim { get; private set; }
@@ -26,7 +16,7 @@ public class PlayerController : EntityContoller
 
     [Header("SO")]
     public PlayerAttributeSO AttributeSO;
-    public PlayerStatePrioritySO StatePrioritySO;
+    public PlayerStateSO StateSO;
 
     [Header("StateMark")]
     public bool IsJumping;
@@ -52,17 +42,9 @@ public class PlayerController : EntityContoller
     {
         base.Awake();
 
-        // Initialize StateMachine
-        IdleState = new Player_IdleState(this, _stateMachine, "Idle");
-        MoveState = new Player_MoveState(this, _stateMachine, "Move");
-        AirState = new Player_AirState(this, _stateMachine, "Idle");
-        JumpState = new Player_JumpState(this, _stateMachine, "Jump");
-        FallState = new Player_FallState(this, _stateMachine, "Fall");
-        HookedState = new Player_HookedState(this, _stateMachine, "Hooked");
-        AirGlideState = new Player_AirGlideState(this, _stateMachine, "AirGlide");
-        AttackState = new Player_AttackState(this, _stateMachine, "Attack");
+        StateSO.InstanceState(this, _stateMachine);
 
-        _stateMachine.InitState(IdleState);
+        _stateMachine.InitState(StateSO.IdleState);
     }
     protected override void Start()
     {
@@ -78,33 +60,28 @@ public class PlayerController : EntityContoller
         base.Update();
     }
 
-    public int GetStatePriority(Type stateType)
-    {
-        return StatePrioritySO?.GetPriority(stateType) ?? 1;
-    }
-
     #region Handle Skill Logics
     void HandleHookAtteched()
     {
-        _stateMachine.ChangeState(HookedState, true);
+        _stateMachine.ChangeState(StateSO.HookedState, true);
         IsAttached = true;
         Checker.GLineChecker.enabled = true;
     }
     void HandleHookReleased()
     {
-        _stateMachine.ChangeState(AirGlideState, true);
+        _stateMachine.ChangeState(StateSO.AirGlideState, true);
         IsAttached = false;
         Checker.GLineChecker.enabled = false;
     }
 
     void HandleAttackStart()
     {
-        _stateMachine.ChangeState(AttackState, false);
+        _stateMachine.ChangeState(StateSO.AttackState, false);
         IsAttacking = true;
     }
     void HandleAttackEnd()
     {
-        _stateMachine.ChangeState(FallState, true);
+        _stateMachine.ChangeState(StateSO.FallState, true);
         IsAttacking = false;
     }
     #endregion

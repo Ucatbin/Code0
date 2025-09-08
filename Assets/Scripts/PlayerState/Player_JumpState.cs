@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Player_JumpState : Player_AirState
 {
-    public Player_JumpState(PlayerController entity, StateMachine stateMachine, string stateName) : base(entity, stateMachine, stateName)
+    public Player_JumpState(PlayerController entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
     {
     }
 
@@ -16,8 +16,8 @@ public class Player_JumpState : Player_AirState
 
         // Start jump timer
         Player_TimerManager.Instance.AddTimer(
-            _player.AttributeSO.JumpWindow,
-            () => _stateMachine.ChangeState(_player.AirState, true),
+            _player.AttributeSO.JumpInputWindow,
+            () => _stateMachine.ChangeState(_player.StateSO.AirState, true),
             "JumpStateTimer"
         );
 
@@ -51,7 +51,7 @@ public class Player_JumpState : Player_AirState
         base.LogicUpdate();
         // Cant add force after jumpWindow
         if (!_player.InputSys.JumpTrigger)
-            _stateMachine.ChangeState(_player.AirState, true);
+            _stateMachine.ChangeState(_player.StateSO.AirState, true);
     }
 
     public override void Exit()

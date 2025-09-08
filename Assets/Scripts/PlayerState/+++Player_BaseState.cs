@@ -5,10 +5,9 @@ public class Player_BaseState : EntityState
 {
     protected PlayerController _player;
 
-    public Player_BaseState(PlayerController entity, StateMachine stateMachine, string stateName) : base(entity, stateMachine, stateName)
+    public Player_BaseState(PlayerController entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
     {
         _player = entity;
-        Priority = _player.GetStatePriority(GetType());
     }
 
     public override void Enter()

@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 148d85893147b7e438e6ce10d363b052, type: 3}
-  m_Name: PlayerAttribute SO
+  m_Name: PlayerAttributeSO
   m_EditorClassIdentifier: 
-  TargetVelocity: {x: 0, y: -4.2011566}
+  TargetVelocity: {x: 0, y: 0}
   MaxGroundSpeed: 12
   MaxGroundMoveSpeed: 6
   GroundAccel: 30
@@ -22,15 +22,13 @@ MonoBehaviour:
   AirAccel: 40
   AirDamping: 30
   MaxJumpSpeed: 12.5
-  JumpInitSpeed: 2
-  JumpAccel: 0.65
-  JumpWindow: 0.25
+  JumpInitSpeed: 3
+  JumpAccel: 1.1
+  JumpInputWindow: 0.25
+  CoyoteWindow: 0.12
   MaxRaiseSpeed: 20
   MaxFallSpeed: 20
-  MinGravityTrashold: 20
-  AirGlideThreshold: 12
   DefaultGravity: 1
   RiseGravity: 3
-  MinFallGravity: 1
-  MaxFallGravity: 4
+  FallGravity: 4.5
   AttackGravity: 0

@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class Player_MoveState : Player_GroundState
 {
-    public Player_MoveState(PlayerController entity, StateMachine stateMachine, string stateName) : base(entity, stateMachine, stateName)
+    public Player_MoveState(PlayerController entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
     {
     }
 
@@ -45,7 +45,7 @@ public class Player_MoveState : Player_GroundState
 
         // If InputX == 0f, exit MoveState
         if (_player.InputSys.MoveInput.x == 0f)
-            _stateMachine.ChangeState(_player.IdleState, true);
+            _stateMachine.ChangeState(_player.StateSO.IdleState, true);
     }
 
     public override void Exit()

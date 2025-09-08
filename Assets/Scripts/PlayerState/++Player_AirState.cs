@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class Player_AirState : Player_BaseState
 {
-    float _targetGravity;
     protected float _maxAirVelocityX;
-    public Player_AirState(PlayerController entity, StateMachine stateMachine, string stateName) : base(entity, stateMachine, stateName)
+
+    public Player_AirState(PlayerController entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
     {
     }
 
@@ -51,32 +51,16 @@ public class Player_AirState : Player_BaseState
     public override void LogicUpdate()
     {
         // Reset IsJumping to enable ground check, enter fallState
-        if (_player.Rb.linearVelocityY < 0f && _stateMachine.CurrentState != _player.FallState)
-            _stateMachine.ChangeState(_player.FallState, false);
+        if (_player.Rb.linearVelocityY < 0f && _stateMachine.CurrentState != _player.StateSO.FallState)
+            _stateMachine.ChangeState(_player.StateSO.FallState, false);
 
         // Exit when detect the ground
-        if (_player.Checker.IsGrounded && _stateMachine.CurrentState != _player.JumpState)
-            _stateMachine.ChangeState(_player.IdleState, true);
+        if (_player.Checker.IsGrounded && _stateMachine.CurrentState != _player.StateSO.JumpState)
+            _stateMachine.ChangeState(_player.StateSO.IdleState, true);
     }
 
     public override void Exit()
     {
         base.Exit();
-    }
-    void ChangeGravityScale()
-    {
-        if (_player.IsJumping)
-            return;
-
-        if (Mathf.Abs(_player.Rb.linearVelocity.magnitude) < _player.AttributeSO.AirGlideThreshold)
-            _targetGravity = _player.AttributeSO.MaxFallGravity;
-        else
-        {
-            _targetGravity = Mathf.Lerp(
-                _player.AttributeSO.MaxFallGravity,
-                _player.AttributeSO.MinFallGravity,
-                Mathf.Abs(_player.Rb.linearVelocity.magnitude) / _player.AttributeSO.MinGravityTrashold);
-        }
-        _player.Rb.gravityScale = _targetGravity;
     }
 }

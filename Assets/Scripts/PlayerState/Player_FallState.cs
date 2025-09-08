@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Player_FallState : Player_AirState
 {
-    public Player_FallState(PlayerController entity, StateMachine stateMachine, string stateName) : base(entity, stateMachine, stateName)
+    public Player_FallState(PlayerController entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
     {
     }
 
@@ -11,7 +11,7 @@ public class Player_FallState : Player_AirState
     {
         base.Enter();
 
-        _player.Rb.gravityScale = _player.AttributeSO.MaxFallGravity;
+        _player.Rb.gravityScale = _player.AttributeSO.FallGravity;
     }
 
     public override void PhysicsUpdate()

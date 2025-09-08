@@ -7,7 +7,8 @@ public class Player_HookedState : Player_BaseState
     PlayerSkill_GrappingHook _gHookSkill;
     PlayerSkill_GrappingHookDash _dashSkill;
     PlayerChecker _checker;
-    public Player_HookedState(PlayerController entity, StateMachine stateMachine, string stateName) : base(entity, stateMachine, stateName)
+
+    public Player_HookedState(PlayerController entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
     {
     }
 
@@ -20,7 +21,7 @@ public class Player_HookedState : Player_BaseState
         _dashSkill = Player_SkillManager.Instance.GrappingHookDash;
         _checker = _player.Checker;
 
-        _player.Rb.gravityScale = _player.AttributeSO.MaxFallGravity;
+        _player.Rb.gravityScale = _player.AttributeSO.FallGravity;
     }
 
     public override void PhysicsUpdate()

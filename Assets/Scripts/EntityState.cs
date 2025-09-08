@@ -5,12 +5,13 @@ public abstract class EntityState
     protected EntityContoller _entity;
     protected StateMachine _stateMachine;
     protected string _stateName;
-    public int Priority;
+    public int _priority;
 
-    public EntityState(EntityContoller entity, StateMachine stateMachine, string stateName)
+    public EntityState(EntityContoller entity, StateMachine stateMachine, int priority, string stateName)
     {
         _entity = entity;
         _stateMachine = stateMachine;
+        _priority = priority;
         _stateName = stateName;
     }
     public abstract void Enter();

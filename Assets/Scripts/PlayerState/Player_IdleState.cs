@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Player_IdleState : Player_GroundState
 {
-    public Player_IdleState(PlayerController entity, StateMachine stateMachine, string stateName) : base(entity, stateMachine, stateName)
+    public Player_IdleState(PlayerController entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
     {
     }
 
@@ -33,7 +33,7 @@ public class Player_IdleState : Player_GroundState
 
         // Change to moveState when have InputX and is not holding jump
         if (_player.InputSys.MoveInput.x != 0f)
-            _stateMachine.ChangeState(_player.MoveState, false);
+            _stateMachine.ChangeState(_player.StateSO.MoveState, false);
     }
 
     public override void Exit()

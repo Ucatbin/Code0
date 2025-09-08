@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "DefaultSO", menuName = "Game/Player/Attributes/Player")]
-public class PlayerAttributeSO : EntityAttributeSO
+public class PlayerAttributeSO : ScriptableObject
 {
     [Header("MOVEMENT")]
     public Vector2 TargetVelocity;
@@ -31,26 +31,29 @@ public class PlayerAttributeSO : EntityAttributeSO
     [Tooltip("Acceration of jump speed")]
     public float JumpAccel = 0.65f;
     [Tooltip("Time window that can add force while holding SPACE"), Range(0f, 1f)]
-    public float JumpWindow = 0.25f;
-    [Tooltip("Time window that can add force while holding SPACE")]
+    public float JumpInputWindow = 0.25f;
+    [Tooltip("Time window that can jump after leave ground"), Range(0f, 1f)]
+    public float CoyoteWindow = 0.15f;
     public float MaxRaiseSpeed = 20f;
     public float MaxFallSpeed = 25f;
-
-    [Header("AIR GLIDE")]
-    [Tooltip("Speed trashold of min air glide gravity")]
-    public float MinGravityTrashold = 30f;
-    [Tooltip("Speed trashold of air glide")]
-    public float AirGlideThreshold = 16f;
 
     [Header("GRAVITY")]
     [Tooltip("Gravity on ground"), Range(0f, 10f)]
     public float DefaultGravity = 1f;
     [Tooltip("Gravity while rising"), Range(0f, 10f)]
     public float RiseGravity = 3f;
-    [Tooltip("Min gravity while falling"), Range(0f, 10f)]
-    public float MinFallGravity = 1f;
     [Tooltip("Max gravity while falling"), Range(0f, 10f)]
-    public float MaxFallGravity = 4.5f;
+    public float FallGravity = 4.5f;
     [Tooltip("Gravity when attacking"), Range(0f, 10f)]
     public float AttackGravity = 0.4f;
+
+    private void Reset()
+    {
+        TargetVelocity = Vector2.zero;
+    }
+
+    private void OnEnable()
+    {
+        TargetVelocity = Vector2.zero;
+    }
 }

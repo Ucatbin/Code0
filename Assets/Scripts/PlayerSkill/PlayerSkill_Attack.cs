@@ -6,8 +6,7 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
     public float AttackForce = 2.5f;
     public float ForceDamping = 0.25f;
     [SerializeField] Animator _anim;
-    [SerializeField] TrailRenderer _trail;
-    [SerializeField] Transform _trailController;
+    [SerializeField] Transform _animation;
 
     public PlayerSkill_Attack(PlayerController player) : base(player)
     {
@@ -32,9 +31,8 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
         SkillEvents.TriggerAttackStart();
 
         float angleZ = Vector2.SignedAngle(Vector2.right, _player.InputSys.MouseDir);
-        _trailController.rotation = Quaternion.Euler(0, 0, angleZ);
-        _trail.enabled = true;
-        _trail.time = AttackDuration * 2.5f;
+        _animation.rotation = Quaternion.Euler(0, 0, angleZ);
+        _animation.gameObject.SetActive(true);
         _anim.SetBool("Attack", true);
     }
     public override void CoolDownSkill()
@@ -45,7 +43,7 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
             "Player_AbilityTimer"
         );
 
-        _trail.enabled = false;
+        _animation.gameObject.SetActive(false);
         _anim.SetBool("Attack", false);
     }
 

@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class Player_AirGlideState : Player_AirState
 {
-    bool _shouldAddForce;
-
-    public Player_AirGlideState(PlayerController entity, StateMachine stateMachine, string stateName) : base(entity, stateMachine, stateName)
+    float _targetAirDamping;
+    
+    public Player_AirGlideState(PlayerController entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
     {
     }
 
@@ -12,6 +12,8 @@ public class Player_AirGlideState : Player_AirState
     {
         base.Enter();
 
+        float enterSpeed = _player.AttributeSO.TargetVelocity.x;
+        _targetAirDamping = enterSpeed * 2.5f;
         _player.IsJumping = false;
     }
     
@@ -40,7 +42,7 @@ public class Player_AirGlideState : Player_AirState
             _player.AttributeSO.TargetVelocity.x = Mathf.MoveTowards(
                 _player.AttributeSO.TargetVelocity.x,
                 0,
-                _player.AttributeSO.AirDamping / 10f * Time.fixedDeltaTime
+                _player.AttributeSO.AirDamping / _targetAirDamping * Time.fixedDeltaTime
             );
 
         _player.Rb.linearVelocity = new Vector2(
