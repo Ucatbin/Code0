@@ -5,7 +5,9 @@ using UnityEngine.Rendering;
 
 public class PlayerInput : MonoBehaviour
 {
+    [SerializeField] PlayerController _player;
     // Public Input
+    public Vector2 MouseDir { get; private set; }
     public Vector2 MoveInput { get; private set; }
     public bool JumpTrigger { get; private set; }
     public bool GrapperTrigger { get; private set; }
@@ -22,9 +24,13 @@ public class PlayerInput : MonoBehaviour
         JumpTrigger = context.performed;
     }
 
-    public void HandleGrappingHook(InputAction.CallbackContext contex)
+    public void HandleGrappingHook(InputAction.CallbackContext context)
     {
-        GrapperTrigger = contex.performed;
+        Vector2 mousePos = _player.MainCam.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 dir = (mousePos - (Vector2)_player.transform.position).normalized;
+        MouseDir = dir;
+        if (context.canceled) MouseDir = Vector2.zero;
+        GrapperTrigger = context.performed;
     }
 
     public void HandleSprint(InputAction.CallbackContext context)
@@ -34,6 +40,11 @@ public class PlayerInput : MonoBehaviour
 
     public void HandleAttack(InputAction.CallbackContext context)
     {
+        Vector2 mousePos = _player.MainCam.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 dir = (mousePos - (Vector2)_player.transform.position).normalized;
+        MouseDir = dir;
         AttackTrigger = context.performed;
+
+        if (context.canceled) MouseDir = Vector2.zero;
     }
 }

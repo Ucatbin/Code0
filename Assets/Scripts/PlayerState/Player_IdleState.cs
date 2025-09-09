@@ -2,19 +2,30 @@ using UnityEngine;
 
 public class Player_IdleState : Player_GroundState
 {
-    public Player_IdleState(PlayerController entity, StateMachine stateMachine, string stateName) : base(entity, stateMachine, stateName)
+    public Player_IdleState(PlayerController entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
     {
     }
 
     public override void Enter()
     {
         base.Enter();
+        _player.AttributeSO.TargetVelocity.y = 0f;
     }
 
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-        
+
+        _player.AttributeSO.TargetVelocity.x = Mathf.MoveTowards(
+            _player.AttributeSO.TargetVelocity.x,
+            0,
+            _player.AttributeSO.GroundDamping * Time.fixedDeltaTime
+        );
+
+        _player.Rb.linearVelocity = new Vector2(
+            _player.AttributeSO.TargetVelocity.x,
+            _player.Rb.linearVelocity.y
+        );
     }
     public override void LogicUpdate()
     {
@@ -22,9 +33,7 @@ public class Player_IdleState : Player_GroundState
 
         // Change to moveState when have InputX and is not holding jump
         if (_player.InputSys.MoveInput.x != 0f)
-        {
-            _stateMachine.ChangeState(_player.MoveState, false);
-        }
+            _stateMachine.ChangeState(_player.StateSO.MoveState, false);
     }
 
     public override void Exit()

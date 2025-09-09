@@ -2,12 +2,9 @@ using UnityEngine;
 
 public class Player_JumpState : Player_AirState
 {
-    bool _shouldApplyForce;
-    bool _canAddForce;
-    float _jumpForce;
-    float _jumpHoldForce;
+    PlayerSkill_Jump _jumpSkill;
 
-    public Player_JumpState(PlayerController entity, StateMachine stateMachine, string stateName) : base(entity, stateMachine, stateName)
+    public Player_JumpState(PlayerController entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
     {
     }
 
@@ -16,68 +13,63 @@ public class Player_JumpState : Player_AirState
         base.Enter();
 
         // Initialize
-        _player.IsJumping = true;
+        _jumpSkill = Player_SkillManager.Instance.Jump;
         _player.Rb.gravityScale = _player.AttributeSO.RiseGravity;
-
-        // Calculate jump force with jump height
-        _jumpForce = Mathf.Sqrt(
-            _player.AttributeSO.JumpHeight *
-            (_player.Rb.gravityScale * Physics2D.gravity.y) *
-            -2f
-        ) * _player.Rb.mass;
-        _jumpHoldForce = Mathf.Sqrt(
-            _player.AttributeSO.JumpHoldForce *
-            (_player.Rb.gravityScale * Physics2D.gravity.y) *
-            -2f
-        ) * _player.Rb.mass;
-
-        // Apply base jump once when enter
-        _player.Rb.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
+        _jumpSkill.FinishJump = false;
 
         // Start jump timer
         Player_TimerManager.Instance.AddTimer(
-            _player.AttributeSO.JumpDelay,
-            () => { _canAddForce = true; },
+            _player.AttributeSO.JumpInputWindow,
+            () => SkillEvents.TriggerJumpEnd(),
             "JumpStateTimer"
         );
+
         Player_TimerManager.Instance.AddTimer(
-            _player.AttributeSO.JumpWindow,
-            () => StopAddForce(),
-            "JumpStateTimer"
+            _jumpSkill.SkillCD,
+            () =>{
+                if (_jumpSkill.CurrentCharges != 0)
+                    _jumpSkill.FinishJump = true;
+            },
+            "PlayerSkillGap"
         );
+        _player.AttributeSO.TargetVelocity.y = _player.AttributeSO.JumpInitSpeed;
     }
 
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
 
-        // Apply additional jump force
-        if (_shouldApplyForce && _canAddForce)
-            _player.Rb.AddForce(Vector2.up * _jumpHoldForce, ForceMode2D.Force);
+        if (Mathf.Abs(_player.AttributeSO.TargetVelocity.y) <= _player.AttributeSO.MaxRaiseSpeed)
+            _player.AttributeSO.TargetVelocity.y = Mathf.MoveTowards(
+                _player.AttributeSO.TargetVelocity.y,
+                _player.AttributeSO.MaxJumpSpeed,
+                _player.AttributeSO.JumpAccel
+            );
+        else
+            _player.AttributeSO.TargetVelocity.y = Mathf.MoveTowards(
+                _player.AttributeSO.TargetVelocity.y,
+                _player.AttributeSO.MaxRaiseSpeed,
+                _player.AttributeSO.JumpAccel
+            );
+
+        _player.Rb.linearVelocity = new Vector2(
+            _player.Rb.linearVelocityX,
+            _player.AttributeSO.TargetVelocity.y
+        );
     }
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
-        // Can jump higher if holding Space button
-        _shouldApplyForce = _player.InputSys.JumpTrigger;
-
         // Cant add force after jumpWindow
-        if (!_player.InputSys.JumpTrigger) StopAddForce();
+        if (!_player.InputSys.JumpTrigger)
+            _stateMachine.ChangeState(_player.StateSO.AirState, true);
     }
 
     public override void Exit()
     {
         base.Exit();
-        
-        _player.IsJumping = false;
+
+        _player.AttributeSO.TargetVelocity.y = 0f;
         Player_TimerManager.Instance.CancelTimersWithTag("JumpStateTimer");
-    }
-    
-    void StopAddForce()
-    {
-        _stateMachine.ChangeState(_player.AirState, true);
-        _canAddForce = false;
-        _shouldApplyForce = false;
     }
 }

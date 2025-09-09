@@ -2,38 +2,44 @@ using UnityEngine;
 
 public class Player_AttackState : Player_BaseState
 {
-    Vector2 _dir;
-    public Player_AttackState(PlayerController entity, StateMachine stateMachine, string stateName) : base(entity, stateMachine, stateName)
+    PlayerSkill_Attack _attackSkill;
+
+    public Player_AttackState(PlayerController entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
     {
     }
+
     public override void Enter()
     {
         base.Enter();
 
-        _player.IsAttacking = true;
-        _player.Rb.gravityScale = _player.AttributeSO.AttackGravity;
+        _attackSkill = Player_SkillManager.Instance.Attack;
+
         Player_TimerManager.Instance.AddTimer(
-            Player_SkillManager.Instance.Attack.AttackDuration,
-            () => { _stateMachine.ChangeState(_player.AirState, true); },
+            _attackSkill.AttackDuration,
+            () => { SkillEvents.TriggerAttackEnd(); },
             "Player_AbilityTimer"
         );
 
-        Vector2 mousePos = _player.MainCam.ScreenToWorldPoint(Input.mousePosition);
-        _dir = (mousePos- (Vector2)_player.transform.position).normalized;
+        _player.AttributeSO.TargetVelocity = Vector2.zero;
+        _player.Rb.gravityScale = _player.AttributeSO.AttackGravity;
+
+        _player.AttributeSO.TargetVelocity = _player.InputSys.MouseDir *
+            _attackSkill.AttackForce;
     }
     public override void PhysicsUpdate()
     {
-        _player.Rb.AddForce(_dir * Player_SkillManager.Instance.Attack.AttackForce, ForceMode2D.Impulse);
-        // _player.Rb.linearVelocity = _dir * Player_SkillManager.Instance.Attack.AttackMovement;
+        _player.Rb.linearVelocity = _player.AttributeSO.TargetVelocity;
     }
-    public override void LogicUpdate() { }
+    public override void LogicUpdate()
+    {
+
+    }
     public override void Exit()
     {
         base.Exit();
 
-        _player.Rb.linearVelocity = _player.Rb.linearVelocity * Player_SkillManager.Instance.Attack.ForceDamping;
-        Player_SkillManager.Instance.Attack.CoolDownSkill();
-        _player.IsAttacking = false;
-        _player.Rb.gravityScale = _player.AttributeSO.DefaultGravity;
+        _player.AttributeSO.TargetVelocity = Vector2.zero;
+        _attackSkill.CoolDownSkill(_attackSkill.SkillCD, "PlyaerAttack");
+        _player.Rb.gravityScale = _player.AttributeSO.FallGravity;
     }
 }

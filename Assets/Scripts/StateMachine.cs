@@ -10,13 +10,13 @@ public class StateMachine
         CurrentState.Enter();
     }
 
-    public virtual void ChangeState(EntityState nextState, bool force)
+    public virtual void ChangeState(EntityState nextState, bool forceChange)
     {
-        if (!force)
+        if (!forceChange)
         {
-            if (nextState.Priority >= CurrentState.Priority)
+            if (nextState._priority >= CurrentState._priority)
             {
-                Debug.Log($"{CurrentState.Priority} Exit: {CurrentState} + {nextState.Priority}Enter: {nextState}");
+                Debug.Log($"{CurrentState._priority} Exit: {CurrentState} + {nextState._priority}Enter: {nextState}");
                 CurrentState.Exit();
                 CurrentState = nextState;
                 CurrentState.Enter();

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Player_DashState : Player_GroundState
 {
-    public Player_DashState(PlayerController entity, StateMachine stateMachine, string stateName) : base(entity, stateMachine, stateName)
+    public Player_DashState(PlayerController entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
     {
     }
 

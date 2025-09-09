@@ -1,11 +1,10 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Player_MoveState : Player_GroundState
 {
-    bool _shouldAddForce;
-
-    public Player_MoveState(PlayerController entity, StateMachine stateMachine, string stateName) : base(entity, stateMachine, stateName)
+    public Player_MoveState(PlayerController entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
     {
     }
 
@@ -18,22 +17,35 @@ public class Player_MoveState : Player_GroundState
     {
         base.PhysicsUpdate();
 
-        if (_shouldAddForce)
-            _player.Rb.AddForce(new Vector2(
-                _player.InputSys.MoveInput.x * _player.AttributeSO.GroundMoveForce,
-                0f
-            ), ForceMode2D.Force);
+        _maxGroundVelocityX =
+            _player.InputSys.MoveInput.x *
+            _player.AttributeSO.MaxGroundMoveSpeed;
+
+        if (Mathf.Abs(_player.AttributeSO.TargetVelocity.x) <= _player.AttributeSO.MaxGroundSpeed)
+            _player.AttributeSO.TargetVelocity.x = Mathf.MoveTowards(
+                _player.AttributeSO.TargetVelocity.x,
+                _maxGroundVelocityX,
+                _player.AttributeSO.GroundAccel * Time.fixedDeltaTime
+            );
+        else
+            _player.AttributeSO.TargetVelocity.x = Mathf.MoveTowards(
+                _player.AttributeSO.TargetVelocity.x,
+                _maxGroundVelocityX,
+                _player.AttributeSO.GroundDamping * Time.fixedDeltaTime
+            );
+
+        _player.Rb.linearVelocity = new Vector2(
+            _player.AttributeSO.TargetVelocity.x,
+            _player.Rb.linearVelocity.y
+        );
     }
     public override void LogicUpdate()
     {
         base.LogicUpdate();
 
-        // If current velocity less than max speed, can add force
-        _shouldAddForce = Mathf.Abs(_player.Rb.linearVelocity.x) < _player.AttributeSO.MaxGroundSpeed;
-
         // If InputX == 0f, exit MoveState
         if (_player.InputSys.MoveInput.x == 0f)
-            _stateMachine.ChangeState(_player.IdleState, true);
+            _stateMachine.ChangeState(_player.StateSO.IdleState, true);
     }
 
     public override void Exit()

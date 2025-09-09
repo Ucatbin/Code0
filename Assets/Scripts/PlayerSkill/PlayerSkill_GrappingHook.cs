@@ -1,94 +1,100 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
 {
-    [SerializeField] float _breakCoolDown = 2f;
+    [SerializeField] float BreakCoolDown = 2f;
     [Header("NecessaryComponent")]
-    [field:SerializeField] public DistanceJoint2D RopeJoint { get; private set; }
-    [field:SerializeField] public LineRenderer RopeLine { get; private set; }
-    public GameObject HookPoint { get; private set; } // The point where the hook is attached
+    [field: SerializeField] public DistanceJoint2D RopeJoint { get; private set; }
+    [field: SerializeField] public LineRenderer RopeLine { get; private set; }
+    public GameObject HookPoint { get; private set; }   // The point where the hook is attached
+    public Vector2 SurfaceNormal { get; private set; }     // The normal of the surface hit    
     [SerializeField] HookPointPool _pool;
 
     [Header("GHookAttribute")]
-    [SerializeField] float _lineMoveSpeed = 4.5f;
-    public float LineSwingForce = 10f;
-    public float MaxSwingSpeed = 10f;
     [field: SerializeField] public float MaxDetectDist { get; private set; } = 20f; // Maximum distance to detect grapple points
-    [field:SerializeField] public LayerMask CanHookLayer { get; private set; } // Which layer can the hook attach to
-    RaycastHit2D _hit;
+    [field: SerializeField] public LayerMask CanHookLayer { get; private set; }      // Which layer can the hook attach to
+    [SerializeField] float _lineMoveSpeed = 4.5f;
+    [SerializeField] float _lineSwingForce = 10f;
+    [SerializeField] float _maxSwingSpeed = 10f;
 
     public PlayerSkill_GrappingHook(PlayerController player) : base(player) { }
 
     void Update()
     {
-        BasicCheck();
+        TryUseSkill();
     }
-    public override void BasicCheck()
+
+    public override void TryUseSkill()
     {
-        // Check input and CanUseSkill
-        if (!_inputSys.GrapperTrigger || !CanUseSkill)
+        if (!CanUseSkill ||
+            (MaxCharges != -1 && CurrentCharges == 0) ||
+            !_inputSys.GrapperTrigger ||
+            _player.IsAttacking
+        )
             return;
         UseSkill();
     }
     public override void UseSkill()
     {
-        if (_player.IsAttacking)
-            return;
+        CurrentCharges -= MaxCharges != -1 ? 1 : 0;
         CanUseSkill = false;
 
         // Get mouse position and calculate fire direction
-        Vector2 mousePos = _player.MainCam.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 fireDir = (mousePos - (Vector2)_player.transform.position).normalized;
-
-        _hit = Physics2D.Raycast(
+        RaycastHit2D hit = Physics2D.Raycast(
             _player.transform.position,
-            fireDir,
+            _player.InputSys.MouseDir,
             MaxDetectDist,
             CanHookLayer
         );
 
-        if (_hit.collider != null)
+        if (hit.collider != null)
         {
             HookPoint = _pool.Pool.Get();
-            HookPoint.transform.position = _hit.point;
-            HookPoint.transform.parent = _hit.transform;
+            HookPoint.transform.position = hit.point;
+            HookPoint.transform.parent = hit.transform;
+            SurfaceNormal = hit.normal;
             AttachHook();
         }
         else
             ResetSkill();
     }
-    public override void CoolDownSkill()
+    public override void CoolDownSkill(float coolDown, string tag)
     {
         Player_TimerManager.Instance.AddTimer(
-            CoolDown,
+            coolDown,
             () => { ResetSkill(); },
-            "Player_AbilityTimer"
+            tag
         );
     }
     public override void ResetSkill()
     {
         CanUseSkill = true;
     }
-
     void AttachHook()
     {
-        // Let state machine know the player is attached
-        SkillEvents.TriggerHookAttached();
-        // Set connect point and enable distance joint
-        RopeJoint.connectedBody = HookPoint.GetComponent<Rigidbody2D>();
-        RopeJoint.distance = Vector2.Distance(_player.transform.position, HookPoint.transform.position);
-        RopeJoint.enabled = true;
-
-        // Setup line renderer
-        RopeLine.SetPosition(0, _player.transform.position);
-        RopeLine.SetPosition(1, HookPoint.transform.position);
-        RopeLine.enabled = true;
+        float heightDiff = HookPoint.transform.position.y - _player.transform.position.y;
+        _player.Rb.gravityScale = 0f;
+        SetLineRenderer();
+        SetJoint();
+        if (_player.Checker.IsGrounded)
+            RopeJoint.distance = heightDiff - 0.5f;
+        SkillEvents.TriggerHookAttach();
     }
-
-    public void ReleaseHook()
+    public void ReleaseGHook()
+    {
+        HandleDisable();
+        CoolDownSkill(SkillCD, "PlayerSkill");
+    }
+    public void BreakGHook()
+    {
+        HandleDisable();
+        CoolDownSkill(BreakCoolDown, "PlayerSkill");
+    }
+    void HandleDisable()
     {
         // Let state machine know the player is released
-        SkillEvents.TriggerHookReleased();
+        SkillEvents.TriggerHookReleas();
         _player.IsAttached = false;
 
         // Disable distance joint and line renderer
@@ -96,16 +102,25 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
         RopeLine.enabled = false;
         _pool.Pool.Release(HookPoint);
     }
-    public void BreakHook()
-    {
-        
-    }
-
     public void MoveOnGLine()
     {
         float inputY = _player.InputSys.MoveInput.y;
+        float inputX = _player.InputSys.MoveInput.x;
         if (inputY != 0)
             RopeJoint.distance -= _lineMoveSpeed * inputY * Time.fixedDeltaTime;
+        if (inputX != 0 && Mathf.Abs(_player.Rb.linearVelocityX) <= _maxSwingSpeed)
+            _player.Rb.AddForce(Vector2.right * inputX * _lineSwingForce);
     }
-
+    void SetJoint()
+    {
+        RopeJoint.connectedBody = HookPoint.GetComponent<Rigidbody2D>();
+        RopeJoint.distance = Vector2.Distance(_player.transform.position, HookPoint.transform.position);
+        RopeJoint.enabled = true;
+    }
+    void SetLineRenderer()
+    {
+        RopeLine.SetPosition(0, _player.transform.position);
+        RopeLine.SetPosition(1, HookPoint.transform.position);
+        RopeLine.enabled = true;
+    }
 }

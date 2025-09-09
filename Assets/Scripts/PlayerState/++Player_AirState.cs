@@ -1,24 +1,26 @@
 using UnityEngine;
 
-public class Player_AirGlideState : Player_AirState
+public class Player_AirState : Player_BaseState
 {
-    float _targetAirDamping;
-    
-    public Player_AirGlideState(PlayerController entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
+    protected float _maxAirVelocityX;
+
+    public Player_AirState(PlayerController entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
     {
     }
 
     public override void Enter()
     {
         base.Enter();
-
-        float enterSpeed = _player.AttributeSO.TargetVelocity.x;
-        _targetAirDamping = enterSpeed * 2.5f;
-        _player.IsJumping = false;
     }
-    
+
     public override void PhysicsUpdate()
     {
+        base.PhysicsUpdate();
+
+        if (Player_SkillManager.Instance.Jump.FinishJump)
+            if (!_player.InputSys.JumpTrigger)
+                Player_SkillManager.Instance.Jump.CanUseSkill = true;
+
         _maxAirVelocityX =
             _player.InputSys.MoveInput.x *
             _player.AttributeSO.MaxAirMoveSpeed;
@@ -42,7 +44,7 @@ public class Player_AirGlideState : Player_AirState
             _player.AttributeSO.TargetVelocity.x = Mathf.MoveTowards(
                 _player.AttributeSO.TargetVelocity.x,
                 0,
-                _player.AttributeSO.AirDamping / _targetAirDamping * Time.fixedDeltaTime
+                _player.AttributeSO.AirDamping * Time.fixedDeltaTime
             );
 
         _player.Rb.linearVelocity = new Vector2(
@@ -52,7 +54,13 @@ public class Player_AirGlideState : Player_AirState
     }
     public override void LogicUpdate()
     {
-        base.LogicUpdate();
+        // Reset IsJumping to enable ground check, enter fallState
+        if (_player.Rb.linearVelocityY < 0f && _stateMachine.CurrentState != _player.StateSO.FallState)
+            _stateMachine.ChangeState(_player.StateSO.FallState, false);
+
+        // Exit when detect the ground
+        if (_player.Checker.IsGrounded && _stateMachine.CurrentState != _player.StateSO.JumpState)
+            _stateMachine.ChangeState(_player.StateSO.IdleState, true);
     }
 
     public override void Exit()
