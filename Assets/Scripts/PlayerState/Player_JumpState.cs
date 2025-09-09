@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Player_JumpState : Player_AirState
 {
+    PlayerSkill_Jump _jumpSkill;
+
     public Player_JumpState(PlayerController entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
     {
     }
@@ -11,16 +13,25 @@ public class Player_JumpState : Player_AirState
         base.Enter();
 
         // Initialize
-        _player.IsJumping = true;
+        _jumpSkill = Player_SkillManager.Instance.Jump;
         _player.Rb.gravityScale = _player.AttributeSO.RiseGravity;
+        _jumpSkill.FinishJump = false;
 
         // Start jump timer
         Player_TimerManager.Instance.AddTimer(
             _player.AttributeSO.JumpInputWindow,
-            () => _stateMachine.ChangeState(_player.StateSO.AirState, true),
+            () => SkillEvents.TriggerJumpEnd(),
             "JumpStateTimer"
         );
 
+        Player_TimerManager.Instance.AddTimer(
+            _jumpSkill.SkillCD,
+            () =>{
+                if (_jumpSkill.CurrentCharges != 0)
+                    _jumpSkill.FinishJump = true;
+            },
+            "PlayerSkillGap"
+        );
         _player.AttributeSO.TargetVelocity.y = _player.AttributeSO.JumpInitSpeed;
     }
 
@@ -59,7 +70,6 @@ public class Player_JumpState : Player_AirState
         base.Exit();
 
         _player.AttributeSO.TargetVelocity.y = 0f;
-        _player.IsJumping = false;
         Player_TimerManager.Instance.CancelTimersWithTag("JumpStateTimer");
     }
 }

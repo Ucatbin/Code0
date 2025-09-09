@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerSkill_GrappingHookDash : PlayerSkill_BaseSkill
@@ -12,26 +13,29 @@ public class PlayerSkill_GrappingHookDash : PlayerSkill_BaseSkill
 
     public PlayerSkill_GrappingHookDash(PlayerController player) : base(player) { }
 
-    public override void BasicSkillCheck()
+    public override void TryUseSkill()
     {
-        if (!_inputSys.DashTrigger || !CanUseSkill)
+        // TODO:Havent complete if yet
+        if (!CanUseSkill ||
+            (MaxCharges != -1 && CurrentCharges == 0) ||
+            !_inputSys.DashTrigger
+        )
             return;
         UseSkill();
     }
     public override void UseSkill()
     {
-        // TODO:Havent complete if yet
-        if (!CanUseSkill)
-            return;
+        CurrentCharges -= MaxCharges != -1 ? 1 : 0;
         CanUseSkill = false;
+
         StartCoroutine(LineDash());
     }
-    public override void CoolDownSkill()
+    public override void CoolDownSkill(float coolDown, string tag)
     {
         Player_TimerManager.Instance.AddTimer(
-            CoolDown,
+            coolDown,
             () => { ResetSkill(); },
-            "Player_AbilityTimer"
+            tag
         );
     }
     public override void ResetSkill()
@@ -48,6 +52,6 @@ public class PlayerSkill_GrappingHookDash : PlayerSkill_BaseSkill
             dashSpeed = Mathf.Lerp(dashSpeed, 1f, Time.fixedDeltaTime * _lineDashDamping);
             yield return null;
         }
-        CoolDownSkill();
+        CoolDownSkill(SkillCD, "PlayerSkill");
     }
 }

@@ -4,7 +4,6 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
 {
     public float AttackDuration = 0.2f;
     public float AttackForce = 2.5f;
-    public float ForceDamping = 0.25f;
     [SerializeField] Animator _anim;
     [SerializeField] Transform _animation;
 
@@ -14,20 +13,24 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
 
     void Update()
     {
-        BasicSkillCheck();
+        TryUseSkill();
     }
-    public override void BasicSkillCheck()
+
+    public override void TryUseSkill()
     {
-        // Check input and CanUseSkill
-        if (!_inputSys.AttackTrigger || !CanUseSkill)
+        if (!CanUseSkill ||
+            (MaxCharges != -1 && CurrentCharges == 0) ||
+            !_inputSys.AttackTrigger ||
+            _player.IsAttached
+        )
             return;
         UseSkill();
     }
     public override void UseSkill()
     {
-        if (_player.IsAttached)
-            return;
+        CurrentCharges -= MaxCharges != -1 ? 1 : 0;
         CanUseSkill = false;
+
         SkillEvents.TriggerAttackStart();
 
         float angleZ = Vector2.SignedAngle(Vector2.right, _player.InputSys.MouseDir);
@@ -35,21 +38,19 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
         _animation.gameObject.SetActive(true);
         _anim.SetBool("Attack", true);
     }
-    public override void CoolDownSkill()
+    public override void CoolDownSkill(float coolDown, string tag)
     {
         Player_TimerManager.Instance.AddTimer(
-            CoolDown,
+            coolDown,
             () => { ResetSkill(); },
-            "Player_AbilityTimer"
+            tag
         );
 
         _animation.gameObject.SetActive(false);
         _anim.SetBool("Attack", false);
     }
-
     public override void ResetSkill()
     {
         CanUseSkill = true;
     }
-
 }

@@ -26,7 +26,7 @@ public class Player_HookedState : Player_BaseState
 
     public override void PhysicsUpdate()
     {
-        _dashSkill.BasicSkillCheck();
+        _dashSkill.TryUseSkill();
 
         _gHookSkill.MoveOnGLine();
     }

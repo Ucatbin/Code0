@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
 {
-    [SerializeField] float _breakCoolDown = 2f;
+    [SerializeField] float BreakCoolDown = 2f;
     [Header("NecessaryComponent")]
     [field: SerializeField] public DistanceJoint2D RopeJoint { get; private set; }
     [field: SerializeField] public LineRenderer RopeLine { get; private set; }
@@ -18,27 +18,26 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
     [SerializeField] float _lineSwingForce = 10f;
     [SerializeField] float _maxSwingSpeed = 10f;
 
-    bool _isBroken;
-
-    public float LineGroundMoveForce = 0.22f;
-
     public PlayerSkill_GrappingHook(PlayerController player) : base(player) { }
 
     void Update()
     {
-        BasicSkillCheck();
+        TryUseSkill();
     }
-    public override void BasicSkillCheck()
+
+    public override void TryUseSkill()
     {
-        // Check input and CanUseSkill
-        if (!_inputSys.GrapperTrigger || !CanUseSkill)
+        if (!CanUseSkill ||
+            (MaxCharges != -1 && CurrentCharges == 0) ||
+            !_inputSys.GrapperTrigger ||
+            _player.IsAttacking
+        )
             return;
         UseSkill();
     }
     public override void UseSkill()
     {
-        if (_player.IsAttacking)
-            return;
+        CurrentCharges -= MaxCharges != -1 ? 1 : 0;
         CanUseSkill = false;
 
         // Get mouse position and calculate fire direction
@@ -60,12 +59,12 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
         else
             ResetSkill();
     }
-    public override void CoolDownSkill()
+    public override void CoolDownSkill(float coolDown, string tag)
     {
         Player_TimerManager.Instance.AddTimer(
-            _isBroken ? _breakCoolDown : CoolDown,
+            coolDown,
             () => { ResetSkill(); },
-            "Player_AbilityTimer"
+            tag
         );
     }
     public override void ResetSkill()
@@ -84,29 +83,24 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
     }
     public void ReleaseGHook()
     {
-        // Let state machine know the player is released
-        SkillEvents.TriggerHookReleas();
-        _player.IsAttached = false;
-        _isBroken = false;
-
-        // Disable distance joint and line renderer
-        RopeJoint.enabled = false;
-        RopeLine.enabled = false;
-        _pool.Pool.Release(HookPoint);
-        CoolDownSkill();
+        HandleDisable();
+        CoolDownSkill(SkillCD, "PlayerSkill");
     }
     public void BreakGHook()
+    {
+        HandleDisable();
+        CoolDownSkill(BreakCoolDown, "PlayerSkill");
+    }
+    void HandleDisable()
     {
         // Let state machine know the player is released
         SkillEvents.TriggerHookReleas();
         _player.IsAttached = false;
-        _isBroken = true;
 
         // Disable distance joint and line renderer
         RopeJoint.enabled = false;
         RopeLine.enabled = false;
         _pool.Pool.Release(HookPoint);
-        CoolDownSkill();
     }
     public void MoveOnGLine()
     {

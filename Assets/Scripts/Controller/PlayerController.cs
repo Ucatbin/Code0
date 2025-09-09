@@ -19,12 +19,15 @@ public class PlayerController : EntityContoller
     public PlayerStateSO StateSO;
 
     [Header("StateMark")]
-    public bool IsJumping;
-    public bool IsAttached;
-    public bool IsAttacking;
+    public int FacingDir = 1;
+    public bool IsJumping = false;
+    public bool IsAttached = false;
+    public bool IsAttacking = false;
 
     void OnEnable()
     {
+        SkillEvents.OnJumpStart += HandleJumpStart;
+        SkillEvents.OnJumpEnd += HandleJumpEnd;
         SkillEvents.OnHookAttach += HandleHookAtteched;
         SkillEvents.OnHookRelease += HandleHookReleased;
         SkillEvents.OnAttackStart += HandleAttackStart;
@@ -32,6 +35,8 @@ public class PlayerController : EntityContoller
     }
     void OnDisable()
     {
+        SkillEvents.OnJumpStart -= HandleJumpStart;
+        SkillEvents.OnJumpEnd -= HandleJumpEnd;
         SkillEvents.OnHookAttach -= HandleHookAtteched;
         SkillEvents.OnHookRelease -= HandleHookReleased;
         SkillEvents.OnAttackStart -= HandleAttackStart;
@@ -61,6 +66,17 @@ public class PlayerController : EntityContoller
     }
 
     #region Handle Skill Logics
+    void HandleJumpStart()
+    {
+        _stateMachine.ChangeState(StateSO.JumpState, false);
+        IsJumping = true;
+    }
+    void HandleJumpEnd()
+    {
+        _stateMachine.ChangeState(StateSO.AirState, true);
+        IsJumping = false;
+    }
+
     void HandleHookAtteched()
     {
         _stateMachine.ChangeState(StateSO.HookedState, true);

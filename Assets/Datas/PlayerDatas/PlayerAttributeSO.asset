@@ -21,10 +21,10 @@ MonoBehaviour:
   MaxAirMoveSpeed: 8
   AirAccel: 40
   AirDamping: 30
-  MaxJumpSpeed: 12.5
+  MaxJumpSpeed: 15
   JumpInitSpeed: 3
-  JumpAccel: 1.1
-  JumpInputWindow: 0.25
+  JumpAccel: 0.95
+  JumpInputWindow: 0.18
   CoyoteWindow: 0.12
   MaxRaiseSpeed: 20
   MaxFallSpeed: 20

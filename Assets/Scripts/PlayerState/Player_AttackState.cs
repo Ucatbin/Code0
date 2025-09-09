@@ -39,7 +39,7 @@ public class Player_AttackState : Player_BaseState
         base.Exit();
 
         _player.AttributeSO.TargetVelocity = Vector2.zero;
-        _attackSkill.CoolDownSkill();
+        _attackSkill.CoolDownSkill(_attackSkill.SkillCD, "PlyaerAttack");
         _player.Rb.gravityScale = _player.AttributeSO.FallGravity;
     }
 }

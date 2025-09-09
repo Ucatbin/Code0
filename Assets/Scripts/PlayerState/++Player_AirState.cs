@@ -17,6 +17,10 @@ public class Player_AirState : Player_BaseState
     {
         base.PhysicsUpdate();
 
+        if (Player_SkillManager.Instance.Jump.FinishJump)
+            if (!_player.InputSys.JumpTrigger)
+                Player_SkillManager.Instance.Jump.CanUseSkill = true;
+
         _maxAirVelocityX =
             _player.InputSys.MoveInput.x *
             _player.AttributeSO.MaxAirMoveSpeed;
