@@ -6,9 +6,9 @@ public class Player_HookedState : Player_BaseState
     // Necessary Component
     PlayerSkill_GrappingHook _gHookSkill;
     PlayerSkill_GrappingHookDash _dashSkill;
-    PlayerChecker _checker;
+    PlayerController_Checker _checker;
 
-    public Player_HookedState(PlayerController entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
+    public Player_HookedState(PlayerController_Main entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
     {
     }
 

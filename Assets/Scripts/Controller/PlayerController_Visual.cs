@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class Player_VisualController : MonoBehaviour
+public class PlayerController_Visual : MonoBehaviour
 {
-    [SerializeField] PlayerController _player;
+    [SerializeField] PlayerController_Main _player;
 
     void Update()
     {

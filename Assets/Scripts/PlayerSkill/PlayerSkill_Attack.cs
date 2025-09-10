@@ -7,7 +7,7 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
     [SerializeField] Animator _anim;
     [SerializeField] Transform _animation;
 
-    public PlayerSkill_Attack(PlayerController player) : base(player)
+    public PlayerSkill_Attack(PlayerController_Main player) : base(player)
     {
     }
 
@@ -19,7 +19,7 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
     public override void TryUseSkill()
     {
         if (!CanUseSkill ||
-            (MaxCharges != -1 && CurrentCharges == 0) ||
+            CurrentCharges == 0 ||
             !_inputSys.AttackTrigger ||
             _player.IsAttached
         )
@@ -28,7 +28,7 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
     }
     public override void UseSkill()
     {
-        CurrentCharges -= MaxCharges != -1 ? 1 : 0;
+        CurrentCharges -= MaxCharges == -1 ? 0 : 1;
         CanUseSkill = false;
 
         SkillEvents.TriggerAttackStart();

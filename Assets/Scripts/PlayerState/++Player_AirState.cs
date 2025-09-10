@@ -4,7 +4,7 @@ public class Player_AirState : Player_BaseState
 {
     protected float _maxAirVelocityX;
 
-    public Player_AirState(PlayerController entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
+    public Player_AirState(PlayerController_Main entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
     {
     }
 

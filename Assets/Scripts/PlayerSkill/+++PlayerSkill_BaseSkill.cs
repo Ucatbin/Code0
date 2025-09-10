@@ -3,7 +3,7 @@ using UnityEngine;
 public abstract class PlayerSkill_BaseSkill :MonoBehaviour
 {
     public bool CanUseSkill;
-    [SerializeField] protected PlayerController _player;
+    [SerializeField] protected PlayerController_Main _player;
     [SerializeField] protected PlayerInput _inputSys;
     public int MaxCharges = -1;
     public int CurrentCharges;
@@ -11,9 +11,9 @@ public abstract class PlayerSkill_BaseSkill :MonoBehaviour
 
     void Awake()
     {
-        CurrentCharges = MaxCharges == -1 ? 0 : MaxCharges;
+        CurrentCharges = MaxCharges;
     }
-    public PlayerSkill_BaseSkill(PlayerController player)
+    public PlayerSkill_BaseSkill(PlayerController_Main player)
     {
         _player = player;
         _inputSys = _player.InputSys;

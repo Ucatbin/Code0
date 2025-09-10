@@ -3,12 +3,12 @@ using System;
 using UnityEngine.UIElements;
 using Unity.Cinemachine;
 
-public class PlayerController : EntityContoller
+public class PlayerController_Main : EntityContoller
 {
     [Header("NecessaryComponent")]
     [field: SerializeField] public Rigidbody2D Rb { get; private set; }
     [field: SerializeField] public Animator Anim { get; private set; }
-    [field: SerializeField] public PlayerChecker Checker { get; private set; }
+    [field: SerializeField] public PlayerController_Checker Checker { get; private set; }
     [field: SerializeField] public PlayerInput InputSys { get; private set; }
     [field: SerializeField] public Camera MainCam { get; private set; }
     [field: SerializeField] public CinemachineCamera Cam { get; private set; }

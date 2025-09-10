@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class Player_MoveState : Player_GroundState
 {
-    public Player_MoveState(PlayerController entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
+    public Player_MoveState(PlayerController_Main entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
     {
     }
 
@@ -43,7 +43,7 @@ public class Player_MoveState : Player_GroundState
     {
         base.LogicUpdate();
 
-        // If InputX == 0f, exit MoveState
+        // If InputX == 0f, enter IdleState
         if (_player.InputSys.MoveInput.x == 0f)
             _stateMachine.ChangeState(_player.StateSO.IdleState, true);
     }

@@ -12,13 +12,13 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
     [SerializeField] HookPointPool _pool;
 
     [Header("GHookAttribute")]
-    [field: SerializeField] public float MaxDetectDist { get; private set; } = 20f; // Maximum distance to detect grapple points
+    [field: SerializeField] public float MaxDetectDist { get; private set; } = 15f; // Maximum distance to detect grapple points
     [field: SerializeField] public LayerMask CanHookLayer { get; private set; }      // Which layer can the hook attach to
     [SerializeField] float _lineMoveSpeed = 4.5f;
     [SerializeField] float _lineSwingForce = 10f;
     [SerializeField] float _maxSwingSpeed = 10f;
 
-    public PlayerSkill_GrappingHook(PlayerController player) : base(player) { }
+    public PlayerSkill_GrappingHook(PlayerController_Main player) : base(player) { }
 
     void Update()
     {
@@ -28,7 +28,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
     public override void TryUseSkill()
     {
         if (!CanUseSkill ||
-            (MaxCharges != -1 && CurrentCharges == 0) ||
+            CurrentCharges == 0 ||
             !_inputSys.GrapperTrigger ||
             _player.IsAttacking
         )
@@ -37,7 +37,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
     }
     public override void UseSkill()
     {
-        CurrentCharges -= MaxCharges != -1 ? 1 : 0;
+        CurrentCharges -= MaxCharges == -1 ? 0 : 1;
         CanUseSkill = false;
 
         // Get mouse position and calculate fire direction

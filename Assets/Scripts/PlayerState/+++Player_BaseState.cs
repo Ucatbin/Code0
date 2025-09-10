@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class Player_BaseState : EntityState
 {
-    protected PlayerController _player;
+    protected PlayerController_Main _player;
 
-    public Player_BaseState(PlayerController entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
+    public Player_BaseState(PlayerController_Main entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
     {
         _player = entity;
     }
