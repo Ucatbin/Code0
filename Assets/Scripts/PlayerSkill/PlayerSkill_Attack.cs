@@ -2,9 +2,13 @@ using UnityEngine;
 
 public class PlayerSkill_Attack : PlayerSkill_BaseSkill
 {
+    [Tooltip("Duration of single attack")]
     public float AttackDuration = 0.2f;
+    [Tooltip("Offset while attacking")]
     public float AttackForce = 2.5f;
+    [Tooltip("The animator of attack effect")]
     [SerializeField] Animator _anim;
+    [Tooltip("The parent of attack effect")]
     [SerializeField] Transform _animation;
 
     public PlayerSkill_Attack(PlayerController_Main player) : base(player)

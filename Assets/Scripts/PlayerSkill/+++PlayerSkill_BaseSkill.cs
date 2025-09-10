@@ -2,10 +2,14 @@ using UnityEngine;
 
 public abstract class PlayerSkill_BaseSkill :MonoBehaviour
 {
+    [Tooltip("Whether skill is useable")]
     public bool CanUseSkill;
+    [Tooltip("Get player component")]
     [SerializeField] protected PlayerController_Main _player;
+    [Tooltip("Get input")]
     [SerializeField] protected PlayerInput _inputSys;
-    public int MaxCharges = -1;
+    [Tooltip("The max charges of this skill, 0 means dont need charges")]
+    public int MaxCharges = 0;
     public int CurrentCharges;
     public float SkillCD;
 
