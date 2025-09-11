@@ -94,7 +94,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
     void HandleDisable()
     {
         // Let state machine know the player is released
-        SkillEvents.TriggerHookReleas();
+        SkillEvents.TriggerHookRelease();
         _player.IsAttached = false;
 
         // Disable distance joint and line renderer

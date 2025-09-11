@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "StateConfig", menuName = "Game/Player/StateMachine")]
+[CreateAssetMenu(fileName = "PlayerStateSO", menuName = "Game/Player/StateMachine")]
 public class PlayerStateSO : ScriptableObject
 {
     [Header("StateMachine")]

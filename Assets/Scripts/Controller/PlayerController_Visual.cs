@@ -6,7 +6,10 @@ public class PlayerController_Visual : MonoBehaviour
 
     void Update()
     {
-        if (_player.InputSys.MoveInput.x == 0f && !_player.InputSys.AttackTrigger)
+        if (_player.InputSys.MoveInput.x == 0f &&
+                !_player.InputSys.AttackTrigger &&
+                !_player.IsAttached
+            )
             return;
 
         if (_player.Rb.linearVelocityX * _player.FacingDir < 0)
