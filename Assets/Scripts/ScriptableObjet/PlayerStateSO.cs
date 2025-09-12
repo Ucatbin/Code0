@@ -40,7 +40,7 @@ public class PlayerStateSO : ScriptableObject
         JumpState = new Player_JumpState(player, stateMachine, JumpPriority, "Jump");
         CoyoteState = new Player_CoyoteState(player, stateMachine, CoyotePriority, "Idle");
         FallState = new Player_FallState(player, stateMachine, FallPriority, "Fall");
-        AirGlideState = new Player_AirGlideState(player, stateMachine, AirGlidePriority, "AirGlide");
+        AirGlideState = new Player_AirGlideState(player, stateMachine, AirGlidePriority, "Fall");
 
         HookedState = new Player_HookedState(player, stateMachine, HookedPriority, "Hooked");
         AttackState = new Player_AttackState(player, stateMachine, AttackPriority, "Attack");

@@ -12,11 +12,13 @@ public class PlayerController_Main : EntityContoller
     [field: SerializeField] public PlayerInput InputSys { get; private set; }
     [field: SerializeField] public Camera MainCam { get; private set; }
     [field: SerializeField] public CinemachineCamera Cam { get; private set; }
-    [field: SerializeField] public Transform Visual { get; private set; }
 
     [Header("SO")]
     public PlayerAttributeSO AttributeSO;
     public PlayerStateSO StateSO;
+
+    [Header("Controllers")]
+    public PlayerController_Visual PlayerVisual;
 
     [Header("StateMark")]
     public int FacingDir = 1;

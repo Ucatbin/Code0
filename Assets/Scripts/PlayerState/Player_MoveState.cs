@@ -1,4 +1,5 @@
 using System;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -21,18 +22,12 @@ public class Player_MoveState : Player_GroundState
             _player.InputSys.MoveInput.x *
             _player.AttributeSO.MaxGroundMoveSpeed;
 
-        if (Mathf.Abs(_player.AttributeSO.TargetVelocity.x) <= _player.AttributeSO.MaxGroundSpeed)
-            _player.AttributeSO.TargetVelocity.x = Mathf.MoveTowards(
-                _player.AttributeSO.TargetVelocity.x,
-                _maxGroundVelocityX,
-                _player.AttributeSO.GroundAccel * Time.fixedDeltaTime
-            );
-        else
-            _player.AttributeSO.TargetVelocity.x = Mathf.MoveTowards(
-                _player.AttributeSO.TargetVelocity.x,
-                _maxGroundVelocityX,
-                _player.AttributeSO.GroundDamping * Time.fixedDeltaTime
-            );
+        float rate = Mathf.Abs(_player.AttributeSO.TargetVelocity.x) <= _player.AttributeSO.MaxGroundSpeed ? _player.AttributeSO.GroundAccel * Time.fixedDeltaTime : _player.AttributeSO.GroundDamping * Time.fixedDeltaTime;
+        _player.AttributeSO.TargetVelocity.x = Mathf.MoveTowards(
+            _player.AttributeSO.TargetVelocity.x,
+            _maxGroundVelocityX,
+            rate
+        );
 
         _player.Rb.linearVelocity = new Vector2(
             _player.AttributeSO.TargetVelocity.x,

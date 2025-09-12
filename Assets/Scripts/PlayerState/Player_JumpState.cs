@@ -39,18 +39,12 @@ public class Player_JumpState : Player_AirState
     {
         base.PhysicsUpdate();
 
-        if (Mathf.Abs(_player.AttributeSO.TargetVelocity.y) <= _player.AttributeSO.MaxRaiseSpeed)
-            _player.AttributeSO.TargetVelocity.y = Mathf.MoveTowards(
-                _player.AttributeSO.TargetVelocity.y,
-                _player.AttributeSO.MaxJumpSpeed,
-                _player.AttributeSO.JumpAccel
-            );
-        else
-            _player.AttributeSO.TargetVelocity.y = Mathf.MoveTowards(
-                _player.AttributeSO.TargetVelocity.y,
-                _player.AttributeSO.MaxRaiseSpeed,
-                _player.AttributeSO.JumpAccel
-            );
+        float maxSpeed = Mathf.Abs(_player.AttributeSO.TargetVelocity.y) <= _player.AttributeSO.MaxRaiseSpeed ? _player.AttributeSO.MaxJumpSpeed : _player.AttributeSO.MaxRaiseSpeed;
+        _player.AttributeSO.TargetVelocity.y = Mathf.MoveTowards(
+            _player.AttributeSO.TargetVelocity.y,
+            maxSpeed,
+            _player.AttributeSO.JumpAccel
+        );
 
         _player.Rb.linearVelocity = new Vector2(
             _player.Rb.linearVelocityX,

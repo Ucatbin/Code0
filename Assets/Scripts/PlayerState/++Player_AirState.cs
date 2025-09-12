@@ -27,18 +27,12 @@ public class Player_AirState : Player_BaseState
 
         if (_player.InputSys.MoveInput.x != 0f)
         {
-            if (Mathf.Abs(_player.AttributeSO.TargetVelocity.x) <= _player.AttributeSO.MaxAirSpeed)
-                _player.AttributeSO.TargetVelocity.x = Mathf.MoveTowards(
-                    _player.AttributeSO.TargetVelocity.x,
-                    _maxAirVelocityX,
-                    _player.AttributeSO.AirAccel * Time.fixedDeltaTime
-                );
-            else
-                _player.AttributeSO.TargetVelocity.x = Mathf.MoveTowards(
-                    _player.AttributeSO.TargetVelocity.x,
-                    _maxAirVelocityX,
-                    _player.AttributeSO.AirDamping * Time.fixedDeltaTime
-                );
+            float rate = Mathf.Abs(_player.AttributeSO.TargetVelocity.x) <= _player.AttributeSO.MaxAirSpeed ? _player.AttributeSO.AirAccel * Time.fixedDeltaTime : _player.AttributeSO.AirDamping * Time.fixedDeltaTime;
+            _player.AttributeSO.TargetVelocity.x = Mathf.MoveTowards(
+                _player.AttributeSO.TargetVelocity.x,
+                _maxAirVelocityX,
+                rate
+            );
         }
         else
             _player.AttributeSO.TargetVelocity.x = Mathf.MoveTowards(

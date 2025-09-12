@@ -36,7 +36,7 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
         CanUseSkill = false;
 
         SkillEvents.TriggerAttackStart();
-
+        _anim.speed = 1 / AttackDuration;
         float angleZ = Vector2.SignedAngle(Vector2.right, _player.InputSys.MouseDir);
         _animation.rotation = Quaternion.Euler(0, 0, angleZ);
         _animation.gameObject.SetActive(true);
