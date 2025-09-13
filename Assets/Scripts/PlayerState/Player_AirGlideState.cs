@@ -12,7 +12,7 @@ public class Player_AirGlideState : Player_AirState
     {
         base.Enter();
 
-        float enterSpeed = _player.AttributeSO.TargetVelocity.x;
+        float enterSpeed = _player.PropertySO.TargetVelocity.x;
         _targetAirDamping = enterSpeed * 2.5f;
         _player.IsJumping = false;
     }
@@ -21,32 +21,32 @@ public class Player_AirGlideState : Player_AirState
     {
         _maxAirVelocityX =
             _player.InputSys.MoveInput.x *
-            _player.AttributeSO.MaxAirMoveSpeed;
+            _player.PropertySO.MaxAirMoveSpeed;
 
         if (_player.InputSys.MoveInput.x != 0f)
         {
-            if (Mathf.Abs(_player.AttributeSO.TargetVelocity.x) <= _player.AttributeSO.MaxAirSpeed)
-                _player.AttributeSO.TargetVelocity.x = Mathf.MoveTowards(
-                    _player.AttributeSO.TargetVelocity.x,
+            if (Mathf.Abs(_player.PropertySO.TargetVelocity.x) <= _player.PropertySO.MaxAirSpeed)
+                _player.PropertySO.TargetVelocity.x = Mathf.MoveTowards(
+                    _player.PropertySO.TargetVelocity.x,
                     _maxAirVelocityX,
-                    _player.AttributeSO.AirAccel * Time.fixedDeltaTime
+                    _player.PropertySO.AirAccel * Time.fixedDeltaTime
                 );
             else
-                _player.AttributeSO.TargetVelocity.x = Mathf.MoveTowards(
-                    _player.AttributeSO.TargetVelocity.x,
+                _player.PropertySO.TargetVelocity.x = Mathf.MoveTowards(
+                    _player.PropertySO.TargetVelocity.x,
                     _maxAirVelocityX,
-                    _player.AttributeSO.AirDamping * Time.fixedDeltaTime
+                    _player.PropertySO.AirDamping * Time.fixedDeltaTime
                 );
         }
         else
-            _player.AttributeSO.TargetVelocity.x = Mathf.MoveTowards(
-                _player.AttributeSO.TargetVelocity.x,
+            _player.PropertySO.TargetVelocity.x = Mathf.MoveTowards(
+                _player.PropertySO.TargetVelocity.x,
                 0,
-                _player.AttributeSO.AirDamping / _targetAirDamping * Time.fixedDeltaTime
+                _player.PropertySO.AirDamping / _targetAirDamping * Time.fixedDeltaTime
             );
 
         _player.Rb.linearVelocity = new Vector2(
-            _player.AttributeSO.TargetVelocity.x,
+            _player.PropertySO.TargetVelocity.x,
             _player.Rb.linearVelocity.y
         );
     }

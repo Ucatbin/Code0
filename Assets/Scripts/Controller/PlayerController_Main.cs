@@ -1,9 +1,7 @@
 using UnityEngine;
-using System;
-using UnityEngine.UIElements;
 using Unity.Cinemachine;
 
-public class PlayerController_Main : EntityContoller
+public class PlayerController_Main : EntityContoller_Main
 {
     [Header("NecessaryComponent")]
     [field: SerializeField] public Rigidbody2D Rb { get; private set; }
@@ -12,10 +10,6 @@ public class PlayerController_Main : EntityContoller
     [field: SerializeField] public PlayerInput InputSys { get; private set; }
     [field: SerializeField] public Camera MainCam { get; private set; }
     [field: SerializeField] public CinemachineCamera Cam { get; private set; }
-
-    [Header("SO")]
-    public PlayerAttributeSO AttributeSO;
-    public PlayerStateSO StateSO;
 
     [Header("Controllers")]
     public PlayerController_Visual PlayerVisual;

@@ -14,17 +14,17 @@ public class Player_JumpState : Player_AirState
 
         // Initialize
         _jumpSkill = Player_SkillManager.Instance.Jump;
-        _player.Rb.gravityScale = _player.AttributeSO.RiseGravity;
+        _player.Rb.gravityScale = _player.PropertySO.RiseGravity;
         _jumpSkill.FinishJump = false;
 
         // Start jump timer
-        Player_TimerManager.Instance.AddTimer(
-            _player.AttributeSO.JumpInputWindow,
+        TimerManager.Instance.AddTimer(
+            _player.PropertySO.JumpInputWindow,
             () => SkillEvents.TriggerJumpEnd(),
             "JumpStateTimer"
         );
 
-        Player_TimerManager.Instance.AddTimer(
+        TimerManager.Instance.AddTimer(
             _jumpSkill.SkillCD,
             () =>{
                 if (_jumpSkill.CurrentCharges != 0)
@@ -32,23 +32,23 @@ public class Player_JumpState : Player_AirState
             },
             "PlayerSkillGap"
         );
-        _player.AttributeSO.TargetVelocity.y = _player.AttributeSO.JumpInitSpeed;
+        _player.PropertySO.TargetVelocity.y = _player.PropertySO.JumpInitSpeed;
     }
 
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
 
-        float maxSpeed = Mathf.Abs(_player.AttributeSO.TargetVelocity.y) <= _player.AttributeSO.MaxRaiseSpeed ? _player.AttributeSO.MaxJumpSpeed : _player.AttributeSO.MaxRaiseSpeed;
-        _player.AttributeSO.TargetVelocity.y = Mathf.MoveTowards(
-            _player.AttributeSO.TargetVelocity.y,
+        float maxSpeed = Mathf.Abs(_player.PropertySO.TargetVelocity.y) <= _player.PropertySO.MaxRaiseSpeed ? _player.PropertySO.MaxJumpSpeed : _player.PropertySO.MaxRaiseSpeed;
+        _player.PropertySO.TargetVelocity.y = Mathf.MoveTowards(
+            _player.PropertySO.TargetVelocity.y,
             maxSpeed,
-            _player.AttributeSO.JumpAccel
+            _player.PropertySO.JumpAccel
         );
 
         _player.Rb.linearVelocity = new Vector2(
             _player.Rb.linearVelocityX,
-            _player.AttributeSO.TargetVelocity.y
+            _player.PropertySO.TargetVelocity.y
         );
     }
     public override void LogicUpdate()
@@ -63,7 +63,7 @@ public class Player_JumpState : Player_AirState
     {
         base.Exit();
 
-        _player.AttributeSO.TargetVelocity.y = 0f;
-        Player_TimerManager.Instance.CancelTimersWithTag("JumpStateTimer");
+        _player.PropertySO.TargetVelocity.y = 0f;
+        TimerManager.Instance.CancelTimersWithTag("JumpStateTimer");
     }
 }

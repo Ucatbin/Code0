@@ -1,15 +1,4 @@
 using UnityEngine;
-public enum BuffUpdateType
-{
-    Add,
-    Replace,
-    None
-}
-public enum BuffRemoveType
-{
-    Reduce,
-    Clear
-}
 
 [CreateAssetMenu(fileName = "new BuffData", menuName = "Game/BuffSys/BuffData")]
 public class BuffDataSO : ScriptableObject
@@ -23,15 +12,16 @@ public class BuffDataSO : ScriptableObject
     public int MaxStacks;
     public string[] Tags;
     [Header("Time Info")]
-    public float Duration;
-    public float Interval;
+    public float Duration;  // The duration of buff
+    public float Interval;  // How many tick will buff last
     [Header("Update")]
-    public BuffUpdateType BuffUpdateT;
-    public BuffRemoveType BuffRemoveT;
+    public BuffType BuffType;
+    public BuffStackType BuffStackType;
+    public BuffRemoveType BuffRemoveType;
     [Header("Call Back")]
-    public BaseBuffModel OnCreat;
-    public BaseBuffModel OnRemove;
-    public BaseBuffModel OnTick;
+    public BaseBuffModel OnCreat;   // When buff is added
+    public BaseBuffModel OnRemove;  // When buff is removed
+    public BaseBuffModel OnInvoke;  // When buff should be handle
 
     public BaseBuffModel OnHit;
     public BaseBuffModel OnBeHurt;

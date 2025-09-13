@@ -32,7 +32,7 @@ public class PlayerSkill_GrappingHookDash : PlayerSkill_BaseSkill
     }
     public override void CoolDownSkill(float coolDown, string tag)
     {
-        Player_TimerManager.Instance.AddTimer(
+        TimerManager.Instance.AddTimer(
             coolDown,
             () => { ResetSkill(); },
             tag

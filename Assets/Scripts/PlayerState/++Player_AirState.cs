@@ -23,26 +23,26 @@ public class Player_AirState : Player_BaseState
 
         _maxAirVelocityX =
             _player.InputSys.MoveInput.x *
-            _player.AttributeSO.MaxAirMoveSpeed;
+            _player.PropertySO.MaxAirMoveSpeed;
 
         if (_player.InputSys.MoveInput.x != 0f)
         {
-            float rate = Mathf.Abs(_player.AttributeSO.TargetVelocity.x) <= _player.AttributeSO.MaxAirSpeed ? _player.AttributeSO.AirAccel * Time.fixedDeltaTime : _player.AttributeSO.AirDamping * Time.fixedDeltaTime;
-            _player.AttributeSO.TargetVelocity.x = Mathf.MoveTowards(
-                _player.AttributeSO.TargetVelocity.x,
+            float rate = Mathf.Abs(_player.PropertySO.TargetVelocity.x) <= _player.PropertySO.MaxAirSpeed ? _player.PropertySO.AirAccel * Time.fixedDeltaTime : _player.PropertySO.AirDamping * Time.fixedDeltaTime;
+            _player.PropertySO.TargetVelocity.x = Mathf.MoveTowards(
+                _player.PropertySO.TargetVelocity.x,
                 _maxAirVelocityX,
                 rate
             );
         }
         else
-            _player.AttributeSO.TargetVelocity.x = Mathf.MoveTowards(
-                _player.AttributeSO.TargetVelocity.x,
+            _player.PropertySO.TargetVelocity.x = Mathf.MoveTowards(
+                _player.PropertySO.TargetVelocity.x,
                 0,
-                _player.AttributeSO.AirDamping * Time.fixedDeltaTime
+                _player.PropertySO.AirDamping * Time.fixedDeltaTime
             );
 
         _player.Rb.linearVelocity = new Vector2(
-            _player.AttributeSO.TargetVelocity.x,
+            _player.PropertySO.TargetVelocity.x,
             _player.Rb.linearVelocity.y
         );
     }

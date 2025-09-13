@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 148d85893147b7e438e6ce10d363b052, type: 3}
-  m_Name: PlayerAttributeSO
+  m_Name: PlayerPropertySO
   m_EditorClassIdentifier: 
   TargetVelocity: {x: 0, y: 0}
   MaxGroundSpeed: 12

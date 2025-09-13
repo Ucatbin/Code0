@@ -20,17 +20,17 @@ public class Player_MoveState : Player_GroundState
 
         _maxGroundVelocityX =
             _player.InputSys.MoveInput.x *
-            _player.AttributeSO.MaxGroundMoveSpeed;
+            _player.PropertySO.MaxGroundMoveSpeed;
 
-        float rate = Mathf.Abs(_player.AttributeSO.TargetVelocity.x) <= _player.AttributeSO.MaxGroundSpeed ? _player.AttributeSO.GroundAccel * Time.fixedDeltaTime : _player.AttributeSO.GroundDamping * Time.fixedDeltaTime;
-        _player.AttributeSO.TargetVelocity.x = Mathf.MoveTowards(
-            _player.AttributeSO.TargetVelocity.x,
+        float rate = Mathf.Abs(_player.PropertySO.TargetVelocity.x) <= _player.PropertySO.MaxGroundSpeed ? _player.PropertySO.GroundAccel * Time.fixedDeltaTime : _player.PropertySO.GroundDamping * Time.fixedDeltaTime;
+        _player.PropertySO.TargetVelocity.x = Mathf.MoveTowards(
+            _player.PropertySO.TargetVelocity.x,
             _maxGroundVelocityX,
             rate
         );
 
         _player.Rb.linearVelocity = new Vector2(
-            _player.AttributeSO.TargetVelocity.x,
+            _player.PropertySO.TargetVelocity.x,
             _player.Rb.linearVelocity.y
         );
     }

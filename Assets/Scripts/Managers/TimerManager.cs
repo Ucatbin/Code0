@@ -2,40 +2,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimerItem : IComparable<TimerItem>
+public class TimerManager : MonoBehaviour
 {
-    public float TriggerTime;   // Absolute trigger time on the timeline
-    public Action Callback;     // Action to callback when the timer triggers
-    public bool IsLoop;         // Is it a looping timer
-    public float Interval;      // Interval for looping timers
-    public object Tag;          // Tag for identification
-    public float RemainingTime; // Remaining time when paused
-    public bool IsPaused;       // Is the timer paused
-
-    public TimerItem(
-        float triggerTime,
-        Action callback,
-        bool isLoop = false,
-        float interval = 0f,
-        object tag = null
-    )
-    {
-        TriggerTime = triggerTime;
-        Callback = callback;
-        IsLoop = isLoop;
-        Interval = interval;
-        Tag = tag;
-    }
-    public int CompareTo(TimerItem other)
-    {
-        if (other == null) return 1;
-        return TriggerTime.CompareTo(other.TriggerTime);
-    }
-}
-
-public class Player_TimerManager : MonoBehaviour
-{
-    public static Player_TimerManager Instance { get; private set; }
+    public static TimerManager Instance { get; private set; }
     SortedSet<TimerItem> _timerHeap = new SortedSet<TimerItem>();
     float _currentTime;
 
@@ -83,6 +52,60 @@ public class Player_TimerManager : MonoBehaviour
         TimerItem newItem = new TimerItem(triggerTime, callback, isLoop, interval, tag);
         _timerHeap.Add(newItem);
     }
+
+    #region Add Timers
+    public void AddTimer(float delay, Action callback, object tag = null)
+    {
+        AddTimerInternal(delay, callback, false, 0f, tag);
+    }
+    public void AddLoopTimer(float interval, Action callback, bool immediateFirstCall = false, object tag = null)
+    {
+        float firstTriggerTime = _currentTime + (immediateFirstCall ? 0f : interval);
+        AddTimerInternal(firstTriggerTime, callback, true, interval, tag);
+    }
+    #endregion
+
+    #region Extend|Set Timers
+    public void ExtendTimersWithTag(object tag, float additionalTime)
+    {
+        List<TimerItem> toUpdate = new List<TimerItem>();
+        
+        foreach (var timer in _timerHeap)
+        {
+            if (Equals(timer.Tag, tag) && !timer.IsPaused)
+            {
+                toUpdate.Add(timer);
+            }
+        }
+        
+        foreach (var timer in toUpdate)
+        {
+            _timerHeap.Remove(timer);
+            timer.TriggerTime += additionalTime;
+            _timerHeap.Add(timer);
+        }
+    }
+
+    public void SetTimersWithTag(object tag, float delay)
+    {
+        List<TimerItem> toUpdate = new List<TimerItem>();
+        
+        foreach (var timer in _timerHeap)
+        {
+            if (Equals(timer.Tag, tag) && !timer.IsPaused)
+            {
+                toUpdate.Add(timer);
+            }
+        }
+        
+        foreach (var timer in toUpdate)
+        {
+            _timerHeap.Remove(timer);
+            timer.TriggerTime = _currentTime + delay;
+            _timerHeap.Add(timer);
+        }
+    }
+    #endregion
 
     #region Pause Timers
     public void PauseTimerWithTag(object tag)
@@ -147,18 +170,6 @@ public class Player_TimerManager : MonoBehaviour
             timer.IsPaused = true;
             _timerHeap.Remove(timer);
         }
-    }
-    #endregion
-
-    #region Add Timers
-    public void AddTimer(float delay, Action callback, object tag = null)
-    {
-        AddTimerInternal(delay, callback, false, 0f, tag);
-    }
-    public void AddLoopTimer(float interval, Action callback, bool immediateFirstCall = false, object tag = null)
-    {
-        float firstTriggerTime = _currentTime + (immediateFirstCall ? 0f : interval);
-        AddTimerInternal(firstTriggerTime, callback, true, interval, tag);
     }
     #endregion
 

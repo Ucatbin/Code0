@@ -13,7 +13,7 @@ public class Player_GroundState : Player_BaseState
     {
         base.Enter();
 
-        _player.Rb.gravityScale = _player.AttributeSO.DefaultGravity;
+        _player.Rb.gravityScale = _player.PropertySO.DefaultGravity;
     }
     
     public override void PhysicsUpdate()

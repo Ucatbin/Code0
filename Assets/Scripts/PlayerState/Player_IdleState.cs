@@ -9,21 +9,21 @@ public class Player_IdleState : Player_GroundState
     public override void Enter()
     {
         base.Enter();
-        _player.AttributeSO.TargetVelocity.y = 0f;
+        _player.PropertySO.TargetVelocity.y = 0f;
     }
 
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
 
-        _player.AttributeSO.TargetVelocity.x = Mathf.MoveTowards(
-            _player.AttributeSO.TargetVelocity.x,
+        _player.PropertySO.TargetVelocity.x = Mathf.MoveTowards(
+            _player.PropertySO.TargetVelocity.x,
             0,
-            _player.AttributeSO.GroundDamping * Time.fixedDeltaTime
+            _player.PropertySO.GroundDamping * Time.fixedDeltaTime
         );
 
         _player.Rb.linearVelocity = new Vector2(
-            _player.AttributeSO.TargetVelocity.x,
+            _player.PropertySO.TargetVelocity.x,
             _player.Rb.linearVelocity.y
         );
     }

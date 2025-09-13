@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "PlayerAttributeSO", menuName = "Game/Player/Attributes")]
-public class PlayerAttributeSO : ScriptableObject
+public class PlayerPropertySO : ScriptableObject
 {
     [Header("MOVEMENT")]
     public Vector2 TargetVelocity;

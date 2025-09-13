@@ -32,6 +32,13 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
     }
     public override void UseSkill()
     {
+        BuffItem buff_speedUp = new BuffItem(
+            BuffManager.Instance.Buff_SpeedUp,
+            null,
+            _player.gameObject, 0
+        );
+        
+        _player.BuffHandler.AddBuff(buff_speedUp);
         CurrentCharges -= MaxCharges == -1 ? 0 : 1;
         CanUseSkill = false;
 
@@ -44,7 +51,7 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
     }
     public override void CoolDownSkill(float coolDown, string tag)
     {
-        Player_TimerManager.Instance.AddTimer(
+        TimerManager.Instance.AddTimer(
             coolDown,
             () => { ResetSkill(); },
             tag
