@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba55464267b749d4daef4658cda25fcb, type: 3}
   m_Name: new BuffModel 1
   m_EditorClassIdentifier: 
-  _speedUp: -3
+  _speedUp: -5
   _speedAccelUp: -20
