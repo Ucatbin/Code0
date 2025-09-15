@@ -19,12 +19,12 @@ public class BuffDataSO : ScriptableObject
     public BuffStackType BuffStackType;
     public BuffRemoveType BuffRemoveType;
     [Header("Call Back")]
-    public BaseBuffModel OnCreat;   // When buff is added
-    public BaseBuffModel OnRemove;  // When buff is removed
-    public BaseBuffModel OnInvoke;  // When buff should be handle
+    public BaseBuffModifier OnCreat;   // When buff is added
+    public BaseBuffModifier OnRemove;  // When buff is removed
+    public BaseBuffModifier OnInvoke;  // When buff should be handle
 
-    public BaseBuffModel OnHit;
-    public BaseBuffModel OnBeHurt;
-    public BaseBuffModel OnKill;
-    public BaseBuffModel OnBekill;
+    public BaseBuffModifier OnHit;
+    public BaseBuffModifier OnBeHurt;
+    public BaseBuffModifier OnKill;
+    public BaseBuffModifier OnBekill;
 }

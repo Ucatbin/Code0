@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "new BuffModel", menuName = "Game/BuffSys/BuffModel")]
-public class PropertyChangeMD : BaseBuffModel
+[CreateAssetMenu(fileName = "new BuffModifier", menuName = "Game/BuffSys/BuffModifier")]
+public class PropertyChangeMD : BaseBuffModifier
 {
     [SerializeField] float _speedUp;
     [SerializeField] float _speedAccelUp;

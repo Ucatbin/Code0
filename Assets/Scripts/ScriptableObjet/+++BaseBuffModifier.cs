@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class BaseBuffModel : ScriptableObject
+public abstract class BaseBuffModifier : ScriptableObject
 {
     public abstract void Apply(BuffItem buffInfo);
 }

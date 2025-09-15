@@ -35,10 +35,11 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
         BuffItem buff_speedUp = new BuffItem(
             BuffManager.Instance.Buff_SpeedUp,
             null,
-            _player.gameObject, 0
+            _player.gameObject,
+            1
         );
         
-        _player.BuffHandler.AddBuff(buff_speedUp);
+        _player.BuffHandler.AddBuff(buff_speedUp, null, _player.gameObject);
         CurrentCharges -= MaxCharges == -1 ? 0 : 1;
         CanUseSkill = false;
 

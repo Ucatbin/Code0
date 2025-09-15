@@ -5,7 +5,7 @@ using UnityEngine;
 public class BuffHandler : MonoBehaviour
 {
     public SortedSet<BuffItem> BuffHeap = new SortedSet<BuffItem>();
-    public void AddBuff(BuffItem thisBuff)
+    public void AddBuff(BuffItem thisBuff, GameObject caster, GameObject target)
     {
         BuffItem existingBuff = FindBuff(thisBuff.BuffData.Id);
         // If entity already have this buff and it's not independent
@@ -40,6 +40,13 @@ public class BuffHandler : MonoBehaviour
         }
         else
         {
+            // Create runtime item
+            BuffItem newBuff = new BuffItem(
+                BuffManager.Instance.Buff_SpeedUp,
+                caster,
+                target,
+                1
+            );
             // Duration
             TimerManager.Instance.AddTimer(
                 thisBuff.BuffData.Duration,
