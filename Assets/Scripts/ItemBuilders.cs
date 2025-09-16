@@ -4,7 +4,7 @@ using UnityEngine;
 #region Player
 public class PlayerItem
 {
-    
+    public PlayerPropertySO PlayerProperty;
 }
 #endregion
 
