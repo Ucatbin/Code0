@@ -1,6 +1,13 @@
 using System;
 using UnityEngine;
 
+#region Player
+public class PlayerItem
+{
+    
+}
+#endregion
+
 #region BuffBuilder
 [Serializable]
 public class BuffItem : IComparable<BuffItem>

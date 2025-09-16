@@ -32,14 +32,14 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
     }
     public override void UseSkill()
     {
-        BuffItem buff_speedUp = new BuffItem(
+        BuffItem buff_speedUp = BuffFactory.CreateBuffItem(
             BuffManager.Instance.Buff_SpeedUp,
-            null,
+            _player.gameObject,
             _player.gameObject,
             1
         );
         
-        _player.BuffHandler.AddBuff(buff_speedUp, null, _player.gameObject);
+        _player.BuffHandler.AddBuff(buff_speedUp);
         CurrentCharges -= MaxCharges == -1 ? 0 : 1;
         CanUseSkill = false;
 

@@ -12,6 +12,7 @@ public class Player_AirGlideState : Player_AirState
     {
         base.Enter();
 
+        _player.PropertySO.TargetVelocity = Vector2.zero;
         float enterSpeed = _player.PropertySO.TargetVelocity.x;
         _targetAirDamping = enterSpeed * 2.5f;
         _player.IsJumping = false;

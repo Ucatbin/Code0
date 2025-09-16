@@ -22,12 +22,12 @@ public class Player_HookedState : Player_BaseState
         _checker = _player.Checker;
 
         _player.Rb.gravityScale = _player.PropertySO.FallGravity;
+        _player.PropertySO.TargetVelocity = Vector2.zero;
     }
 
     public override void PhysicsUpdate()
     {
         _dashSkill.TryUseSkill();
-
         _gHookSkill.MoveOnGLine();
     }
     public override void LogicUpdate()
@@ -56,21 +56,16 @@ public class Player_HookedState : Player_BaseState
             _gHookSkill.BreakGHook();
             return;
         }
-        if (_gHookSkill.RopeJoint.distance > _gHookSkill.MaxDetectDist)
-        {
-            _gHookSkill.BreakGHook();
-            return;
-        }
 
-        RaycastHit2D[] hits = new RaycastHit2D[2];
-        int hitCount = Physics2D.RaycastNonAlloc(
-            _player.transform.position,
-            (_gHookSkill.HookPoint.transform.position - _player.transform.position).normalized,
-            hits,
-            _gHookSkill.RopeJoint.distance,
-            _gHookSkill.CanHookLayer
-        );
-        if (hitCount > 1)
-            _gHookSkill.BreakGHook();
+        // RaycastHit2D[] hits = new RaycastHit2D[2];
+        // int hitCount = Physics2D.RaycastNonAlloc(
+        //     _player.transform.position,
+        //     (_gHookSkill.HookPoint.transform.position - _player.transform.position).normalized,
+        //     hits,
+        //     _gHookSkill.RopeJoint.distance,
+        //     _gHookSkill.CanHookLayer
+        // );
+        // if (hitCount > 1)
+        //     _gHookSkill.BreakGHook();
     }
 }
