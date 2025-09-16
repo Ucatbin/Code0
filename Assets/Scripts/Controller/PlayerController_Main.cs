@@ -4,6 +4,7 @@ using Unity.Cinemachine;
 public class PlayerController_Main : EntityContoller_Main
 {
     [Header("NecessaryComponent")]
+    [field: SerializeField] public PlayerItem PlayerItem { get; private set; }
     [field: SerializeField] public Rigidbody2D Rb { get; private set; }
     [field: SerializeField] public Animator Anim { get; private set; }
     [field: SerializeField] public PlayerController_Checker Checker { get; private set; }
@@ -43,9 +44,11 @@ public class PlayerController_Main : EntityContoller_Main
     {
         base.Awake();
 
-        StateSO.InstanceState(this, _stateMachine);
+        PlayerItem = new PlayerItem(_propertySO, _stateSO);
 
-        _stateMachine.InitState(StateSO.IdleState);
+        _stateSO.InstanceState(this, _stateMachine);
+
+        _stateMachine.InitState(_stateSO.IdleState);
     }
     protected override void Start()
     {
@@ -64,36 +67,36 @@ public class PlayerController_Main : EntityContoller_Main
     #region Handle Skill Logics
     void HandleJumpStart()
     {
-        _stateMachine.ChangeState(StateSO.JumpState, false);
+        _stateMachine.ChangeState(_stateSO.JumpState, false);
         IsJumping = true;
     }
     void HandleJumpEnd()
     {
-        _stateMachine.ChangeState(StateSO.AirState, true);
+        _stateMachine.ChangeState(_stateSO.AirState, true);
         IsJumping = false;
     }
 
     void HandleHookAtteched()
     {
-        _stateMachine.ChangeState(StateSO.HookedState, true);
+        _stateMachine.ChangeState(_stateSO.HookedState, true);
         IsAttached = true;
         Checker.GLineChecker.enabled = true;
     }
     void HandleHookReleased()
     {
-        _stateMachine.ChangeState(StateSO.AirGlideState, true);
+        _stateMachine.ChangeState(_stateSO.AirGlideState, true);
         IsAttached = false;
         Checker.GLineChecker.enabled = false;
     }
 
     void HandleAttackStart()
     {
-        _stateMachine.ChangeState(StateSO.AttackState, false);
+        _stateMachine.ChangeState(_stateSO.AttackState, false);
         IsAttacking = true;
     }
     void HandleAttackEnd()
     {
-        _stateMachine.ChangeState(StateSO.FallState, true);
+        _stateMachine.ChangeState(_stateSO.FallState, true);
         IsAttacking = false;
     }
     #endregion

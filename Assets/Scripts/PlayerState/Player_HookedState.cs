@@ -21,8 +21,8 @@ public class Player_HookedState : Player_BaseState
         _dashSkill = Player_SkillManager.Instance.GrappingHookDash;
         _checker = _player.Checker;
 
-        _player.Rb.gravityScale = _player.PropertySO.FallGravity;
-        _player.PropertySO.TargetVelocity = Vector2.zero;
+        _player.Rb.gravityScale = _player.PlayerItem.Property.FallGravity;
+        _player.PlayerItem.TargetSpeed = Vector2.zero;
     }
 
     public override void PhysicsUpdate()
@@ -41,7 +41,7 @@ public class Player_HookedState : Player_BaseState
     {
         base.Exit();
 
-        _player.PropertySO.TargetVelocity = _player.Rb.linearVelocity;
+        _player.PlayerItem.TargetSpeed = _player.Rb.linearVelocity;
     }
 
     void CheckGLineBreak()

@@ -1,10 +1,45 @@
 using System;
 using UnityEngine;
 
-#region Player
-public class PlayerItem
+#region EntityBuilder
+public class PlayerRuntimeProperty
 {
-    public PlayerPropertySO PlayerProperty;
+    // Base property
+    public float BaseMaxSpeedGround { get; set; }
+    public float BaseMaxSpeedAir { get; set; }
+    public float BaseAttackDamage { get; set; }
+    
+    // Buff modifier
+    public float MaxSpeedGroundMultiplier { get; set; } = 1f;
+    public float MaxSpeedAirMultiplier { get; set; } = 1f;
+    public float AttackDamageMultiplier { get; set; } = 1f;
+    
+    public float MaxSpeedGroundBonus { get; set; } = 0f;
+    public float MaxSpeedAirBonus { get; set; } = 0f;
+    public float FlatAttackDamageBonus { get; set; } = 0f;
+    
+    // Final property
+    public float FMaxMoveSpeedGround => (BaseMaxSpeedGround + MaxSpeedGroundBonus) * MaxSpeedGroundMultiplier;
+    public float FMaxSpeedAir => (BaseMaxSpeedAir + MaxSpeedAirBonus) * MaxSpeedAirMultiplier;
+    public float FinalAttackDamage => (BaseAttackDamage + FlatAttackDamageBonus) * AttackDamageMultiplier;
+}
+public class EntityItem
+{
+    public Vector2 TargetSpeed;
+}
+public class PlayerItem : EntityItem
+{
+    public PlayerPropertySO Property;
+    public PlayerStateSO State;
+    public PlayerRuntimeProperty RuntimeProperty;
+    public float MaxAirVelocityX;
+    public float MaxGroundVelocityX;
+
+    public PlayerItem(PlayerPropertySO property, PlayerStateSO state)
+    {
+        Property = property;
+        State = state;
+    }
 }
 #endregion
 

@@ -20,17 +20,20 @@ public class Player_MoveState : Player_GroundState
 
         _maxGroundVelocityX =
             _player.InputSys.MoveInput.x *
-            _player.PropertySO.MaxGroundMoveSpeed;
+            _player.PlayerItem.Property.MaxGroundMoveSpeed;
 
-        float rate = Mathf.Abs(_player.PropertySO.TargetVelocity.x) <= _player.PropertySO.MaxGroundSpeed ? _player.PropertySO.GroundAccel * Time.fixedDeltaTime : _player.PropertySO.GroundDamping * Time.fixedDeltaTime;
-        _player.PropertySO.TargetVelocity.x = Mathf.MoveTowards(
-            _player.PropertySO.TargetVelocity.x,
+        float rate = Mathf.Abs(_player.PlayerItem.TargetSpeed.x) <= _player.PlayerItem.Property.MaxGroundSpeed
+            ? _player.PlayerItem.Property.GroundAccel * Time.fixedDeltaTime
+            : _player.PlayerItem.Property.GroundDamping * Time.fixedDeltaTime;
+
+        _player.PlayerItem.TargetSpeed.x = Mathf.MoveTowards(
+            _player.PlayerItem.TargetSpeed.x,
             _maxGroundVelocityX,
             rate
         );
 
         _player.Rb.linearVelocity = new Vector2(
-            _player.PropertySO.TargetVelocity.x,
+            _player.PlayerItem.TargetSpeed.x,
             _player.Rb.linearVelocity.y
         );
     }
@@ -40,7 +43,7 @@ public class Player_MoveState : Player_GroundState
 
         // If InputX == 0f, enter IdleState
         if (_player.InputSys.MoveInput.x == 0f)
-            _stateMachine.ChangeState(_player.StateSO.IdleState, true);
+            _stateMachine.ChangeState(_player.PlayerItem.State.IdleState, true);
     }
 
     public override void Exit()

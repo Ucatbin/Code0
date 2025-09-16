@@ -14,12 +14,12 @@ public class Player_JumpState : Player_AirState
 
         // Initialize
         _jumpSkill = Player_SkillManager.Instance.Jump;
-        _player.Rb.gravityScale = _player.PropertySO.RiseGravity;
+        _player.Rb.gravityScale = _player.PlayerItem.Property.RiseGravity;
         _jumpSkill.FinishJump = false;
 
         // Start jump timer
         TimerManager.Instance.AddTimer(
-            _player.PropertySO.JumpInputWindow,
+            _player.PlayerItem.Property.JumpInputWindow,
             () => SkillEvents.TriggerJumpEnd(),
             "JumpStateTimer"
         );
@@ -32,23 +32,23 @@ public class Player_JumpState : Player_AirState
             },
             "PlayerSkillGap"
         );
-        _player.PropertySO.TargetVelocity.y = _player.PropertySO.JumpInitSpeed;
+        _player.PlayerItem.TargetSpeed.y = _player.PlayerItem.Property.JumpInitSpeed;
     }
 
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
 
-        float maxSpeed = Mathf.Abs(_player.PropertySO.TargetVelocity.y) <= _player.PropertySO.MaxRaiseSpeed ? _player.PropertySO.MaxJumpSpeed : _player.PropertySO.MaxRaiseSpeed;
-        _player.PropertySO.TargetVelocity.y = Mathf.MoveTowards(
-            _player.PropertySO.TargetVelocity.y,
+        float maxSpeed = Mathf.Abs(_player.PlayerItem.TargetSpeed.y) <= _player.PlayerItem.Property.MaxRaiseSpeed ? _player.PlayerItem.Property.MaxJumpSpeed : _player.PlayerItem.Property.MaxRaiseSpeed;
+        _player.PlayerItem.TargetSpeed.y = Mathf.MoveTowards(
+            _player.PlayerItem.TargetSpeed.y,
             maxSpeed,
-            _player.PropertySO.JumpAccel
+            _player.PlayerItem.Property.JumpAccel
         );
 
         _player.Rb.linearVelocity = new Vector2(
             _player.Rb.linearVelocityX,
-            _player.PropertySO.TargetVelocity.y
+            _player.PlayerItem.TargetSpeed.y
         );
     }
     public override void LogicUpdate()
@@ -56,14 +56,14 @@ public class Player_JumpState : Player_AirState
         base.LogicUpdate();
         // Cant add force after jumpWindow
         if (!_player.InputSys.JumpTrigger)
-            _stateMachine.ChangeState(_player.StateSO.AirState, true);
+            _stateMachine.ChangeState(_player.PlayerItem.State.AirState, true);
     }
 
     public override void Exit()
     {
         base.Exit();
 
-        _player.PropertySO.TargetVelocity.y = 0f;
+        _player.PlayerItem.TargetSpeed.y = 0f;
         TimerManager.Instance.CancelTimersWithTag("JumpStateTimer");
     }
 }

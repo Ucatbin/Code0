@@ -8,9 +8,9 @@ public class PropertyChangeMD : BaseBuffModifier
 
     public override void Apply(BuffItem buffInfo)
     {
-        var targetProperty = buffInfo.Target.GetComponent<EntityContoller_Main>().PropertySO;
+        // var targetProperty = buffInfo.Target.GetComponent<EntityContoller_Main>()._propertySO;
 
-        targetProperty.MaxGroundMoveSpeed += _speedUp;
-        targetProperty.GroundAccel += _speedAccelUp;
+        // targetProperty.MaxGroundMoveSpeed += _speedUp;
+        // targetProperty.GroundAccel += _speedAccelUp;
     }
 }

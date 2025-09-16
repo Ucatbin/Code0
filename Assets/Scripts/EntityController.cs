@@ -4,8 +4,8 @@ using System;
 public class EntityContoller_Main : MonoBehaviour
 {
     [Header("SO")]
-    public PlayerPropertySO PropertySO;
-    public PlayerStateSO StateSO;
+    protected PlayerPropertySO _propertySO;
+    protected PlayerStateSO _stateSO;
     [Header("Handler")]
     public BuffHandler BuffHandler;
     
