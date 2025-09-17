@@ -12,13 +12,14 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
     [SerializeField] HookPointPool _pool;
 
     [Header("GHookAttribute")]
-    [field: SerializeField] public float MaxDetectDist { get; private set; } = 20f; // Maximum distance to detect grapple points
+    [field: SerializeField] public float MaxDetectDist { get; private set; } = 15f; // Maximum distance to detect grapple points
+    [field: SerializeField] public float MaxLineDist { get; private set; }
     [field: SerializeField] public LayerMask CanHookLayer { get; private set; }      // Which layer can the hook attach to
     [SerializeField] float _lineMoveSpeed = 4.5f;
     [SerializeField] float _lineSwingForce = 10f;
     [SerializeField] float _maxSwingSpeed = 10f;
 
-    public PlayerSkill_GrappingHook(PlayerController player) : base(player) { }
+    public PlayerSkill_GrappingHook(PlayerController_Main player) : base(player) { }
 
     void Update()
     {
@@ -28,7 +29,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
     public override void TryUseSkill()
     {
         if (!CanUseSkill ||
-            (MaxCharges != -1 && CurrentCharges == 0) ||
+            CurrentCharges == 0 ||
             !_inputSys.GrapperTrigger ||
             _player.IsAttacking
         )
@@ -37,7 +38,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
     }
     public override void UseSkill()
     {
-        CurrentCharges -= MaxCharges != -1 ? 1 : 0;
+        CurrentCharges -= MaxCharges == -1 ? 0 : 1;
         CanUseSkill = false;
 
         // Get mouse position and calculate fire direction
@@ -61,7 +62,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
     }
     public override void CoolDownSkill(float coolDown, string tag)
     {
-        Player_TimerManager.Instance.AddTimer(
+        TimerManager.Instance.AddTimer(
             coolDown,
             () => { ResetSkill(); },
             tag
@@ -77,8 +78,8 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
         _player.Rb.gravityScale = 0f;
         SetLineRenderer();
         SetJoint();
-        if (_player.Checker.IsGrounded)
-            RopeJoint.distance = heightDiff - 0.5f;
+        if (Vector2.Distance(_player.transform.position,HookPoint.transform.position) > MaxLineDist)
+            RopeJoint.distance = MaxLineDist - 0.5f;
         SkillEvents.TriggerHookAttach();
     }
     public void ReleaseGHook()
@@ -94,7 +95,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
     void HandleDisable()
     {
         // Let state machine know the player is released
-        SkillEvents.TriggerHookReleas();
+        SkillEvents.TriggerHookRelease();
         _player.IsAttached = false;
 
         // Disable distance joint and line renderer

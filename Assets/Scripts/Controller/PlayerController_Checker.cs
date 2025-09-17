@@ -5,7 +5,7 @@ public static class CheckerEvent
 {
 }
 
-public class PlayerChecker : MonoBehaviour
+public class PlayerController_Checker : MonoBehaviour
 {
     [Header("Ground Check")]
     public bool IsGrounded;

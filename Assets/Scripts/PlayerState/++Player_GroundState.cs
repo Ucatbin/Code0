@@ -1,10 +1,9 @@
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Player_GroundState : Player_BaseState
 {
-    protected float _maxGroundVelocityX;
-
-    public Player_GroundState(PlayerController entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
+    public Player_GroundState(PlayerController_Main entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
     {
     }
 
@@ -12,7 +11,7 @@ public class Player_GroundState : Player_BaseState
     {
         base.Enter();
 
-        _player.Rb.gravityScale = _player.AttributeSO.DefaultGravity;
+        _player.Rb.gravityScale = _player.PropertySO.DefaultGravity;
     }
     
     public override void PhysicsUpdate()

@@ -6,9 +6,9 @@ public class Player_HookedState : Player_BaseState
     // Necessary Component
     PlayerSkill_GrappingHook _gHookSkill;
     PlayerSkill_GrappingHookDash _dashSkill;
-    PlayerChecker _checker;
+    PlayerController_Checker _checker;
 
-    public Player_HookedState(PlayerController entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
+    public Player_HookedState(PlayerController_Main entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
     {
     }
 
@@ -21,13 +21,13 @@ public class Player_HookedState : Player_BaseState
         _dashSkill = Player_SkillManager.Instance.GrappingHookDash;
         _checker = _player.Checker;
 
-        _player.Rb.gravityScale = _player.AttributeSO.FallGravity;
+        _player.Rb.gravityScale = _player.PropertySO.FallGravity;
+        _player.RTProperty.TargetSpeed = Vector2.zero;
     }
 
     public override void PhysicsUpdate()
     {
         _dashSkill.TryUseSkill();
-
         _gHookSkill.MoveOnGLine();
     }
     public override void LogicUpdate()
@@ -41,7 +41,7 @@ public class Player_HookedState : Player_BaseState
     {
         base.Exit();
 
-        _player.AttributeSO.TargetVelocity = _player.Rb.linearVelocity;
+        _player.RTProperty.TargetSpeed = _player.Rb.linearVelocity;
     }
 
     void CheckGLineBreak()
@@ -56,21 +56,16 @@ public class Player_HookedState : Player_BaseState
             _gHookSkill.BreakGHook();
             return;
         }
-        if (_gHookSkill.RopeJoint.distance > _gHookSkill.MaxDetectDist)
-        {
-            _gHookSkill.BreakGHook();
-            return;
-        }
 
-        RaycastHit2D[] hits = new RaycastHit2D[2];
-        int hitCount = Physics2D.RaycastNonAlloc(
-            _player.transform.position,
-            (_gHookSkill.HookPoint.transform.position - _player.transform.position).normalized,
-            hits,
-            _gHookSkill.RopeJoint.distance,
-            _gHookSkill.CanHookLayer
-        );
-        if (hitCount > 1)
-            _gHookSkill.BreakGHook();
+        // RaycastHit2D[] hits = new RaycastHit2D[2];
+        // int hitCount = Physics2D.RaycastNonAlloc(
+        //     _player.transform.position,
+        //     (_gHookSkill.HookPoint.transform.position - _player.transform.position).normalized,
+        //     hits,
+        //     _gHookSkill.RopeJoint.distance,
+        //     _gHookSkill.CanHookLayer
+        // );
+        // if (hitCount > 1)
+        //     _gHookSkill.BreakGHook();
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine.Rendering;
 
 public class PlayerInput : MonoBehaviour
 {
-    [SerializeField] PlayerController _player;
+    [SerializeField] PlayerController_Main _player;
     // Public Input
     public Vector2 MouseDir { get; private set; }
     public Vector2 MoveInput { get; private set; }

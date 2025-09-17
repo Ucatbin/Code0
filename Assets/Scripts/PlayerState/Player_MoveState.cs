@@ -1,10 +1,11 @@
 using System;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Player_MoveState : Player_GroundState
 {
-    public Player_MoveState(PlayerController entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
+    public Player_MoveState(PlayerController_Main entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
     {
     }
 
@@ -17,25 +18,18 @@ public class Player_MoveState : Player_GroundState
     {
         base.PhysicsUpdate();
 
-        _maxGroundVelocityX =
-            _player.InputSys.MoveInput.x *
-            _player.AttributeSO.MaxGroundMoveSpeed;
+        float rate = Mathf.Abs(_player.RTProperty.TargetSpeed.x) <= _player.PropertySO.MaxGroundSpeed
+            ? _player.PropertySO.GroundAccel * Time.fixedDeltaTime
+            : _player.PropertySO.GroundDamping * Time.fixedDeltaTime;
 
-        if (Mathf.Abs(_player.AttributeSO.TargetVelocity.x) <= _player.AttributeSO.MaxGroundSpeed)
-            _player.AttributeSO.TargetVelocity.x = Mathf.MoveTowards(
-                _player.AttributeSO.TargetVelocity.x,
-                _maxGroundVelocityX,
-                _player.AttributeSO.GroundAccel * Time.fixedDeltaTime
-            );
-        else
-            _player.AttributeSO.TargetVelocity.x = Mathf.MoveTowards(
-                _player.AttributeSO.TargetVelocity.x,
-                _maxGroundVelocityX,
-                _player.AttributeSO.GroundDamping * Time.fixedDeltaTime
-            );
+        _player.RTProperty.TargetSpeed.x = Mathf.MoveTowards(
+            _player.RTProperty.TargetSpeed.x,
+            _player.RTProperty.FinalGroundSpeed * _player.InputSys.MoveInput.x,
+            rate
+        );
 
         _player.Rb.linearVelocity = new Vector2(
-            _player.AttributeSO.TargetVelocity.x,
+            _player.RTProperty.TargetSpeed.x,
             _player.Rb.linearVelocity.y
         );
     }
@@ -43,7 +37,7 @@ public class Player_MoveState : Player_GroundState
     {
         base.LogicUpdate();
 
-        // If InputX == 0f, exit MoveState
+        // If InputX == 0f, enter IdleState
         if (_player.InputSys.MoveInput.x == 0f)
             _stateMachine.ChangeState(_player.StateSO.IdleState, true);
     }

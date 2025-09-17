@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "StateConfig", menuName = "Game/Player/StateMachine")]
+[CreateAssetMenu(fileName = "PlayerStateSO", menuName = "Game/Player/StateMachine")]
 public class PlayerStateSO : ScriptableObject
 {
     [Header("StateMachine")]
@@ -32,7 +32,7 @@ public class PlayerStateSO : ScriptableObject
     [Min(0)] public int DashPriority = 3;
     [Min(0)] public int UltimatePriority = 5;
 
-    public void InstanceState(PlayerController player, StateMachine stateMachine)
+    public void InstanceState(PlayerController_Main player, StateMachine stateMachine)
     {
         IdleState = new Player_IdleState(player, stateMachine, IdlePriority, "Idle");
         MoveState = new Player_MoveState(player, stateMachine, MovePriority, "Move");
@@ -40,7 +40,7 @@ public class PlayerStateSO : ScriptableObject
         JumpState = new Player_JumpState(player, stateMachine, JumpPriority, "Jump");
         CoyoteState = new Player_CoyoteState(player, stateMachine, CoyotePriority, "Idle");
         FallState = new Player_FallState(player, stateMachine, FallPriority, "Fall");
-        AirGlideState = new Player_AirGlideState(player, stateMachine, AirGlidePriority, "AirGlide");
+        AirGlideState = new Player_AirGlideState(player, stateMachine, AirGlidePriority, "Fall");
 
         HookedState = new Player_HookedState(player, stateMachine, HookedPriority, "Hooked");
         AttackState = new Player_AttackState(player, stateMachine, AttackPriority, "Attack");

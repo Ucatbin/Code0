@@ -2,28 +2,28 @@ using UnityEngine;
 
 public class Player_IdleState : Player_GroundState
 {
-    public Player_IdleState(PlayerController entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
+    public Player_IdleState(PlayerController_Main entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
     {
     }
 
     public override void Enter()
     {
         base.Enter();
-        _player.AttributeSO.TargetVelocity.y = 0f;
+        _player.RTProperty.TargetSpeed.y = 0f;
     }
 
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
 
-        _player.AttributeSO.TargetVelocity.x = Mathf.MoveTowards(
-            _player.AttributeSO.TargetVelocity.x,
+        _player.RTProperty.TargetSpeed.x = Mathf.MoveTowards(
+            _player.RTProperty.TargetSpeed.x,
             0,
-            _player.AttributeSO.GroundDamping * Time.fixedDeltaTime
+            _player.PropertySO.GroundDamping * Time.fixedDeltaTime
         );
 
         _player.Rb.linearVelocity = new Vector2(
-            _player.AttributeSO.TargetVelocity.x,
+            _player.RTProperty.TargetSpeed.x,
             _player.Rb.linearVelocity.y
         );
     }

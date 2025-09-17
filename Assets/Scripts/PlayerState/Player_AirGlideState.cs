@@ -4,7 +4,7 @@ public class Player_AirGlideState : Player_AirState
 {
     float _targetAirDamping;
     
-    public Player_AirGlideState(PlayerController entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
+    public Player_AirGlideState(PlayerController_Main entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
     {
     }
 
@@ -12,41 +12,37 @@ public class Player_AirGlideState : Player_AirState
     {
         base.Enter();
 
-        float enterSpeed = _player.AttributeSO.TargetVelocity.x;
+        float enterSpeed = _player.RTProperty.TargetSpeed.x;
         _targetAirDamping = enterSpeed * 2.5f;
         _player.IsJumping = false;
     }
     
     public override void PhysicsUpdate()
     {
-        _maxAirVelocityX =
-            _player.InputSys.MoveInput.x *
-            _player.AttributeSO.MaxAirMoveSpeed;
-
         if (_player.InputSys.MoveInput.x != 0f)
         {
-            if (Mathf.Abs(_player.AttributeSO.TargetVelocity.x) <= _player.AttributeSO.MaxAirSpeed)
-                _player.AttributeSO.TargetVelocity.x = Mathf.MoveTowards(
-                    _player.AttributeSO.TargetVelocity.x,
-                    _maxAirVelocityX,
-                    _player.AttributeSO.AirAccel * Time.fixedDeltaTime
+            if (Mathf.Abs(_player.RTProperty.TargetSpeed.x) <= _player.PropertySO.MaxAirSpeed)
+                _player.RTProperty.TargetSpeed.x = Mathf.MoveTowards(
+                    _player.RTProperty.TargetSpeed.x,
+                    _player.RTProperty.FinalAirSpeed * _player.InputSys.MoveInput.x,
+                    _player.PropertySO.AirAccel * Time.fixedDeltaTime
                 );
             else
-                _player.AttributeSO.TargetVelocity.x = Mathf.MoveTowards(
-                    _player.AttributeSO.TargetVelocity.x,
-                    _maxAirVelocityX,
-                    _player.AttributeSO.AirDamping * Time.fixedDeltaTime
+                _player.RTProperty.TargetSpeed.x = Mathf.MoveTowards(
+                    _player.RTProperty.TargetSpeed.x,
+                    _player.RTProperty.FinalAirSpeed * _player.InputSys.MoveInput.x,
+                    _player.PropertySO.AirDamping * Time.fixedDeltaTime
                 );
         }
         else
-            _player.AttributeSO.TargetVelocity.x = Mathf.MoveTowards(
-                _player.AttributeSO.TargetVelocity.x,
+            _player.RTProperty.TargetSpeed.x = Mathf.MoveTowards(
+                _player.RTProperty.TargetSpeed.x,
                 0,
-                _player.AttributeSO.AirDamping / _targetAirDamping * Time.fixedDeltaTime
+                _player.PropertySO.AirDamping / _targetAirDamping * Time.fixedDeltaTime
             );
 
         _player.Rb.linearVelocity = new Vector2(
-            _player.AttributeSO.TargetVelocity.x,
+            _player.RTProperty.TargetSpeed.x,
             _player.Rb.linearVelocity.y
         );
     }

@@ -1,22 +1,20 @@
 using UnityEngine;
-using System;
-using UnityEngine.UIElements;
 using Unity.Cinemachine;
 
-public class PlayerController : EntityContoller
+public class PlayerController_Main : EntityContoller_Main
 {
     [Header("NecessaryComponent")]
     [field: SerializeField] public Rigidbody2D Rb { get; private set; }
     [field: SerializeField] public Animator Anim { get; private set; }
-    [field: SerializeField] public PlayerChecker Checker { get; private set; }
+    [field: SerializeField] public PlayerController_Checker Checker { get; private set; }
     [field: SerializeField] public PlayerInput InputSys { get; private set; }
     [field: SerializeField] public Camera MainCam { get; private set; }
     [field: SerializeField] public CinemachineCamera Cam { get; private set; }
-    [field: SerializeField] public Transform Visual { get; private set; }
 
-    [Header("SO")]
-    public PlayerAttributeSO AttributeSO;
-    public PlayerStateSO StateSO;
+
+    [Header("Controllers")]
+    public PlayerController_Visual PlayerVisual;
+    public RTPropertyController RTProperty;
 
     [Header("StateMark")]
     public int FacingDir = 1;
@@ -50,6 +48,8 @@ public class PlayerController : EntityContoller
         StateSO.InstanceState(this, _stateMachine);
 
         _stateMachine.InitState(StateSO.IdleState);
+
+        RTProperty.Init(PropertySO.MaxGroundMoveSpeed, PropertySO.MaxAirMoveSpeed);
     }
     protected override void Start()
     {

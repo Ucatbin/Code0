@@ -4,7 +4,7 @@ public class PlayerSkill_Jump : PlayerSkill_BaseSkill
 {
     public bool FinishJump;
 
-    public PlayerSkill_Jump(PlayerController player) : base(player)
+    public PlayerSkill_Jump(PlayerController_Main player) : base(player)
     {
     }
 
@@ -16,7 +16,7 @@ public class PlayerSkill_Jump : PlayerSkill_BaseSkill
     public override void TryUseSkill()
     {
         if (!CanUseSkill ||
-            (MaxCharges != -1 && CurrentCharges == 0) ||
+            CurrentCharges == 0 ||
             !_inputSys.JumpTrigger
         )
             return;
@@ -24,7 +24,7 @@ public class PlayerSkill_Jump : PlayerSkill_BaseSkill
     }
     public override void UseSkill()
     {
-        CurrentCharges -= MaxCharges != -1 ? 1 : 0;
+        CurrentCharges -= MaxCharges == -1 ? 0 : 1;
         CanUseSkill = false;
 
         SkillEvents.TriggerJumpStart();

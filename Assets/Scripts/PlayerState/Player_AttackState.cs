@@ -4,7 +4,7 @@ public class Player_AttackState : Player_BaseState
 {
     PlayerSkill_Attack _attackSkill;
 
-    public Player_AttackState(PlayerController entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
+    public Player_AttackState(PlayerController_Main entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
     {
     }
 
@@ -14,21 +14,21 @@ public class Player_AttackState : Player_BaseState
 
         _attackSkill = Player_SkillManager.Instance.Attack;
 
-        Player_TimerManager.Instance.AddTimer(
+        TimerManager.Instance.AddTimer(
             _attackSkill.AttackDuration,
             () => { SkillEvents.TriggerAttackEnd(); },
             "Player_AbilityTimer"
         );
 
-        _player.AttributeSO.TargetVelocity = Vector2.zero;
-        _player.Rb.gravityScale = _player.AttributeSO.AttackGravity;
+        _player.RTProperty.TargetSpeed = Vector2.zero;
+        _player.Rb.gravityScale = _player.PropertySO.AttackGravity;
 
-        _player.AttributeSO.TargetVelocity = _player.InputSys.MouseDir *
+        _player.RTProperty.TargetSpeed = _player.InputSys.MouseDir *
             _attackSkill.AttackForce;
     }
     public override void PhysicsUpdate()
     {
-        _player.Rb.linearVelocity = _player.AttributeSO.TargetVelocity;
+        _player.Rb.linearVelocity = _player.RTProperty.TargetSpeed;
     }
     public override void LogicUpdate()
     {
@@ -38,8 +38,8 @@ public class Player_AttackState : Player_BaseState
     {
         base.Exit();
 
-        _player.AttributeSO.TargetVelocity = Vector2.zero;
+        _player.RTProperty.TargetSpeed = Vector2.zero;
         _attackSkill.CoolDownSkill(_attackSkill.SkillCD, "PlyaerAttack");
-        _player.Rb.gravityScale = _player.AttributeSO.FallGravity;
+        _player.Rb.gravityScale = _player.PropertySO.FallGravity;
     }
 }

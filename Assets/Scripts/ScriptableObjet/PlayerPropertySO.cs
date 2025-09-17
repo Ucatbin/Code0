@@ -1,10 +1,9 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "DefaultSO", menuName = "Game/Player/Attributes/Player")]
-public class PlayerAttributeSO : ScriptableObject
+[CreateAssetMenu(fileName = "PlayerAttributeSO", menuName = "Game/Player/Attributes")]
+public class PlayerPropertySO : ScriptableObject
 {
     [Header("MOVEMENT")]
-    public Vector2 TargetVelocity;
     [Tooltip("Max speed on ground")]
     public float MaxGroundSpeed = 12f;
     [Tooltip("Max speed can input add on ground")]
@@ -46,14 +45,4 @@ public class PlayerAttributeSO : ScriptableObject
     public float FallGravity = 4.5f;
     [Tooltip("Gravity when attacking"), Range(0f, 10f)]
     public float AttackGravity = 0.4f;
-
-    private void Reset()
-    {
-        TargetVelocity = Vector2.zero;
-    }
-
-    private void OnEnable()
-    {
-        TargetVelocity = Vector2.zero;
-    }
 }

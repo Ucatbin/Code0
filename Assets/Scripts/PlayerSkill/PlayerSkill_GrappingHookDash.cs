@@ -11,13 +11,13 @@ public class PlayerSkill_GrappingHookDash : PlayerSkill_BaseSkill
     [SerializeField] float _lineDashSpeed = 20f; // Maximum distance to detect grapple points
     [SerializeField] float _lineDashDamping = 8f;
 
-    public PlayerSkill_GrappingHookDash(PlayerController player) : base(player) { }
+    public PlayerSkill_GrappingHookDash(PlayerController_Main player) : base(player) { }
 
     public override void TryUseSkill()
     {
         // TODO:Havent complete if yet
         if (!CanUseSkill ||
-            (MaxCharges != -1 && CurrentCharges == 0) ||
+            CurrentCharges == 0 ||
             !_inputSys.DashTrigger
         )
             return;
@@ -25,14 +25,14 @@ public class PlayerSkill_GrappingHookDash : PlayerSkill_BaseSkill
     }
     public override void UseSkill()
     {
-        CurrentCharges -= MaxCharges != -1 ? 1 : 0;
+        CurrentCharges -= MaxCharges == -1 ? 0 : 1;
         CanUseSkill = false;
 
         StartCoroutine(LineDash());
     }
     public override void CoolDownSkill(float coolDown, string tag)
     {
-        Player_TimerManager.Instance.AddTimer(
+        TimerManager.Instance.AddTimer(
             coolDown,
             () => { ResetSkill(); },
             tag
