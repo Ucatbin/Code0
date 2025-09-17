@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class Player_GroundState : Player_BaseState
 {
-    protected float _maxGroundVelocityX;
-
     public Player_GroundState(PlayerController_Main entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
     {
     }
@@ -13,7 +11,7 @@ public class Player_GroundState : Player_BaseState
     {
         base.Enter();
 
-        _player.Rb.gravityScale = _player.PlayerItem.Property.DefaultGravity;
+        _player.Rb.gravityScale = _player.PropertySO.DefaultGravity;
     }
     
     public override void PhysicsUpdate()
@@ -26,7 +24,7 @@ public class Player_GroundState : Player_BaseState
             Player_SkillManager.Instance?.Jump.ResetSkill();
         // Enter airState as soon as leave the ground
             if (!_player.Checker.IsGrounded)
-                _stateMachine.ChangeState(_player.PlayerItem.State.CoyoteState, false);
+                _stateMachine.ChangeState(_player.StateSO.CoyoteState, false);
     }
 
     public override void Exit()

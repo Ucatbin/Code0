@@ -13,6 +13,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
 
     [Header("GHookAttribute")]
     [field: SerializeField] public float MaxDetectDist { get; private set; } = 15f; // Maximum distance to detect grapple points
+    [field: SerializeField] public float MaxLineDist { get; private set; }
     [field: SerializeField] public LayerMask CanHookLayer { get; private set; }      // Which layer can the hook attach to
     [SerializeField] float _lineMoveSpeed = 4.5f;
     [SerializeField] float _lineSwingForce = 10f;
@@ -77,8 +78,8 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
         _player.Rb.gravityScale = 0f;
         SetLineRenderer();
         SetJoint();
-        if (_player.Checker.IsGrounded)
-            RopeJoint.distance = heightDiff - 0.5f;
+        if (Vector2.Distance(_player.transform.position,HookPoint.transform.position) > MaxLineDist)
+            RopeJoint.distance = MaxLineDist - 0.5f;
         SkillEvents.TriggerHookAttach();
     }
     public void ReleaseGHook()

@@ -11,7 +11,7 @@ public class Player_FallState : Player_AirState
     {
         base.Enter();
 
-        _player.Rb.gravityScale = _player.PlayerItem.Property.FallGravity;
+        _player.Rb.gravityScale = _player.PropertySO.FallGravity;
     }
 
     public override void PhysicsUpdate()

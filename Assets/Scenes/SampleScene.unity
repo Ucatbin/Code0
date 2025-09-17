@@ -849,6 +849,7 @@ GameObject:
   m_Component:
   - component: {fileID: 542567387}
   - component: {fileID: 542567388}
+  - component: {fileID: 542567389}
   m_Layer: 0
   m_Name: PlayerController
   m_TagString: Untagged
@@ -883,6 +884,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c8a96044ed00a64da8c838767c70f19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PropertySO: {fileID: 11400000, guid: fc0fe7c335a11f345a7dc7c3ee3db4d2, type: 2}
+  StateSO: {fileID: 11400000, guid: f1dcc5e1b3ca74d42b63f30e30971e1f, type: 2}
   BuffHandler: {fileID: 2010529398}
   <Rb>k__BackingField: {fileID: 1614462010}
   <Anim>k__BackingField: {fileID: 596630718}
@@ -891,10 +894,28 @@ MonoBehaviour:
   <MainCam>k__BackingField: {fileID: 519420031}
   <Cam>k__BackingField: {fileID: 893872117}
   PlayerVisual: {fileID: 405554527}
+  RTProperty: {fileID: 542567389}
   FacingDir: 1
   IsJumping: 0
   IsAttached: 0
   IsAttacking: 0
+--- !u!114 &542567389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 542567386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ee2b2fb96478324da3f795ec19248cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetSpeed: {x: 0, y: 0}
+  GroundSpeedMult: 1
+  AirSpeedMult: 1
+  GroundSpeedBonus: 0
+  AirSpeedBonus: 0
 --- !u!1 &596630715
 GameObject:
   m_ObjectHideFlags: 0
@@ -2834,6 +2855,7 @@ MonoBehaviour:
   <RopeLine>k__BackingField: {fileID: 686963752}
   _pool: {fileID: 686963755}
   <MaxDetectDist>k__BackingField: 15
+  <MaxLineDist>k__BackingField: 8
   <CanHookLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 64

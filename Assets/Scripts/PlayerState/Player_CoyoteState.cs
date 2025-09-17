@@ -9,8 +9,8 @@ public class Player_CoyoteState : Player_FallState
         base.Enter();
 
         TimerManager.Instance.AddTimer(
-            _player.PlayerItem.Property.CoyoteWindow,
-            () => _stateMachine.ChangeState(_player.PlayerItem.State.FallState, false),
+            _player.PropertySO.CoyoteWindow,
+            () => _stateMachine.ChangeState(_player.StateSO.FallState, false),
             "Coyote"
         );
     }
@@ -24,7 +24,7 @@ public class Player_CoyoteState : Player_FallState
         base.LogicUpdate();
 
         if (_player.InputSys.JumpTrigger)
-            _stateMachine.ChangeState(_player.PlayerItem.State.JumpState, true);
+            _stateMachine.ChangeState(_player.StateSO.JumpState, true);
     }
 
     public override void Exit()

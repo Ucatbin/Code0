@@ -4,7 +4,6 @@ using Unity.Cinemachine;
 public class PlayerController_Main : EntityContoller_Main
 {
     [Header("NecessaryComponent")]
-    [field: SerializeField] public PlayerItem PlayerItem { get; private set; }
     [field: SerializeField] public Rigidbody2D Rb { get; private set; }
     [field: SerializeField] public Animator Anim { get; private set; }
     [field: SerializeField] public PlayerController_Checker Checker { get; private set; }
@@ -12,8 +11,10 @@ public class PlayerController_Main : EntityContoller_Main
     [field: SerializeField] public Camera MainCam { get; private set; }
     [field: SerializeField] public CinemachineCamera Cam { get; private set; }
 
+
     [Header("Controllers")]
     public PlayerController_Visual PlayerVisual;
+    public RTPropertyController RTProperty;
 
     [Header("StateMark")]
     public int FacingDir = 1;
@@ -44,11 +45,11 @@ public class PlayerController_Main : EntityContoller_Main
     {
         base.Awake();
 
-        PlayerItem = new PlayerItem(_propertySO, _stateSO);
+        StateSO.InstanceState(this, _stateMachine);
 
-        _stateSO.InstanceState(this, _stateMachine);
+        _stateMachine.InitState(StateSO.IdleState);
 
-        _stateMachine.InitState(_stateSO.IdleState);
+        RTProperty.Init(PropertySO.MaxGroundMoveSpeed, PropertySO.MaxAirMoveSpeed);
     }
     protected override void Start()
     {
@@ -67,36 +68,36 @@ public class PlayerController_Main : EntityContoller_Main
     #region Handle Skill Logics
     void HandleJumpStart()
     {
-        _stateMachine.ChangeState(_stateSO.JumpState, false);
+        _stateMachine.ChangeState(StateSO.JumpState, false);
         IsJumping = true;
     }
     void HandleJumpEnd()
     {
-        _stateMachine.ChangeState(_stateSO.AirState, true);
+        _stateMachine.ChangeState(StateSO.AirState, true);
         IsJumping = false;
     }
 
     void HandleHookAtteched()
     {
-        _stateMachine.ChangeState(_stateSO.HookedState, true);
+        _stateMachine.ChangeState(StateSO.HookedState, true);
         IsAttached = true;
         Checker.GLineChecker.enabled = true;
     }
     void HandleHookReleased()
     {
-        _stateMachine.ChangeState(_stateSO.AirGlideState, true);
+        _stateMachine.ChangeState(StateSO.AirGlideState, true);
         IsAttached = false;
         Checker.GLineChecker.enabled = false;
     }
 
     void HandleAttackStart()
     {
-        _stateMachine.ChangeState(_stateSO.AttackState, false);
+        _stateMachine.ChangeState(StateSO.AttackState, false);
         IsAttacking = true;
     }
     void HandleAttackEnd()
     {
-        _stateMachine.ChangeState(_stateSO.FallState, true);
+        _stateMachine.ChangeState(StateSO.FallState, true);
         IsAttacking = false;
     }
     #endregion
