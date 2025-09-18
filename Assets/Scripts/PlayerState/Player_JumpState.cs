@@ -56,6 +56,7 @@ public class Player_JumpState : Player_AirState
     {
         base.Exit();
 
+        _player.IsJumping = false;
         _player.RTProperty.TargetSpeed.y = 0f;
         TimerManager.Instance.CancelTimersWithTag("JumpStateTimer");
     }

@@ -87,43 +87,42 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
         }
         else
         {
-            SetJoint();
-            if (Vector2.Distance(_player.transform.position,HookPoint.transform.position) > MaxLineDist)
+            if (Vector2.Distance(_player.transform.position, HookPoint.transform.position) > MaxLineDist)
                 StartCoroutine(InitGLine());
-            //     RopeJoint.distance = MaxLineDist;
-            
+            else
+            {
+                SetJoint();
+                SetLineRenderer();
+                SkillEvents.TriggerHookAttach();
+            }
         }
     }
 
     IEnumerator MoveToTarget(Vector2 startPos, Vector2 targetPos)
     {
         float elapsedTime = 0f;
-
         while (elapsedTime < _initForce)
         {
             float t = elapsedTime / _initForce;
-            
-            // 关键修复：明确移动玩家的transform
             _player.PlayerRoot.position = Vector2.Lerp(startPos, targetPos, t);
             SetLineRenderer();
-
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-
-        // 确保最终精确到达目标位置
         _player.PlayerRoot.position = targetPos;
-        
-        SetJoint();
-        _player.Rb.AddForce((targetPos - startPos) * 0.5f, ForceMode2D.Impulse);
-        
+        _player.Rb.AddForce((targetPos - startPos) * 1f, ForceMode2D.Impulse);
+
         if (Vector2.Distance(_player.transform.position, HookPoint.transform.position) > MaxLineDist)
             StartCoroutine(InitGLine());
         else
+        {
+            SetJoint();
             SkillEvents.TriggerHookAttach();
+        }
     }
     IEnumerator InitGLine()
     {
+        SetJoint();
         float elapsedTime = 0f;
         float startDist = RopeJoint.distance;
         while (elapsedTime <= _initSpeed)

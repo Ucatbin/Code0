@@ -887,6 +887,7 @@ MonoBehaviour:
   PropertySO: {fileID: 11400000, guid: fc0fe7c335a11f345a7dc7c3ee3db4d2, type: 2}
   StateSO: {fileID: 11400000, guid: f1dcc5e1b3ca74d42b63f30e30971e1f, type: 2}
   BuffHandler: {fileID: 2010529398}
+  <PlayerRoot>k__BackingField: {fileID: 1614462008}
   <Rb>k__BackingField: {fileID: 1614462010}
   <Anim>k__BackingField: {fileID: 596630718}
   <Checker>k__BackingField: {fileID: 1875388750}
@@ -899,6 +900,7 @@ MonoBehaviour:
   IsJumping: 0
   IsAttached: 0
   IsAttacking: 0
+  IsAddingForce: 0
 --- !u!114 &542567389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -912,6 +914,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetSpeed: {x: 0, y: 0}
+  AccelMult: 1
   GroundSpeedMult: 1
   AirSpeedMult: 1
   GroundSpeedBonus: 0
@@ -2860,8 +2863,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _lineMoveSpeed: 4.5
-  _lineSwingForce: 0
-  _maxSwingSpeed: 0
+  _lineSwingForce: 35
+  _maxSwingSpeed: 12
+  _initForce: 0.25
+  _initSpeed: 0.15
 --- !u!4 &1721889137
 Transform:
   m_ObjectHideFlags: 0
