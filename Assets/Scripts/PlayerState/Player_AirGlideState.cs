@@ -12,6 +12,7 @@ public class Player_AirGlideState : Player_AirState
     {
         base.Enter();
 
+        _player.Rb.gravityScale = _player.PropertySO.AirGlideGravity;
         float enterSpeed = _player.RTProperty.TargetSpeed.x;
         _targetAirDamping = enterSpeed * 2.5f;
         _player.IsJumping = false;
@@ -19,32 +20,7 @@ public class Player_AirGlideState : Player_AirState
     
     public override void PhysicsUpdate()
     {
-        if (_player.InputSys.MoveInput.x != 0f)
-        {
-            if (Mathf.Abs(_player.RTProperty.TargetSpeed.x) <= _player.PropertySO.MaxAirSpeed)
-                _player.RTProperty.TargetSpeed.x = Mathf.MoveTowards(
-                    _player.RTProperty.TargetSpeed.x,
-                    _player.RTProperty.FinalAirSpeed * _player.InputSys.MoveInput.x,
-                    _player.PropertySO.AirAccel * Time.fixedDeltaTime
-                );
-            else
-                _player.RTProperty.TargetSpeed.x = Mathf.MoveTowards(
-                    _player.RTProperty.TargetSpeed.x,
-                    _player.RTProperty.FinalAirSpeed * _player.InputSys.MoveInput.x,
-                    _player.PropertySO.AirDamping * Time.fixedDeltaTime
-                );
-        }
-        else
-            _player.RTProperty.TargetSpeed.x = Mathf.MoveTowards(
-                _player.RTProperty.TargetSpeed.x,
-                0,
-                _player.PropertySO.AirDamping / _targetAirDamping * Time.fixedDeltaTime
-            );
-
-        _player.Rb.linearVelocity = new Vector2(
-            _player.RTProperty.TargetSpeed.x,
-            _player.Rb.linearVelocity.y
-        );
+        base.PhysicsUpdate();
     }
     public override void LogicUpdate()
     {

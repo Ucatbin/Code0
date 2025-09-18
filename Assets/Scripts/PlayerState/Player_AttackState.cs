@@ -28,7 +28,7 @@ public class Player_AttackState : Player_BaseState
     }
     public override void PhysicsUpdate()
     {
-        _player.Rb.linearVelocity = _player.RTProperty.TargetSpeed;
+
     }
     public override void LogicUpdate()
     {

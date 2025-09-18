@@ -18,6 +18,8 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
     [SerializeField] float _lineMoveSpeed = 4.5f;
     [SerializeField] float _lineSwingForce = 10f;
     [SerializeField] float _maxSwingSpeed = 10f;
+    [SerializeField] float _initForce;
+    [SerializeField] float _initSpeed;
 
     public PlayerSkill_GrappingHook(PlayerController_Main player) : base(player) { }
 
@@ -74,12 +76,65 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
     }
     void AttachHook()
     {
-        float heightDiff = HookPoint.transform.position.y - _player.transform.position.y;
+        _player.IsAddingForce = true;
         _player.Rb.gravityScale = 0f;
         SetLineRenderer();
+        if (_player.Checker.IsGrounded)
+        {
+            Vector3 targetPos = new Vector2(HookPoint.transform.position.x, _player.transform.position.y);
+            _player.Rb.AddForce((targetPos - _player.transform.position) * _initForce, ForceMode2D.Impulse);
+            StartCoroutine(MoveToTarget(_player.transform.position, targetPos));
+        }
+        else
+        {
+            SetJoint();
+            if (Vector2.Distance(_player.transform.position,HookPoint.transform.position) > MaxLineDist)
+                StartCoroutine(InitGLine());
+            //     RopeJoint.distance = MaxLineDist;
+            
+        }
+    }
+
+    IEnumerator MoveToTarget(Vector2 startPos, Vector2 targetPos)
+    {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < _initForce)
+        {
+            float t = elapsedTime / _initForce;
+            
+            // 关键修复：明确移动玩家的transform
+            _player.PlayerRoot.position = Vector2.Lerp(startPos, targetPos, t);
+            SetLineRenderer();
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // 确保最终精确到达目标位置
+        _player.PlayerRoot.position = targetPos;
+        
         SetJoint();
-        if (Vector2.Distance(_player.transform.position,HookPoint.transform.position) > MaxLineDist)
-            RopeJoint.distance = MaxLineDist - 0.5f;
+        _player.Rb.AddForce((targetPos - startPos) * 0.5f, ForceMode2D.Impulse);
+        
+        if (Vector2.Distance(_player.transform.position, HookPoint.transform.position) > MaxLineDist)
+            StartCoroutine(InitGLine());
+        else
+            SkillEvents.TriggerHookAttach();
+    }
+    IEnumerator InitGLine()
+    {
+        float elapsedTime = 0f;
+        float startDist = RopeJoint.distance;
+        while (elapsedTime <= _initSpeed)
+        {
+            float t = elapsedTime / _initSpeed;
+            SetLineRenderer();
+            RopeJoint.distance = Mathf.Lerp(startDist, MaxLineDist, t);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        RopeJoint.distance = MaxLineDist;
         SkillEvents.TriggerHookAttach();
     }
     public void ReleaseGHook()

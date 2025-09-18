@@ -43,6 +43,8 @@ public class PlayerPropertySO : ScriptableObject
     public float RiseGravity = 3f;
     [Tooltip("Max gravity while falling"), Range(0f, 10f)]
     public float FallGravity = 4.5f;
+    [Tooltip("Max gravity while gliding"), Range(0f, 10f)]
+    public float AirGlideGravity = 3.5f;
     [Tooltip("Gravity when attacking"), Range(0f, 10f)]
     public float AttackGravity = 0.4f;
 }
