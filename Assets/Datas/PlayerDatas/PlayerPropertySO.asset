@@ -15,14 +15,13 @@ MonoBehaviour:
   MaxGroundSpeed: 12
   MaxGroundMoveSpeed: 6
   GroundAccel: 1
-  GroundDamping: 1
+  GroundDamping: 2
   MaxAirSpeed: 20
   MaxAirMoveSpeed: 8
-  AirAccel: 0.5
-  AirDamping: 0.5
-  MaxJumpSpeed: 12.5
-  JumpInitSpeed: 10
-  JumpAccel: 25
+  AirAccel: 0.8
+  AirDamping: 0.06
+  JumpInitForce: 10
+  JumpAccel: 20
   JumpInputWindow: 0.25
   CoyoteWindow: 0.15
   MaxRaiseSpeed: 20

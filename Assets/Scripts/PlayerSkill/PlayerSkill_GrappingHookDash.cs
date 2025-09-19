@@ -10,6 +10,7 @@ public class PlayerSkill_GrappingHookDash : PlayerSkill_BaseSkill
     [Header("GHookAttribute")]
     [SerializeField] float _lineDashSpeed = 20f; // Maximum distance to detect grapple points
     [SerializeField] float _lineDashDamping = 8f;
+    [SerializeField] float _duration = 0.25f;
 
     public PlayerSkill_GrappingHookDash(PlayerController_Main player) : base(player) { }
 
@@ -46,10 +47,13 @@ public class PlayerSkill_GrappingHookDash : PlayerSkill_BaseSkill
     public IEnumerator LineDash()
     {
         float dashSpeed = _lineDashSpeed;
+        float elapsedTime = 0f;
         while (dashSpeed != 1f && _player.IsAttached)
         {
-            RopeJoint.distance -= _lineDashSpeed * Time.fixedDeltaTime;
-            dashSpeed = Mathf.Lerp(dashSpeed, 1f, Time.fixedDeltaTime * _lineDashDamping);
+            float t = elapsedTime / _duration;
+            dashSpeed = Mathf.Lerp(dashSpeed, 1f, t);
+            RopeJoint.distance -= dashSpeed * Time.fixedDeltaTime;
+            elapsedTime += Time.deltaTime;
             yield return null;
         }
         CoolDownSkill(SkillCD, "PlayerSkill");

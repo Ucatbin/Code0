@@ -1,6 +1,5 @@
 using UnityEngine;
 using Unity.Cinemachine;
-using Unity.IntegerTime;
 
 public class PlayerController_Main : EntityContoller_Main
 {
@@ -72,6 +71,7 @@ public class PlayerController_Main : EntityContoller_Main
 
     void HandleMovement()
     {
+        // Jump and grapline are controlled by force and horizontal movement is controlled by velocity
         float accel = Checker.IsGrounded ? PropertySO.GroundAccel : PropertySO.AirAccel;
         float damping = Checker.IsGrounded ? PropertySO.GroundDamping : PropertySO.AirDamping;
         float finalSpeed = Checker.IsGrounded
@@ -114,13 +114,11 @@ public class PlayerController_Main : EntityContoller_Main
     {
         _stateMachine.ChangeState(StateSO.HookedState, true);
         IsAttached = true;
-        Checker.GLineChecker.enabled = true;
     }
     void HandleHookReleased()
     {
         _stateMachine.ChangeState(StateSO.AirGlideState, true);
         IsAttached = false;
-        Checker.GLineChecker.enabled = false;
     }
 
     void HandleAttackStart()

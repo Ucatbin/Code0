@@ -31,7 +31,7 @@ public class PlayerSkill_Jump : PlayerSkill_BaseSkill
     }
     public override void CoolDownSkill(float coolDown, string tag)
     {
-        throw new System.NotImplementedException();
+        
     }
     public override void ResetSkill()
     {
