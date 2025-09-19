@@ -15,17 +15,6 @@ public class Player_IdleState : Player_GroundState
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-
-        _player.RTProperty.TargetSpeed.x = Mathf.MoveTowards(
-            _player.RTProperty.TargetSpeed.x,
-            0,
-            _player.PropertySO.GroundDamping * Time.fixedDeltaTime
-        );
-
-        _player.Rb.linearVelocity = new Vector2(
-            _player.RTProperty.TargetSpeed.x,
-            _player.Rb.linearVelocity.y
-        );
     }
     public override void LogicUpdate()
     {

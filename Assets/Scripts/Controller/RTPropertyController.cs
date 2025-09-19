@@ -8,6 +8,7 @@ public class RTPropertyController : MonoBehaviour
     float _baseAirSpeed;
 
     // Buff modifier
+    public float AccelMult = 1f;
     public float GroundSpeedMult = 1f;
     public float AirSpeedMult = 1f;
 
@@ -18,9 +19,9 @@ public class RTPropertyController : MonoBehaviour
     public float FinalGroundSpeed => (_baseGroundSpeed + GroundSpeedBonus) * GroundSpeedMult;
     public float FinalAirSpeed => (_baseAirSpeed + AirSpeedBonus) * AirSpeedMult;
 
-    public void Init(float baseGroundSpeed, float baseAirSpeed)
+    public void Init(PlayerPropertySO property)
     {
-        _baseGroundSpeed = baseGroundSpeed;
-        _baseAirSpeed = baseAirSpeed;
+        _baseGroundSpeed = property.MaxGroundMoveSpeed;
+        _baseAirSpeed = property.MaxAirMoveSpeed;
     }
 }

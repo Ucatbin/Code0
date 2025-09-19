@@ -16,6 +16,7 @@ public class Player_JumpState : Player_AirState
         _jumpSkill = Player_SkillManager.Instance.Jump;
         _player.Rb.gravityScale = _player.PropertySO.RiseGravity;
         _jumpSkill.FinishJump = false;
+        _player.Rb.linearVelocityY = 0f;
 
         // Start jump timer
         TimerManager.Instance.AddTimer(
@@ -26,34 +27,30 @@ public class Player_JumpState : Player_AirState
 
         TimerManager.Instance.AddTimer(
             _jumpSkill.SkillCD,
-            () =>{
+            () =>
+            {
                 if (_jumpSkill.CurrentCharges != 0)
                     _jumpSkill.FinishJump = true;
             },
             "PlayerSkillGap"
         );
-        _player.RTProperty.TargetSpeed.y = _player.PropertySO.JumpInitSpeed;
+
+        _player.Rb.AddForce(_player.PropertySO.JumpInitForce * Vector2.up, ForceMode2D.Impulse);
+
+        if (_jumpSkill.CurrentCharges != _jumpSkill.MaxCharges - 1)
+            _stateMachine.ChangeState(_player.StateSO.AirState, true);
     }
 
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
 
-        float maxSpeed = Mathf.Abs(_player.RTProperty.TargetSpeed.y) <= _player.PropertySO.MaxRaiseSpeed ? _player.PropertySO.MaxJumpSpeed : _player.PropertySO.MaxRaiseSpeed;
-        _player.RTProperty.TargetSpeed.y = Mathf.MoveTowards(
-            _player.RTProperty.TargetSpeed.y,
-            maxSpeed,
-            _player.PropertySO.JumpAccel
-        );
-
-        _player.Rb.linearVelocity = new Vector2(
-            _player.Rb.linearVelocityX,
-            _player.RTProperty.TargetSpeed.y
-        );
+        _player.Rb.AddForce(_player.PropertySO.JumpAccel * Vector2.up, ForceMode2D.Force);
     }
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+        
         // Cant add force after jumpWindow
         if (!_player.InputSys.JumpTrigger)
             _stateMachine.ChangeState(_player.StateSO.AirState, true);
@@ -63,6 +60,7 @@ public class Player_JumpState : Player_AirState
     {
         base.Exit();
 
+        _player.IsJumping = false;
         _player.RTProperty.TargetSpeed.y = 0f;
         TimerManager.Instance.CancelTimersWithTag("JumpStateTimer");
     }

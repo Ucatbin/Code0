@@ -5,11 +5,12 @@ using UnityEngine;
 public class PlayerSkill_GrappingHookDash : PlayerSkill_BaseSkill
 {
     [Header("NecessaryComponent")]
-    [field: SerializeField] public DistanceJoint2D RopeJoint { get; private set; }
+    [field: SerializeField] PlayerSkill_GrappingHook _grappingHook;
 
     [Header("GHookAttribute")]
-    [SerializeField] float _lineDashSpeed = 20f; // Maximum distance to detect grapple points
-    [SerializeField] float _lineDashDamping = 8f;
+    [SerializeField] float _lineDashSpeed = 45f; // Maximum distance to detect grapple points
+    [SerializeField] float _lineDashForce = 25f;
+    [SerializeField] float _duration = 0.25f;
 
     public PlayerSkill_GrappingHookDash(PlayerController_Main player) : base(player) { }
 
@@ -46,10 +47,15 @@ public class PlayerSkill_GrappingHookDash : PlayerSkill_BaseSkill
     public IEnumerator LineDash()
     {
         float dashSpeed = _lineDashSpeed;
+        float elapsedTime = 0f;
+        Vector2 forceDir = (_grappingHook.HookPoint.transform.position - _player.transform.position).normalized;
         while (dashSpeed != 1f && _player.IsAttached)
         {
-            RopeJoint.distance -= _lineDashSpeed * Time.fixedDeltaTime;
-            dashSpeed = Mathf.Lerp(dashSpeed, 1f, Time.fixedDeltaTime * _lineDashDamping);
+            float t = elapsedTime / _duration;
+            dashSpeed = Mathf.Lerp(dashSpeed, 1f, t);
+            _grappingHook.RopeJoint.distance -= dashSpeed * Time.fixedDeltaTime;
+            _player.Rb.AddForce(forceDir * _lineDashForce, ForceMode2D.Force);
+            elapsedTime += Time.deltaTime;
             yield return null;
         }
         CoolDownSkill(SkillCD, "PlayerSkill");
