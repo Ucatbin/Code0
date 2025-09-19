@@ -20,7 +20,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
     [SerializeField] float _lineSwingForce = 20f;
     [SerializeField] float _maxSwingSpeed = 12f;
     [SerializeField] float _initPosDuration = 0.25f;
-    [SerializeField] float _initLineDuration = 0.12f;
+    [SerializeField] float _initLineDuration = 0.2f;
 
     public PlayerSkill_GrappingHook(PlayerController_Main player) : base(player) { }
 
@@ -84,7 +84,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
         SetLineRenderer();
 
         // If isGrounded, player will move to the hook point first
-        if (_player.Checker.IsGrounded)
+        if (_player.Checker.IsGrounded && SurfaceNormal.y != 0)
         {
             Vector3 targetPos = new Vector2(HookPoint.transform.position.x, _player.transform.position.y);
             _player.Rb.AddForce((targetPos - _player.transform.position) * _initPosDuration, ForceMode2D.Impulse);

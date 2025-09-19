@@ -20,7 +20,7 @@ public class PlayerPropertySO : ScriptableObject
     [Tooltip("Acceration when move in the air")]
     public float AirAccel = 0.8f;
     [Tooltip("Damping when move in the air")]
-    public float AirDamping = 0.06f;
+    public float AirDamping = 0.18f;
 
     [Header("JUMP")]
     [Tooltip("Give player a initial force")]
@@ -42,7 +42,7 @@ public class PlayerPropertySO : ScriptableObject
     [Tooltip("Max gravity while falling"), Range(0f, 10f)]
     public float FallGravity = 4.5f;
     [Tooltip("Max gravity while gliding"), Range(0f, 10f)]
-    public float AirGlideGravity = 3.5f;
+    public float AirGlideGravity = 4.5f;
     [Tooltip("Gravity when attacking"), Range(0f, 10f)]
     public float AttackGravity = 0.4f;
 }
