@@ -22,6 +22,7 @@ public class Player_AttackState : Player_BaseState
 
         _player.RTProperty.TargetSpeed = Vector2.zero;
         _player.Rb.gravityScale = _player.PropertySO.AttackGravity;
+        _player.Rb.linearVelocityY = 0f;
 
         _player.RTProperty.TargetSpeed = _player.InputSys.MouseDir *
             _attackSkill.AttackForce;

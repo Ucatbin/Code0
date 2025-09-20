@@ -19,7 +19,7 @@ MonoBehaviour:
   MaxAirSpeed: 20
   MaxAirMoveSpeed: 8
   AirAccel: 0.8
-  AirDamping: 0.06
+  AirDamping: 0.18
   JumpInitForce: 10
   JumpAccel: 20
   JumpInputWindow: 0.25
@@ -29,5 +29,5 @@ MonoBehaviour:
   DefaultGravity: 1
   RiseGravity: 3
   FallGravity: 4.5
-  AirGlideGravity: 3.5
+  AirGlideGravity: 4.5
   AttackGravity: 0.4

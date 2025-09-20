@@ -2866,7 +2866,7 @@ MonoBehaviour:
   _lineSwingForce: 35
   _maxSwingSpeed: 12
   _initPosDuration: 0.25
-  _initLineDuration: 0.12
+  _initLineDuration: 0.2
 --- !u!4 &1721889137
 Transform:
   m_ObjectHideFlags: 0
@@ -2900,9 +2900,9 @@ MonoBehaviour:
   MaxCharges: -1
   CurrentCharges: 0
   SkillCD: 1
-  <RopeJoint>k__BackingField: {fileID: 1614462011}
-  _lineDashSpeed: 50
-  _lineDashDamping: 10
+  _grappingHook: {fileID: 1721889136}
+  _lineDashSpeed: 45
+  _lineDashForce: 25
   _duration: 0.25
 --- !u!114 &1721889139
 MonoBehaviour:
