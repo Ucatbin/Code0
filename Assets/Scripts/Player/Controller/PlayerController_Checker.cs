@@ -10,9 +10,9 @@ public class PlayerController_Checker : MonoBehaviour
     [Header("Ground Check")]
     public bool IsGrounded;
     [SerializeField] LayerMask _groundLayer;
-    [SerializeField] float _groundCheckDist= 0.1f;
+    [SerializeField] float _groundCheckDist= 0.03f;
     [SerializeField] Transform _groundCheckPoint;
-    [SerializeField] float groundCheckWidth = 0.4f;
+    [SerializeField] float groundCheckWidth = 0.32f;
 
     [Header("Grapple Check")]
     public Collider2D GLineChecker;
