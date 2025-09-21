@@ -1,7 +1,7 @@
 using UnityEngine;
 using Unity.Cinemachine;
 
-public class PlayerController_Main : EntityContoller_Main
+public class PlayerController_Main : EntityContoller_Main, IDamageable
 {
     [Header("NecessaryComponent")]
     [field: SerializeField] public Transform PlayerRoot { get ; private set; }
@@ -12,6 +12,8 @@ public class PlayerController_Main : EntityContoller_Main
     [field: SerializeField] public Camera MainCam { get; private set; }
     [field: SerializeField] public CinemachineCamera Cam { get; private set; }
 
+    public int CurrentHealth => throw new System.NotImplementedException();
+    public int MaxHealth => throw new System.NotImplementedException();
 
     [Header("Controllers")]
     public PlayerController_Visual PlayerVisual;
@@ -131,5 +133,15 @@ public class PlayerController_Main : EntityContoller_Main
         _stateMachine.ChangeState(StateSO.FallState, true);
         IsAttacking = false;
     }
+
     #endregion
+    public void TakeDamage(DamageData damageData)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Die()
+    {
+        throw new System.NotImplementedException();
+    }
 }

@@ -1,6 +1,48 @@
 using System;
 using UnityEngine;
 
+#region DamageBuilder
+/// <summary>
+/// 伤害数据传输对象
+/// </summary>
+[Serializable]
+public struct DamageData
+{
+    public int DamageAmount;
+    public Vector2 DamageDirection;
+    public float KnockbackForce;
+    public DamageType DamageType;
+
+    public DamageData(
+        int damageAmount,
+        Vector2 damageDirection,
+        float knockbackForce,
+        DamageType damageType = DamageType.Normal
+    )
+    {
+        DamageAmount = damageAmount;
+        DamageDirection = damageDirection;
+        KnockbackForce = knockbackForce;
+        DamageType = damageType;
+    }
+}
+
+/// <summary>
+/// 伤害类型枚举
+/// </summary>
+public enum DamageType
+{
+    Normal,
+    Physics,     // 普通物理伤害
+    Magic,      // 魔法伤害
+    Fire,       // 火焰伤害
+    Ice,        // 冰冻伤害
+    Lightning,  // 雷电伤害
+    Poison,     // 毒素伤害
+    True        // 真实伤害（无视防御）
+}
+#endregion
+
 #region BuffBuilder
 [Serializable]
 public class BuffItem : IComparable<BuffItem>
