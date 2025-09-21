@@ -15,7 +15,7 @@ public class PlayerSkill_Jump : PlayerSkill_BaseSkill
 
     public override void TryUseSkill()
     {
-        if (!CanUseSkill ||
+        if (!IsReady ||
             CurrentCharges == 0 ||
             !_inputSys.JumpTrigger
         )
@@ -25,7 +25,7 @@ public class PlayerSkill_Jump : PlayerSkill_BaseSkill
     public override void UseSkill()
     {
         CurrentCharges -= MaxCharges == -1 ? 0 : 1;
-        CanUseSkill = false;
+        IsReady = false;
 
         SkillEvents.TriggerJumpStart();
     }
@@ -36,6 +36,6 @@ public class PlayerSkill_Jump : PlayerSkill_BaseSkill
     public override void ResetSkill()
     {
         CurrentCharges = MaxCharges;
-        CanUseSkill = true;
+        IsReady = true;
     }
 }

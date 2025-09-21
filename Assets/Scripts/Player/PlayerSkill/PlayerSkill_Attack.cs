@@ -22,7 +22,7 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
 
     public override void TryUseSkill()
     {
-        if (!CanUseSkill ||
+        if (!IsReady ||
             CurrentCharges == 0 ||
             !_inputSys.AttackTrigger ||
             _player.IsAttached
@@ -41,7 +41,7 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
         
         _player.BuffHandler.AddBuff(buff_speedUp);
         CurrentCharges -= MaxCharges == -1 ? 0 : 1;
-        CanUseSkill = false;
+        IsReady = false;
 
         SkillEvents.TriggerAttackStart();
         _anim.speed = 1 / AttackDuration;
@@ -63,6 +63,6 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
     }
     public override void ResetSkill()
     {
-        CanUseSkill = true;
+        IsReady = true;
     }
 }
