@@ -17,7 +17,7 @@ public class PlayerSkill_GrappingHookDash : PlayerSkill_BaseSkill
     public override void TryUseSkill()
     {
         // TODO:Havent complete if yet
-        if (!CanUseSkill ||
+        if (!IsReady ||
             CurrentCharges == 0 ||
             !_inputSys.DashTrigger
         )
@@ -27,7 +27,7 @@ public class PlayerSkill_GrappingHookDash : PlayerSkill_BaseSkill
     public override void UseSkill()
     {
         CurrentCharges -= MaxCharges == -1 ? 0 : 1;
-        CanUseSkill = false;
+        IsReady = false;
 
         StartCoroutine(LineDash());
     }
@@ -41,7 +41,7 @@ public class PlayerSkill_GrappingHookDash : PlayerSkill_BaseSkill
     }
     public override void ResetSkill()
     {
-        CanUseSkill = true;
+        IsReady = true;
     }
 
     public IEnumerator LineDash()
@@ -54,10 +54,11 @@ public class PlayerSkill_GrappingHookDash : PlayerSkill_BaseSkill
             float t = elapsedTime / _duration;
             dashSpeed = Mathf.Lerp(dashSpeed, 1f, t);
             _grappingHook.RopeJoint.distance -= dashSpeed * Time.fixedDeltaTime;
-            _player.Rb.AddForce(forceDir * _lineDashForce, ForceMode2D.Force);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+        _grappingHook.ReleaseGHook();
+        _player.Rb.AddForce(forceDir * _lineDashForce, ForceMode2D.Impulse);
         CoolDownSkill(SkillCD, "PlayerSkill");
     }
 }

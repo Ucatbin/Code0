@@ -2,8 +2,10 @@ using UnityEngine;
 
 public abstract class PlayerSkill_BaseSkill :MonoBehaviour
 {
-    [Tooltip("Whether skill is useable")]
-    public bool CanUseSkill;
+    [Tooltip("Whether skill is ready to use")]
+    public bool IsReady;
+    [Tooltip("Wether button released")]
+    public bool CanUse;
     [Tooltip("Get player component")]
     [SerializeField] protected PlayerController_Main _player;
     [Tooltip("Get input")]

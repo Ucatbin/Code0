@@ -31,7 +31,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
 
     public override void TryUseSkill()
     {
-        if (!CanUseSkill ||
+        if (!IsReady ||
             CurrentCharges == 0 ||
             !_inputSys.GrapperTrigger ||
             _player.IsAttacking
@@ -42,7 +42,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
     public override void UseSkill()
     {
         CurrentCharges -= MaxCharges == -1 ? 0 : 1;
-        CanUseSkill = false;
+        IsReady = false;
 
         // Get mouse position and calculate fire direction
         RaycastHit2D hit = Physics2D.Raycast(
@@ -74,7 +74,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
     }
     public override void ResetSkill()
     {
-        CanUseSkill = true;
+        IsReady = true;
     }
     void AttachHook()
     {
