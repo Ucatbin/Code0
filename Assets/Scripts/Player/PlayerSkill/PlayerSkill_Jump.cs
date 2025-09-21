@@ -1,9 +1,8 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerSkill_Jump : PlayerSkill_BaseSkill
 {
-    public bool FinishJump;
-
     public PlayerSkill_Jump(PlayerController_Main player) : base(player)
     {
     }
@@ -15,7 +14,7 @@ public class PlayerSkill_Jump : PlayerSkill_BaseSkill
 
     public override void TryUseSkill()
     {
-        if (!IsReady ||
+        if (!CanUse ||
             CurrentCharges == 0 ||
             !_inputSys.JumpTrigger
         )
@@ -25,6 +24,7 @@ public class PlayerSkill_Jump : PlayerSkill_BaseSkill
     public override void UseSkill()
     {
         CurrentCharges -= MaxCharges == -1 ? 0 : 1;
+        CanUse = false;
         IsReady = false;
 
         SkillEvents.TriggerJumpStart();
@@ -35,7 +35,18 @@ public class PlayerSkill_Jump : PlayerSkill_BaseSkill
     }
     public override void ResetSkill()
     {
-        CurrentCharges = MaxCharges;
         IsReady = true;
+        StartCoroutine(ButtonReleaseCheck());
+    }
+
+    public override IEnumerator ButtonReleaseCheck()
+    {
+        while (!CanUse)
+        {
+            if (!_player.InputSys.JumpTrigger)
+                    CanUse = true;
+            else
+                yield return null;
+        }
     }
 }

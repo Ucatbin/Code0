@@ -1520,7 +1520,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objPrefab: {fileID: 1101025356}
   _minCount: 1
-  _maxCount: 1
+  _maxCount: 10
 --- !u!1 &719935245
 GameObject:
   m_ObjectHideFlags: 0
@@ -2847,13 +2847,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 542fd3fa9f1028240866db681a545067, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CanUseSkill: 1
+  IsReady: 1
+  CanUse: 1
   _player: {fileID: 542567388}
   _inputSys: {fileID: 1233298156}
   MaxCharges: -1
   CurrentCharges: 0
-  SkillCD: 0.28
-  BreakCoolDown: 1.85
+  SkillCD: 0.22
+  BreakCoolDown: 0.22
   <RopeJoint>k__BackingField: {fileID: 1614462011}
   <RopeLine>k__BackingField: {fileID: 686963752}
   _pool: {fileID: 686963755}
@@ -2894,7 +2895,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de09d1b89adcffe4fb4cca6e42787c0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CanUseSkill: 1
+  IsReady: 1
+  CanUse: 1
   _player: {fileID: 542567388}
   _inputSys: {fileID: 1233298156}
   MaxCharges: -1
@@ -2902,7 +2904,7 @@ MonoBehaviour:
   SkillCD: 1
   _grappingHook: {fileID: 1721889136}
   _lineDashSpeed: 45
-  _lineDashForce: 25
+  _lineDashForce: 5
   _duration: 0.25
 --- !u!114 &1721889139
 MonoBehaviour:
@@ -2916,7 +2918,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ee1cc69f0eb9cf42b0223d10042245a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CanUseSkill: 1
+  IsReady: 1
+  CanUse: 1
   _player: {fileID: 542567388}
   _inputSys: {fileID: 1233298156}
   MaxCharges: -1
@@ -2938,13 +2941,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c24e9e42d2121649a82786def033266, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CanUseSkill: 1
+  IsReady: 1
+  CanUse: 1
   _player: {fileID: 542567388}
   _inputSys: {fileID: 1233298156}
   MaxCharges: 2
   CurrentCharges: 0
   SkillCD: 0.12
-  FinishJump: 0
 --- !u!1 &1744596188
 GameObject:
   m_ObjectHideFlags: 0

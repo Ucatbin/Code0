@@ -1,11 +1,12 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerSkill_Attack : PlayerSkill_BaseSkill
 {
     [Tooltip("Duration of single attack")]
-    public float AttackDuration = 0.2f;
+    public float AttackDuration = 0.28f;
     [Tooltip("Offset while attacking")]
-    public float AttackForce = 2.5f;
+    public float AttackForce = 3.5f;
     [Tooltip("The animator of attack effect")]
     [SerializeField] Animator _anim;
     [Tooltip("The parent of attack effect")]
@@ -22,7 +23,7 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
 
     public override void TryUseSkill()
     {
-        if (!IsReady ||
+        if (!CanUse ||
             CurrentCharges == 0 ||
             !_inputSys.AttackTrigger ||
             _player.IsAttached
@@ -42,6 +43,7 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
         _player.BuffHandler.AddBuff(buff_speedUp);
         CurrentCharges -= MaxCharges == -1 ? 0 : 1;
         IsReady = false;
+        CanUse = false;
 
         SkillEvents.TriggerAttackStart();
         _anim.speed = 1 / AttackDuration;
@@ -64,5 +66,11 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
     public override void ResetSkill()
     {
         IsReady = true;
+        CanUse = true;
+    }
+
+    public override IEnumerator ButtonReleaseCheck()
+    {
+        throw new System.NotImplementedException();
     }
 }

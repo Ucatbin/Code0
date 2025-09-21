@@ -15,7 +15,6 @@ public class Player_JumpState : Player_AirState
         // Initialize
         _jumpSkill = Player_SkillManager.Instance.Jump;
         _player.Rb.gravityScale = _player.PropertySO.RiseGravity;
-        _jumpSkill.FinishJump = false;
         _player.Rb.linearVelocityY = 0f;
 
         // Start jump timer
@@ -27,11 +26,7 @@ public class Player_JumpState : Player_AirState
 
         TimerManager.Instance.AddTimer(
             _jumpSkill.SkillCD,
-            () =>
-            {
-                if (_jumpSkill.CurrentCharges != 0)
-                    _jumpSkill.FinishJump = true;
-            },
+            () => _jumpSkill.ResetSkill(),
             "PlayerSkillGap"
         );
 

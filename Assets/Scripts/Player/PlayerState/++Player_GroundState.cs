@@ -12,6 +12,9 @@ public class Player_GroundState : Player_BaseState
         base.Enter();
 
         _player.Rb.gravityScale = _player.PropertySO.DefaultGravity;
+
+        if (Player_SkillManager.Instance != null)
+            Player_SkillManager.Instance.Jump.CurrentCharges = Player_SkillManager.Instance.Jump.MaxCharges;  
     }
     
     public override void PhysicsUpdate()
@@ -20,11 +23,9 @@ public class Player_GroundState : Player_BaseState
     }
     public override void LogicUpdate()
     {
-        if (!_player.InputSys.JumpTrigger)
-            Player_SkillManager.Instance?.Jump.ResetSkill();
         // Enter airState as soon as leave the ground
-            if (!_player.Checker.IsGrounded)
-                _stateMachine.ChangeState(_player.StateSO.CoyoteState, false);
+        if (!_player.Checker.IsGrounded)
+            _stateMachine.ChangeState(_player.StateSO.CoyoteState, false);
     }
 
     public override void Exit()

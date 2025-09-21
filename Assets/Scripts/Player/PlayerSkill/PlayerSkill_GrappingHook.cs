@@ -14,10 +14,10 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
 
     [Header("GHookAttribute")]
     [field: SerializeField] public float MaxDetectDist { get; private set; } = 15f; // Maximum distance to detect grapple points
-    [field: SerializeField] public float MaxLineDist { get; private set; }
+    [field: SerializeField] public float MaxLineDist { get; private set; } = 8f;
     [field: SerializeField] public LayerMask CanHookLayer { get; private set; }      // Which layer can the hook attach to
     [SerializeField] float _lineMoveSpeed = 4.5f;
-    [SerializeField] float _lineSwingForce = 20f;
+    [SerializeField] float _lineSwingForce = 35f;
     [SerializeField] float _maxSwingSpeed = 12f;
     [SerializeField] float _initPosDuration = 0.25f;
     [SerializeField] float _initLineDuration = 0.2f;
@@ -31,7 +31,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
 
     public override void TryUseSkill()
     {
-        if (!IsReady ||
+        if (!CanUse ||
             CurrentCharges == 0 ||
             !_inputSys.GrapperTrigger ||
             _player.IsAttacking
@@ -43,6 +43,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
     {
         CurrentCharges -= MaxCharges == -1 ? 0 : 1;
         IsReady = false;
+        CanUse = false;
 
         // Get mouse position and calculate fire direction
         RaycastHit2D hit = Physics2D.Raycast(
@@ -75,6 +76,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
     public override void ResetSkill()
     {
         IsReady = true;
+        StartCoroutine(ButtonReleaseCheck());
     }
     void AttachHook()
     {
@@ -205,6 +207,17 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
         {
             BreakGHook();
             return;
+        }
+    }
+
+    public override IEnumerator ButtonReleaseCheck()
+    {
+        while (!CanUse)
+        {
+            if (!_player.InputSys.GrapperTrigger)
+                    CanUse = true;
+            else
+                yield return null;
         }
     }
 }

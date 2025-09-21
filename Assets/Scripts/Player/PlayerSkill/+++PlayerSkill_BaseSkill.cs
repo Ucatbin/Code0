@@ -1,8 +1,9 @@
+using System.Collections;
 using UnityEngine;
 
-public abstract class PlayerSkill_BaseSkill :MonoBehaviour
+public abstract class PlayerSkill_BaseSkill : MonoBehaviour
 {
-    [Tooltip("Whether skill is ready to use")]
+    [Tooltip("Whether skill is cooled down")]
     public bool IsReady;
     [Tooltip("Wether button released")]
     public bool CanUse;
@@ -28,4 +29,6 @@ public abstract class PlayerSkill_BaseSkill :MonoBehaviour
     public abstract void CoolDownSkill(float coolDown, string tag);
     public abstract void UseSkill();
     public abstract void ResetSkill();
+
+    public abstract IEnumerator ButtonReleaseCheck();
 }

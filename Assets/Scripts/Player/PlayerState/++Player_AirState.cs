@@ -15,10 +15,9 @@ public class Player_AirState : Player_BaseState
     {
         base.PhysicsUpdate();
 
-
-        if (Player_SkillManager.Instance.Jump.FinishJump)
-            if (!_player.InputSys.JumpTrigger)
-                Player_SkillManager.Instance.Jump.IsReady = true;
+        // if (Player_SkillManager.Instance.Jump.FinishJump)
+        //     if (!_player.InputSys.JumpTrigger)
+        //         Player_SkillManager.Instance.Jump.IsReady = true;
     }
     public override void LogicUpdate()
     {

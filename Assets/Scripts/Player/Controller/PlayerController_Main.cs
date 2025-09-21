@@ -4,7 +4,7 @@ using Unity.Cinemachine;
 public class PlayerController_Main : EntityContoller_Main, IDamageable
 {
     [Header("NecessaryComponent")]
-    [field: SerializeField] public Transform PlayerRoot { get ; private set; }
+    [field: SerializeField] public Transform PlayerRoot { get; private set; }
     [field: SerializeField] public Rigidbody2D Rb { get; private set; }
     [field: SerializeField] public Animator Anim { get; private set; }
     [field: SerializeField] public PlayerController_Checker Checker { get; private set; }
@@ -135,6 +135,7 @@ public class PlayerController_Main : EntityContoller_Main, IDamageable
     }
 
     #endregion
+    #region DamageInfo
     public void TakeDamage(DamageData damageData)
     {
         throw new System.NotImplementedException();
@@ -144,4 +145,5 @@ public class PlayerController_Main : EntityContoller_Main, IDamageable
     {
         throw new System.NotImplementedException();
     }
+    #endregion
 }

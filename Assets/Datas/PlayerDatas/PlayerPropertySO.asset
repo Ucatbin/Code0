@@ -17,7 +17,7 @@ MonoBehaviour:
   GroundAccel: 1
   GroundDamping: 2
   MaxAirSpeed: 20
-  MaxAirMoveSpeed: 8
+  MaxAirMoveSpeed: 6
   AirAccel: 0.8
   AirDamping: 0.18
   JumpInitForce: 10
