@@ -6,6 +6,7 @@ public interface IDamageable
     int CurrentHealth { get; }
     int MaxHealth { get; }
     void TakeDamage(DamageData damageData);
+    void TakeHeal();
     void Die();
 }
 

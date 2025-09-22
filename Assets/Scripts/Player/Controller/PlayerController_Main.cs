@@ -12,8 +12,9 @@ public class PlayerController_Main : EntityContoller_Main, IDamageable
     [field: SerializeField] public Camera MainCam { get; private set; }
     [field: SerializeField] public CinemachineCamera Cam { get; private set; }
 
-    public int CurrentHealth => throw new System.NotImplementedException();
-    public int MaxHealth => throw new System.NotImplementedException();
+    [Header("Damageable")]
+    public int CurrentHealth { get; private set; }
+    public int MaxHealth => PropertySO.MaxHealth;
 
     [Header("Controllers")]
     public PlayerController_Visual PlayerVisual;
@@ -54,6 +55,8 @@ public class PlayerController_Main : EntityContoller_Main, IDamageable
         _stateMachine.InitState(StateSO.IdleState);
 
         RTProperty.Init(PropertySO);
+
+        CurrentHealth = MaxHealth;
     }
     protected override void Start()
     {
@@ -142,6 +145,11 @@ public class PlayerController_Main : EntityContoller_Main, IDamageable
     }
 
     public void Die()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void TakeHeal()
     {
         throw new System.NotImplementedException();
     }

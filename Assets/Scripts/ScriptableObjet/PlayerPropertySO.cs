@@ -3,6 +3,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PlayerAttributeSO", menuName = "Game/Player/Attributes")]
 public class PlayerPropertySO : ScriptableObject
 {
+    [Header("Health")]
+    public int MaxHealth = 100;
     [Header("MOVEMENT")]
     [Tooltip("Max speed on ground")]
     public float MaxGroundSpeed = 12f;
