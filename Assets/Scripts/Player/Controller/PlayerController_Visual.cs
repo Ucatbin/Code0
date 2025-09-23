@@ -4,7 +4,8 @@ public class PlayerController_Visual : MonoBehaviour
 {
     [SerializeField] PlayerController_Main _player;
     public TrailRenderer GlideTrail;
-    public Transform PlayerVisual;
+    [SerializeField] Transform _playerVisual;
+    [SerializeField] Transform _playerCheckers;
 
     void Update()
     {
@@ -21,7 +22,8 @@ public class PlayerController_Visual : MonoBehaviour
 
         if (_player.Rb.linearVelocityX * _player.FacingDir < 0)
         {
-            PlayerVisual.transform.Rotate(new Vector2(0f, 180f));
+            _playerVisual.Rotate(new Vector2(0f, 180f));
+            _playerCheckers.Rotate(new Vector2(0f, 180f));
             _player.FacingDir = _player.FacingDir * -1;
         }
     }

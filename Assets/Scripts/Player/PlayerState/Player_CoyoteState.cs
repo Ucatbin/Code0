@@ -10,7 +10,11 @@ public class Player_CoyoteState : Player_FallState
 
         TimerManager.Instance.AddTimer(
             _player.PropertySO.CoyoteWindow,
-            () => _stateMachine.ChangeState(_player.StateSO.FallState, false),
+            () =>
+            {
+                _stateMachine.ChangeState(_player.StateSO.FallState, false);
+                Player_SkillManager.Instance.Jump.CurrentCharges -= 1;
+            },
             "Coyote"
         );
     }

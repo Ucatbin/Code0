@@ -13,6 +13,7 @@ public class PlayerStateSO : ScriptableObject
     public Player_CoyoteState CoyoteState { get; private set; }
     public Player_FallState FallState { get; private set; }
     public Player_AirGlideState AirGlideState { get; private set; }
+    public Player_WallSlideState WallSlideState { get; private set; }
 
     public Player_HookedState HookedState { get; private set; }
     public Player_AttackState AttackState { get; private set; }
@@ -25,6 +26,7 @@ public class PlayerStateSO : ScriptableObject
     [Min(0)] public int CoyotePriority = 1;
     [Min(0)] public int FallPriority = 1;
     [Min(0)] public int AirGlidePriority = 2;
+    [Min(0)] public int WallSlidePriority = 1;
 
     [Header("Action States Priority")]
     [Min(0)] public int HookedPriority = 3;
@@ -41,6 +43,7 @@ public class PlayerStateSO : ScriptableObject
         CoyoteState = new Player_CoyoteState(player, stateMachine, CoyotePriority, "Idle");
         FallState = new Player_FallState(player, stateMachine, FallPriority, "Fall");
         AirGlideState = new Player_AirGlideState(player, stateMachine, AirGlidePriority, "Fall");
+        WallSlideState = new Player_WallSlideState(player, stateMachine, WallSlidePriority, "WallSlide");
 
         HookedState = new Player_HookedState(player, stateMachine, HookedPriority, "Hooked");
         AttackState = new Player_AttackState(player, stateMachine, AttackPriority, "Attack");

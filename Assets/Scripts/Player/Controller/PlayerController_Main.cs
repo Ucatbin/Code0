@@ -26,6 +26,7 @@ public class PlayerController_Main : EntityContoller_Main, IDamageable
     public bool IsAttached = false;
     public bool IsAttacking = false;
     public bool IsAddingForce = false;
+    public bool IsWallSliding = false;
 
     void OnEnable()
     {

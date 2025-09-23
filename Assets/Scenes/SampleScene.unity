@@ -128,7 +128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 14778943}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GroundChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,7 +159,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 40701402}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -862,7 +862,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 390987058}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Controllers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -900,7 +900,7 @@ GameObject:
   m_Component:
   - component: {fileID: 405554526}
   - component: {fileID: 405554527}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: VisualController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -936,7 +936,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 542567388}
   GlideTrail: {fileID: 596630719}
-  PlayerVisual: {fileID: 1961907187}
+  _playerVisual: {fileID: 1961907187}
+  _playerCheckers: {fileID: 1875388749}
 --- !u!1 &445309550
 GameObject:
   m_ObjectHideFlags: 0
@@ -1386,7 +1387,7 @@ GameObject:
   - component: {fileID: 542567387}
   - component: {fileID: 542567388}
   - component: {fileID: 542567389}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PlayerController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1437,6 +1438,7 @@ MonoBehaviour:
   IsAttached: 0
   IsAttacking: 0
   IsAddingForce: 0
+  IsWallSliding: 0
 --- !u!114 &542567389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1455,6 +1457,37 @@ MonoBehaviour:
   AirSpeedMult: 1
   GroundSpeedBonus: 0
   AirSpeedBonus: 0
+--- !u!1 &589259273
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 589259274}
+  m_Layer: 8
+  m_Name: WallChecker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &589259274
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 589259273}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.42, y: 0.2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1875388749}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &596630715
 GameObject:
   m_ObjectHideFlags: 0
@@ -1467,7 +1500,7 @@ GameObject:
   - component: {fileID: 596630717}
   - component: {fileID: 596630718}
   - component: {fileID: 596630719}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1912,7 +1945,7 @@ GameObject:
   - component: {fileID: 686963751}
   - component: {fileID: 686963755}
   - component: {fileID: 686963752}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GrappingHook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2245,7 +2278,7 @@ GameObject:
   m_Component:
   - component: {fileID: 893872116}
   - component: {fileID: 893872117}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CinemachineCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2589,7 +2622,7 @@ GameObject:
   m_Component:
   - component: {fileID: 973925176}
   - component: {fileID: 973925177}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2675,7 +2708,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1024342921}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AttackVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2708,7 +2741,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1078320050}
   - component: {fileID: 1078320051}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GrappleChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2786,7 +2819,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1101025357}
   - component: {fileID: 1101025358}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2846,7 +2879,7 @@ GameObject:
   - component: {fileID: 1233298155}
   - component: {fileID: 1233298157}
   - component: {fileID: 1233298156}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: InputController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3137,7 +3170,7 @@ GameObject:
   - component: {fileID: 1564471962}
   - component: {fileID: 1564471963}
   - component: {fileID: 1564471964}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Managers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3209,7 +3242,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1573893944}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AttackEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3245,7 +3278,7 @@ GameObject:
   - component: {fileID: 1614462010}
   - component: {fileID: 1614462011}
   - component: {fileID: 1614462012}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3503,7 +3536,7 @@ GameObject:
   - component: {fileID: 1721889139}
   - component: {fileID: 1721889136}
   - component: {fileID: 1721889138}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SkillController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3742,7 +3775,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1819390177}
   - component: {fileID: 1819390178}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Isometric Diamond
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3830,7 +3863,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1875388749}
   - component: {fileID: 1875388750}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CheckerController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3852,6 +3885,7 @@ Transform:
   m_Children:
   - {fileID: 14778943}
   - {fileID: 1078320050}
+  - {fileID: 589259274}
   m_Father: {fileID: 390987058}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1875388750
@@ -3866,13 +3900,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d0366a57031d9140a942a6d90376b6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _player: {fileID: 542567388}
   IsGrounded: 0
+  WallDected: 0
   _groundLayer:
     serializedVersion: 2
     m_Bits: 64
   _groundCheckDist: 0.03
   _groundCheckPoint: {fileID: 14778943}
   groundCheckWidth: 0.32
+  _wallCheckPoint: {fileID: 589259274}
+  _wallCheckDist: 0.1
+  _wallLayer:
+    serializedVersion: 2
+    m_Bits: 65
   GLineChecker: {fileID: 1078320051}
   GLineBreakLayer:
     serializedVersion: 2
@@ -4021,7 +4062,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1900539158}
   - component: {fileID: 1900539159}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4168,7 +4209,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1961907187}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PlayerVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4203,7 +4244,7 @@ GameObject:
   - component: {fileID: 1967383940}
   - component: {fileID: 1967383942}
   - component: {fileID: 1967383941}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AttackVFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4316,7 +4357,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2010529399}
   - component: {fileID: 2010529398}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HandlerController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4360,7 +4401,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2096532429}
   - component: {fileID: 2096532430}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -17,7 +17,8 @@ public class PlayerSkill_Jump : PlayerSkill_BaseSkill
             CurrentCharges == 0 ||
             !_inputSys.JumpTrigger ||
             _player.IsJumping ||
-            _player.IsAttacking
+            _player.IsAttacking ||
+            _player.IsWallSliding
         )
             return;
         UseSkill();
