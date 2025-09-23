@@ -106,35 +106,35 @@ public class PlayerController_Main : EntityContoller_Main, IDamageable
     #region Handle Skill Logics
     void HandleJumpStart()
     {
-        _stateMachine.ChangeState(StateSO.JumpState, false);
         IsJumping = true;
+        _stateMachine.ChangeState(StateSO.JumpState, false);
     }
     void HandleJumpEnd()
     {
-        _stateMachine.ChangeState(StateSO.AirState, true);
         IsJumping = false;
+        _stateMachine.ChangeState(StateSO.AirState, true);
     }
 
     void HandleHookAtteched()
     {
-        _stateMachine.ChangeState(StateSO.HookedState, true);
         IsAttached = true;
+        _stateMachine.ChangeState(StateSO.HookedState, true);
     }
     void HandleHookReleased()
     {
-        _stateMachine.ChangeState(StateSO.AirGlideState, true);
         IsAttached = false;
+        _stateMachine.ChangeState(StateSO.AirGlideState, true);
     }
 
     void HandleAttackStart()
     {
-        _stateMachine.ChangeState(StateSO.AttackState, false);
         IsAttacking = true;
+        _stateMachine.ChangeState(StateSO.AttackState, false);
     }
     void HandleAttackEnd()
     {
-        _stateMachine.ChangeState(StateSO.FallState, true);
         IsAttacking = false;
+        _stateMachine.ChangeState(StateSO.FallState, true);
     }
 
     #endregion

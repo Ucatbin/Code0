@@ -33,7 +33,7 @@ public class Player_JumpState : Player_AirState
         _player.Rb.AddForce(_player.PropertySO.JumpInitForce * Vector2.up, ForceMode2D.Impulse);
 
         if (_jumpSkill.CurrentCharges != _jumpSkill.MaxCharges - 1)
-            _stateMachine.ChangeState(_player.StateSO.AirState, true);
+            SkillEvents.TriggerJumpEnd();
     }
 
     public override void PhysicsUpdate()
@@ -48,14 +48,13 @@ public class Player_JumpState : Player_AirState
         
         // Cant add force after jumpWindow
         if (!_player.InputSys.JumpTrigger)
-            _stateMachine.ChangeState(_player.StateSO.AirState, true);
+            SkillEvents.TriggerJumpEnd();
     }
 
     public override void Exit()
     {
         base.Exit();
 
-        _player.IsJumping = false;
         _player.RTProperty.TargetSpeed.y = 0f;
         TimerManager.Instance.CancelTimersWithTag("JumpStateTimer");
     }

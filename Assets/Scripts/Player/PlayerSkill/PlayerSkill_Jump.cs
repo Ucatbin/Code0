@@ -1,5 +1,4 @@
 using System.Collections;
-using UnityEngine;
 
 public class PlayerSkill_Jump : PlayerSkill_BaseSkill
 {
@@ -16,7 +15,9 @@ public class PlayerSkill_Jump : PlayerSkill_BaseSkill
     {
         if (!CanUse ||
             CurrentCharges == 0 ||
-            !_inputSys.JumpTrigger
+            !_inputSys.JumpTrigger ||
+            _player.IsJumping ||
+            _player.IsAttacking
         )
             return;
         UseSkill();
@@ -44,7 +45,7 @@ public class PlayerSkill_Jump : PlayerSkill_BaseSkill
         while (!CanUse)
         {
             if (!_player.InputSys.JumpTrigger)
-                    CanUse = true;
+                CanUse = true;
             else
                 yield return null;
         }

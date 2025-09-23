@@ -26,11 +26,11 @@ public class Player_HookedState : Player_BaseState
     public override void PhysicsUpdate()
     {
         _dashSkill.TryUseSkill();
-        _gHookSkill.MoveOnGLine();
+        _gHookSkill.MoveOnLine();
     }
     public override void LogicUpdate()
     {
-        _gHookSkill.CheckGLineBreak();
+        _gHookSkill.CheckLineBreak();
 
         _gHookSkill.RopeLine.SetPosition(0, _player.transform.position);
     }

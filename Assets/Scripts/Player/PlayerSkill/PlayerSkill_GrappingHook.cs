@@ -119,12 +119,13 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
                 BreakGHook();
                 yield break;
             }
-            
             elapsedTime += Time.deltaTime;
             yield return null;
         }
         _player.PlayerRoot.position = targetPos;
+        RopeLine.SetPosition(0, _player.transform.position);
         _player.Rb.AddForce((targetPos - startPos) * 1.5f, ForceMode2D.Impulse);
+        _player.Checker.GLineChecker.enabled = false;
 
         if (Vector2.Distance(_player.transform.position, HookPoint.transform.position) > MaxLineDist)
             StartCoroutine(SetLineDist());
@@ -149,6 +150,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
             yield return null;
         }
         RopeJoint.distance = MaxLineDist;
+        RopeLine.SetPosition(0, _player.transform.position);
         SkillEvents.TriggerHookAttach();
     }
     public void ReleaseGHook()
@@ -168,14 +170,12 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
         _player.IsAttached = false;
         _player.IsAddingForce = false;
 
-        _player.Checker.GLineChecker.enabled = false;
-
         // Disable distance joint and line renderer
         RopeJoint.enabled = false;
         RopeLine.enabled = false;
         _pool.Pool.Release(HookPoint);
     }
-    public void MoveOnGLine()
+    public void MoveOnLine()
     {
         float inputY = _player.InputSys.MoveInput.y;
         float inputX = _player.InputSys.MoveInput.x;
@@ -196,7 +196,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
         RopeLine.SetPosition(1, HookPoint.transform.position);
         RopeLine.enabled = true;
     }
-    public void CheckGLineBreak()
+    public void CheckLineBreak()
     {
         if (!_player.InputSys.GrapperTrigger && _player.IsAttached)
         {
@@ -215,7 +215,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
         while (!CanUse)
         {
             if (!_player.InputSys.GrapperTrigger)
-                    CanUse = true;
+                CanUse = true;
             else
                 yield return null;
         }

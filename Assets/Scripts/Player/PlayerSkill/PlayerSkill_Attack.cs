@@ -66,11 +66,17 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
     public override void ResetSkill()
     {
         IsReady = true;
-        CanUse = true;
+        StartCoroutine(ButtonReleaseCheck());
     }
 
     public override IEnumerator ButtonReleaseCheck()
     {
-        throw new System.NotImplementedException();
+        while (!CanUse)
+        {
+            if (!_player.InputSys.AttackTrigger)
+                CanUse = true;
+            else
+                yield return null;
+        }
     }
 }

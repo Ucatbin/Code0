@@ -77,7 +77,7 @@ public class PlayerSkill_GrappingHookDash : PlayerSkill_BaseSkill
         while (!CanUse)
         {
             if (!_player.InputSys.DashTrigger)
-                    CanUse = true;
+                CanUse = true;
             else
                 yield return null;
         }
