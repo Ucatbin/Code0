@@ -12,9 +12,6 @@ public class Player_GroundState : Player_BaseState
         base.Enter();
 
         _player.Rb.gravityScale = _player.PropertySO.DefaultGravity;
-
-        if (Player_SkillManager.Instance != null)
-            Player_SkillManager.Instance.Jump.CurrentCharges = Player_SkillManager.Instance.Jump.MaxCharges;  
     }
     
     public override void PhysicsUpdate()

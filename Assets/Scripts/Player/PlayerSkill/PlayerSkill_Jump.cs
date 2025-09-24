@@ -13,12 +13,15 @@ public class PlayerSkill_Jump : PlayerSkill_BaseSkill
 
     public override void TryUseSkill()
     {
+        // Reset charges when on ground or wall slide
+        if ((_player.Checker.IsGrounded || _player.IsWallSliding) && !_player.InputSys.JumpTrigger)
+            CurrentCharges = MaxCharges;
+            
         if (!CanUse ||
             CurrentCharges == 0 ||
             !_inputSys.JumpTrigger ||
             _player.IsJumping ||
-            _player.IsAttacking ||
-            _player.IsWallSliding
+            _player.IsAttacking
         )
             return;
         UseSkill();
@@ -29,7 +32,10 @@ public class PlayerSkill_Jump : PlayerSkill_BaseSkill
         CanUse = false;
         IsReady = false;
 
-        SkillEvents.TriggerJumpStart();
+        if (_player.IsWallSliding)
+            SkillEvents.TriggerWallJumpStart();
+        else
+            SkillEvents.TriggerJumpStart();
     }
     public override void CoolDownSkill(float coolDown, string tag)
     {

@@ -16,6 +16,7 @@ MonoBehaviour:
   MovePriority: 1
   AirPriority: 1
   JumpPriority: 2
+  WallJumpPriority: 3
   CoyotePriority: 2
   FallPriority: 1
   AirGlidePriority: 1

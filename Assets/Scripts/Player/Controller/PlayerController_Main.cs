@@ -31,6 +31,7 @@ public class PlayerController_Main : EntityContoller_Main, IDamageable
     void OnEnable()
     {
         SkillEvents.OnJumpStart += HandleJumpStart;
+        SkillEvents.OnWallJumpStart += HandleWallJumpStart;
         SkillEvents.OnJumpEnd += HandleJumpEnd;
         SkillEvents.OnHookAttach += HandleHookAtteched;
         SkillEvents.OnHookRelease += HandleHookReleased;
@@ -40,6 +41,7 @@ public class PlayerController_Main : EntityContoller_Main, IDamageable
     void OnDisable()
     {
         SkillEvents.OnJumpStart -= HandleJumpStart;
+        SkillEvents.OnWallJumpStart -= HandleWallJumpStart;
         SkillEvents.OnJumpEnd -= HandleJumpEnd;
         SkillEvents.OnHookAttach -= HandleHookAtteched;
         SkillEvents.OnHookRelease -= HandleHookReleased;
@@ -109,6 +111,11 @@ public class PlayerController_Main : EntityContoller_Main, IDamageable
     {
         IsJumping = true;
         _stateMachine.ChangeState(StateSO.JumpState, false);
+    }
+    void HandleWallJumpStart()
+    {
+        IsJumping = true;
+        _stateMachine.ChangeState(StateSO.WallJumpState, false);
     }
     void HandleJumpEnd()
     {

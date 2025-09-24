@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 148d85893147b7e438e6ce10d363b052, type: 3}
   m_Name: PlayerPropertySO
   m_EditorClassIdentifier: 
+  MaxHealth: 100
   MaxGroundSpeed: 12
   MaxGroundMoveSpeed: 6
   GroundAccel: 1
@@ -21,6 +22,8 @@ MonoBehaviour:
   AirAccel: 0.8
   AirDamping: 0.18
   JumpInitForce: 10
+  WallJumpForce: 12
+  WallJumpDir: {x: 1, y: 1.5}
   JumpAccel: 20
   JumpInputWindow: 0.25
   CoyoteWindow: 0.15
