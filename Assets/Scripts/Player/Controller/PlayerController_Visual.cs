@@ -14,9 +14,10 @@ public class PlayerController_Visual : MonoBehaviour
 
     void Flip()
     {
-        if (_player.InputSys.MoveInput.x == 0f &&
-                !_player.InputSys.AttackTrigger &&
-                !_player.IsAttached
+        if (_player.InputSys.MoveInput.x == 0f &&   // Can flip while moving
+                !_player.InputSys.AttackTrigger &&  // Can flip while attacking
+                !_player.IsAttached ||              // Can flip while attached
+                _player.IsWallSliding               // Precent flip shaking when is wall sliding
             )
             return;
 

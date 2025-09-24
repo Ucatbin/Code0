@@ -10,14 +10,17 @@ public class PlayerController_Checker : MonoBehaviour
     [SerializeField] PlayerController_Main _player;
     [Header("Ground Check")]
     public bool IsGrounded;
-    public bool WallDected;
+    [SerializeField] Transform _groundCheckPoint;
     [SerializeField] LayerMask _groundLayer;
     [SerializeField] float _groundCheckDist = 0.03f;
-    [SerializeField] Transform _groundCheckPoint;
-    [SerializeField] float groundCheckWidth = 0.32f;
+    [SerializeField] float _groundCheckWidth = 0.32f;
+
+    [Header("Wall Check")]
+    public bool WallDected;
     [SerializeField] Transform _wallCheckPoint;
-    [SerializeField] float _wallCheckDist = 0.1f;
     [SerializeField] LayerMask _wallLayer;
+    [SerializeField] float _wallCheckDist = 0.1f;
+    [SerializeField] float _wallCheckWidth = 0.32f;
 
     [Header("Grapple Check")]
     public Collider2D GLineChecker;
@@ -32,9 +35,9 @@ public class PlayerController_Checker : MonoBehaviour
     void GroundCheck()
     {
         // Add check points
-        Vector2 leftPos = _groundCheckPoint.position - _groundCheckPoint.right * groundCheckWidth / 2;
+        Vector2 leftPos = _groundCheckPoint.position - _groundCheckPoint.right * _groundCheckWidth / 2;
         Vector2 centerPos = _groundCheckPoint.position;
-        Vector2 rightPos = _groundCheckPoint.position + _groundCheckPoint.right * groundCheckWidth / 2;
+        Vector2 rightPos = _groundCheckPoint.position + _groundCheckPoint.right * _groundCheckWidth / 2;
 
         // Raycasts
         bool leftHit = Physics2D.Raycast(leftPos, Vector2.down, _groundCheckDist, _groundLayer);
@@ -51,10 +54,20 @@ public class PlayerController_Checker : MonoBehaviour
 
     void WallCheck()
     {
-        bool wallHit = Physics2D.Raycast(_wallCheckPoint.position, Vector2.right, _wallCheckDist * _player.FacingDir, _wallLayer);
+        Vector2 upperPos = _wallCheckPoint.position - _wallCheckPoint.up * _wallCheckWidth / 2;
+        Vector2 centerPos = _wallCheckPoint.position;
+        Vector2 lowerPos = _wallCheckPoint.position + _wallCheckPoint.up * _wallCheckWidth / 2;
 
-        Debug.DrawRay(_wallCheckPoint.position, Vector2.right * _wallCheckDist * _player.FacingDir, Color.yellow);
+        // Raycasts
+        bool upperHit = Physics2D.Raycast(upperPos, Vector2.right, _wallCheckDist * _player.FacingDir, _wallLayer);
+        bool centerHit = Physics2D.Raycast(centerPos, Vector2.right, _wallCheckDist * _player.FacingDir, _wallLayer);
+        bool lowerHit = Physics2D.Raycast(lowerPos, Vector2.right, _wallCheckDist * _player.FacingDir, _wallLayer);
 
-        WallDected = wallHit;
+        // Debug ray
+        Debug.DrawRay(upperPos, Vector2.right * _wallCheckDist, Color.red);
+        Debug.DrawRay(centerPos, Vector2.right * _wallCheckDist, Color.red);
+        Debug.DrawRay(lowerPos, Vector2.right * _wallCheckDist, Color.red);
+
+        WallDected = upperHit || centerHit || lowerHit;
     }
 }
