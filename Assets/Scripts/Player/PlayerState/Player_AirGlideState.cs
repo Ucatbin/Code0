@@ -11,7 +11,6 @@ public class Player_AirGlideState : Player_AirState
         base.Enter();
 
         _player.Rb.gravityScale = _player.PropertySO.AirGlideGravity;
-        float enterSpeed = _player.RTProperty.TargetSpeed.magnitude;
     }
     
     public override void PhysicsUpdate()

@@ -67,7 +67,7 @@ public class PlayerSkill_GrappingHookDash : PlayerSkill_BaseSkill
         }
         grappingHook.ReleaseGHook();
         _player.Rb.linearVelocityY = 0f;
-        _player.RTProperty.TargetSpeed += CalculateForce(lineDir, grappingHook.SurfaceNormal);
+        _player.SetTargetSpeed(_player.Rb.linearVelocity + CalculateForce(lineDir, grappingHook.SurfaceNormal));
         _player.Rb.AddForce(_player.PropertySO.JumpInitForce * Vector2.up, ForceMode2D.Impulse);
         CoolDownSkill(SkillCD, "PlayerSkill");
     }

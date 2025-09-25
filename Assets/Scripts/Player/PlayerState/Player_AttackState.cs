@@ -20,12 +20,10 @@ public class Player_AttackState : Player_BaseState
             "Player_AbilityTimer"
         );
 
-        _player.RTProperty.TargetSpeed = Vector2.zero;
+        _player.SetTargetSpeed(Vector2.zero);
         _player.Rb.gravityScale = _player.PropertySO.AttackGravity;
         _player.Rb.linearVelocityY = 0f;
-
-        _player.RTProperty.TargetSpeed = _player.InputSys.MouseDir *
-            _attackSkill.AttackForce;
+        _player.SetTargetSpeed(_player.InputSys.MouseDir * _attackSkill.AttackForce);
     }
     public override void PhysicsUpdate()
     {
@@ -39,7 +37,6 @@ public class Player_AttackState : Player_BaseState
     {
         base.Exit();
 
-        _player.RTProperty.TargetSpeed = Vector2.zero;
         _attackSkill.CoolDownSkill(_attackSkill.SkillCD, "PlyaerAttack");
         _player.Rb.gravityScale = _player.PropertySO.FallGravity;
     }
