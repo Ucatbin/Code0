@@ -3,6 +3,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PlayerAttributeSO", menuName = "Game/Player/Attributes")]
 public class PlayerPropertySO : ScriptableObject
 {
+    [Header("Health")]
+    public int MaxHealth = 100;
     [Header("MOVEMENT")]
     [Tooltip("Max speed on ground")]
     public float MaxGroundSpeed = 12f;
@@ -25,6 +27,9 @@ public class PlayerPropertySO : ScriptableObject
     [Header("JUMP")]
     [Tooltip("Give player a initial force")]
     public float JumpInitForce = 10f;
+    [Tooltip("Give player a initial force")]
+    public float WallJumpForce = 10f;
+    public Vector2 WallJumpDir = new Vector2(1f, 1.5f);
     [Tooltip("Acceration of jump force")]
     public float JumpAccel = 20f;
     [Tooltip("Time window that can add force while holding SPACE"), Range(0f, 1f)]

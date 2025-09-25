@@ -8,7 +8,7 @@ public class PropertyChangeMD : BaseBuffModifier
 
     public override void Apply(BuffItem buffInfo)
     {
-        var targetProperty = buffInfo.Target.GetComponent<RTPropertyController>();
+        var targetProperty = buffInfo.Target.GetComponent<EntityContoller_Main>();
 
         targetProperty.GroundSpeedBonus += _speedUp;
         targetProperty.AirSpeedBonus += _speedUp;

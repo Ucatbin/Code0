@@ -15,7 +15,6 @@ public class Player_JumpState : Player_AirState
         // Initialize
         _jumpSkill = Player_SkillManager.Instance.Jump;
         _player.Rb.gravityScale = _player.PropertySO.RiseGravity;
-        _jumpSkill.FinishJump = false;
         _player.Rb.linearVelocityY = 0f;
 
         // Start jump timer
@@ -27,18 +26,14 @@ public class Player_JumpState : Player_AirState
 
         TimerManager.Instance.AddTimer(
             _jumpSkill.SkillCD,
-            () =>
-            {
-                if (_jumpSkill.CurrentCharges != 0)
-                    _jumpSkill.FinishJump = true;
-            },
+            () => _jumpSkill.ResetSkill(),
             "PlayerSkillGap"
         );
 
         _player.Rb.AddForce(_player.PropertySO.JumpInitForce * Vector2.up, ForceMode2D.Impulse);
 
         if (_jumpSkill.CurrentCharges != _jumpSkill.MaxCharges - 1)
-            _stateMachine.ChangeState(_player.StateSO.AirState, true);
+            SkillEvents.TriggerJumpEnd();
     }
 
     public override void PhysicsUpdate()
@@ -53,15 +48,14 @@ public class Player_JumpState : Player_AirState
         
         // Cant add force after jumpWindow
         if (!_player.InputSys.JumpTrigger)
-            _stateMachine.ChangeState(_player.StateSO.AirState, true);
+            SkillEvents.TriggerJumpEnd();
     }
 
     public override void Exit()
     {
         base.Exit();
 
-        _player.IsJumping = false;
-        _player.RTProperty.TargetSpeed.y = 0f;
+        _player.SetTargetSpeed(new Vector2(_player.Rb.linearVelocityX, 0f));
         TimerManager.Instance.CancelTimersWithTag("JumpStateTimer");
     }
 }

@@ -9,7 +9,7 @@ public class Player_IdleState : Player_GroundState
     public override void Enter()
     {
         base.Enter();
-        _player.RTProperty.TargetSpeed.y = 0f;
+        _player.SetTargetSpeed(new Vector2(_player.Rb.linearVelocityX, 0f));
     }
 
     public override void PhysicsUpdate()

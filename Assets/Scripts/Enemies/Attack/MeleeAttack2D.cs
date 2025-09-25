@@ -12,9 +12,9 @@ public class MeleeAttack2D : Attack2D
         Collider2D hit = Physics2D.OverlapCircle(hitOrigin.position, radius, targetMask);
          if (hit != null && hit.TryGetComponent(out IDamageable dmg))
         {
-            dmg.TakeDamage(damage);
+            //dmg.TakeDamage(damage);
         }
-        // TODO: ²¥·Å¶¯»­/ÒôÐ§
+        // TODO: ï¿½ï¿½ï¿½Å¶ï¿½ï¿½ï¿½/ï¿½ï¿½Ð§
     }
 
     void OnDrawGizmosSelected()

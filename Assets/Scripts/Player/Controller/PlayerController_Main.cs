@@ -1,10 +1,10 @@
 using UnityEngine;
 using Unity.Cinemachine;
 
-public class PlayerController_Main : EntityContoller_Main, IDamageable
+public class PlayerController_Main : EntityContoller_Main
 {
     [Header("NecessaryComponent")]
-    [field: SerializeField] public Transform PlayerRoot { get ; private set; }
+    [field: SerializeField] public Transform PlayerRoot { get; private set; }
     [field: SerializeField] public Rigidbody2D Rb { get; private set; }
     [field: SerializeField] public Animator Anim { get; private set; }
     [field: SerializeField] public PlayerController_Checker Checker { get; private set; }
@@ -12,12 +12,12 @@ public class PlayerController_Main : EntityContoller_Main, IDamageable
     [field: SerializeField] public Camera MainCam { get; private set; }
     [field: SerializeField] public CinemachineCamera Cam { get; private set; }
 
-    public int CurrentHealth => throw new System.NotImplementedException();
-    public int MaxHealth => throw new System.NotImplementedException();
+    [Header("SO")]
+    public PlayerPropertySO PropertySO;
+    public PlayerStateSO StateSO;
 
     [Header("Controllers")]
     public PlayerController_Visual PlayerVisual;
-    public RTPropertyController RTProperty;
 
     [Header("StateMark")]
     public int FacingDir = 1;
@@ -25,10 +25,12 @@ public class PlayerController_Main : EntityContoller_Main, IDamageable
     public bool IsAttached = false;
     public bool IsAttacking = false;
     public bool IsAddingForce = false;
+    public bool IsWallSliding = false;
 
     void OnEnable()
     {
         SkillEvents.OnJumpStart += HandleJumpStart;
+        SkillEvents.OnWallJumpStart += HandleWallJumpStart;
         SkillEvents.OnJumpEnd += HandleJumpEnd;
         SkillEvents.OnHookAttach += HandleHookAtteched;
         SkillEvents.OnHookRelease += HandleHookReleased;
@@ -38,6 +40,7 @@ public class PlayerController_Main : EntityContoller_Main, IDamageable
     void OnDisable()
     {
         SkillEvents.OnJumpStart -= HandleJumpStart;
+        SkillEvents.OnWallJumpStart -= HandleWallJumpStart;
         SkillEvents.OnJumpEnd -= HandleJumpEnd;
         SkillEvents.OnHookAttach -= HandleHookAtteched;
         SkillEvents.OnHookRelease -= HandleHookReleased;
@@ -49,11 +52,14 @@ public class PlayerController_Main : EntityContoller_Main, IDamageable
     {
         base.Awake();
 
+        BaseGroundSpeed = PropertySO.MaxGroundMoveSpeed;
+        BaseAirSpeed = PropertySO.MaxAirMoveSpeed;
+        MaxHealth = PropertySO.MaxHealth;
+        CurrentHealth = MaxHealth;
+
         StateSO.InstanceState(this, _stateMachine);
 
         _stateMachine.InitState(StateSO.IdleState);
-
-        RTProperty.Init(PropertySO);
     }
     protected override void Start()
     {
@@ -77,71 +83,68 @@ public class PlayerController_Main : EntityContoller_Main, IDamageable
         float accel = Checker.IsGrounded ? PropertySO.GroundAccel : PropertySO.AirAccel;
         float damping = Checker.IsGrounded ? PropertySO.GroundDamping : PropertySO.AirDamping;
         float finalSpeed = Checker.IsGrounded
-            ? RTProperty.FinalGroundSpeed * InputSys.MoveInput.x
-            : RTProperty.FinalAirSpeed * InputSys.MoveInput.x;
+            ? FinalGroundSpeed * InputSys.MoveInput.x
+            : FinalAirSpeed * InputSys.MoveInput.x;
         float rate = Rb.linearVelocityX <= Mathf.Abs(finalSpeed) ? accel : damping;
+        float speedX;
 
         if (InputSys.MoveInput.x != 0)
-            RTProperty.TargetSpeed.x = Mathf.MoveTowards(
-                RTProperty.TargetSpeed.x,
+            speedX = Mathf.MoveTowards(
+                TargetSpeed.x,
                 finalSpeed,
                 rate
             );
         else
-            RTProperty.TargetSpeed.x = Mathf.MoveTowards(
-                RTProperty.TargetSpeed.x,
+            speedX = Mathf.MoveTowards(
+                TargetSpeed.x,
                 0,
                 damping
             );
+        SetTargetSpeed(new Vector2(speedX, TargetSpeed.y));
 
         if (IsAddingForce)
-            RTProperty.TargetSpeed = Rb.linearVelocity;
+            SetTargetSpeed(Rb.linearVelocity);
         else
-            Rb.linearVelocity = new Vector2(RTProperty.TargetSpeed.x, Rb.linearVelocityY);
+            Rb.linearVelocity = new Vector2(TargetSpeed.x, Rb.linearVelocityY);
     }
-
     #region Handle Skill Logics
     void HandleJumpStart()
     {
-        _stateMachine.ChangeState(StateSO.JumpState, false);
         IsJumping = true;
+        _stateMachine.ChangeState(StateSO.JumpState, false);
+    }
+    void HandleWallJumpStart()
+    {
+        IsJumping = true;
+        _stateMachine.ChangeState(StateSO.WallJumpState, false);
     }
     void HandleJumpEnd()
     {
-        _stateMachine.ChangeState(StateSO.AirState, true);
         IsJumping = false;
+        _stateMachine.ChangeState(StateSO.AirState, true);
     }
 
     void HandleHookAtteched()
     {
-        _stateMachine.ChangeState(StateSO.HookedState, true);
         IsAttached = true;
+        _stateMachine.ChangeState(StateSO.HookedState, true);
     }
     void HandleHookReleased()
     {
-        _stateMachine.ChangeState(StateSO.AirGlideState, true);
         IsAttached = false;
+        _stateMachine.ChangeState(StateSO.AirGlideState, true);
     }
 
     void HandleAttackStart()
     {
-        _stateMachine.ChangeState(StateSO.AttackState, false);
         IsAttacking = true;
+        _stateMachine.ChangeState(StateSO.AttackState, false);
     }
     void HandleAttackEnd()
     {
-        _stateMachine.ChangeState(StateSO.FallState, true);
         IsAttacking = false;
+        _stateMachine.ChangeState(StateSO.FallState, true);
     }
 
     #endregion
-    public void TakeDamage(DamageData damageData)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void Die()
-    {
-        throw new System.NotImplementedException();
-    }
 }

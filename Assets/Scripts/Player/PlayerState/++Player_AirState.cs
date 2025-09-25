@@ -15,13 +15,12 @@ public class Player_AirState : Player_BaseState
     {
         base.PhysicsUpdate();
 
-
-        if (Player_SkillManager.Instance.Jump.FinishJump)
-            if (!_player.InputSys.JumpTrigger)
-                Player_SkillManager.Instance.Jump.IsReady = true;
     }
     public override void LogicUpdate()
     {
+        if (_player.Checker.WallDected && _player.InputSys.MoveInput.x == _player.FacingDir)
+            _stateMachine.ChangeState(_player.StateSO.WallSlideState, false);
+            
         // Reset IsJumping to enable ground check, enter fallState
         if (_player.Rb.linearVelocityY < 0f && _stateMachine.CurrentState != _player.StateSO.FallState)
             _stateMachine.ChangeState(_player.StateSO.FallState, false);

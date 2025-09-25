@@ -6,6 +6,8 @@ public static class SkillEvents
     public static event Action OnJumpEnd;
     public static void TriggerJumpStart() => OnJumpStart?.Invoke();
     public static void TriggerJumpEnd() => OnJumpEnd?.Invoke();
+    public static event Action OnWallJumpStart;
+    public static void TriggerWallJumpStart() => OnWallJumpStart?.Invoke();
     
     public static event Action OnHookAttach;
     public static event Action OnHookRelease;

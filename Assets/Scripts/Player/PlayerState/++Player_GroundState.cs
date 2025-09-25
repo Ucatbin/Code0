@@ -20,11 +20,9 @@ public class Player_GroundState : Player_BaseState
     }
     public override void LogicUpdate()
     {
-        if (!_player.InputSys.JumpTrigger)
-            Player_SkillManager.Instance?.Jump.ResetSkill();
         // Enter airState as soon as leave the ground
-            if (!_player.Checker.IsGrounded)
-                _stateMachine.ChangeState(_player.StateSO.CoyoteState, false);
+        if (!_player.Checker.IsGrounded)
+            _stateMachine.ChangeState(_player.StateSO.CoyoteState, false);
     }
 
     public override void Exit()

@@ -1,9 +1,7 @@
-using UnityEngine;
+using System.Collections;
 
 public class PlayerSkill_Jump : PlayerSkill_BaseSkill
 {
-    public bool FinishJump;
-
     public PlayerSkill_Jump(PlayerController_Main player) : base(player)
     {
     }
@@ -15,9 +13,15 @@ public class PlayerSkill_Jump : PlayerSkill_BaseSkill
 
     public override void TryUseSkill()
     {
-        if (!IsReady ||
+        // Reset charges when on ground or wall slide
+        if ((_player.Checker.IsGrounded || _player.IsWallSliding) && !_player.InputSys.JumpTrigger)
+            CurrentCharges = MaxCharges;
+            
+        if (!CanUse ||
             CurrentCharges == 0 ||
-            !_inputSys.JumpTrigger
+            !_inputSys.JumpTrigger ||
+            _player.IsJumping ||
+            _player.IsAttacking
         )
             return;
         UseSkill();
@@ -25,9 +29,13 @@ public class PlayerSkill_Jump : PlayerSkill_BaseSkill
     public override void UseSkill()
     {
         CurrentCharges -= MaxCharges == -1 ? 0 : 1;
+        CanUse = false;
         IsReady = false;
 
-        SkillEvents.TriggerJumpStart();
+        if (_player.IsWallSliding)
+            SkillEvents.TriggerWallJumpStart();
+        else
+            SkillEvents.TriggerJumpStart();
     }
     public override void CoolDownSkill(float coolDown, string tag)
     {
@@ -35,7 +43,18 @@ public class PlayerSkill_Jump : PlayerSkill_BaseSkill
     }
     public override void ResetSkill()
     {
-        CurrentCharges = MaxCharges;
         IsReady = true;
+        StartCoroutine(ButtonReleaseCheck());
+    }
+
+    public override IEnumerator ButtonReleaseCheck()
+    {
+        while (!CanUse)
+        {
+            if (!_player.InputSys.JumpTrigger)
+                CanUse = true;
+            else
+                yield return null;
+        }
     }
 }
