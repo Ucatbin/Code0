@@ -3,23 +3,26 @@ using UnityEngine;
 
 #region DamageBuilder
 /// <summary>
-/// 伤害数据传输对象
+/// Damage Info
 /// </summary>
 [Serializable]
 public struct DamageData
 {
+    public Transform Caster;
     public int DamageAmount;
     public Vector2 DamageDirection;
     public float KnockbackForce;
     public DamageType DamageType;
 
     public DamageData(
+        Transform caster,
         int damageAmount,
         Vector2 damageDirection,
         float knockbackForce,
         DamageType damageType = DamageType.Normal
     )
     {
+        Caster = caster;
         DamageAmount = damageAmount;
         DamageDirection = damageDirection;
         KnockbackForce = knockbackForce;

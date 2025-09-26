@@ -54,6 +54,9 @@ public class PlayerController_Checker : MonoBehaviour
 
     void WallCheck()
     {
+        if (IsGrounded)
+            return;
+
         Vector2 upperPos = _wallCheckPoint.position - _wallCheckPoint.up * _wallCheckWidth / 2;
         Vector2 centerPos = _wallCheckPoint.position;
         Vector2 lowerPos = _wallCheckPoint.position + _wallCheckPoint.up * _wallCheckWidth / 2;

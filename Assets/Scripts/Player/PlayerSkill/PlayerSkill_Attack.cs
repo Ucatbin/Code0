@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PlayerSkill_Attack : PlayerSkill_BaseSkill
 {
+    [SerializeField] public DamageData Damage;
     [Tooltip("Duration of single attack")]
     public float AttackDuration = 0.28f;
     [Tooltip("Offset while attacking")]
@@ -10,7 +11,7 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
     [Tooltip("The animator of attack effect")]
     [SerializeField] Animator _anim;
     [Tooltip("The parent of attack effect")]
-    [SerializeField] Transform _animation;
+    [SerializeField] Transform _attackItem;
 
     public PlayerSkill_Attack(PlayerController_Main player) : base(player)
     {
@@ -39,8 +40,8 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
             _player.gameObject,
             1
         );
-        
         _player.BuffHandler.AddBuff(buff_speedUp);
+
         CurrentCharges -= MaxCharges == -1 ? 0 : 1;
         IsReady = false;
         CanUse = false;
@@ -48,8 +49,8 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
         SkillEvents.TriggerAttackStart();
         _anim.speed = 1 / AttackDuration;
         float angleZ = Vector2.SignedAngle(Vector2.right, _player.InputSys.MouseDir);
-        _animation.rotation = Quaternion.Euler(0, 0, angleZ);
-        _animation.gameObject.SetActive(true);
+        _attackItem.rotation = Quaternion.Euler(0, 0, angleZ);
+        _attackItem.gameObject.SetActive(true);
         _anim.SetBool("Attack", true);
     }
     public override void CoolDownSkill(float coolDown, string tag)
@@ -60,7 +61,7 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
             tag
         );
 
-        _animation.gameObject.SetActive(false);
+        _attackItem.gameObject.SetActive(false);
         _anim.SetBool("Attack", false);
     }
     public override void ResetSkill()

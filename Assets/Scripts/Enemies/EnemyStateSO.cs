@@ -1,0 +1,16 @@
+using UnityEngine;
+
+[CreateAssetMenu]
+public class EnemyStateSO : ScriptableObject
+{
+    [Header("STATEMACHINE")]
+    public Enemy_IdleState IdleState { get; private set; }
+
+    [Header("STATES PRIORITY")]
+    [Min(0)] public int IdlePriority = 1;
+
+    public void InstanceState(EnemyController_Main enemy, StateMachine stateMachine)
+    {
+        IdleState = new Enemy_IdleState(enemy, stateMachine, IdlePriority, "Idle");
+    }
+}

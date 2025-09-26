@@ -111,7 +111,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
         while (elapsedTime < _initPosDuration)
         {
             float t = elapsedTime / _initPosDuration;
-            _player.PlayerRoot.position = Vector2.Lerp(startPos, targetPos, t);
+            _player.Root.position = Vector2.Lerp(startPos, targetPos, t);
             RopeLine.SetPosition(0, _player.transform.position);
             // break when cant get target position
             if (_player.Checker.GLineChecker.IsTouchingLayers(_player.Checker.GLineBreakLayer))
@@ -122,7 +122,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        _player.PlayerRoot.position = targetPos;
+        _player.Root.position = targetPos;
         RopeLine.SetPosition(0, _player.transform.position);
         _player.Rb.AddForce((targetPos - startPos) * 1.5f, ForceMode2D.Impulse);
         _player.Checker.GLineChecker.enabled = false;

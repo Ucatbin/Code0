@@ -1,31 +1,33 @@
 using UnityEngine;
 using System;
 
+
 public class EntityContoller_Main : MonoBehaviour, IMoveable, IDamageable
 {
+    [Header("NecessaryComponent")]
     protected StateMachine _stateMachine;
+    [field: SerializeField] public Transform Root { get; private set; }
+    [field: SerializeField] public Rigidbody2D Rb { get; private set; }
+    [field: SerializeField] public Animator Anim { get; private set; }
 
     [Header("Handler")]
     public BuffHandler BuffHandler;
 
     [Header("Moveable")]
-    public Vector2 TargetSpeed { get; private set; }
+    [field: SerializeField] public Vector2 TargetSpeed { get; private set; }
     public float BaseGroundSpeed { get; set; }
     public float BaseAirSpeed { get; set; }
 
     public float AccelMult { get; set; } = 1f;
-    public float GroundSpeedMult { get; set; } = 1f;
-    public float AirSpeedMult { get; set; } = 1f;
-    public float GroundSpeedBonus { get; set; } = 0f;
-    public float AirSpeedBonus { get; set; } = 0f;
+    public float SpeedMult { get; set; } = 1f;
+    public float SpeedBonus { get; set; } = 0f;
 
-    public float FinalGroundSpeed => (BaseGroundSpeed + GroundSpeedBonus) * GroundSpeedMult;
-    public float FinalAirSpeed => (BaseAirSpeed + AirSpeedBonus) * AirSpeedMult;
+    public float FinalGroundSpeed => (BaseGroundSpeed + SpeedBonus) * SpeedMult;
+    public float FinalAirSpeed => (BaseAirSpeed + SpeedBonus) * SpeedMult;
 
     [Header("Damageable")]
-    public int CurrentHealth { get; set; }
     public int MaxHealth { get; set; }
-
+    [field: SerializeField] public int CurrentHealth { get; set; }
 
     protected virtual void Awake()
     {
@@ -45,28 +47,16 @@ public class EntityContoller_Main : MonoBehaviour, IMoveable, IDamageable
     }
 
     #region IMoveable
-    public void SetTargetSpeed(Vector2 speed)
-    {
-        TargetSpeed = speed;
-    }
-
-    public void AddSpeed(float speed)
-    {
-        GroundSpeedBonus += speed;
-        AirSpeedBonus += speed;
-    }
-
-    public void MultSpeed(float multiplier)
-    {
-        GroundSpeedMult *= multiplier;
-        AirSpeedMult *= multiplier;
-    }
+    public void SetTargetSpeed(Vector2 speed) => TargetSpeed = speed;
+    public void AddSpeed(float speed) => SpeedBonus += speed;
+    public void MultSpeed(float multiplier) => SpeedMult *= multiplier;
     #endregion
 
     #region  IDamageable
     public void TakeDamage(DamageData damageData)
     {
-        throw new NotImplementedException();
+        Debug.Log($"{Root.name} take {damageData.DamageAmount}damage from {damageData.Caster}");
+        CurrentHealth -= damageData.DamageAmount;
     }
 
     public void TakeHeal()

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 [CreateAssetMenu(fileName = "PlayerStateSO", menuName = "Game/Player/StateMachine")]
 public class PlayerStateSO : ScriptableObject
 {
-    [Header("StateMachine")]
+    [Header("STATEMACHINE")]
     public Player_IdleState IdleState { get; private set; }
     public Player_MoveState MoveState { get; private set; }
     public Player_AirState AirState { get; private set; }
@@ -19,7 +19,7 @@ public class PlayerStateSO : ScriptableObject
     public Player_HookedState HookedState { get; private set; }
     public Player_AttackState AttackState { get; private set; }
 
-    [Header("Movement States Priority")]
+    [Header("STATES PRIORITY")]
     [Min(0)] public int IdlePriority = 1;
     [Min(0)] public int MovePriority = 1;
     [Min(0)] public int AirPriority = 1;
