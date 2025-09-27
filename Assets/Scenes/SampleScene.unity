@@ -3599,6 +3599,9 @@ MonoBehaviour:
   AttackForce: 10
   _anim: {fileID: 2096532430}
   _attackItem: {fileID: 1024342921}
+  CanHit:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!1 &1614462003
 GameObject:
   m_ObjectHideFlags: 0
@@ -4009,6 +4012,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1819390177}
+  - component: {fileID: 1819390180}
   - component: {fileID: 1819390178}
   - component: {fileID: 1819390179}
   m_Layer: 8
@@ -4118,8 +4122,8 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_CallbackLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
+    m_Bits: 512
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -4135,6 +4139,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.1, y: 4.7}
   m_EdgeRadius: 0
+--- !u!114 &1819390180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1819390176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bacc875488a58694aa09c7326436b4ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attack: {fileID: 1573893945}
 --- !u!1 &1875388748
 GameObject:
   m_ObjectHideFlags: 0

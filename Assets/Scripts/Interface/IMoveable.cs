@@ -54,5 +54,6 @@ public interface IMoveable
     /// Invoke when change speed multiplier
     /// </summary>
     void MultSpeed(float multiplier);
+    void HandleMovement();
     #endregion
 }

@@ -19,4 +19,9 @@ public class EnemyController_Main : EntityContoller_Main
 
         _stateMachine.InitState(StateSO.IdleState);
     }
+
+    public override void HandleMovement()
+    {
+        base.HandleMovement();
+    }
 }

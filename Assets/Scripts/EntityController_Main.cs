@@ -50,12 +50,13 @@ public class EntityContoller_Main : MonoBehaviour, IMoveable, IDamageable
     public void SetTargetSpeed(Vector2 speed) => TargetSpeed = speed;
     public void AddSpeed(float speed) => SpeedBonus += speed;
     public void MultSpeed(float multiplier) => SpeedMult *= multiplier;
+    public virtual void HandleMovement() {}
     #endregion
 
     #region  IDamageable
     public void TakeDamage(DamageData damageData)
     {
-        Debug.Log($"{Root.name} take {damageData.DamageAmount}damage from {damageData.Caster}");
+        Debug.Log($"{Root.name} take {damageData.DamageAmount} damage from {damageData.Caster}");
         CurrentHealth -= damageData.DamageAmount;
     }
 

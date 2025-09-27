@@ -12,6 +12,7 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
     [SerializeField] Animator _anim;
     [Tooltip("The parent of attack effect")]
     [SerializeField] Transform _attackItem;
+    public LayerMask CanHit;
 
     public PlayerSkill_Attack(PlayerController_Main player) : base(player)
     {
