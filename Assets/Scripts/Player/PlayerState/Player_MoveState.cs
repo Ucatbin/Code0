@@ -1,7 +1,3 @@
-using System;
-using Unity.Mathematics;
-using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Player_MoveState : Player_GroundState
 {
@@ -22,7 +18,6 @@ public class Player_MoveState : Player_GroundState
     {
         base.LogicUpdate();
 
-        // If InputX == 0f, enter IdleState
         if (_player.InputSys.MoveInput.x == 0f)
             _stateMachine.ChangeState(_player.StateSO.IdleState, true);
     }

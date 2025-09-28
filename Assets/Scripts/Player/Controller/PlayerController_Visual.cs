@@ -12,7 +12,7 @@ public class PlayerController_Visual : MonoBehaviour
         Flip();
     }
 
-    void Flip()
+    public void Flip()
     {
         if (_player.InputSys.MoveInput.x == 0f &&   // Can flip while moving
                 !_player.InputSys.AttackTrigger &&  // Can flip while attacking
@@ -23,8 +23,7 @@ public class PlayerController_Visual : MonoBehaviour
 
         if (_player.Rb.linearVelocityX * _player.FacingDir < 0)
         {
-            _playerVisual.Rotate(new Vector2(0f, 180f));
-            _playerCheckers.Rotate(new Vector2(0f, 180f));
+            _player.Root.Rotate(new Vector2(0f, 180f));
             _player.FacingDir = _player.FacingDir * -1;
         }
     }

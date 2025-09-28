@@ -4,23 +4,18 @@ using Unity.Cinemachine;
 public class PlayerController_Main : EntityContoller_Main
 {
     [Header("NecessaryComponent")]
-    [field: SerializeField] public Transform PlayerRoot { get; private set; }
-    [field: SerializeField] public Rigidbody2D Rb { get; private set; }
-    [field: SerializeField] public Animator Anim { get; private set; }
-    [field: SerializeField] public PlayerController_Checker Checker { get; private set; }
-    [field: SerializeField] public PlayerInput InputSys { get; private set; }
-    [field: SerializeField] public Camera MainCam { get; private set; }
-    [field: SerializeField] public CinemachineCamera Cam { get; private set; }
+    public PlayerInput InputSys;
+    public Camera MainCam;
+    public CinemachineCamera Cam;
 
-    [Header("SO")]
+    [Header("Scriptable Object")]
     public PlayerPropertySO PropertySO;
     public PlayerStateSO StateSO;
 
     [Header("Controllers")]
-    public PlayerController_Visual PlayerVisual;
+    public PlayerController_Visual Visual;
 
     [Header("StateMark")]
-    public int FacingDir = 1;
     public bool IsJumping = false;
     public bool IsAttached = false;
     public bool IsAttacking = false;
@@ -69,37 +64,30 @@ public class PlayerController_Main : EntityContoller_Main
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-
-        HandleMovement();
     }
     protected override void Update()
     {
         base.Update();
     }
 
-    void HandleMovement()
+    public override void HandleMovement()
     {
+        base.HandleMovement();
         // Jump and grapline are controlled by force and horizontal movement is controlled by velocity
         float accel = Checker.IsGrounded ? PropertySO.GroundAccel : PropertySO.AirAccel;
         float damping = Checker.IsGrounded ? PropertySO.GroundDamping : PropertySO.AirDamping;
         float finalSpeed = Checker.IsGrounded
             ? FinalGroundSpeed * InputSys.MoveInput.x
             : FinalAirSpeed * InputSys.MoveInput.x;
-        float rate = Rb.linearVelocityX <= Mathf.Abs(finalSpeed) ? accel : damping;
-        float speedX;
+        float delta = Rb.linearVelocityX <= Mathf.Abs(finalSpeed) && InputSys.MoveInput.x != 0
+            ? accel
+            : damping;
 
-        if (InputSys.MoveInput.x != 0)
-            speedX = Mathf.MoveTowards(
-                TargetSpeed.x,
-                finalSpeed,
-                rate
-            );
-        else
-            speedX = Mathf.MoveTowards(
-                TargetSpeed.x,
-                0,
-                damping
-            );
+        float speedX = Mathf.MoveTowards(
+            TargetSpeed.x,
+            InputSys.MoveInput.x != 0 ? finalSpeed : 0,
+            delta
+        );
         SetTargetSpeed(new Vector2(speedX, TargetSpeed.y));
 
         if (IsAddingForce)

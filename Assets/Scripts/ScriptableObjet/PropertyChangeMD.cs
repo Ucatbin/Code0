@@ -10,7 +10,6 @@ public class PropertyChangeMD : BaseBuffModifier
     {
         var targetProperty = buffInfo.Target.GetComponent<EntityContoller_Main>();
 
-        targetProperty.GroundSpeedBonus += _speedUp;
-        targetProperty.AirSpeedBonus += _speedUp;
+        targetProperty.SpeedBonus += _speedUp;
     }
 }
