@@ -9,7 +9,7 @@ public interface IMoveable
     /// <summary>
     /// The only variable need to handle movement, only try to get FinalSpeed
     /// </summary>
-    Vector2 TargetSpeed { get; }
+    Vector2 TargetSpeed { get; set; }
     /// <summary>
     /// Only get form property scriptable object
     /// </summary>

@@ -5,16 +5,17 @@ using System;
 public class EntityContoller_Main : MonoBehaviour, IMoveable, IDamageable
 {
     [Header("NecessaryComponent")]
+    public CheckerController Checker;
+    public Transform Root;
+    public Rigidbody2D Rb;
+    public Animator Anim;
     protected StateMachine _stateMachine;
-    [field: SerializeField] public Transform Root { get; private set; }
-    [field: SerializeField] public Rigidbody2D Rb { get; private set; }
-    [field: SerializeField] public Animator Anim { get; private set; }
 
     [Header("Handler")]
     public BuffHandler BuffHandler;
 
     [Header("Moveable")]
-    [field: SerializeField] public Vector2 TargetSpeed { get; private set; }
+    [field: SerializeField] public Vector2 TargetSpeed { get; set; }
     public float BaseGroundSpeed { get; set; }
     public float BaseAirSpeed { get; set; }
 
@@ -29,6 +30,8 @@ public class EntityContoller_Main : MonoBehaviour, IMoveable, IDamageable
     public int MaxHealth { get; set; }
     [field: SerializeField] public int CurrentHealth { get; set; }
 
+    [Header("StateMark")]
+    public int FacingDir = 1;
     protected virtual void Awake()
     {
         _stateMachine = new StateMachine();
@@ -40,6 +43,8 @@ public class EntityContoller_Main : MonoBehaviour, IMoveable, IDamageable
     protected virtual void FixedUpdate()
     {
         _stateMachine.CurrentState.PhysicsUpdate();
+
+        HandleMovement();
     }
     protected virtual void Update()
     {

@@ -8,9 +8,16 @@ public class Enemy_IdleState : Enemy_GroundState
     public override void Enter()
     {
         base.Enter();
+        
+        TimerManager.Instance.AddTimer(
+            5f,
+            () => _stateMachine.ChangeState(_enemy.StateSO.PatrolState, false)
+        );
     }
     public override void PhysicsUpdate() { }
-    public override void LogicUpdate() { }
+    public override void LogicUpdate()
+    {
+    }
     public override void Exit()
     {
         base.Exit();

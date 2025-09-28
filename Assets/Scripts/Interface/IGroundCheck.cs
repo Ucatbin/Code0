@@ -1,16 +1,11 @@
 using UnityEngine;
 
-public class IGroundCheck : MonoBehaviour
+public interface IGroundCheck
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    bool IsGrounded { get; }
+    Transform GroundCheckPoint { get; }
+    LayerMask GroundLayer { get; }
+    float GroundCheckDist { get; }
+    float GroundCheckWidth { get; }
+    void GroundCheck() { }
 }

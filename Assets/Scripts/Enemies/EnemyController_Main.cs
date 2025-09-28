@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class EnemyController_Main : EntityContoller_Main
@@ -5,6 +6,10 @@ public class EnemyController_Main : EntityContoller_Main
     [Header("Scriptable Object")]
     public EnemyPropertySO PropertySO;
     public EnemyStateSO StateSO;
+    public Transform Checkers;
+
+    [Header("StateMark")]
+    public bool IsPatroling = false;
 
     protected override void Awake()
     {

@@ -4,20 +4,18 @@ using Unity.Cinemachine;
 public class PlayerController_Main : EntityContoller_Main
 {
     [Header("NecessaryComponent")]
-    [field: SerializeField] public PlayerController_Checker Checker { get; private set; }
-    [field: SerializeField] public PlayerInput InputSys { get; private set; }
-    [field: SerializeField] public Camera MainCam { get; private set; }
-    [field: SerializeField] public CinemachineCamera Cam { get; private set; }
+    public PlayerInput InputSys;
+    public Camera MainCam;
+    public CinemachineCamera Cam;
 
     [Header("Scriptable Object")]
     public PlayerPropertySO PropertySO;
     public PlayerStateSO StateSO;
 
     [Header("Controllers")]
-    public PlayerController_Visual PlayerVisual;
+    public PlayerController_Visual Visual;
 
     [Header("StateMark")]
-    public int FacingDir = 1;
     public bool IsJumping = false;
     public bool IsAttached = false;
     public bool IsAttacking = false;
@@ -66,8 +64,6 @@ public class PlayerController_Main : EntityContoller_Main
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-
-        HandleMovement();
     }
     protected override void Update()
     {

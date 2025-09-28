@@ -9,12 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be1c3017c59055742a0ca6f9bd3befe1, type: 3}
-  m_Name: New Enemy Property SO
+  m_Script: {fileID: 11500000, guid: 193bed0a777a77d4d9901cc261bb3e7a, type: 3}
+  m_Name: EnemyState
   m_EditorClassIdentifier: 
-  MaxHealth: 10
-  MaxGroundMoveSpeed: 4
-  MaxAirMoveSpeed: 4
-  Accel: 1
-  Damping: 2
-  JumpForce: 10
+  IdlePriority: 1

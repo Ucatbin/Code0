@@ -50,6 +50,14 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
         SkillEvents.TriggerAttackStart();
         _anim.speed = 1 / AttackDuration;
         float angleZ = Vector2.SignedAngle(Vector2.right, _player.InputSys.MouseDir);
+        if ((Mathf.Abs(angleZ) > 90 && _player.FacingDir != -1) ||
+            (Mathf.Abs(angleZ) < 90 && _player.FacingDir != 1)
+        )
+            {
+                _player.Root.Rotate(new Vector2(0f, 180f));
+                _player.FacingDir = _player.FacingDir * -1;
+            }
+
         _attackItem.rotation = Quaternion.Euler(0, 0, angleZ);
         _attackItem.gameObject.SetActive(true);
         _anim.SetBool("Attack", true);
