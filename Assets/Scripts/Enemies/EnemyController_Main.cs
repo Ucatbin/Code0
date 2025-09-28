@@ -28,5 +28,21 @@ public class EnemyController_Main : EntityContoller_Main
     public override void HandleMovement()
     {
         base.HandleMovement();
+
+        int moveDir = IsPatroling ? FacingDir : 0;
+        float finalSpeed = Checker.IsGrounded
+            ? FinalGroundSpeed * moveDir
+            : FinalAirSpeed * moveDir;
+        float delta = Rb.linearVelocityX <= Mathf.Abs(finalSpeed) && moveDir != 0
+            ? PropertySO.Accel
+            : PropertySO.Damping;
+
+        float speedX = Mathf.MoveTowards(
+            TargetSpeed.x,
+            moveDir != 0 ? finalSpeed : 0,
+            delta
+        );
+        SetTargetSpeed(new Vector2(speedX, TargetSpeed.y));
+        Rb.linearVelocity = new Vector2(TargetSpeed.x, Rb.linearVelocityY);
     }
 }
