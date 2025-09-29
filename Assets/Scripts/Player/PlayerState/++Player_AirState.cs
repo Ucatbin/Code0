@@ -27,7 +27,7 @@ public class Player_AirState : Player_BaseState
 
         // Exit when detect the ground
         if (_player.Checker.IsGrounded && _stateMachine.CurrentState != _player.StateSO.JumpState)
-            _stateMachine.ChangeState(_player.StateSO.IdleState, true);
+            _stateMachine.ChangeState(_player.StateSO.IdleState, false);
     }
 
     public override void Exit()

@@ -18,6 +18,7 @@ public class PlayerController_Main : EntityContoller_Main
     [Header("StateMark")]
     public bool IsJumping = false;
     public bool IsAttached = false;
+    public bool IsLineDashing = false;
     public bool IsAttacking = false;
     public bool IsAddingForce = false;
     public bool IsWallSliding = false;
@@ -99,12 +100,22 @@ public class PlayerController_Main : EntityContoller_Main
     void HandleJumpStart()
     {
         IsJumping = true;
-        _stateMachine.ChangeState(StateSO.JumpState, false);
+        bool sucess = _stateMachine.ChangeState(StateSO.JumpState, false);
+        if (!sucess)
+        {
+            IsJumping = false;
+            Player_SkillManager.Instance.Jump.ResetSkill();
+        }
     }
     void HandleWallJumpStart()
     {
         IsJumping = true;
-        _stateMachine.ChangeState(StateSO.WallJumpState, false);
+        bool sucess = _stateMachine.ChangeState(StateSO.WallJumpState, false);
+        if (!sucess)
+        {
+            IsJumping = false;
+            Player_SkillManager.Instance.Jump.ResetSkill();
+        }
     }
     void HandleJumpEnd()
     {
@@ -115,7 +126,12 @@ public class PlayerController_Main : EntityContoller_Main
     void HandleHookAtteched()
     {
         IsAttached = true;
-        _stateMachine.ChangeState(StateSO.HookedState, true);
+        bool sucess = _stateMachine.ChangeState(StateSO.HookedState, false);
+        if (!sucess)
+        {
+            IsAttached = false;
+            Player_SkillManager.Instance.GrappingHook.ResetSkill();
+        }
     }
     void HandleHookReleased()
     {
@@ -126,13 +142,17 @@ public class PlayerController_Main : EntityContoller_Main
     void HandleAttackStart()
     {
         IsAttacking = true;
-        _stateMachine.ChangeState(StateSO.AttackState, false);
+        bool sucess = _stateMachine.ChangeState(StateSO.AttackState, false);
+        if (!sucess)
+        {
+            IsAttacking = false;
+            Player_SkillManager.Instance.Attack.ResetSkill();
+        }
     }
     void HandleAttackEnd()
     {
-        IsAttacking = false;
         _stateMachine.ChangeState(StateSO.FallState, true);
+        IsAttacking = false;
     }
-
     #endregion
 }

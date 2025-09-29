@@ -19,7 +19,7 @@ public class Player_MoveState : Player_GroundState
         base.LogicUpdate();
 
         if (_player.InputSys.MoveInput.x == 0f)
-            _stateMachine.ChangeState(_player.StateSO.IdleState, true);
+            _stateMachine.ChangeState(_player.StateSO.IdleState, false);
     }
 
     public override void Exit()

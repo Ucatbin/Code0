@@ -35,19 +35,18 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
     }
     public override void UseSkill()
     {
-        BuffItem buff_speedUp = BuffFactory.CreateBuffItem(
-            BuffManager.Instance.Buff_SpeedUp,
-            _player.gameObject,
-            _player.gameObject,
-            1
-        );
-        _player.BuffHandler.AddBuff(buff_speedUp);
+        // BuffItem buff_speedUp = BuffFactory.CreateBuffItem(
+        //     BuffManager.Instance.Buff_SpeedUp,
+        //     _player.gameObject,
+        //     _player.gameObject,
+        //     1
+        // );
+        // _player.BuffHandler.AddBuff(buff_speedUp);
 
         CurrentCharges -= MaxCharges == -1 ? 0 : 1;
         IsReady = false;
         CanUse = false;
 
-        SkillEvents.TriggerAttackStart();
         _anim.speed = 1 / AttackDuration;
         float angleZ = Vector2.SignedAngle(Vector2.right, _player.InputSys.MouseDir);
         if ((Mathf.Abs(angleZ) > 90 && _player.FacingDir != -1) ||
@@ -61,13 +60,14 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
         _attackItem.rotation = Quaternion.Euler(0, 0, angleZ);
         _attackItem.gameObject.SetActive(true);
         _anim.SetBool("Attack", true);
+        SkillEvents.TriggerAttackStart();
     }
     public override void CoolDownSkill(float coolDown, string tag)
     {
         TimerManager.Instance.AddTimer(
             coolDown,
             () => { ResetSkill(); },
-            tag
+            "AttackCD"
         );
 
         _attackItem.gameObject.SetActive(false);

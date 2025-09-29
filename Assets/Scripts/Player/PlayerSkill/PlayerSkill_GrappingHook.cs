@@ -10,7 +10,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
     [field: SerializeField] public LineRenderer RopeLine { get; private set; }
     public GameObject HookPoint { get; private set; }   // The point where the hook is attached
     public Vector2 SurfaceNormal { get; private set; }     // The normal of the surface hit    
-    [SerializeField] HookPointPool _pool;
+    public HookPointPool HookPool;
 
     [Header("GHookAttribute")]
     [field: SerializeField] public float MaxDetectDist { get; private set; } = 15f; // Maximum distance to detect grapple points
@@ -60,7 +60,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
         if (hit.collider != null)
         {
             // Set the hook
-            HookPoint = _pool.Pool.Get();
+            HookPoint = HookPool.Pool.Get();
             HookPoint.transform.position = hit.point;
             HookPoint.transform.parent = hit.transform;
             SurfaceNormal = hit.normal;
@@ -74,7 +74,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
         TimerManager.Instance.AddTimer(
             coolDown,
             () => { ResetSkill(); },
-            tag
+            "PlayerSkillCD"
         );
     }
     public override void ResetSkill()
@@ -177,7 +177,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
         // Disable distance joint and line renderer
         RopeJoint.enabled = false;
         RopeLine.enabled = false;
-        _pool.Pool.Release(HookPoint);
+        HookPool.Pool.Release(HookPoint);
     }
     public void MoveOnLine()
     {
@@ -202,12 +202,17 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
     }
     public void CheckLineBreak()
     {
-        if (!_player.InputSys.GrapperTrigger && _player.IsAttached)
+        if (!_player.InputSys.GrapperTrigger
+            && _player.IsAttached
+            && !_player.IsLineDashing
+            )
         {
             ReleaseGHook();
             return;
         }
-        if (GLineChecker.IsTouchingLayers(GLineBreakLayer))
+        if (GLineChecker.IsTouchingLayers(GLineBreakLayer)
+            && !_player.IsLineDashing
+            )
         {
             BreakGHook();
             return;

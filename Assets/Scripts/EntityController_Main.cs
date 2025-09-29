@@ -1,7 +1,6 @@
 using UnityEngine;
 using System;
 
-
 public class EntityContoller_Main : MonoBehaviour, IMoveable, IDamageable
 {
     [Header("NecessaryComponent")]
@@ -63,16 +62,16 @@ public class EntityContoller_Main : MonoBehaviour, IMoveable, IDamageable
     {
         Debug.Log($"{Root.name} take {damageData.DamageAmount} damage from {damageData.Caster}");
         CurrentHealth -= damageData.DamageAmount;
+        if (CurrentHealth <= 0)
+            Die();
     }
-
     public void TakeHeal()
     {
         throw new NotImplementedException();
     }
-
     public void Die()
     {
-        throw new NotImplementedException();
+        Destroy(Root.gameObject);
     }
     #endregion
 }

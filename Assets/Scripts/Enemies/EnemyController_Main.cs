@@ -6,7 +6,6 @@ public class EnemyController_Main : EntityContoller_Main
     [Header("Scriptable Object")]
     public EnemyPropertySO PropertySO;
     public EnemyStateSO StateSO;
-    public Transform Checkers;
 
     [Header("StateMark")]
     public bool IsPatroling = false;
