@@ -11,7 +11,7 @@ public class Enemy_IdleState : Enemy_GroundState
         base.Enter();
 
         TimerManager.Instance?.AddTimer(
-            5f,
+            2f,
             () => _stateMachine.ChangeState(_enemy.StateSO.PatrolState, false),
             "EnemyPatrolWait"
         );

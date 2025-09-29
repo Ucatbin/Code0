@@ -31,18 +31,18 @@ public struct DamageData
 }
 
 /// <summary>
-/// 伤害类型枚举
+/// Damage Type
 /// </summary>
 public enum DamageType
 {
     Normal,
-    Physics,     // 普通物理伤害
-    Magic,      // 魔法伤害
-    Fire,       // 火焰伤害
-    Ice,        // 冰冻伤害
-    Lightning,  // 雷电伤害
-    Poison,     // 毒素伤害
-    True        // 真实伤害（无视防御）
+    Physics,
+    Magic,
+    Fire,
+    Ice,
+    Lightning,
+    Poison,
+    True
 }
 #endregion
 

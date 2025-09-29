@@ -2,24 +2,22 @@ using UnityEngine;
 
 public class HookPointPool : BaseObjectPool
 {
-    protected override GameObject createFunc() => Instantiate(
-        _objPrefab,
-        transform.position,
-        Quaternion.identity,
-        transform
-    );
-
-    protected override void actionOnGet(GameObject obj)
+    protected override void Awake()
     {
-        obj.SetActive(true);
+        InitHook();
+        base.Awake();
     }
 
     protected override void actionOnRelease(GameObject obj)
     {
-        obj.SetActive(false);
+        base.actionOnRelease(obj);
+        obj.transform.SetParent(transform);
     }
-    protected override void actionOnDestroy(GameObject obj)
+    void InitHook()
     {
-        Destroy(obj);
+        _objPrefab = new GameObject("Hook");
+        _objPrefab.transform.SetParent(transform);
+        _objPrefab.AddComponent<Rigidbody2D>();
+        _objPrefab.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
     }
 }

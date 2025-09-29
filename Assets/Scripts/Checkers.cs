@@ -69,7 +69,7 @@ public class CheckerController : MonoBehaviour, IGroundCheck, IWallCheck
 
         // Debug ray
         //Debug.DrawRay(upperPos, Vector2.right * _wallCheckDist, Color.red);
-        Debug.DrawRay(centerPos, Vector2.right * _wallCheckDist, Color.red);
+        Debug.DrawRay(centerPos, Vector2.right * _wallCheckDist * _entity.FacingDir, Color.red);
         //Debug.DrawRay(lowerPos, Vector2.right * _wallCheckDist, Color.red);
 
         WallDected = centerHit;

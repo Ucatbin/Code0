@@ -57,6 +57,7 @@ public class PlayerSkill_GrappingHookDash : PlayerSkill_BaseSkill
         Vector2 lineDir = grappingHook.HookPoint.transform.position - _player.transform.position;
         float dashSpeed = _lineDashSpeed;
         float elapsedTime = 0f;
+        _player.IsLineDashing = true;
         while (dashSpeed != 1f && _player.IsAttached)
         {
             float t = elapsedTime / _duration;
@@ -65,6 +66,7 @@ public class PlayerSkill_GrappingHookDash : PlayerSkill_BaseSkill
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+        _player.IsLineDashing = false;
         grappingHook.ReleaseGHook();
         _player.Rb.linearVelocityY = 0f;
         _player.SetTargetSpeed(_player.Rb.linearVelocity + CalculateForce(lineDir, grappingHook.SurfaceNormal));

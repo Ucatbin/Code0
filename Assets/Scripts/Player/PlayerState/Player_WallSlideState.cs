@@ -19,7 +19,7 @@ public class Player_WallSlideState : Player_BaseState
     public override void LogicUpdate()
     {
         if (_player.Checker.IsGrounded || !_player.Checker.WallDected || _player.InputSys.MoveInput.x == 0)
-            _stateMachine.ChangeState(_player.StateSO.FallState, true);
+            _stateMachine.ChangeState(_player.StateSO.FallState, false);
     }
     public override void Exit()
     {

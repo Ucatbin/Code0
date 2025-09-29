@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class StateMachine
@@ -10,7 +11,7 @@ public class StateMachine
         CurrentState.Enter();
     }
 
-    public virtual void ChangeState(EntityState nextState, bool forceChange)
+    public virtual bool ChangeState(EntityState nextState, bool forceChange)
     {
         if (!forceChange)
         {
@@ -20,8 +21,10 @@ public class StateMachine
                 CurrentState.Exit();
                 CurrentState = nextState;
                 CurrentState.Enter();
+                return true;
             }
-            else return;
+            else
+                return false;
         }
         else
         {
@@ -29,6 +32,7 @@ public class StateMachine
             CurrentState.Exit();
             CurrentState = nextState;
             CurrentState.Enter();
+            return true;
         }
     }
 }
