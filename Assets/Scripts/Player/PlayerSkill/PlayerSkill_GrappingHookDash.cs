@@ -16,6 +16,7 @@ public class PlayerSkill_GrappingHookDash : PlayerSkill_BaseSkill
         // TODO:Havent complete if yet
         if (!CanUse ||
             CurrentCharges == 0 ||
+            !_player.IsAttached ||
             !_inputSys.DashTrigger
         )
             return;

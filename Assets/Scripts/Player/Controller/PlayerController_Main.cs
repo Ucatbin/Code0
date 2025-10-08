@@ -16,6 +16,7 @@ public class PlayerController_Main : EntityContoller_Main
     public PlayerController_Visual Visual;
 
     [Header("StateMark")]
+    public bool IsBusy = true;
     public bool IsJumping = false;
     public bool IsAttached = false;
     public bool IsLineDashing = false;

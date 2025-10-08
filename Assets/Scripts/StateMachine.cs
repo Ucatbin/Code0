@@ -11,6 +11,9 @@ public class StateMachine
         CurrentState.Enter();
     }
 
+    /// <summary>
+    /// Change state and return whether state change is sucess
+    /// </summary>
     public virtual bool ChangeState(EntityState nextState, bool forceChange)
     {
         if (!forceChange)

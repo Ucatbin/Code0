@@ -38,7 +38,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
         if (!CanUse ||
             CurrentCharges == 0 ||
             !_inputSys.GrapperTrigger ||
-            _player.IsAttacking
+            _player.IsBusy
         )
             return;
         UseSkill();
@@ -92,7 +92,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
         // If isGrounded, player will move to the hook point first
         if (_player.Checker.IsGrounded && SurfaceNormal.y != 0)
         {
-            Vector3 targetPos = new Vector2(HookPoint.transform.position.x, _player.transform.position.y);
+            Vector3 targetPos = new Vector2(HookPoint.transform.position.x, _player.transform.position.y); 
             _player.Rb.AddForce((targetPos - _player.transform.position) * _initPosDuration, ForceMode2D.Impulse);
             StartCoroutine(MoveToTarget(_player.transform.position, targetPos));
         }

@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices.ComTypes;
 using System.Collections;
 using UnityEngine;
 
@@ -28,7 +29,7 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
         if (!CanUse ||
             CurrentCharges == 0 ||
             !_inputSys.AttackTrigger ||
-            _player.IsAttached
+            _player.IsBusy
         )
             return;
         UseSkill();
@@ -43,23 +44,6 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
         // );
         // _player.BuffHandler.AddBuff(buff_speedUp);
 
-        CurrentCharges -= MaxCharges == -1 ? 0 : 1;
-        IsReady = false;
-        CanUse = false;
-
-        _anim.speed = 1 / AttackDuration;
-        float angleZ = Vector2.SignedAngle(Vector2.right, _player.InputSys.MouseDir);
-        if ((Mathf.Abs(angleZ) > 90 && _player.FacingDir != -1) ||
-            (Mathf.Abs(angleZ) < 90 && _player.FacingDir != 1)
-        )
-            {
-                _player.Root.Rotate(new Vector2(0f, 180f));
-                _player.FacingDir = _player.FacingDir * -1;
-            }
-
-        _attackItem.rotation = Quaternion.Euler(0, 0, angleZ);
-        _attackItem.gameObject.SetActive(true);
-        _anim.SetBool("Attack", true);
         SkillEvents.TriggerAttackStart();
     }
     public override void CoolDownSkill(float coolDown, string tag)
@@ -88,5 +72,24 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
             else
                 yield return null;
         }
+    }
+
+    public IEnumerator AttackAnim()
+    {
+        _anim.speed = 1 / AttackDuration;
+        float angleZ = Vector2.SignedAngle(Vector2.right, _player.InputSys.MouseDir);
+        if ((Mathf.Abs(angleZ) > 90 && _player.FacingDir != -1) ||
+            (Mathf.Abs(angleZ) < 90 && _player.FacingDir != 1)
+        )
+        {
+            _player.Root.Rotate(new Vector2(0f, 180f));
+            _player.FacingDir = _player.FacingDir * -1;
+        }
+
+        _attackItem.rotation = Quaternion.Euler(0, 0, angleZ);
+        _attackItem.gameObject.SetActive(true);
+        _anim.SetBool("Attack", true);
+
+        yield return null;
     }
 }

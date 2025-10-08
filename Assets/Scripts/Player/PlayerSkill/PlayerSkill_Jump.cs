@@ -20,18 +20,13 @@ public class PlayerSkill_Jump : PlayerSkill_BaseSkill
         if (!CanUse ||
             CurrentCharges == 0 ||
             !_inputSys.JumpTrigger ||
-            _player.IsJumping ||
-            _player.IsAttacking
+            _player.IsBusy
         )
             return;
         UseSkill();
     }
     public override void UseSkill()
     {
-        CurrentCharges -= MaxCharges == -1 ? 0 : 1;
-        CanUse = false;
-        IsReady = false;
-
         if (_player.IsWallSliding)
             SkillEvents.TriggerWallJumpStart();
         else

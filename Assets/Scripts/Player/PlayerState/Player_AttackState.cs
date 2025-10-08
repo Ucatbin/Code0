@@ -12,7 +12,12 @@ public class Player_AttackState : Player_BaseState
     {
         base.Enter();
 
+        _player.IsBusy = true;
         _attackSkill = Player_SkillManager.Instance.Attack;
+        _attackSkill.CurrentCharges -= _attackSkill.MaxCharges == -1 ? 0 : 1;
+        _attackSkill.IsReady = false;
+        _attackSkill.CanUse = false;
+        _attackSkill.StartCoroutine(_attackSkill.AttackAnim());
 
         TimerManager.Instance.AddTimer(
             _attackSkill.AttackDuration,
@@ -37,6 +42,7 @@ public class Player_AttackState : Player_BaseState
     {
         base.Exit();
 
+        _player.IsBusy = false;
         _attackSkill.CoolDownSkill(_attackSkill.SkillCD, "PlyaerAttack");
         _player.Rb.gravityScale = _player.PropertySO.FallGravity;
     }

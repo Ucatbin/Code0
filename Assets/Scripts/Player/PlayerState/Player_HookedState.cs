@@ -16,6 +16,7 @@ public class Player_HookedState : Player_BaseState
         base.Enter();
 
         // Initialize grappling hook component
+        _player.IsBusy = true;
         _gHookSkill = Player_SkillManager.Instance.GrappingHook;
         _dashSkill = Player_SkillManager.Instance.GrappingHookDash;
 
@@ -38,5 +39,7 @@ public class Player_HookedState : Player_BaseState
     public override void Exit()
     {
         base.Exit();
+
+        _player.IsBusy = false;
     }
 }

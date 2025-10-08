@@ -13,7 +13,11 @@ public class Player_JumpState : Player_AirState
         base.Enter();
 
         // Initialize
+        _player.IsBusy = true;
         _jumpSkill = Player_SkillManager.Instance.Jump;
+        _jumpSkill.CurrentCharges -= _jumpSkill.MaxCharges == -1 ? 0 : 1;
+        _jumpSkill.CanUse = false;
+        _jumpSkill.IsReady = false;
         _player.Rb.gravityScale = _player.PropertySO.RiseGravity;
         _player.Rb.linearVelocityY = 0f;
 
@@ -54,7 +58,8 @@ public class Player_JumpState : Player_AirState
     public override void Exit()
     {
         base.Exit();
-
+        
+        _player.IsBusy = false;
         _player.IsJumping = false;
         _player.SetTargetSpeed(new Vector2(_player.Rb.linearVelocityX, 0f));
         TimerManager.Instance.CancelTimersWithTag("JumpStateTimer");
