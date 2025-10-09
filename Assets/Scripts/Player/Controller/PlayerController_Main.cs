@@ -74,23 +74,24 @@ public class PlayerController_Main : EntityContoller_Main
 
     public override void HandleMovement()
     {
-        base.HandleMovement();
         // Jump and grapline are controlled by force and horizontal movement is controlled by velocity
-        float accel = Checker.IsGrounded ? PropertySO.GroundAccel : PropertySO.AirAccel;
-        float damping = Checker.IsGrounded ? PropertySO.GroundDamping : PropertySO.AirDamping;
-        float finalSpeed = Checker.IsGrounded
+        base.HandleMovement();
+        
+        float accel = Checker.IsGrounded ? PropertySO.GroundAccel : PropertySO.AirAccel;        // Decide to use ground accel or air accel
+        float damping = Checker.IsGrounded ? PropertySO.GroundDamping : PropertySO.AirDamping;  // Decide to use ground damping or air damping
+        float finalSpeed = Checker.IsGrounded                                                   // Decide to use ground max speed or air max final speed
             ? FinalGroundSpeed * InputSys.MoveInput.x
             : FinalAirSpeed * InputSys.MoveInput.x;
-        float delta = Rb.linearVelocityX <= Mathf.Abs(finalSpeed) && InputSys.MoveInput.x != 0
+        float delta = Rb.linearVelocityX <= Mathf.Abs(finalSpeed) && InputSys.MoveInput.x != 0  // Decide to use accel or damping
             ? accel
             : damping;
 
-        float speedX = Mathf.MoveTowards(
+        float speedX = Mathf.MoveTowards(                                                       // Calculate final target speed
             TargetSpeed.x,
             InputSys.MoveInput.x != 0 ? finalSpeed : 0,
             delta
         );
-        SetTargetSpeed(new Vector2(speedX, TargetSpeed.y));
+        SetTargetSpeed(new Vector2(speedX, TargetSpeed.y));                                     // Set final target speed
 
         if (IsAddingForce)
             SetTargetSpeed(Rb.linearVelocity);

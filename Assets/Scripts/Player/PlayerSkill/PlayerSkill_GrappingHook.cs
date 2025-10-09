@@ -117,6 +117,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
             float t = elapsedTime / _initPosDuration;
             _player.Root.position = Vector2.Lerp(startPos, targetPos, t);
             RopeLine.SetPosition(0, _player.transform.position);
+            RopeLine.SetPosition(1, HookPoint.transform.position);
             // break when cant get target position
             if (GLineChecker.IsTouchingLayers(GLineBreakLayer))
             {
@@ -128,6 +129,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
         }
         _player.Root.position = targetPos;
         RopeLine.SetPosition(0, _player.transform.position);
+        RopeLine.SetPosition(1, HookPoint.transform.position);
         _player.Rb.AddForce((targetPos - startPos) * 1.5f, ForceMode2D.Impulse);
         GLineChecker.enabled = false;
 
@@ -149,12 +151,14 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
             float t = elapsedTime / _initLineDuration;
             RopeJoint.distance = Mathf.Lerp(startDist, MaxLineDist, t);
             RopeLine.SetPosition(0, _player.transform.position);
+            RopeLine.SetPosition(1, HookPoint.transform.position);
 
             elapsedTime += Time.deltaTime;
             yield return null;
         }
         RopeJoint.distance = MaxLineDist;
         RopeLine.SetPosition(0, _player.transform.position);
+        RopeLine.SetPosition(1, HookPoint.transform.position);
         SkillEvents.TriggerHookAttach();
     }
     public void ReleaseGHook()

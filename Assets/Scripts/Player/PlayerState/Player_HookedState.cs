@@ -34,6 +34,7 @@ public class Player_HookedState : Player_BaseState
         _gHookSkill.CheckLineBreak();
 
         _gHookSkill.RopeLine.SetPosition(0, _player.transform.position);
+        _gHookSkill.RopeLine.SetPosition(1, _gHookSkill.HookPoint.transform.position);
     }
 
     public override void Exit()
