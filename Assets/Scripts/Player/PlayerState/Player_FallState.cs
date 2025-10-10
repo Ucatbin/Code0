@@ -9,8 +9,6 @@ public class Player_FallState : Player_AirState
     public override void Enter()
     {
         base.Enter();
-
-        _player.Rb.gravityScale = _player.PropertySO.FallGravity;
     }
 
     public override void PhysicsUpdate()
@@ -20,6 +18,9 @@ public class Player_FallState : Player_AirState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+
+        if (_player.Checker.WallDected && _player.InputSys.MoveInput.x == _player.FacingDir)
+            _stateMachine.ChangeState(_player.StateSO.WallSlideState, false);
     }
 
     public override void Exit()

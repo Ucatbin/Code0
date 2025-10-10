@@ -1155,14 +1155,11 @@ MonoBehaviour:
   Rb: {fileID: 1614462010}
   Anim: {fileID: 596630718}
   BuffHandler: {fileID: 2010529398}
-  <TargetVelocity>k__BackingField: {x: 0, y: 0}
-  <MaxFallSpeed>k__BackingField: 20
-  <InAirAccel>k__BackingField: 80
-  <FallMult>k__BackingField: 2
-  <CurrentHealth>k__BackingField: 0
-  IsBusy: 1
+  IsBusy: 0
   IsPhysicsDriven: 0
   FacingDir: 1
+  <TargetVelocity>k__BackingField: {x: 0, y: 0}
+  <CurrentHealth>k__BackingField: 0
   InputSys: {fileID: 1233298156}
   MainCam: {fileID: 519420031}
   Cam: {fileID: 893872117}
@@ -2017,7 +2014,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &734777678
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3276,6 +3273,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1659442048}
+  - component: {fileID: 1659442050}
   - component: {fileID: 1659442047}
   - component: {fileID: 1659442049}
   m_Layer: 0
@@ -3325,6 +3323,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Buff_SpeedUp>k__BackingField: {fileID: 11400000, guid: 0a572fff0ba52264295d20ec68a6b7b7, type: 2}
+--- !u!114 &1659442050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659442046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 020e8f126d3366a4fb70dc7b6d0ad7a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <GlobalVar>k__BackingField: {fileID: 11400000, guid: f6773d87c043ba74ab6a3fb3592fde9c, type: 2}
 --- !u!1 &1685203365
 GameObject:
   m_ObjectHideFlags: 0

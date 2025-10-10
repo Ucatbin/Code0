@@ -69,10 +69,9 @@ public class PlayerController_Main : EntityContoller_Main
 
     public override void HandleMovement()
     {
-        // Jump and grapline are controlled by force and horizontal movement is controlled by velocity
         base.HandleMovement();
 
-        if (IsPhysicsDriven)
+        if (IsPhysicsDriven || (InputSys.MoveInput.x == 0 && Rb.linearVelocityX == 0))
             return;
 
         float accel = Checker.IsGrounded ? PropertySO.GroundAccel : PropertySO.AirAccel;        // Decide to use ground accel or air accel
@@ -84,12 +83,12 @@ public class PlayerController_Main : EntityContoller_Main
             ? accel
             : damping;
 
-        float speedX = Mathf.MoveTowards(                                                       // Calculate final target speed
+        float frameVelocityX = Mathf.MoveTowards(                                                       // Calculate final target speed
             TargetVelocity.x,
             InputSys.MoveInput.x != 0 ? finalSpeed : 0,
-            delta
+            delta * Time.fixedDeltaTime
         );
-        SetTargetVelocityX(speedX);
+        SetTargetVelocityX(frameVelocityX);
         ApplyMovement();
     }
     #region Handle Skill Logics

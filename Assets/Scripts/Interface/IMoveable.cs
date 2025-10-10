@@ -42,12 +42,6 @@ public interface IMoveable
     float FinalAirSpeed { get; }
     #endregion
 
-    #region Gravity
-    float MaxFallSpeed { get; }
-    float InAirAccel { get; }
-    float FallMult { get; }
-    #endregion
-
     #region Function
     /// <summary>
     /// Change speed quickly by adjust TargetSpeed directly

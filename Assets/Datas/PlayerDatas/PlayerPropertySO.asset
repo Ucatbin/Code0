@@ -13,24 +13,20 @@ MonoBehaviour:
   m_Name: PlayerPropertySO
   m_EditorClassIdentifier: 
   MaxHealth: 100
-  MaxGroundSpeed: 12
-  MaxGroundMoveSpeed: 6
-  GroundAccel: 1
-  GroundDamping: 2
-  MaxAirSpeed: 20
-  MaxAirMoveSpeed: 6
-  AirAccel: 0.8
-  AirDamping: 0.18
-  JumpInitPower: 20
+  MaxGroundMoveSpeed: 8
+  GroundAccel: 60
+  GroundDamping: 80
+  MaxAirMoveSpeed: 8
+  AirAccel: 40
+  AirDamping: 28
+  JumpInitPower: 18
   JumpHoldPower: 12
-  WallJumpForce: 12
-  WallJumpDir: {x: 1, y: 1.5}
   JumpInputWindow: 0.25
+  WallSlideSpeed: 0.2
+  WallJumpPower: 15
+  WallJumpWindow: 0.15
+  WallJumpDir: {x: 0.5, y: 1}
   CoyoteWindow: 0.15
-  MaxRaiseSpeed: 20
-  MaxFallSpeed: 25
-  DefaultGravity: 4
-  RiseGravity: 0
   FallGravity: 0
   AirGlideGravity: 4.5
   AttackGravity: 0.4

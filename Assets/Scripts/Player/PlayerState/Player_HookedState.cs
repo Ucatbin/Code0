@@ -20,7 +20,7 @@ public class Player_HookedState : Player_BaseState
         _gHookSkill = Player_SkillManager.Instance.GrappingHook;
         _dashSkill = Player_SkillManager.Instance.GrappingHookDash;
 
-        _player.Rb.gravityScale = _player.PropertySO.DefaultGravity;
+        _player.Rb.gravityScale = 4.5f;
         _player.SetTargetVelocity(Vector2.zero);
     }
 

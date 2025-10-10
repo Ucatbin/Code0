@@ -12,11 +12,10 @@ public class Player_JumpState : Player_AirState
     {
         base.Enter();
 
+        _jumpSkill = Player_SkillManager.Instance.Jump;
+
         _player.IsBusy = true;
         _player.IsJumping = true;
-
-        _jumpSkill = Player_SkillManager.Instance.Jump;
-        _jumpSkill.ConsumeSkill();
 
         _player.SetTargetVelocityY(_player.PropertySO.JumpInitPower);
         _player.ApplyMovement();
@@ -31,6 +30,8 @@ public class Player_JumpState : Player_AirState
             () => _jumpSkill.ResetSkill(),
             "PlayerSkillGap"
         );
+
+        _jumpSkill.ConsumeSkill();
 
         if (_jumpSkill.CurrentCharges != _jumpSkill.MaxCharges - 1)
             SkillEvents.TriggerJumpEnd();

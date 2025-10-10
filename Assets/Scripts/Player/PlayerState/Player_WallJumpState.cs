@@ -3,6 +3,7 @@ using UnityEngine;
 public class Player_WallJumpState : Player_AirState
 {
     PlayerSkill_Jump _jumpSkill;
+    Vector2 _wallJumpDir;
 
     public Player_WallJumpState(PlayerController_Main entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
     {
@@ -12,14 +13,13 @@ public class Player_WallJumpState : Player_AirState
     {
         base.Enter();
 
-        // Initialize
         _jumpSkill = Player_SkillManager.Instance.Jump;
-        _player.SetTargetVelocity(Vector2.zero);
-        _player.Rb.linearVelocity = Vector2.zero;
 
-        // Start jump timer
+        _player.IsBusy = true;
+        _player.IsJumping = true;
+
         TimerManager.Instance.AddTimer(
-            _player.PropertySO.JumpInputWindow,
+            _player.PropertySO.WallJumpWindow,
             () => SkillEvents.TriggerJumpEnd(),
             "JumpStateTimer"
         );
@@ -29,15 +29,22 @@ public class Player_WallJumpState : Player_AirState
             "PlayerSkillGap"
         );
 
-        Vector2 diagonalForce = new Vector2(-_player.FacingDir * _player.PropertySO.WallJumpDir.x, _player.PropertySO.WallJumpDir.y).normalized;
-        _player.Rb.AddForce(_player.PropertySO.WallJumpForce * diagonalForce, ForceMode2D.Impulse);
+        _wallJumpDir = new Vector2(-_player.FacingDir * _player.PropertySO.WallJumpDir.x, _player.PropertySO.WallJumpDir.y).normalized;
+        _jumpSkill.ConsumeSkill();
     }
-    public override void PhysicsUpdate() { }
+    public override void PhysicsUpdate()
+    {
+        _player.SetTargetVelocity(_player.PropertySO.WallJumpPower * _wallJumpDir);
+        _player.ApplyMovement();
+    }
     public override void LogicUpdate() { }
     public override void Exit()
     {
         base.Exit();
 
-        _player.SetTargetVelocity(new Vector2(_player.Rb.linearVelocityX, 0f));
+        _player.IsBusy = false;
+        _player.IsJumping = false;
+
+        TimerManager.Instance.CancelTimersWithTag("JumpStateTimer");
     }
 }
