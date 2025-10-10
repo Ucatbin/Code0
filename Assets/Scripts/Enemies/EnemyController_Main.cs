@@ -37,11 +37,11 @@ public class EnemyController_Main : EntityContoller_Main
             : PropertySO.Damping;
 
         float speedX = Mathf.MoveTowards(
-            TargetSpeed.x,
+            TargetVelocity.x,
             moveDir != 0 ? finalSpeed : 0,
             delta
         );
-        SetTargetSpeed(new Vector2(speedX, TargetSpeed.y));
-        Rb.linearVelocity = new Vector2(TargetSpeed.x, Rb.linearVelocityY);
+        SetTargetVelocity(new Vector2(speedX, TargetVelocity.y));
+        Rb.linearVelocity = new Vector2(TargetVelocity.x, Rb.linearVelocityY);
     }
 }

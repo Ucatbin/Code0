@@ -6,7 +6,7 @@ public abstract class PlayerSkill_BaseSkill : MonoBehaviour
     [Tooltip("Whether skill is cooled down")]
     public bool IsReady;
     [Tooltip("Wether button released")]
-    public bool CanUse;
+    public bool IsInputReset;
     [Tooltip("Get player component")]
     [SerializeField] protected PlayerController_Main _player;
     [Tooltip("Get input")]
@@ -29,6 +29,12 @@ public abstract class PlayerSkill_BaseSkill : MonoBehaviour
     public abstract void CoolDownSkill(float coolDown, string tag);
     public abstract void UseSkill();
     public abstract void ResetSkill();
+    public void ConsumeSkill()
+    {
+        CurrentCharges -= MaxCharges == -1 ? 0 : 1;
+        IsInputReset = false;
+        IsReady = false;
+    }
 
     public abstract IEnumerator ButtonReleaseCheck();
 }

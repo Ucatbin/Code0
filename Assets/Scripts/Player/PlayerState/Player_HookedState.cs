@@ -20,8 +20,8 @@ public class Player_HookedState : Player_BaseState
         _gHookSkill = Player_SkillManager.Instance.GrappingHook;
         _dashSkill = Player_SkillManager.Instance.GrappingHookDash;
 
-        _player.Rb.gravityScale = _player.PropertySO.FallGravity;
-        _player.SetTargetSpeed(Vector2.zero);
+        _player.Rb.gravityScale = _player.PropertySO.DefaultGravity;
+        _player.SetTargetVelocity(Vector2.zero);
     }
 
     public override void PhysicsUpdate()
@@ -31,6 +31,7 @@ public class Player_HookedState : Player_BaseState
     }
     public override void LogicUpdate()
     {
+        _player.ApplyMovement();
         _gHookSkill.CheckLineBreak();
 
         _gHookSkill.RopeLine.SetPosition(0, _player.transform.position);
@@ -41,6 +42,7 @@ public class Player_HookedState : Player_BaseState
     {
         base.Exit();
 
+        _player.Rb.gravityScale = 0;
         _player.IsBusy = false;
     }
 }

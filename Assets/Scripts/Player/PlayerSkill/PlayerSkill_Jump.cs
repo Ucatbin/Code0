@@ -17,7 +17,7 @@ public class PlayerSkill_Jump : PlayerSkill_BaseSkill
         if ((_player.Checker.IsGrounded || _player.IsWallSliding) && !_player.InputSys.JumpTrigger)
             CurrentCharges = MaxCharges;
             
-        if (!CanUse ||
+        if (!IsInputReset ||
             CurrentCharges == 0 ||
             !_inputSys.JumpTrigger ||
             _player.IsBusy
@@ -44,10 +44,10 @@ public class PlayerSkill_Jump : PlayerSkill_BaseSkill
 
     public override IEnumerator ButtonReleaseCheck()
     {
-        while (!CanUse)
+        while (!IsInputReset)
         {
             if (!_player.InputSys.JumpTrigger)
-                CanUse = true;
+                IsInputReset = true;
             else
                 yield return null;
         }

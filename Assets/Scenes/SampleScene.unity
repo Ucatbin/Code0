@@ -1150,26 +1150,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c8a96044ed00a64da8c838767c70f19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Checker: {fileID: 1875388750}
   Root: {fileID: 1614462008}
+  Checker: {fileID: 1875388750}
   Rb: {fileID: 1614462010}
   Anim: {fileID: 596630718}
   BuffHandler: {fileID: 2010529398}
-  <TargetSpeed>k__BackingField: {x: 0, y: 0}
+  <TargetVelocity>k__BackingField: {x: 0, y: 0}
+  <MaxFallSpeed>k__BackingField: 20
+  <InAirAccel>k__BackingField: 80
+  <FallMult>k__BackingField: 2
   <CurrentHealth>k__BackingField: 0
+  IsBusy: 1
+  IsPhysicsDriven: 0
   FacingDir: 1
   InputSys: {fileID: 1233298156}
   MainCam: {fileID: 519420031}
   Cam: {fileID: 893872117}
   PropertySO: {fileID: 11400000, guid: fc0fe7c335a11f345a7dc7c3ee3db4d2, type: 2}
   StateSO: {fileID: 11400000, guid: f1dcc5e1b3ca74d42b63f30e30971e1f, type: 2}
-  Visual: {fileID: 405554527}
-  IsBusy: 1
   IsJumping: 0
   IsAttached: 0
   IsLineDashing: 0
   IsAttacking: 0
-  IsAddingForce: 0
   IsWallSliding: 0
 --- !u!1 &589259273
 GameObject:
@@ -1818,7 +1820,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsReady: 1
-  CanUse: 1
+  IsInputReset: 0
   _player: {fileID: 542567388}
   _inputSys: {fileID: 1233298156}
   MaxCharges: -1
@@ -1840,7 +1842,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsReady: 1
-  CanUse: 1
+  IsInputReset: 1
   _player: {fileID: 542567388}
   _inputSys: {fileID: 1233298156}
   MaxCharges: -1
@@ -2497,7 +2499,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsReady: 1
-  CanUse: 1
+  IsInputReset: 1
   _player: {fileID: 542567388}
   _inputSys: {fileID: 1233298156}
   MaxCharges: 2
@@ -2950,7 +2952,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsReady: 1
-  CanUse: 1
+  IsInputReset: 1
   _player: {fileID: 542567388}
   _inputSys: {fileID: 1233298156}
   MaxCharges: -1
@@ -3196,7 +3198,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.1
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2

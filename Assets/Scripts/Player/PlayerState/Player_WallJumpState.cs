@@ -14,9 +14,7 @@ public class Player_WallJumpState : Player_AirState
 
         // Initialize
         _jumpSkill = Player_SkillManager.Instance.Jump;
-        _player.IsAddingForce = true;
-        _player.Rb.gravityScale = _player.PropertySO.RiseGravity;
-        _player.SetTargetSpeed(Vector2.zero);
+        _player.SetTargetVelocity(Vector2.zero);
         _player.Rb.linearVelocity = Vector2.zero;
 
         // Start jump timer
@@ -40,7 +38,6 @@ public class Player_WallJumpState : Player_AirState
     {
         base.Exit();
 
-        _player.IsAddingForce = false;
-        _player.SetTargetSpeed(new Vector2(_player.Rb.linearVelocityX, 0f));
+        _player.SetTargetVelocity(new Vector2(_player.Rb.linearVelocityX, 0f));
     }
 }

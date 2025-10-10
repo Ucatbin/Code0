@@ -12,29 +12,25 @@ public class Player_JumpState : Player_AirState
     {
         base.Enter();
 
-        // Initialize
         _player.IsBusy = true;
-        _jumpSkill = Player_SkillManager.Instance.Jump;
-        _jumpSkill.CurrentCharges -= _jumpSkill.MaxCharges == -1 ? 0 : 1;
-        _jumpSkill.CanUse = false;
-        _jumpSkill.IsReady = false;
-        _player.Rb.gravityScale = _player.PropertySO.RiseGravity;
-        _player.Rb.linearVelocityY = 0f;
+        _player.IsJumping = true;
 
-        // Start jump timer
+        _jumpSkill = Player_SkillManager.Instance.Jump;
+        _jumpSkill.ConsumeSkill();
+
+        _player.SetTargetVelocityY(_player.PropertySO.JumpInitPower);
+        _player.ApplyMovement();
+
         TimerManager.Instance.AddTimer(
             _player.PropertySO.JumpInputWindow,
             () => SkillEvents.TriggerJumpEnd(),
             "JumpStateTimer"
         );
-
         TimerManager.Instance.AddTimer(
             _jumpSkill.SkillCD,
             () => _jumpSkill.ResetSkill(),
             "PlayerSkillGap"
         );
-
-        _player.Rb.AddForce(_player.PropertySO.JumpInitForce * Vector2.up, ForceMode2D.Impulse);
 
         if (_jumpSkill.CurrentCharges != _jumpSkill.MaxCharges - 1)
             SkillEvents.TriggerJumpEnd();
@@ -44,12 +40,13 @@ public class Player_JumpState : Player_AirState
     {
         base.PhysicsUpdate();
 
-        _player.Rb.AddForce(_player.PropertySO.JumpAccel * Vector2.up, ForceMode2D.Force);
+        _player.SetTargetVelocityY(_player.PropertySO.JumpHoldPower);
+        _player.ApplyMovement();
     }
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        
+
         // Cant add force after jumpWindow
         if (!_player.InputSys.JumpTrigger)
             SkillEvents.TriggerJumpEnd();
@@ -61,7 +58,7 @@ public class Player_JumpState : Player_AirState
         
         _player.IsBusy = false;
         _player.IsJumping = false;
-        _player.SetTargetSpeed(new Vector2(_player.Rb.linearVelocityX, 0f));
+        
         TimerManager.Instance.CancelTimersWithTag("JumpStateTimer");
     }
 }

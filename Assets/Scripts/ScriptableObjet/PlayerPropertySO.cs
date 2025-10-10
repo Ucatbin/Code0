@@ -26,12 +26,12 @@ public class PlayerPropertySO : ScriptableObject
 
     [Header("JUMP")]
     [Tooltip("Give player a initial force")]
-    public float JumpInitForce = 10f;
+    public float JumpInitPower = 10f;
+    [Tooltip("Acceration of jump force")]
+    public float JumpHoldPower = 10f;
     [Tooltip("Give player a initial force")]
     public float WallJumpForce = 10f;
     public Vector2 WallJumpDir = new Vector2(1f, 1.5f);
-    [Tooltip("Acceration of jump force")]
-    public float JumpAccel = 20f;
     [Tooltip("Time window that can add force while holding SPACE"), Range(0f, 1f)]
     public float JumpInputWindow = 0.25f;
     [Tooltip("Time window that can jump after leave ground"), Range(0f, 1f)]

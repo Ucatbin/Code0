@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerSkill_GrappingHookDash : PlayerSkill_BaseSkill
@@ -14,7 +13,7 @@ public class PlayerSkill_GrappingHookDash : PlayerSkill_BaseSkill
     public override void TryUseSkill()
     {
         // TODO:Havent complete if yet
-        if (!CanUse ||
+        if (!IsInputReset ||
             CurrentCharges == 0 ||
             !_player.IsAttached ||
             !_inputSys.DashTrigger
@@ -26,7 +25,7 @@ public class PlayerSkill_GrappingHookDash : PlayerSkill_BaseSkill
     {
         CurrentCharges -= MaxCharges == -1 ? 0 : 1;
         IsReady = false;
-        CanUse = false;
+        IsInputReset = false;
 
         StartCoroutine(LineDash());
     }
@@ -70,17 +69,17 @@ public class PlayerSkill_GrappingHookDash : PlayerSkill_BaseSkill
         _player.IsLineDashing = false;
         grappingHook.ReleaseGHook();
         _player.Rb.linearVelocityY = 0f;
-        _player.SetTargetSpeed(_player.Rb.linearVelocity + CalculateForce(lineDir, grappingHook.SurfaceNormal));
-        _player.Rb.AddForce(_player.PropertySO.JumpInitForce * Vector2.up, ForceMode2D.Impulse);
+        _player.SetTargetVelocity(_player.Rb.linearVelocity + CalculateForce(lineDir, grappingHook.SurfaceNormal));
+        _player.Rb.AddForce(_player.PropertySO.JumpInitPower * Vector2.up, ForceMode2D.Impulse);
         CoolDownSkill(SkillCD, "PlayerSkill");
     }
 
     public override IEnumerator ButtonReleaseCheck()
     {
-        while (!CanUse)
+        while (!IsInputReset)
         {
             if (!_player.InputSys.DashTrigger)
-                CanUse = true;
+                IsInputReset = true;
             else
                 yield return null;
         }

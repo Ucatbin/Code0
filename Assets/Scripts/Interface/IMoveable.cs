@@ -9,7 +9,7 @@ public interface IMoveable
     /// <summary>
     /// The only variable need to handle movement, only try to get FinalSpeed
     /// </summary>
-    Vector2 TargetSpeed { get; set; }
+    Vector2 TargetVelocity { get; set; }
     /// <summary>
     /// Only get form property scriptable object
     /// </summary>
@@ -41,19 +41,30 @@ public interface IMoveable
     /// </summary>
     float FinalAirSpeed { get; }
     #endregion
+
+    #region Gravity
+    float MaxFallSpeed { get; }
+    float InAirAccel { get; }
+    float FallMult { get; }
+    #endregion
+
     #region Function
     /// <summary>
     /// Change speed quickly by adjust TargetSpeed directly
     /// </summary>
-    void SetTargetSpeed(Vector2 speed);
+    void SetTargetVelocity(Vector2 speed);
+    void SetTargetVelocityX(float speedX);
+    void SetTargetVelocityY(float speedY);
     /// <summary>
     /// Invoke when change speed buncer
     /// </summary>
-    void AddSpeed(float speed);
+    void AddVelocity(float speed);
     /// <summary>
     /// Invoke when change speed multiplier
     /// </summary>
-    void MultSpeed(float multiplier);
+    void MultVelocity(float multiplier);
     void HandleMovement();
+    void ApplyMovement();
+    void HandleGravity();
     #endregion
 }

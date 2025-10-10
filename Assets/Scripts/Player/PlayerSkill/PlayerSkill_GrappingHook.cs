@@ -35,7 +35,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
 
     public override void TryUseSkill()
     {
-        if (!CanUse ||
+        if (!IsInputReset ||
             CurrentCharges == 0 ||
             !_inputSys.GrapperTrigger ||
             _player.IsBusy
@@ -47,7 +47,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
     {
         CurrentCharges -= MaxCharges == -1 ? 0 : 1;
         IsReady = false;
-        CanUse = false;
+        IsInputReset = false;
 
         // Get mouse position and calculate fire direction
         RaycastHit2D hit = Physics2D.Raycast(
@@ -85,7 +85,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
     void AttachHook()
     {
         // Init variables
-        _player.IsAddingForce = true;
+        _player.IsPhysicsDriven = true;
         GLineChecker.enabled = true;
         SetLineRenderer();
 
@@ -176,7 +176,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
         // Let state machine know the player is released
         SkillEvents.TriggerHookRelease();
         _player.IsAttached = false;
-        _player.IsAddingForce = false;
+        _player.IsPhysicsDriven = false;
 
         // Disable distance joint and line renderer
         RopeJoint.enabled = false;
@@ -225,10 +225,10 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
 
     public override IEnumerator ButtonReleaseCheck()
     {
-        while (!CanUse)
+        while (!IsInputReset)
         {
             if (!_player.InputSys.GrapperTrigger)
-                CanUse = true;
+                IsInputReset = true;
             else
                 yield return null;
         }

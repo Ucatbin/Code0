@@ -10,8 +10,6 @@ public class Player_GroundState : Player_BaseState
     public override void Enter()
     {
         base.Enter();
-
-        _player.Rb.gravityScale = _player.PropertySO.DefaultGravity;
     }
     
     public override void PhysicsUpdate()

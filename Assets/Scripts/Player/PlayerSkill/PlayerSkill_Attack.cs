@@ -26,7 +26,7 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
 
     public override void TryUseSkill()
     {
-        if (!CanUse ||
+        if (!IsInputReset ||
             CurrentCharges == 0 ||
             !_inputSys.AttackTrigger ||
             _player.IsBusy
@@ -36,14 +36,6 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
     }
     public override void UseSkill()
     {
-        // BuffItem buff_speedUp = BuffFactory.CreateBuffItem(
-        //     BuffManager.Instance.Buff_SpeedUp,
-        //     _player.gameObject,
-        //     _player.gameObject,
-        //     1
-        // );
-        // _player.BuffHandler.AddBuff(buff_speedUp);
-
         SkillEvents.TriggerAttackStart();
     }
     public override void CoolDownSkill(float coolDown, string tag)
@@ -62,13 +54,12 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
         IsReady = true;
         StartCoroutine(ButtonReleaseCheck());
     }
-
     public override IEnumerator ButtonReleaseCheck()
     {
-        while (!CanUse)
+        while (!IsInputReset)
         {
             if (!_player.InputSys.AttackTrigger)
-                CanUse = true;
+                IsInputReset = true;
             else
                 yield return null;
         }
