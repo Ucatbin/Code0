@@ -58,21 +58,15 @@ public class CheckerController : MonoBehaviour, IGroundCheck, IWallCheck
 
     public virtual void WallCheck()
     {
-        //Vector2 upperPos = _wallCheckPoint.position - _wallCheckPoint.up * _wallCheckWidth / 2;
+        // Add check points
         Vector2 centerPos = _wallCheckPoint.position;
-        //Vector2 lowerPos = _wallCheckPoint.position + _wallCheckPoint.up * _wallCheckWidth / 2;
 
         // Raycasts
-        //bool upperHit = Physics2D.Raycast(upperPos, Vector2.right, _wallCheckDist * _entity.FacingDir, _wallLayer);
         bool centerHit = Physics2D.Raycast(centerPos, Vector2.right, _wallCheckDist * _entity.FacingDir, _wallLayer);
-        //bool lowerHit = Physics2D.Raycast(lowerPos, Vector2.right, _wallCheckDist * _entity.FacingDir, _wallLayer);
 
         // Debug ray
-        //Debug.DrawRay(upperPos, Vector2.right * _wallCheckDist, Color.red);
         Debug.DrawRay(centerPos, Vector2.right * _wallCheckDist * _entity.FacingDir, Color.red);
-        //Debug.DrawRay(lowerPos, Vector2.right * _wallCheckDist, Color.red);
 
         WallDected = centerHit;
-        //WallDected = upperHit || centerHit || lowerHit;
     }
 }

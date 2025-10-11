@@ -15,9 +15,6 @@ public class Player_WallJumpState : Player_AirState
 
         _jumpSkill = Player_SkillManager.Instance.Jump;
 
-        _player.IsBusy = true;
-        _player.IsJumping = true;
-
         TimerManager.Instance.AddTimer(
             _player.PropertySO.WallJumpWindow,
             () => SkillEvents.TriggerJumpEnd(),
@@ -30,7 +27,6 @@ public class Player_WallJumpState : Player_AirState
         );
 
         _wallJumpDir = new Vector2(-_player.FacingDir * _player.PropertySO.WallJumpDir.x, _player.PropertySO.WallJumpDir.y).normalized;
-        _jumpSkill.ConsumeSkill();
     }
     public override void PhysicsUpdate()
     {
@@ -42,9 +38,9 @@ public class Player_WallJumpState : Player_AirState
     {
         base.Exit();
 
+        TimerManager.Instance.CancelTimersWithTag("JumpStateTimer");
+
         _player.IsBusy = false;
         _player.IsJumping = false;
-
-        TimerManager.Instance.CancelTimersWithTag("JumpStateTimer");
     }
 }

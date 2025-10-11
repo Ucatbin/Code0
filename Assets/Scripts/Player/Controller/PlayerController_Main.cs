@@ -128,6 +128,9 @@ public class PlayerController_Main : EntityContoller_Main
             _stateMachine.ChangeState(StateSO.AirState, true);
         else
             _stateMachine.ChangeState(StateSO.IdleState, false);
+
+        IsJumping = false;
+        IsBusy = false;
     }
 
     // GRAPPING HOOK
@@ -150,8 +153,10 @@ public class PlayerController_Main : EntityContoller_Main
     }
     void HandleHookReleased()
     {
-        IsHooked = false;
         _stateMachine.ChangeState(StateSO.AirGlideState, true);
+
+        IsHooked = false;
+        IsBusy = false;
     }
 
     // ATTACK
@@ -172,6 +177,9 @@ public class PlayerController_Main : EntityContoller_Main
     void HandleAttackEnd()
     {
         _stateMachine.ChangeState(StateSO.FallState, true);
+
+        IsAttacking = false;
+        IsBusy = false;
     }
     #endregion
 }

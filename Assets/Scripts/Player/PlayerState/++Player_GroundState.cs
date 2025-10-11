@@ -1,6 +1,3 @@
-using Unity.Mathematics;
-using UnityEngine;
-
 public class Player_GroundState : Player_BaseState
 {
     public Player_GroundState(PlayerController_Main entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
@@ -18,8 +15,7 @@ public class Player_GroundState : Player_BaseState
     }
     public override void LogicUpdate()
     {
-        // Enter airState as soon as leave the ground
-        if (!_player.Checker.IsGrounded && !_player.IsBusy)
+        if (!_player.Checker.IsGrounded)
             _stateMachine.ChangeState(_player.StateSO.CoyoteState, false);
     }
 

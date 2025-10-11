@@ -11,9 +11,9 @@ public class PlayerSkill_Jump : PlayerSkill_BaseSkill
         InputEvents.OnJumpPressed += TryUseSkill;
         InputEvents.OnJumpReleased += () =>
         {
-            IsInputReset = true;
             if (_player.IsJumping)
                 SkillEvents.TriggerJumpEnd();
+            IsInputReset = true;
         };
     }
     void OnDisable()
@@ -21,9 +21,9 @@ public class PlayerSkill_Jump : PlayerSkill_BaseSkill
         InputEvents.OnJumpPressed -= TryUseSkill;
         InputEvents.OnJumpReleased -= () =>
         {
-            IsInputReset = true;
             if (_player.IsJumping)
                 SkillEvents.TriggerJumpEnd();
+            IsInputReset = true;
         };
     }
 

@@ -38,9 +38,9 @@ public class Player_AttackState : Player_BaseState
     {
         base.Exit();
 
+        _attackSkill.CoolDownSkill(_attackSkill.SkillCD, "PlyaerAttack");
+        
         _player.IsBusy = false;
         _player.IsAttacking = false;
-
-        _attackSkill.CoolDownSkill(_attackSkill.SkillCD, "PlyaerAttack");
     }
 }

@@ -17,5 +17,5 @@ MonoBehaviour:
   MaxFallSpeed: 20
   ZeroGravity: 0
   DefaultGravity: 1
-  FallDamping: 55
+  FallDamping: 45
   FallMult: 1.2

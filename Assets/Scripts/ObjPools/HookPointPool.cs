@@ -11,6 +11,7 @@ public class HookPointPool : BaseObjectPool
     protected override void actionOnRelease(GameObject obj)
     {
         base.actionOnRelease(obj);
+
         obj.transform.SetParent(transform);
     }
     void InitHook()

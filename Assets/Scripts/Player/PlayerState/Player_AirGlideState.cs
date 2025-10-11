@@ -25,5 +25,8 @@ public class Player_AirGlideState : Player_AirState
     public override void Exit()
     {
         base.Exit();
+
+        _player.Rb.gravityScale = 0f;
+        _player.IsPhysicsDriven = false;
     }
 }

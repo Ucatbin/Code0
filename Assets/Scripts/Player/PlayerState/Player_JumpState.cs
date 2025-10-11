@@ -28,7 +28,7 @@ public class Player_JumpState : Player_AirState
             "PlayerSkillGap"
         );
 
-        if (_jumpSkill.CurrentCharges != _jumpSkill.MaxCharges - 1)
+        if (_jumpSkill.CurrentCharges != _jumpSkill.MaxCharges)
             SkillEvents.TriggerJumpEnd();
     }
 
@@ -47,10 +47,10 @@ public class Player_JumpState : Player_AirState
     public override void Exit()
     {
         base.Exit();
+
+        TimerManager.Instance.CancelTimersWithTag("JumpStateTimer");
         
         _player.IsBusy = false;
         _player.IsJumping = false;
-        
-        TimerManager.Instance.CancelTimersWithTag("JumpStateTimer");
     }
 }

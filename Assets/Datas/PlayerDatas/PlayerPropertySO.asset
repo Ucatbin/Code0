@@ -19,13 +19,13 @@ MonoBehaviour:
   MaxAirMoveSpeed: 8
   AirAccel: 40
   AirDamping: 28
-  JumpInitPower: 18
-  JumpHoldPower: 12
+  JumpInitPower: 14
+  JumpHoldPower: 10
   JumpInputWindow: 0.25
   WallSlideSpeed: 0.2
-  WallJumpPower: 15
+  WallJumpPower: 14
   WallJumpWindow: 0.15
-  WallJumpDir: {x: 0.5, y: 1}
+  WallJumpDir: {x: 0.8, y: 1}
   CoyoteWindow: 0.15
   FallGravity: 0
   AirGlideGravity: 4.5

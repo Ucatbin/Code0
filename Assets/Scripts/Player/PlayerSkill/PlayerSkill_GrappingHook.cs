@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
@@ -17,15 +16,16 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
     [field: SerializeField] public float MaxLineDist { get; private set; } = 8f;
     [field: SerializeField] public LayerMask CanHookLayer { get; private set; }      // Which layer can the hook attach to
     [SerializeField] float _lineMoveSpeed = 4.5f;
+    [SerializeField] float _lineInitSpeedMult = 100f;
     [SerializeField] float _lineSwingForce = 35f;
     [SerializeField] float _maxSwingSpeed = 12f;
-    [SerializeField] float _initPosDuration = 0.25f;
     [SerializeField] float _initLineDuration = 0.2f;
 
     [Header("Checker")]
     public Collider2D GLineChecker;
     public LayerMask GLineBreakLayer;
     public bool IsHookFinished;
+    bool _releaseEarly = false;
 
     public PlayerSkill_GrappingHook(PlayerController_Main player) : base(player) { }
 
@@ -86,18 +86,13 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
         HookPool.Pool.Release(HookPoint);
     }
 
-    public void SetHookPoint(RaycastHit2D hit)
-    {
-        HookPoint = HookPool.Pool.Get();
-        HookPoint.transform.position = hit.point;
-        HookPoint.transform.parent = hit.transform;
-        SurfaceNormal = hit.normal;
-    }
+    #region Init
     public void AttachHook()
     {
         IsHookFinished = false;
         RopeLine.enabled = true;
         GLineChecker.enabled = true;
+        _player.Rb.gravityScale = 4.5f;
 
         // If isGrounded, player will move to the hook point first
         if (_player.Checker.IsGrounded && SurfaceNormal.y != 0)
@@ -113,22 +108,35 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
             {
                 SetJoint();
                 IsHookFinished = true;
+                Player_SkillManager.Instance.Jump.CurrentCharges -= 1;
             }
         }
     }
-
     IEnumerator MoveToTarget(Vector2 startPos, Vector2 targetPos)
     {
-        while (Vector2.Distance(targetPos, startPos) <= 0.2f)
+        bool isFromLeft = startPos.x < targetPos.x;
+        while (Mathf.Abs(_player.transform.position.x - targetPos.x) >= 0.01f)
         {
-            _player.SetTargetVelocityX(_lineMoveSpeed * 1f);
-            _player.ApplyMovement();
-            SetLineRenderer();
-            yield return null;
+            bool isLeft = _player.transform.position.x <= targetPos.x;
+            if (isLeft != isFromLeft)
+                break;
+
+            _player.Rb.AddForce(
+                _lineMoveSpeed * (targetPos - startPos).normalized * _lineInitSpeedMult,
+                ForceMode2D.Force
+                );
+
+            if (_releaseEarly)
+            {
+                _releaseEarly = false;
+                yield break;
+            }
+            yield return new WaitForFixedUpdate();
         }
-        _player.Root.position = targetPos;
+        if (_player.Checker.IsGrounded)
+            _player.Root.position = targetPos;
         SetLineRenderer();
-        _player.Rb.AddForce((targetPos - startPos) * 1.5f, ForceMode2D.Impulse);
+        _player.Rb.linearVelocity *= 0.5f;
         GLineChecker.enabled = false;
 
         if (Vector2.Distance(_player.transform.position, HookPoint.transform.position) > MaxLineDist)
@@ -137,6 +145,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
         {
             SetJoint();
             IsHookFinished = true;
+            Player_SkillManager.Instance.Jump.CurrentCharges -= 1;
         }
     }
     IEnumerator SetLineDist()
@@ -156,6 +165,48 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
         RopeJoint.distance = MaxLineDist;
         SetLineRenderer();
         IsHookFinished = true;
+        Player_SkillManager.Instance.Jump.CurrentCharges -= 1;
+    }
+    #endregion
+    #region Setup components
+    public void SetHookPoint(RaycastHit2D hit)
+    {
+        HookPoint = HookPool.Pool.Get();
+        HookPoint.transform.position = hit.point;
+        HookPoint.transform.parent = hit.transform;
+        SurfaceNormal = hit.normal;
+    }
+    void SetJoint()
+    {
+        RopeJoint.connectedBody = HookPoint.GetComponent<Rigidbody2D>();
+        RopeJoint.distance = Vector2.Distance(_player.transform.position, HookPoint.transform.position);
+        RopeJoint.enabled = true;
+    }
+    public void SetLineRenderer()
+    {
+        RopeLine.SetPosition(0, _player.transform.position);
+        RopeLine.SetPosition(1, HookPoint.transform.position);
+    }
+    #endregion
+    #region Release and break
+    void CheckLineRelease()
+    {
+        if (_player.IsHooked && !_player.IsLineDashing)
+            ReleaseGHook();
+    }
+    public void CheckLineBreak()
+    {
+        if (GLineChecker.IsTouchingLayers(GLineBreakLayer)
+            && !_player.IsLineDashing
+            )
+        {
+            if (!IsHookFinished)
+            {
+                _releaseEarly = true;
+                Debug.Log(1);
+            }
+            BreakGHook();
+        }
     }
     public void ReleaseGHook()
     {
@@ -169,16 +220,16 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
     }
     void HandleDisable()
     {
-        // Let state machine know the player is released
         SkillEvents.TriggerHookRelease();
         _player.IsHooked = false;
         _player.IsPhysicsDriven = false;
 
-        // Disable distance joint and line renderer
+        HookPool.Pool.Release(HookPoint);
         RopeJoint.enabled = false;
         RopeLine.enabled = false;
-        HookPool.Pool.Release(HookPoint);
     }
+    # endregion
+
     public void MoveOnLine()
     {
         float inputY = _player.InputSys.MoveInput.y;
@@ -187,32 +238,5 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
             RopeJoint.distance -= _lineMoveSpeed * inputY * Time.fixedDeltaTime;
         if (inputX != 0 && Mathf.Abs(_player.Rb.linearVelocityX) <= _maxSwingSpeed)
             _player.Rb.AddForce(Vector2.right * inputX * _lineSwingForce);
-    }
-    void SetJoint()
-    {
-        RopeJoint.connectedBody = HookPoint.GetComponent<Rigidbody2D>();
-        RopeJoint.distance = Vector2.Distance(_player.transform.position, HookPoint.transform.position);
-        RopeJoint.enabled = true;
-    }
-    public void SetLineRenderer()
-    {
-        RopeLine.SetPosition(0, _player.transform.position);
-        RopeLine.SetPosition(1, HookPoint.transform.position);
-    }
-
-    void CheckLineRelease()
-    {
-        if (_player.IsHooked && !_player.IsLineDashing)
-            ReleaseGHook();
-    }
-    public void CheckLineBreak()
-    {
-        if (GLineChecker.IsTouchingLayers(GLineBreakLayer)
-            && !_player.IsLineDashing
-            )
-            {
-                BreakGHook();
-                StopCoroutine("MoveToTarget");
-            }
     }
 }

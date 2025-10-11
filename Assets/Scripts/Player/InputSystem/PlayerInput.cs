@@ -5,10 +5,9 @@ using UnityEngine.InputSystem;
 public class PlayerInput : MonoBehaviour
 {
     [SerializeField] PlayerController_Main _player;
-    // Public Input
+
     public Vector2 MouseDir { get; private set; }
     public Vector2 MoveInput { get; private set; }
-    public bool DashTrigger { get; private set; }
 
     public void HandleMove(InputAction.CallbackContext context)
     {
@@ -37,9 +36,12 @@ public class PlayerInput : MonoBehaviour
         }
     }
 
-    public void HandleSprint(InputAction.CallbackContext context)
+    public void HandleDash(InputAction.CallbackContext context)
     {
-        DashTrigger = context.performed;
+        if (context.performed)
+            InputEvents.TriggerDashPressed();
+        if (context.canceled)
+            InputEvents.TriggerDashReleased();
     }
 
     public void HandleAttack(InputAction.CallbackContext context)
@@ -76,4 +78,10 @@ public static class InputEvents
     public static event Action OnGHookReleased;
     public static void TriggerGHookPressed() => OnGHookPressed?.Invoke();
     public static void TriggerGHookReleased() => OnGHookReleased?.Invoke();
+
+    // Dash
+    public static event Action OnDashPressed;
+    public static event Action OnDashReleased;
+    public static void TriggerDashPressed() => OnDashPressed?.Invoke();
+    public static void TriggerDashReleased() => OnDashReleased?.Invoke();
 }

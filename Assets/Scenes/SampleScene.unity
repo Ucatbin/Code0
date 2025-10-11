@@ -1166,7 +1166,8 @@ MonoBehaviour:
   PropertySO: {fileID: 11400000, guid: fc0fe7c335a11f345a7dc7c3ee3db4d2, type: 2}
   StateSO: {fileID: 11400000, guid: f1dcc5e1b3ca74d42b63f30e30971e1f, type: 2}
   IsJumping: 0
-  IsAttached: 0
+  IsCoyoting: 0
+  IsHooked: 0
   IsLineDashing: 0
   IsAttacking: 0
   IsWallSliding: 0
@@ -1816,8 +1817,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de09d1b89adcffe4fb4cca6e42787c0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsReady: 1
-  IsInputReset: 0
+  _isReady: 1
+  IsInputReset: 1
   _player: {fileID: 542567388}
   _inputSys: {fileID: 1233298156}
   MaxCharges: -1
@@ -1838,7 +1839,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 542fd3fa9f1028240866db681a545067, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsReady: 1
+  _isReady: 1
   IsInputReset: 1
   _player: {fileID: 542567388}
   _inputSys: {fileID: 1233298156}
@@ -1854,15 +1855,16 @@ MonoBehaviour:
   <CanHookLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 64
-  _lineMoveSpeed: 4.5
+  _lineMoveSpeed: 6
+  _lineInitSpeedMult: 18
   _lineSwingForce: 35
   _maxSwingSpeed: 12
-  _initPosDuration: 0.25
   _initLineDuration: 0.2
   GLineChecker: {fileID: 1078320051}
   GLineBreakLayer:
     serializedVersion: 2
     m_Bits: 64
+  IsHookFinished: 0
 --- !u!1 &719935245
 GameObject:
   m_ObjectHideFlags: 0
@@ -2495,7 +2497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c24e9e42d2121649a82786def033266, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsReady: 1
+  _isReady: 1
   IsInputReset: 1
   _player: {fileID: 542567388}
   _inputSys: {fileID: 1233298156}
@@ -2719,7 +2721,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1233298156}
         m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
-        m_MethodName: HandleGrappingHook
+        m_MethodName: HandleGHook
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2735,7 +2737,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1233298156}
         m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
-        m_MethodName: HandleSprint
+        m_MethodName: HandleDash
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2948,7 +2950,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ee1cc69f0eb9cf42b0223d10042245a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsReady: 1
+  _isReady: 1
   IsInputReset: 1
   _player: {fileID: 542567388}
   _inputSys: {fileID: 1233298156}
@@ -2965,9 +2967,6 @@ MonoBehaviour:
   AttackForce: 10
   _anim: {fileID: 2096532430}
   _attackItem: {fileID: 1024342921}
-  CanHit:
-    serializedVersion: 2
-    m_Bits: 512
 --- !u!1 &1592619836
 GameObject:
   m_ObjectHideFlags: 0
