@@ -3,10 +3,11 @@ using UnityEngine;
 
 public abstract class PlayerSkill_BaseSkill : MonoBehaviour
 {
+    bool _canHold = false;
     [Tooltip("Whether skill is cooled down")]
-    public bool IsReady;
+    [SerializeField] protected bool _isReady = true;
     [Tooltip("Wether button released")]
-    public bool IsInputReset;
+    public bool IsInputReset = true;
     [Tooltip("Get player component")]
     [SerializeField] protected PlayerController_Main _player;
     [Tooltip("Get input")]
@@ -28,13 +29,13 @@ public abstract class PlayerSkill_BaseSkill : MonoBehaviour
     public abstract void TryUseSkill();
     public abstract void CoolDownSkill(float coolDown, string tag);
     public abstract void UseSkill();
-    public abstract void ResetSkill();
+    public abstract void TryResetSkill();
+    public void CoolDownSkill() => _isReady = true;
     public void ConsumeSkill()
     {
         CurrentCharges -= MaxCharges == -1 ? 0 : 1;
-        IsInputReset = false;
-        IsReady = false;
+        _isReady = false;
+        if (!_canHold)
+            IsInputReset = false;
     }
-
-    public abstract IEnumerator ButtonReleaseCheck();
 }

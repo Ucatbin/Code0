@@ -19,14 +19,12 @@ public class Player_GroundState : Player_BaseState
     public override void LogicUpdate()
     {
         // Enter airState as soon as leave the ground
-        if (!_player.Checker.IsGrounded)
+        if (!_player.Checker.IsGrounded && !_player.IsBusy)
             _stateMachine.ChangeState(_player.StateSO.CoyoteState, false);
     }
 
     public override void Exit()
     {
         base.Exit();
-
-        _player.Rb.linearVelocity = new Vector2(_player.Rb.linearVelocityX, 0f);
     }
 }

@@ -26,9 +26,6 @@ public class Player_CoyoteState : Player_FallState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
-        if (_player.InputSys.JumpTrigger)
-            _stateMachine.ChangeState(_player.StateSO.JumpState, false);
     }
 
     public override void Exit()

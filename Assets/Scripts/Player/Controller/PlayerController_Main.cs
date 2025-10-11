@@ -14,7 +14,8 @@ public class PlayerController_Main : EntityContoller_Main
 
     [Header("StateMark")]
     public bool IsJumping = false;
-    public bool IsAttached = false;
+    public bool IsCoyoting = false;
+    public bool IsHooked = false;
     public bool IsLineDashing = false;
     public bool IsAttacking = false;
     public bool IsWallSliding = false;
@@ -92,53 +93,85 @@ public class PlayerController_Main : EntityContoller_Main
         ApplyMovement();
     }
     #region Handle Skill Logics
+    // JUMP
     void HandleJumpStart()
     {
+        var jumpSkill = Player_SkillManager.Instance.Jump;
         bool sucess = _stateMachine.ChangeState(StateSO.JumpState, false);
-        if (!sucess)
-            Player_SkillManager.Instance.Jump.ResetSkill();
+        if (sucess)
+        {
+            IsJumping = true;
+            IsBusy = true;
+
+            jumpSkill.ConsumeSkill();
+        }
+        else
+            Player_SkillManager.Instance.Jump.TryResetSkill();
     }
     void HandleWallJumpStart()
     {
+        var jumpSkill = Player_SkillManager.Instance.Jump;
         bool sucess = _stateMachine.ChangeState(StateSO.WallJumpState, false);
-        if (!sucess)
-            Player_SkillManager.Instance.Jump.ResetSkill();
+        if (sucess)
+        {
+            IsJumping = true;
+            IsBusy = true;
+
+            jumpSkill.ConsumeSkill();
+        }
+        else
+            Player_SkillManager.Instance.Jump.TryResetSkill();
     }
     void HandleJumpEnd()
     {
-        _stateMachine.ChangeState(StateSO.AirState, true);
+        if (!Checker.IsGrounded)
+            _stateMachine.ChangeState(StateSO.AirState, true);
+        else
+            _stateMachine.ChangeState(StateSO.IdleState, false);
     }
 
+    // GRAPPING HOOK
     void HandleHookAtteched()
     {
-        IsAttached = true;
+        var gHookSkill = Player_SkillManager.Instance.GrappingHook;
         bool sucess = _stateMachine.ChangeState(StateSO.HookedState, false);
-        if (!sucess)
+        if (sucess)
         {
-            IsAttached = false;
-            Player_SkillManager.Instance.GrappingHook.ResetSkill();
+            IsHooked = true;
+            IsBusy = true;
+            IsPhysicsDriven = true;
+
+            gHookSkill.AttachHook();
+            gHookSkill.ConsumeSkill();
         }
+        else
+            Player_SkillManager.Instance.GrappingHook.TryResetSkill();
+
     }
     void HandleHookReleased()
     {
-        IsAttached = false;
+        IsHooked = false;
         _stateMachine.ChangeState(StateSO.AirGlideState, true);
     }
 
+    // ATTACK
     void HandleAttackStart()
     {
-        IsAttacking = true;
+        var attackSkill = Player_SkillManager.Instance.Attack;
         bool sucess = _stateMachine.ChangeState(StateSO.AttackState, false);
-        if (!sucess)
+        if (sucess)
         {
-            IsAttacking = false;
-            Player_SkillManager.Instance.Attack.ResetSkill();
+            IsAttacking = true;
+            IsBusy = true;
+
+            attackSkill.ConsumeSkill();
         }
+        else
+            Player_SkillManager.Instance.Attack.TryResetSkill();
     }
     void HandleAttackEnd()
     {
         _stateMachine.ChangeState(StateSO.FallState, true);
-        IsAttacking = false;
     }
     #endregion
 }

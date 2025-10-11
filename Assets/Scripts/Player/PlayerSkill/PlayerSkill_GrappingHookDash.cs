@@ -13,9 +13,10 @@ public class PlayerSkill_GrappingHookDash : PlayerSkill_BaseSkill
     public override void TryUseSkill()
     {
         // TODO:Havent complete if yet
-        if (!IsInputReset ||
+        if (!_isReady ||
+            !IsInputReset ||
             CurrentCharges == 0 ||
-            !_player.IsAttached ||
+            !_player.IsHooked ||
             !_inputSys.DashTrigger
         )
             return;
@@ -23,26 +24,21 @@ public class PlayerSkill_GrappingHookDash : PlayerSkill_BaseSkill
     }
     public override void UseSkill()
     {
-        CurrentCharges -= MaxCharges == -1 ? 0 : 1;
-        IsReady = false;
-        IsInputReset = false;
-
         StartCoroutine(LineDash());
     }
     public override void CoolDownSkill(float coolDown, string tag)
     {
         TimerManager.Instance.AddTimer(
             coolDown,
-            () => { ResetSkill(); },
+            () => { CoolDownSkill(); },
             tag
         );
     }
-    public override void ResetSkill()
+    public override void TryResetSkill()
     {
-        IsReady = true;
-        StartCoroutine(ButtonReleaseCheck());
-    }
 
+    }
+    
     Vector2 CalculateForce(Vector2 lineDir, Vector2 normal)
     {
         Vector2 dir = new Vector2(-normal.y, normal.x);
@@ -58,7 +54,8 @@ public class PlayerSkill_GrappingHookDash : PlayerSkill_BaseSkill
         float dashSpeed = _lineDashSpeed;
         float elapsedTime = 0f;
         _player.IsLineDashing = true;
-        while (dashSpeed != 1f && _player.IsAttached)
+        ConsumeSkill();
+        while (dashSpeed != 1f && _player.IsHooked)
         {
             float t = elapsedTime / _duration;
             dashSpeed = Mathf.Lerp(dashSpeed, 1f, t);
@@ -72,16 +69,5 @@ public class PlayerSkill_GrappingHookDash : PlayerSkill_BaseSkill
         _player.SetTargetVelocity(_player.Rb.linearVelocity + CalculateForce(lineDir, grappingHook.SurfaceNormal));
         _player.Rb.AddForce(_player.PropertySO.JumpInitPower * Vector2.up, ForceMode2D.Impulse);
         CoolDownSkill(SkillCD, "PlayerSkill");
-    }
-
-    public override IEnumerator ButtonReleaseCheck()
-    {
-        while (!IsInputReset)
-        {
-            if (!_player.InputSys.DashTrigger)
-                IsInputReset = true;
-            else
-                yield return null;
-        }
     }
 }

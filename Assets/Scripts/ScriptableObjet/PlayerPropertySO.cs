@@ -30,7 +30,7 @@ public class PlayerPropertySO : ScriptableObject
     public float WallSlideSpeed = 0.2f;
     public float WallJumpPower = 10f;
     public float WallJumpWindow = 0.4f;
-    public Vector2 WallJumpDir = new Vector2(1f, 1.5f);
+    public Vector2 WallJumpDir = new Vector2(0.5f, 1f);
     [Tooltip("Time window that can jump after leave ground"), Range(0f, 1f)]
     public float CoyoteWindow = 0.15f;
 

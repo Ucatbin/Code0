@@ -42,7 +42,7 @@ public class PlayerStateSO : ScriptableObject
         MoveState = new Player_MoveState(player, stateMachine, MovePriority, "Move");
         AirState = new Player_AirState(player, stateMachine, AirPriority, "Idle");
         JumpState = new Player_JumpState(player, stateMachine, JumpPriority, "Jump");
-        WallJumpState = new Player_WallJumpState(player, stateMachine, JumpPriority, "Jump");
+        WallJumpState = new Player_WallJumpState(player, stateMachine, WallJumpPriority, "Jump");
         CoyoteState = new Player_CoyoteState(player, stateMachine, CoyotePriority, "Idle");
         FallState = new Player_FallState(player, stateMachine, FallPriority, "Fall");
         AirGlideState = new Player_AirGlideState(player, stateMachine, AirGlidePriority, "Fall");

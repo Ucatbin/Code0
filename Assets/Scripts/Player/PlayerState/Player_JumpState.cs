@@ -14,9 +14,6 @@ public class Player_JumpState : Player_AirState
 
         _jumpSkill = Player_SkillManager.Instance.Jump;
 
-        _player.IsBusy = true;
-        _player.IsJumping = true;
-
         _player.SetTargetVelocityY(_player.PropertySO.JumpInitPower);
         _player.ApplyMovement();
 
@@ -27,11 +24,9 @@ public class Player_JumpState : Player_AirState
         );
         TimerManager.Instance.AddTimer(
             _jumpSkill.SkillCD,
-            () => _jumpSkill.ResetSkill(),
+            () => _jumpSkill.CoolDownSkill(),
             "PlayerSkillGap"
         );
-
-        _jumpSkill.ConsumeSkill();
 
         if (_jumpSkill.CurrentCharges != _jumpSkill.MaxCharges - 1)
             SkillEvents.TriggerJumpEnd();
@@ -47,10 +42,6 @@ public class Player_JumpState : Player_AirState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
-        // Cant add force after jumpWindow
-        if (!_player.InputSys.JumpTrigger)
-            SkillEvents.TriggerJumpEnd();
     }
 
     public override void Exit()

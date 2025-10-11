@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class Player_HookedState : Player_BaseState
 {
-    // Necessary Component
     PlayerSkill_GrappingHook _gHookSkill;
     PlayerSkill_GrappingHookDash _dashSkill;
 
@@ -15,27 +14,28 @@ public class Player_HookedState : Player_BaseState
     {
         base.Enter();
 
-        // Initialize grappling hook component
-        _player.IsBusy = true;
         _gHookSkill = Player_SkillManager.Instance.GrappingHook;
         _dashSkill = Player_SkillManager.Instance.GrappingHookDash;
-
-        _player.Rb.gravityScale = 4.5f;
-        _player.SetTargetVelocity(Vector2.zero);
     }
 
     public override void PhysicsUpdate()
     {
+        if (!_gHookSkill.IsHookFinished)
+            return;
+
         _dashSkill.TryUseSkill();
         _gHookSkill.MoveOnLine();
     }
     public override void LogicUpdate()
     {
-        _player.ApplyMovement();
         _gHookSkill.CheckLineBreak();
+        
+        if (!_gHookSkill.IsHookFinished)
+            return;
 
-        _gHookSkill.RopeLine.SetPosition(0, _player.transform.position);
-        _gHookSkill.RopeLine.SetPosition(1, _gHookSkill.HookPoint.transform.position);
+        _player.ApplyMovement();
+
+        _gHookSkill.SetLineRenderer();
     }
 
     public override void Exit()

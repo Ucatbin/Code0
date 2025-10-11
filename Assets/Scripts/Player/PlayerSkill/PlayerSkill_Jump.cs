@@ -1,4 +1,4 @@
-using System.Collections;
+using UnityEngine;
 
 public class PlayerSkill_Jump : PlayerSkill_BaseSkill
 {
@@ -6,23 +6,41 @@ public class PlayerSkill_Jump : PlayerSkill_BaseSkill
     {
     }
 
-    void Update()
+    void OnEnable()
     {
-        TryUseSkill();
+        InputEvents.OnJumpPressed += TryUseSkill;
+        InputEvents.OnJumpReleased += () =>
+        {
+            IsInputReset = true;
+            if (_player.IsJumping)
+                SkillEvents.TriggerJumpEnd();
+        };
+    }
+    void OnDisable()
+    {
+        InputEvents.OnJumpPressed -= TryUseSkill;
+        InputEvents.OnJumpReleased -= () =>
+        {
+            IsInputReset = true;
+            if (_player.IsJumping)
+                SkillEvents.TriggerJumpEnd();
+        };
     }
 
+    void Update()
+    {
+        if (CurrentCharges != MaxCharges)
+            TryResetSkill();
+    }
     public override void TryUseSkill()
     {
-        // Reset charges when on ground or wall slide
-        if ((_player.Checker.IsGrounded || _player.IsWallSliding) && !_player.InputSys.JumpTrigger)
-            CurrentCharges = MaxCharges;
-            
-        if (!IsInputReset ||
+        if (!_isReady ||
+            !IsInputReset ||
             CurrentCharges == 0 ||
-            !_inputSys.JumpTrigger ||
             _player.IsBusy
         )
             return;
+
         UseSkill();
     }
     public override void UseSkill()
@@ -34,22 +52,11 @@ public class PlayerSkill_Jump : PlayerSkill_BaseSkill
     }
     public override void CoolDownSkill(float coolDown, string tag)
     {
-        
-    }
-    public override void ResetSkill()
-    {
-        IsReady = true;
-        StartCoroutine(ButtonReleaseCheck());
-    }
 
-    public override IEnumerator ButtonReleaseCheck()
+    }
+    public override void TryResetSkill()
     {
-        while (!IsInputReset)
-        {
-            if (!_player.InputSys.JumpTrigger)
-                IsInputReset = true;
-            else
-                yield return null;
-        }
+        if ((_player.Checker.IsGrounded || _player.IsWallSliding) && IsInputReset)
+            CurrentCharges = MaxCharges;
     }
 }

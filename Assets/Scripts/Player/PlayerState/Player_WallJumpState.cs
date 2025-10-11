@@ -25,7 +25,7 @@ public class Player_WallJumpState : Player_AirState
         );
         TimerManager.Instance.AddTimer(
             _jumpSkill.SkillCD,
-            () => _jumpSkill.ResetSkill(),
+            () => _jumpSkill.CoolDownSkill(),
             "PlayerSkillGap"
         );
 

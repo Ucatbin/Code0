@@ -12,12 +12,11 @@ public class Player_AttackState : Player_BaseState
     {
         base.Enter();
 
-        _player.IsBusy = true;
-        _player.IsAttacking = true;
-
         _attackSkill = Player_SkillManager.Instance.Attack;
-        _attackSkill.ConsumeSkill();
+
         _attackSkill.StartCoroutine(_attackSkill.AttackAnim());
+        _player.SetTargetVelocity(_player.Rb.linearVelocity + _player.InputSys.MouseDir * _attackSkill.AttackForce);
+        _player.ApplyMovement();
 
         TimerManager.Instance.AddTimer(
             _attackSkill.AttackDuration,
@@ -25,10 +24,7 @@ public class Player_AttackState : Player_BaseState
             "Player_AbilityTimer"
         );
 
-        _player.SetTargetVelocity(Vector2.zero);
-        _player.Rb.gravityScale = _player.PropertySO.AttackGravity;
-        _player.Rb.linearVelocityY = 0f;
-        _player.SetTargetVelocity(_player.InputSys.MouseDir * _attackSkill.AttackForce);
+        _attackSkill.ConsumeSkill();
     }
     public override void PhysicsUpdate()
     {

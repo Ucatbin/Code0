@@ -1,4 +1,3 @@
-using System.Runtime.InteropServices.ComTypes;
 using System.Collections;
 using UnityEngine;
 
@@ -13,22 +12,27 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
     [SerializeField] Animator _anim;
     [Tooltip("The parent of attack effect")]
     [SerializeField] Transform _attackItem;
-    public LayerMask CanHit;
 
     public PlayerSkill_Attack(PlayerController_Main player) : base(player)
     {
     }
 
-    void Update()
+    void OnEnable()
     {
-        TryUseSkill();
+        InputEvents.OnAttackPressed += TryUseSkill;
+        InputEvents.OnAttackReleased += () => IsInputReset = true;
+    }
+    void OnDisable()
+    {
+        InputEvents.OnAttackPressed -= TryUseSkill;
+        InputEvents.OnAttackReleased -= () => IsInputReset = true;
     }
 
     public override void TryUseSkill()
     {
-        if (!IsInputReset ||
+        if (!_isReady ||
+            !IsInputReset ||
             CurrentCharges == 0 ||
-            !_inputSys.AttackTrigger ||
             _player.IsBusy
         )
             return;
@@ -42,27 +46,16 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
     {
         TimerManager.Instance.AddTimer(
             coolDown,
-            () => { ResetSkill(); },
+            () => { CoolDownSkill(); },
             "AttackCD"
         );
 
         _attackItem.gameObject.SetActive(false);
         _anim.SetBool("Attack", false);
     }
-    public override void ResetSkill()
+    public override void TryResetSkill()
     {
-        IsReady = true;
-        StartCoroutine(ButtonReleaseCheck());
-    }
-    public override IEnumerator ButtonReleaseCheck()
-    {
-        while (!IsInputReset)
-        {
-            if (!_player.InputSys.AttackTrigger)
-                IsInputReset = true;
-            else
-                yield return null;
-        }
+        
     }
 
     public IEnumerator AttackAnim()
