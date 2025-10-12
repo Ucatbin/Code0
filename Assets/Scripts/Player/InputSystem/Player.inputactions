@@ -16,6 +16,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "LineDash",
+                    "type": "Button",
+                    "id": "7b2fc10d-c505-402b-a5b9-b0bd8e2be87a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Jump",
                     "type": "Button",
                     "id": "961dba7d-6c9b-48fb-94ad-a28f6670e65a",
@@ -28,15 +37,6 @@
                     "name": "GrappingHook",
                     "type": "Button",
                     "id": "58875624-e257-4240-85f7-7f938ab5255b",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Sprint",
-                    "type": "Button",
-                    "id": "696f5ce7-26c1-4a48-aa23-c60813c86445",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -165,6 +165,28 @@
                 },
                 {
                     "name": "",
+                    "id": "f96cf55e-70cc-4df7-b9a4-c2d87789abb4",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LineDash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ed8fcbf9-8807-425d-9356-4d19de60a22a",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LineDash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "42746315-cd72-4a13-9dba-2d6a2129e06f",
                     "path": "<Keyboard>/space",
                     "interactions": "",
@@ -204,28 +226,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "GrappingHook",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9809e4ca-d268-405e-ae0c-f242496cc1ea",
-                    "path": "<Keyboard>/leftShift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Sprint",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "2e06756c-f5ce-417b-8b14-8ae18d1df8c7",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Sprint",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

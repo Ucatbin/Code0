@@ -27,6 +27,4 @@ MonoBehaviour:
   WallJumpWindow: 0.15
   WallJumpDir: {x: 0.8, y: 1}
   CoyoteWindow: 0.15
-  FallGravity: 0
-  AirGlideGravity: 4.5
-  AttackGravity: 0.4
+  AirGlideGravity: 1.5

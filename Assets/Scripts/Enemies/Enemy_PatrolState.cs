@@ -15,7 +15,7 @@ public class Enemy_PatrolState : Enemy_GroundState
     public override void PhysicsUpdate() {}
     public override void LogicUpdate()
     {
-        if (_enemy.Checker.WallDected)
+        if (_enemy.Checker.IsWallDected)
         {
             _enemy.Root.Rotate(new Vector2(0f, 180f));
             _enemy.FacingDir *= -1;

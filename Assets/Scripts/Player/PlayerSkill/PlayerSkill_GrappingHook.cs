@@ -15,16 +15,18 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
     [field: SerializeField] public float MaxDetectDist { get; private set; } = 15f; // Maximum distance to detect grapple points
     [field: SerializeField] public float MaxLineDist { get; private set; } = 8f;
     [field: SerializeField] public LayerMask CanHookLayer { get; private set; }      // Which layer can the hook attach to
-    [SerializeField] float _lineMoveSpeed = 4.5f;
-    [SerializeField] float _lineInitSpeedMult = 100f;
+    [SerializeField] float _lineInitSpeedMult = 100f;   // Force add per frame when move to target hookpoint
+    [SerializeField] float _initLineDur = 0.2f;         // The duration of setting the line length
+    [SerializeField] float _lineMoveSpeed = 4.5f;       // Speed when move on the line
     [SerializeField] float _lineSwingForce = 35f;
     [SerializeField] float _maxSwingSpeed = 12f;
-    [SerializeField] float _initLineDuration = 0.2f;
 
     [Header("Checker")]
     public Collider2D GLineChecker;
     public LayerMask GLineBreakLayer;
     public bool IsHookFinished;
+
+    [Header("Other")]
     bool _releaseEarly = false;
 
     public PlayerSkill_GrappingHook(PlayerController_Main player) : base(player) { }
@@ -102,11 +104,11 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
         }
         else
         {
+            SetJoint();
             if (Vector2.Distance(_player.transform.position, HookPoint.transform.position) > MaxLineDist)
                 StartCoroutine(SetLineDist());
             else
             {
-                SetJoint();
                 IsHookFinished = true;
                 Player_SkillManager.Instance.Jump.CurrentCharges -= 1;
             }
@@ -135,35 +137,37 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
         }
         if (_player.Checker.IsGrounded)
             _player.Root.position = targetPos;
-        SetLineRenderer();
         _player.Rb.linearVelocity *= 0.5f;
         GLineChecker.enabled = false;
 
+        SetJoint();
         if (Vector2.Distance(_player.transform.position, HookPoint.transform.position) > MaxLineDist)
             StartCoroutine(SetLineDist());
         else
         {
-            SetJoint();
             IsHookFinished = true;
             Player_SkillManager.Instance.Jump.CurrentCharges -= 1;
         }
     }
     IEnumerator SetLineDist()
     {
-        SetJoint();
         float elapsedTime = 0f;
         float startDist = RopeJoint.distance;
-        while (elapsedTime <= _initLineDuration)
+        while (Mathf.Abs(RopeJoint.distance - MaxLineDist) > 0.05f)
         {
-            float t = elapsedTime / _initLineDuration;
+            float t = elapsedTime / _initLineDur;
             RopeJoint.distance = Mathf.Lerp(startDist, MaxLineDist, t);
-            SetLineRenderer();
 
             elapsedTime += Time.deltaTime;
+
+            if (_releaseEarly)
+            {
+                _releaseEarly = false;
+                yield break;
+            }
             yield return null;
         }
         RopeJoint.distance = MaxLineDist;
-        SetLineRenderer();
         IsHookFinished = true;
         Player_SkillManager.Instance.Jump.CurrentCharges -= 1;
     }
@@ -201,10 +205,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
             )
         {
             if (!IsHookFinished)
-            {
                 _releaseEarly = true;
-                Debug.Log(1);
-            }
             BreakGHook();
         }
     }

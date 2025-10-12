@@ -13,13 +13,13 @@ public class PlayerSkill_GrappingHookDash : PlayerSkill_BaseSkill
 
     void OnEnable()
     {
-        InputEvents.OnDashPressed += TryUseSkill;
-        InputEvents.OnDashReleased += () => IsInputReset = true;
+        InputEvents.OnLineDashPressed += TryUseSkill;
+        InputEvents.OnLineDashReleased += () => IsInputReset = true;
     }
     void OnDisable()
     {
-        InputEvents.OnDashPressed -= TryUseSkill;
-        InputEvents.OnDashReleased -= () => IsInputReset = true;
+        InputEvents.OnLineDashPressed -= TryUseSkill;
+        InputEvents.OnLineDashReleased -= () => IsInputReset = true;
     }
     public override void TryUseSkill()
     {

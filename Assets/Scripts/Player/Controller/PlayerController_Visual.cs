@@ -15,9 +15,8 @@ public class PlayerController_Visual : MonoBehaviour
     public void Flip()
     {
         if (_player.InputSys.MoveInput.x == 0f &&   // Can flip while moving
-
                 !_player.IsHooked ||              // Can flip while attached
-                _player.IsWallSliding               // Precent flip shaking when is wall sliding
+                _player.Checker.IsWallDected               // Prevent flip shaking when is wall sliding
             )
             return;
 

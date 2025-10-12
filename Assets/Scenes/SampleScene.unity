@@ -1855,11 +1855,11 @@ MonoBehaviour:
   <CanHookLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 64
-  _lineMoveSpeed: 6
   _lineInitSpeedMult: 18
+  _initLineDur: 0.12
+  _lineMoveSpeed: 6
   _lineSwingForce: 35
   _maxSwingSpeed: 12
-  _initLineDuration: 0.2
   GLineChecker: {fileID: 1078320051}
   GLineBreakLayer:
     serializedVersion: 2
@@ -2660,6 +2660,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 542567388}
+  InputActions: {fileID: -944628639613478452, guid: 1417dd746e26e5e4a90a02e0659e719c, type: 3}
 --- !u!114 &1233298157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2737,22 +2738,6 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1233298156}
         m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
-        m_MethodName: HandleDash
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 696f5ce7-26c1-4a48-aa23-c60813c86445
-    m_ActionName: 'Normal/Sprint[/Keyboard/leftShift]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1233298156}
-        m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
         m_MethodName: HandleAttack
         m_Mode: 0
         m_Arguments:
@@ -2765,6 +2750,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 87878111-8246-4ef4-a45d-a6d199dde472
     m_ActionName: 'Normal/Attack[/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1233298156}
+        m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
+        m_MethodName: HandleLineDash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 7b2fc10d-c505-402b-a5b9-b0bd8e2be87a
+    m_ActionName: 'Normal/LineDash[/Keyboard/space]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Normal
@@ -3839,7 +3840,7 @@ MonoBehaviour:
     m_Bits: 65
   _wallCheckDist: 0.1
   _wallCheckWidth: 0.32
-  <WallDected>k__BackingField: 0
+  <IsWallDected>k__BackingField: 0
 --- !u!1 &1898253073
 GameObject:
   m_ObjectHideFlags: 0

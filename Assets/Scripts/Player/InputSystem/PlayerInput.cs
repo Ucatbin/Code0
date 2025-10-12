@@ -6,9 +6,25 @@ public class PlayerInput : MonoBehaviour
 {
     [SerializeField] PlayerController_Main _player;
 
+    [SerializeField] InputActionAsset InputActions;
+
+    InputActionMap _normalActionMap;
+
     public Vector2 MouseDir { get; private set; }
     public Vector2 MoveInput { get; private set; }
 
+    void Awake()
+    {
+        _normalActionMap = InputActions.FindActionMap("Normal");
+        ChangeActionMap(_normalActionMap);
+    }
+    public void ChangeActionMap(InputActionMap nextMap)
+    {
+        InputActions.Disable();
+        nextMap.Enable();
+    }
+
+    #region Normal Map
     public void HandleMove(InputAction.CallbackContext context)
     {
         MoveInput = context.ReadValue<Vector2>();
@@ -16,9 +32,9 @@ public class PlayerInput : MonoBehaviour
 
     public void HandleJump(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && !_player.IsHooked)
             InputEvents.TriggerJumpPressed();
-        if (context.canceled)
+        if (context.canceled && !_player.IsHooked)
             InputEvents.TriggerJumpReleased();
     }
 
@@ -35,15 +51,6 @@ public class PlayerInput : MonoBehaviour
             MouseDir = Vector2.zero;
         }
     }
-
-    public void HandleDash(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-            InputEvents.TriggerDashPressed();
-        if (context.canceled)
-            InputEvents.TriggerDashReleased();
-    }
-
     public void HandleAttack(InputAction.CallbackContext context)
     {
         Vector2 mousePos = _player.MainCam.ScreenToWorldPoint(Input.mousePosition);
@@ -57,6 +64,14 @@ public class PlayerInput : MonoBehaviour
             MouseDir = Vector2.zero;
         }
     }
+    public void HandleLineDash(InputAction.CallbackContext context)
+    {
+        if (context.performed && _player.IsHooked)
+            InputEvents.TriggerLineDashPressed();
+        if (context.canceled && _player.IsHooked)
+            InputEvents.TriggerLineDashReleased();
+    }
+    #endregion
 }
 
 public static class InputEvents
@@ -80,8 +95,8 @@ public static class InputEvents
     public static void TriggerGHookReleased() => OnGHookReleased?.Invoke();
 
     // Dash
-    public static event Action OnDashPressed;
-    public static event Action OnDashReleased;
-    public static void TriggerDashPressed() => OnDashPressed?.Invoke();
-    public static void TriggerDashReleased() => OnDashReleased?.Invoke();
+    public static event Action OnLineDashPressed;
+    public static event Action OnLineDashReleased;
+    public static void TriggerLineDashPressed() => OnLineDashPressed?.Invoke();
+    public static void TriggerLineDashReleased() => OnLineDashReleased?.Invoke();
 }

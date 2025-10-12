@@ -19,7 +19,7 @@ public class Player_FallState : Player_AirState
     {
         base.LogicUpdate();
 
-        if (_player.Checker.WallDected && _player.InputSys.MoveInput.x == _player.FacingDir)
+        if (_player.Checker.IsWallDected && _player.InputSys.MoveInput.x == _player.FacingDir)
             _stateMachine.ChangeState(_player.StateSO.WallSlideState, false);
     }
 

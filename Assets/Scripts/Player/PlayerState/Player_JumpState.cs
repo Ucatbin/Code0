@@ -36,12 +36,22 @@ public class Player_JumpState : Player_AirState
     {
         base.PhysicsUpdate();
 
-        _player.SetTargetVelocityY(_player.PropertySO.JumpHoldPower);
-        _player.ApplyMovement();
+        if (_player.Rb.linearVelocityY == 0)
+        {
+            _player.SetTargetVelocityY(0);
+            _player.ApplyMovement();
+            SkillEvents.TriggerJumpEnd();
+        }
+        else
+        {
+            _player.SetTargetVelocityY(_player.PropertySO.JumpHoldSpeed);
+            _player.ApplyMovement();
+        }        
     }
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+
     }
 
     public override void Exit()

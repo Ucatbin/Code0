@@ -84,7 +84,7 @@ public class PlayerController_Main : EntityContoller_Main
             ? accel
             : damping;
 
-        float frameVelocityX = Mathf.MoveTowards(                                                       // Calculate final target speed
+        float frameVelocityX = Mathf.MoveTowards(                                               // Calculate final target speed
             TargetVelocity.x,
             InputSys.MoveInput.x != 0 ? finalSpeed : 0,
             delta * Time.fixedDeltaTime

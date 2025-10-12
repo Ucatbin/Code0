@@ -62,7 +62,7 @@ public class EntityContoller_Main : MonoBehaviour, IMoveable, IDamageable
         if (IsPhysicsDriven) return;
 
         if (Checker.IsGrounded && TargetVelocity.y <= 0)
-            SetTargetVelocityY(-0.5f);
+            SetTargetVelocityY(-1.5f);
         else
         {
             var globalGravity = GameManager.Instance.GlobalVar;

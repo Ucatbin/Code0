@@ -24,7 +24,7 @@ public class CheckerController : MonoBehaviour, IGroundCheck, IWallCheck
     [SerializeField] float _wallCheckDist = 0.1f;
     [SerializeField] float _wallCheckWidth = 0.32f;
     // Interface
-    [field:SerializeField] public bool WallDected { get; set; }
+    [field:SerializeField] public bool IsWallDected { get; set; }
     public Transform WallCheckPoint => _wallCheckPoint;
     public LayerMask WallCheckLayer => _wallLayer;
     public float WallCheckDist => _wallCheckDist;
@@ -67,6 +67,6 @@ public class CheckerController : MonoBehaviour, IGroundCheck, IWallCheck
         // Debug ray
         Debug.DrawRay(centerPos, Vector2.right * _wallCheckDist * _entity.FacingDir, Color.red);
 
-        WallDected = centerHit;
+        IsWallDected = centerHit;
     }
 }

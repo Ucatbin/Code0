@@ -24,7 +24,7 @@ public class PlayerPropertySO : ScriptableObject
     [Tooltip("Give player a initial force")]
     public float JumpInitPower = 10f;
     [Tooltip("Acceration of jump force")]
-    public float JumpHoldPower = 10f;
+    public float JumpHoldSpeed = 10f;
     [Tooltip("Time window that can add force while holding SPACE"), Range(0f, 1f)]
     public float JumpInputWindow = 0.25f;
     public float WallSlideSpeed = 0.2f;
@@ -35,10 +35,6 @@ public class PlayerPropertySO : ScriptableObject
     public float CoyoteWindow = 0.15f;
 
     [Header("GRAVITY")]
-    [Tooltip("Max gravity while falling"), Range(0f, 10f)]
-    public float FallGravity = 4.5f;
     [Tooltip("Max gravity while gliding"), Range(0f, 10f)]
     public float AirGlideGravity = 4.5f;
-    [Tooltip("Gravity when attacking"), Range(0f, 10f)]
-    public float AttackGravity = 0.4f;
 }
