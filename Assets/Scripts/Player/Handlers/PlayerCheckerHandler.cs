@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerController_Checkers : CheckerController
+public class PlayerController_Checkers : CheckerHandler
 {
     public override void WallCheck()
     {

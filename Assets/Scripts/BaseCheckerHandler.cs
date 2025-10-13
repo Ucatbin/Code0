@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class CheckerController : MonoBehaviour, IGroundCheck, IWallCheck
+public class CheckerHandler : MonoBehaviour, IGroundCheck, IWallCheck
 {
     [SerializeField] Character _entity;
 

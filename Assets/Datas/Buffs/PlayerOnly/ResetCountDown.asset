@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1ee6aadb8dc9be409a44b78965a9c53, type: 3}
-  m_Name: Permanent BuffModifier
+  m_Script: {fileID: 11500000, guid: 4bb97d567d0be4643a44ff6c54c897bf, type: 3}
+  m_Name: ResetCountDown
   m_EditorClassIdentifier: 

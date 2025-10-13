@@ -10,24 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: baee7c3aba51dec4b8f316110fe6e0df, type: 3}
-  m_Name: +PlayerCountDown
+  m_Name: +KillToAccel
   m_EditorClassIdentifier: 
-  Id: 1
-  BuffName: CountDown
+  Id: 0
+  BuffName: KillToAccel
   Description: 
   Icon: {fileID: 0}
   Priority: 99
   MaxStacks: 1
   Tags: []
   Duration: 0
-  Interval: 0.1
+  Interval: -1
   BuffType: 2
   BuffStackType: 2
   BuffRemoveType: 1
   OnCreat: {fileID: 0}
   OnRemove: {fileID: 0}
-  OnInvoke: {fileID: 11400000, guid: 788a8cad13774af4d85ff85d39e334ed, type: 2}
+  OnInvoke: {fileID: 0}
   OnHit: {fileID: 0}
   OnBeHurt: {fileID: 0}
-  OnKill: {fileID: 11400000, guid: 3d11edd7aee4d434ab06c7f08af0e132, type: 2}
+  OnKill: {fileID: 11400000, guid: 7042ce31dd59491468768b809b2bbf62, type: 2}
   OnBekill: {fileID: 0}

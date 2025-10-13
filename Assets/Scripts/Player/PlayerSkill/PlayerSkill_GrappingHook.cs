@@ -97,7 +97,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
         _player.Rb.gravityScale = 4.5f;
 
         // If isGrounded, player will move to the hook point first
-        if (_player.Checker.IsGrounded && SurfaceNormal.y != 0)
+        if (_player.CheckerSys.IsGrounded && SurfaceNormal.y != 0)
         {
             Vector3 targetPos = new Vector2(HookPoint.transform.position.x, _player.transform.position.y);
             StartCoroutine(MoveToTarget(_player.transform.position, targetPos));
@@ -135,7 +135,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
             }
             yield return new WaitForFixedUpdate();
         }
-        if (_player.Checker.IsGrounded)
+        if (_player.CheckerSys.IsGrounded)
             _player.Root.position = targetPos;
         _player.Rb.linearVelocity *= 0.5f;
         GLineChecker.enabled = false;

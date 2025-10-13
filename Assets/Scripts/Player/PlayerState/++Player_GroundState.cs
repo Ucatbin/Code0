@@ -15,7 +15,7 @@ public class Player_GroundState : Player_BaseState
     }
     public override void LogicUpdate()
     {
-        if (!_player.Checker.IsGrounded)
+        if (!_player.CheckerSys.IsGrounded)
             _stateMachine.ChangeState(_player.StateSO.CoyoteState, false);
     }
 

@@ -3,16 +3,17 @@ using Unity.Cinemachine;
 
 public class PlayerController_Main : Character
 {
-    [Header("NecessaryComponent")]
-    public PlayerInput InputSys;
-    public Camera MainCam;
-    public CinemachineCamera Cam;
+    [Header("PlayerHandlers")]
+    public InputHandler InputSys;
 
-    [Header("Datas")]
+    [Header("PlayerComponents")]
+    public Camera MainCam;
+    
+    [Header("PlayerDatas")]
     public PlayerPropertySO PropertySO;
     public PlayerStateSO StateSO;
 
-    [Header("StateMark")]
+    [Header("PlayerStateMarks")]
     public bool IsJumping = false;
     public bool IsCoyoting = false;
     public bool IsHooked = false;
@@ -75,9 +76,9 @@ public class PlayerController_Main : Character
         if (IsPhysicsDriven || (InputSys.MoveInput.x == 0 && Rb.linearVelocityX == 0))
             return;
 
-        float accel = Checker.IsGrounded ? PropertySO.GroundAccel : PropertySO.AirAccel;        // Decide to use ground accel or air accel
-        float damping = Checker.IsGrounded ? PropertySO.GroundDamping : PropertySO.AirDamping;  // Decide to use ground damping or air damping
-        float finalSpeed = Checker.IsGrounded                                                   // Decide to use ground max speed or air max final speed
+        float accel = CheckerSys.IsGrounded ? PropertySO.GroundAccel : PropertySO.AirAccel;        // Decide to use ground accel or air accel
+        float damping = CheckerSys.IsGrounded ? PropertySO.GroundDamping : PropertySO.AirDamping;  // Decide to use ground damping or air damping
+        float finalSpeed = CheckerSys.IsGrounded                                                   // Decide to use ground max speed or air max final speed
             ? FinalGroundSpeed * InputSys.MoveInput.x
             : FinalAirSpeed * InputSys.MoveInput.x;
         float delta = Rb.linearVelocityX <= Mathf.Abs(finalSpeed) && InputSys.MoveInput.x != 0  // Decide to use accel or damping
@@ -124,7 +125,7 @@ public class PlayerController_Main : Character
     }
     void HandleJumpEnd()
     {
-        if (!Checker.IsGrounded)
+        if (!CheckerSys.IsGrounded)
             _stateMachine.ChangeState(StateSO.AirState, true);
         else
             _stateMachine.ChangeState(StateSO.IdleState, false);

@@ -32,13 +32,13 @@ public struct DamageData
 
     public void HandleHit()
     {
-        var buffsToProcess = Caster.BuffHandler.BuffHeap.ToList();
+        var buffsToProcess = Caster.BuffSys.BuffHeap.ToList();
         foreach (var buffInfo in buffsToProcess)
             buffInfo?.BuffData.OnHit?.Apply(buffInfo);
     }
     public void HandleKill()
     {
-        var buffsToProcess = Caster.BuffHandler.BuffHeap.ToList();
+        var buffsToProcess = Caster.BuffSys.BuffHeap.ToList();
         foreach (var buffInfo in buffsToProcess)
             buffInfo?.BuffData.OnKill?.Apply(buffInfo);
     }
@@ -90,10 +90,9 @@ public class BuffItem : IComparable<BuffItem>
 
 public enum BuffType
 {
-    Unique,
-    Stackable,
-    Independent,
-    Permanent
+    Stackable,      // Can add stacks
+    Independent,    // Isolated to invoke
+    Permanent,      // Wont remove
 }
 public enum BuffStackType
 {

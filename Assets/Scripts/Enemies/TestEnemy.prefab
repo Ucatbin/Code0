@@ -1,5 +1,50 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2051121800204436383
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8046638723907729221}
+  - component: {fileID: 1155190057272649383}
+  m_Layer: 9
+  m_Name: BuffHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8046638723907729221
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2051121800204436383}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8973194057215381257}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1155190057272649383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2051121800204436383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aefc797552e42e4f95df571ae3c2984, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _entity: {fileID: 0}
 --- !u!1 &2068580592760149710
 GameObject:
   m_ObjectHideFlags: 0
@@ -98,7 +143,7 @@ GameObject:
   - component: {fileID: 3884308937797776472}
   - component: {fileID: 9078860714768111420}
   m_Layer: 9
-  m_Name: Checkers
+  m_Name: CheckerHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -112,14 +157,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3687806315227609445}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 82965294179814929}
   - {fileID: 3258929060476403590}
-  m_Father: {fileID: 3156729401001556107}
+  m_Father: {fileID: 8973194057215381257}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9078860714768111420
 MonoBehaviour:
@@ -158,7 +203,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8973194057215381257}
   - component: {fileID: 9050118224966589016}
-  - component: {fileID: 2789043831222558604}
   m_Layer: 9
   m_Name: Controller
   m_TagString: Untagged
@@ -178,7 +222,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3884308937797776472}
+  - {fileID: 8046638723907729221}
   m_Father: {fileID: 3156729401001556107}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9050118224966589016
@@ -194,10 +240,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Root: {fileID: 3156729401001556107}
-  Checker: {fileID: 9078860714768111420}
   Rb: {fileID: 9197564711913767360}
   Anim: {fileID: 0}
-  BuffHandler: {fileID: 2789043831222558604}
+  CheckerSys: {fileID: 9078860714768111420}
+  BuffSys: {fileID: 1155190057272649383}
   IsBusy: 0
   IsPhysicsDriven: 0
   FacingDir: 1
@@ -206,18 +252,6 @@ MonoBehaviour:
   PropertySO: {fileID: 11400000, guid: 89366d1f35c3fd94a9bef0d912c1aa82, type: 2}
   StateSO: {fileID: 11400000, guid: 45a0738e5eed8d74ebaf578bb152a1db, type: 2}
   IsPatroling: 0
---- !u!114 &2789043831222558604
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5735720648580055160}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8aefc797552e42e4f95df571ae3c2984, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6220681194587170263
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,7 +284,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8973194057215381257}
-  - {fileID: 3884308937797776472}
   - {fileID: 7717169839294127966}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

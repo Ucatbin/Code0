@@ -29,7 +29,7 @@ public class EnemyController_Main : Character
         base.HandleMovement();
 
         int moveDir = IsPatroling ? FacingDir : 0;
-        float finalSpeed = Checker.IsGrounded
+        float finalSpeed = CheckerSys.IsGrounded
             ? FinalGroundSpeed * moveDir
             : FinalAirSpeed * moveDir;
         float delta = Rb.linearVelocityX <= Mathf.Abs(finalSpeed) && moveDir != 0

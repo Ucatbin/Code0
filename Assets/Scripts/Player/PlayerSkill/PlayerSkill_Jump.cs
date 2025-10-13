@@ -56,7 +56,7 @@ public class PlayerSkill_Jump : PlayerSkill_BaseSkill
     }
     public override void TryResetSkill()
     {
-        if ((_player.Checker.IsGrounded || _player.IsWallSliding) && IsInputReset)
+        if ((_player.CheckerSys.IsGrounded || _player.IsWallSliding) && IsInputReset)
             CurrentCharges = MaxCharges;
     }
 }

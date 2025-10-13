@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BuffHandler : MonoBehaviour
 {
+    [SerializeField] protected Character _entity;
+
     public SortedSet<BuffItem> BuffHeap = new SortedSet<BuffItem>();
     public void AddBuff(BuffItem thisBuff)
     {
@@ -41,29 +43,24 @@ public class BuffHandler : MonoBehaviour
         else
         {
             if (thisBuff.BuffData.BuffType != BuffType.Permanent)
-            {
                 // Duration
                 TimerManager.Instance.AddTimer(
                     thisBuff.BuffData.Duration,
                     () => RemoveBuff(thisBuff),
                     thisBuff.BuffData.Id
                 );
-                // Tick callback
-                if (thisBuff.BuffData.Interval != -1)
-                    TimerManager.Instance.AddLoopTimer(
-                        thisBuff.BuffData.Interval,
-                        () => thisBuff.BuffData.OnInvoke?.Apply(thisBuff),
-                        false,
-                        thisBuff.BuffData.Id + "Loop"
-                    );
-            }
+            // Tick callback
+            if (thisBuff.BuffData.Interval != -1)
+                TimerManager.Instance.AddLoopTimer(
+                    thisBuff.BuffData.Interval,
+                    () => thisBuff.BuffData.OnInvoke?.Apply(thisBuff),
+                    false,
+                    thisBuff.BuffData.Id + "Loop"
+                );
             thisBuff.BuffData.OnCreat?.Apply(thisBuff);
             BuffHeap.Add(thisBuff);
         }
-        foreach (var buff in BuffHeap)
-        {
-            Debug.Log(buff.BuffData.BuffName + buff.CurrentStack);
-        }
+        Debug.Log(thisBuff.BuffData.BuffName + BuffHeap.Count);
     }
     void RemoveBuff(BuffItem thisBuff)
     {

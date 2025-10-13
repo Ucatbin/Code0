@@ -3,15 +3,17 @@ using System;
 
 public class Character : MonoBehaviour, IMoveable, IDamageable
 {
-    [Header("NecessaryComponent")]
+    [Header("BaseComponents")]
     public Transform Root;                  // This entity transform
-    public CheckerController Checker;       // Entity collision checkers
     public Rigidbody2D Rb;                  // Rigibody
     public Animator Anim;                   // Animator
-    public BuffHandler BuffHandler;         // Handle buff system
     protected StateMachine _stateMachine = new StateMachine();   // Statemachine
 
-    [Header("StateMark")]
+    [Header("BaseHandlers")]
+    public CheckerHandler CheckerSys;       // Entity collision checkers
+    public BuffHandler BuffSys;             // Handle buff system
+
+    [Header("BaseStateMarks")]
     public bool IsBusy = false;
     public bool IsPhysicsDriven = false;
     public int FacingDir = 1;
@@ -61,7 +63,7 @@ public class Character : MonoBehaviour, IMoveable, IDamageable
     {
         if (IsPhysicsDriven) return;
 
-        if (Checker.IsGrounded && TargetVelocity.y <= 0)
+        if (CheckerSys.IsGrounded && TargetVelocity.y <= 0)
             SetTargetVelocityY(-1.5f);
         else
         {
@@ -88,7 +90,7 @@ public class Character : MonoBehaviour, IMoveable, IDamageable
     public void TakeDamage(DamageData damageData)
     {
         damageData.HandleHit();
-        var buffsToProcess = BuffHandler.BuffHeap;
+        var buffsToProcess = BuffSys.BuffHeap;
         foreach (var buffInfo in buffsToProcess)
             buffInfo?.BuffData.OnBeHurt?.Apply(buffInfo);
 
@@ -104,7 +106,7 @@ public class Character : MonoBehaviour, IMoveable, IDamageable
     public void Die(DamageData damageData)
     {
         damageData.HandleKill();
-        var buffsToProcess = BuffHandler.BuffHeap;
+        var buffsToProcess = BuffSys.BuffHeap;
         foreach (var buffInfo in buffsToProcess)
             buffInfo.BuffData.OnBekill.Apply(buffInfo);         
         Destroy(Root.gameObject);
