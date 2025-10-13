@@ -10,25 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: baee7c3aba51dec4b8f316110fe6e0df, type: 3}
-  m_Name: new BuffData
+  m_Name: KillToAccel
   m_EditorClassIdentifier: 
-  Id: -1
-  BuffName: Test
-  Description: just for test
-  Icon: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  Priority: 99
-  MaxStacks: 20
-  Tags:
-  - Buff
-  Duration: 5
-  Interval: -1
-  BuffType: 0
-  BuffStackType: 1
+  Id: 0
+  BuffName: KillToAccel
+  Description: 
+  Icon: {fileID: 0}
+  Priority: 0
+  MaxStacks: 1
+  Tags: []
+  Duration: 0
+  Interval: 0
+  BuffType: 3
+  BuffStackType: 2
   BuffRemoveType: 1
-  OnCreat: {fileID: 11400000, guid: 59177f267907f5f47a777857e23ecbe8, type: 2}
-  OnRemove: {fileID: 11400000, guid: 145f7594480fadc49ba29fd7d8e837e2, type: 2}
+  OnCreat: {fileID: 0}
+  OnRemove: {fileID: 0}
   OnInvoke: {fileID: 0}
   OnHit: {fileID: 0}
   OnBeHurt: {fileID: 0}
-  OnKill: {fileID: 0}
+  OnKill: {fileID: 11400000, guid: 7042ce31dd59491468768b809b2bbf62, type: 2}
   OnBekill: {fileID: 0}

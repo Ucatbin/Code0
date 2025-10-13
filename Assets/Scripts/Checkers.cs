@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CheckerController : MonoBehaviour, IGroundCheck, IWallCheck
 {
-    [SerializeField] EntityContoller_Main _entity;
+    [SerializeField] Character _entity;
 
     [Header("Ground Check")]
     [SerializeField] Transform _groundCheckPoint;

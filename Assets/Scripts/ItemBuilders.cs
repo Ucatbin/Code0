@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 #region DamageBuilder
@@ -8,14 +9,14 @@ using UnityEngine;
 [Serializable]
 public struct DamageData
 {
-    public Transform Caster;
+    public Character Caster;
     public int DamageAmount;
     public Vector2 DamageDirection;
     public float KnockbackForce;
     public DamageType DamageType;
 
     public DamageData(
-        Transform caster,
+        Character caster,
         int damageAmount,
         Vector2 damageDirection,
         float knockbackForce,
@@ -27,6 +28,19 @@ public struct DamageData
         DamageDirection = damageDirection;
         KnockbackForce = knockbackForce;
         DamageType = damageType;
+    }
+
+    public void HandleHit()
+    {
+        var buffsToProcess = Caster.BuffHandler.BuffHeap.ToList();
+        foreach (var buffInfo in buffsToProcess)
+            buffInfo?.BuffData.OnHit?.Apply(buffInfo);
+    }
+    public void HandleKill()
+    {
+        var buffsToProcess = Caster.BuffHandler.BuffHeap.ToList();
+        foreach (var buffInfo in buffsToProcess)
+            buffInfo?.BuffData.OnKill?.Apply(buffInfo);
     }
 }
 
@@ -51,14 +65,14 @@ public enum DamageType
 public class BuffItem : IComparable<BuffItem>
 {
     public BuffDataSO BuffData; // Get the data of buffSO
-    public GameObject Source;   // Who deal this buff
-    public GameObject Target;   // Who take this buff
+    public Character Source;   // Who deal this buff
+    public Character Target;   // Who take this buff
     public int CurrentStack;    // How many stacks
 
     public BuffItem(
         BuffDataSO buffData,
-        GameObject caster,
-        GameObject target,
+        Character caster,
+        Character target,
         int curStack
     )
     {
@@ -78,7 +92,8 @@ public enum BuffType
 {
     Unique,
     Stackable,
-    Independent
+    Independent,
+    Permanent
 }
 public enum BuffStackType
 {

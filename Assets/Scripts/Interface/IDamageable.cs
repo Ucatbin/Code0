@@ -13,5 +13,5 @@ public interface IDamageable
     int CurrentHealth { get; }
     void TakeDamage(DamageData damageData);
     void TakeHeal();
-    void Die();
+    void Die(DamageData damageData);
 }

@@ -2,12 +2,12 @@ using UnityEngine;
 public abstract class EntityState
 {
     // Necessary parameter
-    protected EntityContoller_Main _entity;
+    protected Character _entity;
     protected StateMachine _stateMachine;
     protected string _stateName;
     public int _priority;
 
-    public EntityState(EntityContoller_Main entity, StateMachine stateMachine, int priority, string stateName)
+    public EntityState(Character entity, StateMachine stateMachine, int priority, string stateName)
     {
         _entity = entity;
         _stateMachine = stateMachine;

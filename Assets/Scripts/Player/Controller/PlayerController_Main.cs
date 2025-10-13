@@ -1,7 +1,7 @@
 using UnityEngine;
 using Unity.Cinemachine;
 
-public class PlayerController_Main : EntityContoller_Main
+public class PlayerController_Main : Character
 {
     [Header("NecessaryComponent")]
     public PlayerInput InputSys;

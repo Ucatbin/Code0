@@ -2016,7 +2016,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!61 &734777678
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2959,7 +2959,7 @@ MonoBehaviour:
   CurrentCharges: 0
   SkillCD: 0.2
   Damage:
-    Caster: {fileID: 1614462008}
+    Caster: {fileID: 542567388}
     DamageAmount: 2
     DamageDirection: {x: 0, y: 0}
     KnockbackForce: 0
@@ -4280,6 +4280,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2010529399}
   - component: {fileID: 2010529398}
+  - component: {fileID: 2010529400}
   m_Layer: 8
   m_Name: HandlerController
   m_TagString: Untagged
@@ -4314,6 +4315,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 390987058}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2010529400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010529397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9c186108b21dda4eb9879659990683c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 542567388}
+  PBuff_KillToAccel: {fileID: 11400000, guid: 562911090a4008c4a88df9ce18259f2d, type: 2}
 --- !u!1 &2096532428
 GameObject:
   m_ObjectHideFlags: 0

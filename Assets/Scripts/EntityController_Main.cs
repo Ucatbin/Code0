@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 
-public class EntityContoller_Main : MonoBehaviour, IMoveable, IDamageable
+public class Character : MonoBehaviour, IMoveable, IDamageable
 {
     [Header("NecessaryComponent")]
     public Transform Root;                  // This entity transform
@@ -44,7 +44,6 @@ public class EntityContoller_Main : MonoBehaviour, IMoveable, IDamageable
     public float FinalGroundSpeed => (BaseGroundSpeed + SpeedBonus) * SpeedMult;
     public float FinalAirSpeed => (BaseAirSpeed + SpeedBonus) * SpeedMult;
 
-    public virtual void HandleMovement() { }
     public void SetTargetVelocityX(float speedX) => TargetVelocity = new Vector2(speedX, Rb.linearVelocityY);
     public void SetTargetVelocityY(float speedY) => TargetVelocity = new Vector2(Rb.linearVelocityX, speedY);
     public void SetTargetVelocity(Vector2 speed) => TargetVelocity = speed;
@@ -57,6 +56,7 @@ public class EntityContoller_Main : MonoBehaviour, IMoveable, IDamageable
         else                    // Set velocity
             Rb.linearVelocity = TargetVelocity;
     }
+    public virtual void HandleMovement() { }
     public void HandleGravity()
     {
         if (IsPhysicsDriven) return;
@@ -87,17 +87,26 @@ public class EntityContoller_Main : MonoBehaviour, IMoveable, IDamageable
 
     public void TakeDamage(DamageData damageData)
     {
+        damageData.HandleHit();
+        var buffsToProcess = BuffHandler.BuffHeap;
+        foreach (var buffInfo in buffsToProcess)
+            buffInfo?.BuffData.OnBeHurt?.Apply(buffInfo);
+
         Debug.Log($"{Root.name} take {damageData.DamageAmount} damage from {damageData.Caster}");
         CurrentHealth -= damageData.DamageAmount;
         if (CurrentHealth <= 0)
-            Die();
+            Die(damageData);
     }
     public void TakeHeal()
     {
         CurrentHealth += 1;
     }
-    public void Die()
+    public void Die(DamageData damageData)
     {
+        damageData.HandleKill();
+        var buffsToProcess = BuffHandler.BuffHeap;
+        foreach (var buffInfo in buffsToProcess)
+            buffInfo.BuffData.OnBekill.Apply(buffInfo);         
         Destroy(Root.gameObject);
     }
     #endregion

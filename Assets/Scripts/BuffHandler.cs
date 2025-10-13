@@ -11,10 +11,10 @@ public class BuffHandler : MonoBehaviour
         // If entity already have this buff and it's not independent
         if (existingBuff != null && existingBuff.BuffData.BuffType != BuffType.Independent)
         {
-            existingBuff.CurrentStack += 
-                (existingBuff.BuffData.BuffType == BuffType.Stackable) && 
-                (existingBuff.CurrentStack < existingBuff.BuffData.MaxStacks) 
-                    ? 1 
+            existingBuff.CurrentStack +=
+                (existingBuff.BuffData.BuffType == BuffType.Stackable) &&
+                (existingBuff.CurrentStack < existingBuff.BuffData.MaxStacks)
+                    ? 1
                     : 0;
 
             switch (existingBuff.BuffData.BuffStackType)
@@ -40,23 +40,29 @@ public class BuffHandler : MonoBehaviour
         }
         else
         {
-            // Duration
-            TimerManager.Instance.AddTimer(
-                thisBuff.BuffData.Duration,
-                () => RemoveBuff(thisBuff),
-                thisBuff.BuffData.Id
-            );
-            // Tick callback
-            if (thisBuff.BuffData.Interval != -1)
-                TimerManager.Instance.AddLoopTimer(
-                    thisBuff.BuffData.Interval,
-                    () => thisBuff.BuffData.OnInvoke?.Apply(thisBuff),
-                    false,
-                    thisBuff.BuffData.Id + "Loop"
+            if (thisBuff.BuffData.BuffType != BuffType.Permanent)
+            {
+                // Duration
+                TimerManager.Instance.AddTimer(
+                    thisBuff.BuffData.Duration,
+                    () => RemoveBuff(thisBuff),
+                    thisBuff.BuffData.Id
                 );
-
+                // Tick callback
+                if (thisBuff.BuffData.Interval != -1)
+                    TimerManager.Instance.AddLoopTimer(
+                        thisBuff.BuffData.Interval,
+                        () => thisBuff.BuffData.OnInvoke?.Apply(thisBuff),
+                        false,
+                        thisBuff.BuffData.Id + "Loop"
+                    );
+            }
             thisBuff.BuffData.OnCreat?.Apply(thisBuff);
             BuffHeap.Add(thisBuff);
+        }
+        foreach (var buff in BuffHeap)
+        {
+            Debug.Log(buff.BuffData.BuffName + buff.CurrentStack);
         }
     }
     void RemoveBuff(BuffItem thisBuff)
