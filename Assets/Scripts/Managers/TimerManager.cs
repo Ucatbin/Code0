@@ -5,7 +5,8 @@ using UnityEngine;
 public class TimerManager : MonoBehaviour
 {
     public static TimerManager Instance { get; private set; }
-    SortedSet<TimerItem> _timerHeap = new SortedSet<TimerItem>();
+    [SerializeField] List<TimerItem> _timerList = new List<TimerItem>();
+    SortedSet<TimerItem> _timerHeap => new SortedSet<TimerItem>(_timerList);
     float _currentTime;
 
     void Awake()
@@ -32,14 +33,14 @@ public class TimerManager : MonoBehaviour
                 break;
 
             // Invoke and remove the timer from the heap
-            _timerHeap.Remove(nextTimer);
+            _timerList.Remove(nextTimer);
             nextTimer.Callback?.Invoke();
 
             // If it's a looping timer, reschedule it
             if (nextTimer.IsLoop)
             {
                 nextTimer.TriggerTime = _currentTime + nextTimer.Interval;
-                _timerHeap.Add(nextTimer);
+                _timerList.Add(nextTimer);
             }
         }
     }
@@ -50,7 +51,7 @@ public class TimerManager : MonoBehaviour
         float triggerTime = _currentTime + delayOrTime;
 
         TimerItem newItem = new TimerItem(triggerTime, callback, isLoop, interval, tag);
-        _timerHeap.Add(newItem);
+        _timerList.Add(newItem);
     }
 
     #region Add Timers
@@ -80,9 +81,9 @@ public class TimerManager : MonoBehaviour
         
         foreach (var timer in toUpdate)
         {
-            _timerHeap.Remove(timer);
+            _timerList.Remove(timer);
             timer.TriggerTime += additionalTime;
-            _timerHeap.Add(timer);
+            _timerList.Add(timer);
         }
     }
 
@@ -100,9 +101,9 @@ public class TimerManager : MonoBehaviour
         
         foreach (var timer in toUpdate)
         {
-            _timerHeap.Remove(timer);
+            _timerList.Remove(timer);
             timer.TriggerTime = _currentTime + delay;
-            _timerHeap.Add(timer);
+            _timerList.Add(timer);
         }
     }
     #endregion
@@ -118,7 +119,7 @@ public class TimerManager : MonoBehaviour
 
                 timer.RemainingTime = timer.TriggerTime - _currentTime;
                 timer.IsPaused = true;
-                _timerHeap.Remove(timer);
+                _timerList.Remove(timer);
             }
         }
     }
@@ -136,7 +137,7 @@ public class TimerManager : MonoBehaviour
 
             timer.TriggerTime = _currentTime + timer.RemainingTime;
             timer.IsPaused = false;
-            _timerHeap.Add(timer);
+            _timerList.Add(timer);
         }
     }
     public void PauseAllTimers()
@@ -149,7 +150,7 @@ public class TimerManager : MonoBehaviour
 
                 timer.RemainingTime = timer.TriggerTime - _currentTime;
                 timer.IsPaused = true;
-                _timerHeap.Remove(timer);
+                _timerList.Remove(timer);
             }
         }
     }
@@ -168,7 +169,7 @@ public class TimerManager : MonoBehaviour
 
             timer.RemainingTime = timer.TriggerTime - _currentTime;
             timer.IsPaused = true;
-            _timerHeap.Remove(timer);
+            _timerList.Remove(timer);
         }
     }
     #endregion
@@ -184,12 +185,12 @@ public class TimerManager : MonoBehaviour
                 toRemove.Add(timer);
         }
         foreach (var timer in toRemove)
-            _timerHeap.Remove(timer);
+            _timerList.Remove(timer);
     }
     // Clear all timers
     public void ClearAllTimers()
     {
-        _timerHeap.Clear();
+        _timerList.Clear();
     }
     # endregion
 }

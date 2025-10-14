@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PlayerAttributeSO", menuName = "Game/Player/Attributes")]
+[CreateAssetMenu(fileName = "PlayerPropertySO", menuName = "Game/Player/Property")]
 public class PlayerPropertySO : ScriptableObject
 {
     [Header("Health")]

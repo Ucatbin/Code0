@@ -5,11 +5,11 @@ using UnityEngine;
 public class BuffHandler : MonoBehaviour
 {
     [SerializeField] protected Character _entity;
-
-    public SortedSet<BuffItem> BuffHeap = new SortedSet<BuffItem>();
-    public void AddBuff(BuffItem thisBuff)
+    [SerializeField] List<BaseBuffItem> _buffList = new List<BaseBuffItem>();
+    public SortedSet<BaseBuffItem> BuffHeap => new SortedSet<BaseBuffItem>(_buffList);
+    public void AddBuff(BaseBuffItem thisBuff)
     {
-        BuffItem existingBuff = FindBuff(thisBuff.BuffData.Id);
+        BaseBuffItem existingBuff = FindBuff(thisBuff.BuffData.Id);
         // If entity already have this buff and it's not independent
         if (existingBuff != null && existingBuff.BuffData.BuffType != BuffType.Independent)
         {
@@ -42,7 +42,7 @@ public class BuffHandler : MonoBehaviour
         }
         else
         {
-            if (thisBuff.BuffData.BuffType != BuffType.Permanent)
+            if (thisBuff.BuffData.Duration != -1)
                 // Duration
                 TimerManager.Instance.AddTimer(
                     thisBuff.BuffData.Duration,
@@ -58,17 +58,17 @@ public class BuffHandler : MonoBehaviour
                     thisBuff.BuffData.Id + "Loop"
                 );
             thisBuff.BuffData.OnCreat?.Apply(thisBuff);
-            BuffHeap.Add(thisBuff);
+            _buffList.Add(thisBuff);
         }
         Debug.Log(thisBuff.BuffData.BuffName + BuffHeap.Count);
     }
-    void RemoveBuff(BuffItem thisBuff)
+    void RemoveBuff(BaseBuffItem thisBuff)
     {
         switch (thisBuff.BuffData.BuffRemoveType)
         {
             case BuffRemoveType.Clear:  // Clear this buff no matter how many stacks
                 thisBuff.BuffData.OnRemove.Apply(thisBuff);
-                BuffHeap.Remove(thisBuff);
+                _buffList.Remove(thisBuff);
                 TimerManager.Instance.CancelTimersWithTag(thisBuff.BuffData.Id + "Loop");
                 break;
             case BuffRemoveType.Reduce: // Reduce 1 stack, remove if stack reduce to 0
@@ -76,14 +76,14 @@ public class BuffHandler : MonoBehaviour
                 thisBuff.BuffData.OnRemove.Apply(thisBuff);
                 if (thisBuff.CurrentStack == 0)
                 {
-                    BuffHeap.Remove(thisBuff);
+                    _buffList.Remove(thisBuff);
                     TimerManager.Instance.CancelTimersWithTag(thisBuff.BuffData.Id + "Loop");
                 }
                 break;
         }
     }
 
-    BuffItem FindBuff(int buffDataId)
+    BaseBuffItem FindBuff(int buffDataId)
     {
         foreach (var buffInfo in BuffHeap)
         {

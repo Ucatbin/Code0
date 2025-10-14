@@ -4,7 +4,7 @@ public class BuffManager : MonoBehaviour
 {
     public static BuffManager Instance { get; private set; }
 
-    [field: SerializeField] public BuffDataSO Buff_SpeedUp { get; private set; }
+    [field: SerializeField] public BaseBuffDataSO Buff_SpeedUp { get; private set; }
 
     void Awake()
     {
@@ -20,9 +20,9 @@ public class BuffManager : MonoBehaviour
 
 public static class BuffFactory
 {
-    public static BuffItem CreateBuffItem(BuffDataSO buffData, Character caster, Character target, int stack)
+    public static BaseBuffItem CreateBuffItem(BaseBuffDataSO buffData, Character caster, Character target, int stack)
     {
-        BuffItem buffItem = new BuffItem(buffData, caster, target, stack);
+        BaseBuffItem buffItem = new BaseBuffItem(buffData, caster, target, stack);
         return buffItem;
     }
 }

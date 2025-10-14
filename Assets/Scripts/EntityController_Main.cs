@@ -92,7 +92,7 @@ public class Character : MonoBehaviour, IMoveable, IDamageable
         damageData.HandleHit();
         var buffsToProcess = BuffSys.BuffHeap;
         foreach (var buffInfo in buffsToProcess)
-            buffInfo?.BuffData.OnBeHurt?.Apply(buffInfo);
+            buffInfo?.BuffData.OnBeHit?.Apply(buffInfo);
 
         Debug.Log($"{Root.name} take {damageData.DamageAmount} damage from {damageData.Caster}");
         CurrentHealth -= damageData.DamageAmount;

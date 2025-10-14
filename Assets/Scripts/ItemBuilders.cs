@@ -60,54 +60,8 @@ public enum DamageType
 }
 #endregion
 
-#region BuffBuilder
-[Serializable]
-public class BuffItem : IComparable<BuffItem>
-{
-    public BuffDataSO BuffData; // Get the data of buffSO
-    public Character Source;   // Who deal this buff
-    public Character Target;   // Who take this buff
-    public int CurrentStack;    // How many stacks
-
-    public BuffItem(
-        BuffDataSO buffData,
-        Character caster,
-        Character target,
-        int curStack
-    )
-    {
-        BuffData = buffData;
-        Source = caster;
-        Target = target;
-        CurrentStack = curStack;
-    }
-    public int CompareTo(BuffItem other)
-    {
-        if (other == null) return 1;
-        return BuffData.Priority.CompareTo(other.BuffData.Priority);
-    }
-}
-
-public enum BuffType
-{
-    Stackable,      // Can add stacks
-    Independent,    // Isolated to invoke
-    Permanent,      // Wont remove
-}
-public enum BuffStackType
-{
-    ExtendDuration,
-    RefreshDuration,
-    None
-}
-public enum BuffRemoveType
-{
-    Reduce,
-    Clear
-}
-#endregion
-
 #region TimerBuilder
+[Serializable]
 public class TimerItem : IComparable<TimerItem>
 {
     public float TriggerTime;   // Absolute trigger time on the timeline
