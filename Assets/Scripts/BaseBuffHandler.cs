@@ -21,14 +21,14 @@ public class BuffHandler : MonoBehaviour
 
             switch (existingBuff.BuffData.BuffStackType)
             {
-                case BuffStackType.ExtendDuration:
+                case BuffStackType.Extend:
                     // Extend duration
                     TimerManager.Instance.ExtendTimersWithTag(
                         existingBuff.BuffData.Id,
                         existingBuff.BuffData.Duration
                     );
                     break;
-                case BuffStackType.RefreshDuration:
+                case BuffStackType.Refresh:
                     // Refresh duration
                     TimerManager.Instance.SetTimersWithTag(
                         existingBuff.BuffData.Id,

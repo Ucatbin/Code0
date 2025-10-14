@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class WorldManager : MonoBehaviour
 {
-    public static GameManager Instance { get; private set; }
+    public static WorldManager Instance { get; private set; }
 
     [field: SerializeField] public GlobalVarSO GlobalVar { get; private set; }
     

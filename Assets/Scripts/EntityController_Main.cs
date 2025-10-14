@@ -67,7 +67,7 @@ public class Character : MonoBehaviour, IMoveable, IDamageable
             SetTargetVelocityY(-1.5f);
         else
         {
-            var globalGravity = GameManager.Instance.GlobalVar;
+            var globalGravity = WorldManager.Instance.GlobalVar;
             float inAirGravity = globalGravity.FallDamping;
             if (Rb.linearVelocityY < 0)
                 inAirGravity *= globalGravity.FallMult;

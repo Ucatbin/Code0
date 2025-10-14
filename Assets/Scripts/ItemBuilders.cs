@@ -44,9 +44,6 @@ public struct DamageData
     }
 }
 
-/// <summary>
-/// Damage Type
-/// </summary>
 public enum DamageType
 {
     Normal,

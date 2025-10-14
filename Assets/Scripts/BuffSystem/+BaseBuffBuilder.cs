@@ -88,8 +88,8 @@ public enum BuffType
 }
 public enum BuffStackType
 {
-    ExtendDuration,
-    RefreshDuration,
+    Extend,
+    Refresh,
     None
 }
 public enum BuffRemoveType
