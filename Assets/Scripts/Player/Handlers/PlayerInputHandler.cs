@@ -94,7 +94,7 @@ public static class InputEvents
     public static void TriggerGHookPressed() => OnGHookPressed?.Invoke();
     public static void TriggerGHookReleased() => OnGHookReleased?.Invoke();
 
-    // Dash
+    // Line Dash
     public static event Action OnLineDashPressed;
     public static event Action OnLineDashReleased;
     public static void TriggerLineDashPressed() => OnLineDashPressed?.Invoke();

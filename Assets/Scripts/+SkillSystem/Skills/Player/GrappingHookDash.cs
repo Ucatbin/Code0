@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerSkill_GrappingHookDash : PlayerSkill_BaseSkill
@@ -6,21 +7,31 @@ public class PlayerSkill_GrappingHookDash : PlayerSkill_BaseSkill
     PlayerSkill_GrappingHook _gHookSkill;
     [Header("GHookAttribute")]
     [SerializeField] float _lineDashForce = 5f;
+    [SerializeField] bool _stopDash = false;
 
     public PlayerSkill_GrappingHookDash(PlayerController_Main player) : base(player) { }
 
     void OnEnable()
     {
         InputEvents.OnLineDashPressed += TryUseSkill;
-        InputEvents.OnLineDashReleased += () => IsInputReset = true;
+        InputEvents.OnLineDashReleased += () =>
+        {
+            IsInputReset = true;
+            _stopDash = true;
+        };
     }
     void OnDisable()
     {
         InputEvents.OnLineDashPressed -= TryUseSkill;
-        InputEvents.OnLineDashReleased -= () => IsInputReset = true;
+        InputEvents.OnLineDashReleased -= () =>
+        {
+            IsInputReset = true;
+            _stopDash = true;
+        };
     }
     public override void TryUseSkill()
     {
+        _stopDash = false;
         _gHookSkill = Player_SkillManager.Instance.GrappingHook;
         // TODO:Havent complete if yet
         if (!_isReady ||
@@ -34,9 +45,8 @@ public class PlayerSkill_GrappingHookDash : PlayerSkill_BaseSkill
     public override void UseSkill()
     {
         ConsumeSkill();
-        ApplyLineDash();
         CoolDownSkill(SkillCD, "PlayerSkill");
-        // StartCoroutine(LineDash());
+        StartCoroutine(ApplyLineDash());
     }
     public override void CoolDownSkill(float coolDown, string tag)
     {
@@ -50,12 +60,19 @@ public class PlayerSkill_GrappingHookDash : PlayerSkill_BaseSkill
 
     }
 
-    void ApplyLineDash()
+    IEnumerator ApplyLineDash()
     {
-        Vector2 tangent1 = new Vector2(-_gHookSkill.SurfaceNormal.y, _gHookSkill.SurfaceNormal.x);
-        Vector2 tangent2 = new Vector2(_gHookSkill.SurfaceNormal.y, -_gHookSkill.SurfaceNormal.x);
-        Vector2 dashDir = _player.FacingDir == 1 ? tangent1 : tangent2;
+        while (!_stopDash && _player.IsHooked)
+        {
+            Vector2 playerToHook = (_gHookSkill.HookPoint.transform.position - _player.transform.position).normalized;
+            Vector2 tangent1 = new Vector2(-playerToHook.y, playerToHook.x);
+            Vector2 tangent2 = new Vector2(playerToHook.y, -playerToHook.x);
+            Vector2 dashDir = _player.FacingDir >= 0 ? tangent2 : tangent1;
 
-        _player.Rb.AddForce(_lineDashForce * dashDir.normalized, ForceMode2D.Impulse);
+            _player.Rb.AddForce(_lineDashForce * dashDir.normalized, ForceMode2D.Force);
+            Debug.Log( dashDir.normalized * playerToHook);
+            yield return new WaitForFixedUpdate();
+        }
+        yield break;
     }
 }

@@ -61,13 +61,21 @@ public class Character : MonoBehaviour, IMoveable, IDamageable
         else                    // Set velocity
             Rb.linearVelocity = TargetVelocity;
 
+        // Handle flip
         if (Rb.linearVelocityX * FacingDir < 0)
             HandleFlip();
 
-        if (CheckerSys.IsCeilingDetected)
+        // Prevent stuck on ceiling
+        if (CheckerSys.IsCeilingDetected && Rb.linearVelocityY > 0)
         {
+            Rb.linearVelocityY = 0;
             SetTargetVelocityY(0);
-            ApplyMovement();
+        }
+
+        if (CheckerSys.IsWallDected && Rb.linearVelocityX * FacingDir > 0)
+        {
+            Rb.linearVelocityX = 0;
+            SetTargetVelocityX(0);
         }
     }
     public virtual void HandleMovement() { }

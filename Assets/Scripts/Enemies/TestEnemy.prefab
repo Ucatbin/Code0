@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entity: {fileID: 0}
+  _buffList: []
 --- !u!1 &2068580592760149710
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,6 +194,12 @@ MonoBehaviour:
   _wallCheckDist: 1
   _wallCheckWidth: 0.32
   <IsWallDected>k__BackingField: 0
+  _ceilingCheckPoint: {fileID: 0}
+  _ceilingLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  _ceilingCheckDist: 0
+  <IsCeilingDetected>k__BackingField: 0
 --- !u!1 &5735720648580055160
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,6 +255,9 @@ MonoBehaviour:
   IsPhysicsDriven: 0
   FacingDir: 1
   <TargetVelocity>k__BackingField: {x: 0, y: 0}
+  <ShouldFlip>k__BackingField:
+  - {fileID: 7717169839294127966}
+  - {fileID: 3884308937797776472}
   <CurrentHealth>k__BackingField: 0
   PropertySO: {fileID: 11400000, guid: 89366d1f35c3fd94a9bef0d912c1aa82, type: 2}
   StateSO: {fileID: 11400000, guid: 45a0738e5eed8d74ebaf578bb152a1db, type: 2}

@@ -39,6 +39,9 @@ public class Player_HookedState : Player_BaseState
 
         _player.ApplyMovement();
 
+        if (_player.CheckerSys.IsGrounded)
+            _gHookSkill.ReleaseGHook();
+
     }
 
     public override void Exit()

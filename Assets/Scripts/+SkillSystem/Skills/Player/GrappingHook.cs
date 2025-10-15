@@ -16,8 +16,8 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
     [field: SerializeField] public float MaxLineDist { get; private set; } = 8f;
     [field: SerializeField] public LayerMask CanHookLayer { get; private set; }      // Which layer can the hook attach to
     [SerializeField] float _lineInitSpeedMult = 100f;   // Force add per frame when move to target hookpoint
-    [SerializeField] float _initLineDur = 0.2f;         // The duration of setting the line length
-    [SerializeField] float _lineMoveSpeed = 4.5f;       // Speed when move on the line
+    [SerializeField] float _initLineLengthDur = 0.2f;         // The duration of setting the line length
+    [SerializeField] float _lineStretchSpeed = 4.5f;       // Speed when move on the line
     [SerializeField] float _lineSwingForce = 35f;
     [SerializeField] float _maxSwingSpeed = 12f;
 
@@ -124,7 +124,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
                 break;
 
             _player.Rb.AddForce(
-                _lineMoveSpeed * (targetPos - startPos).normalized * _lineInitSpeedMult,
+                _lineStretchSpeed * (targetPos - startPos).normalized * _lineInitSpeedMult,
                 ForceMode2D.Force
                 );
 
@@ -155,7 +155,7 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
         float startDist = RopeJoint.distance;
         while (Mathf.Abs(RopeJoint.distance - MaxLineDist) > 0.05f)
         {
-            float t = elapsedTime / _initLineDur;
+            float t = elapsedTime / _initLineLengthDur;
             RopeJoint.distance = Mathf.Lerp(startDist, MaxLineDist, t);
 
             elapsedTime += Time.deltaTime;
@@ -236,8 +236,10 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
         float inputY = _player.InputSys.MoveInput.y;
         float inputX = _player.InputSys.MoveInput.x;
         if (inputY != 0)
-            RopeJoint.distance -= _lineMoveSpeed * inputY * Time.fixedDeltaTime;
-        if (inputX != 0 && Mathf.Abs(_player.Rb.linearVelocityX) <= _maxSwingSpeed)
+            RopeJoint.distance -= _lineStretchSpeed * inputY * Time.fixedDeltaTime;
+        if (Mathf.Abs(_player.Rb.linearVelocity.magnitude) <= _maxSwingSpeed &&
+            inputX * _player.Rb.linearVelocityX > 0
+        )
             _player.Rb.AddForce(Vector2.right * inputX * _lineSwingForce);
     }
 }
