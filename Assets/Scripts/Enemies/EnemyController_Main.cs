@@ -1,7 +1,7 @@
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class EnemyController_Main : EntityContoller_Main
+public class EnemyController_Main : Character
 {
     [Header("Scriptable Object")]
     public EnemyPropertySO PropertySO;
@@ -29,7 +29,7 @@ public class EnemyController_Main : EntityContoller_Main
         base.HandleMovement();
 
         int moveDir = IsPatroling ? FacingDir : 0;
-        float finalSpeed = Checker.IsGrounded
+        float finalSpeed = CheckerSys.IsGrounded
             ? FinalGroundSpeed * moveDir
             : FinalAirSpeed * moveDir;
         float delta = Rb.linearVelocityX <= Mathf.Abs(finalSpeed) && moveDir != 0
@@ -37,11 +37,11 @@ public class EnemyController_Main : EntityContoller_Main
             : PropertySO.Damping;
 
         float speedX = Mathf.MoveTowards(
-            TargetSpeed.x,
+            TargetVelocity.x,
             moveDir != 0 ? finalSpeed : 0,
             delta
         );
-        SetTargetSpeed(new Vector2(speedX, TargetSpeed.y));
-        Rb.linearVelocity = new Vector2(TargetSpeed.x, Rb.linearVelocityY);
+        SetTargetVelocity(new Vector2(speedX, TargetVelocity.y));
+        Rb.linearVelocity = new Vector2(TargetVelocity.x, Rb.linearVelocityY);
     }
 }

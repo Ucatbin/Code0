@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemySpawner : BaseObjectPool
+public class EnemySpawner : ObjectPool
 {
     void OnTriggerEnter2D(Collider2D collision)
     {

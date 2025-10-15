@@ -1,5 +1,51 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2051121800204436383
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8046638723907729221}
+  - component: {fileID: 1155190057272649383}
+  m_Layer: 9
+  m_Name: BuffHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8046638723907729221
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2051121800204436383}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8973194057215381257}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1155190057272649383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2051121800204436383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aefc797552e42e4f95df571ae3c2984, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _entity: {fileID: 0}
+  _buffList: []
 --- !u!1 &2068580592760149710
 GameObject:
   m_ObjectHideFlags: 0
@@ -98,7 +144,7 @@ GameObject:
   - component: {fileID: 3884308937797776472}
   - component: {fileID: 9078860714768111420}
   m_Layer: 9
-  m_Name: Checkers
+  m_Name: CheckerHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -112,14 +158,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3687806315227609445}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 82965294179814929}
   - {fileID: 3258929060476403590}
-  m_Father: {fileID: 3156729401001556107}
+  m_Father: {fileID: 8973194057215381257}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9078860714768111420
 MonoBehaviour:
@@ -147,7 +193,13 @@ MonoBehaviour:
     m_Bits: 65
   _wallCheckDist: 1
   _wallCheckWidth: 0.32
-  <WallDected>k__BackingField: 0
+  <IsWallDected>k__BackingField: 0
+  _ceilingCheckPoint: {fileID: 0}
+  _ceilingLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  _ceilingCheckDist: 0
+  <IsCeilingDetected>k__BackingField: 0
 --- !u!1 &5735720648580055160
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,7 +229,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3884308937797776472}
+  - {fileID: 8046638723907729221}
   m_Father: {fileID: 3156729401001556107}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9050118224966589016
@@ -192,14 +246,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 341495e3fe9f5f7429b5be51b73302c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Checker: {fileID: 9078860714768111420}
   Root: {fileID: 3156729401001556107}
   Rb: {fileID: 9197564711913767360}
   Anim: {fileID: 0}
-  BuffHandler: {fileID: 0}
-  <TargetSpeed>k__BackingField: {x: 0, y: 0}
-  <CurrentHealth>k__BackingField: 0
+  CheckerSys: {fileID: 9078860714768111420}
+  BuffSys: {fileID: 1155190057272649383}
+  IsBusy: 0
+  IsPhysicsDriven: 0
   FacingDir: 1
+  <TargetVelocity>k__BackingField: {x: 0, y: 0}
+  <ShouldFlip>k__BackingField:
+  - {fileID: 7717169839294127966}
+  - {fileID: 3884308937797776472}
+  <CurrentHealth>k__BackingField: 0
   PropertySO: {fileID: 11400000, guid: 89366d1f35c3fd94a9bef0d912c1aa82, type: 2}
   StateSO: {fileID: 11400000, guid: 45a0738e5eed8d74ebaf578bb152a1db, type: 2}
   IsPatroling: 0
@@ -235,7 +294,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8973194057215381257}
-  - {fileID: 3884308937797776472}
   - {fileID: 7717169839294127966}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

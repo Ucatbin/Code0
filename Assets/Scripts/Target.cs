@@ -8,11 +8,11 @@ public class Target : EnemyController_Main
 
         int moveDir = IsPatroling ? FacingDir : 0;
         float speedX = Mathf.MoveTowards(
-            TargetSpeed.x,
+            TargetVelocity.x,
             moveDir != 0 ? FinalGroundSpeed * moveDir : 0,
             PropertySO.Accel
         );
-        SetTargetSpeed(new Vector2(speedX, TargetSpeed.y));
-        Rb.linearVelocity = new Vector2(TargetSpeed.x, Rb.linearVelocityY);
+        SetTargetVelocity(new Vector2(speedX, TargetVelocity.y));
+        Rb.linearVelocity = new Vector2(TargetVelocity.x, Rb.linearVelocityY);
     }
 }

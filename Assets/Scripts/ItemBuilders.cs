@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 #region DamageBuilder
@@ -8,14 +9,14 @@ using UnityEngine;
 [Serializable]
 public struct DamageData
 {
-    public Transform Caster;
+    public Character Caster;
     public int DamageAmount;
     public Vector2 DamageDirection;
     public float KnockbackForce;
     public DamageType DamageType;
 
     public DamageData(
-        Transform caster,
+        Character caster,
         int damageAmount,
         Vector2 damageDirection,
         float knockbackForce,
@@ -28,11 +29,21 @@ public struct DamageData
         KnockbackForce = knockbackForce;
         DamageType = damageType;
     }
+
+    public void HandleHit()
+    {
+        var buffsToProcess = Caster.BuffSys.BuffHeap.ToList();
+        foreach (var buffInfo in buffsToProcess)
+            buffInfo?.BuffData.OnHit?.Apply(buffInfo);
+    }
+    public void HandleKill()
+    {
+        var buffsToProcess = Caster.BuffSys.BuffHeap.ToList();
+        foreach (var buffInfo in buffsToProcess)
+            buffInfo?.BuffData.OnKill?.Apply(buffInfo);
+    }
 }
 
-/// <summary>
-/// Damage Type
-/// </summary>
 public enum DamageType
 {
     Normal,
@@ -46,54 +57,8 @@ public enum DamageType
 }
 #endregion
 
-#region BuffBuilder
-[Serializable]
-public class BuffItem : IComparable<BuffItem>
-{
-    public BuffDataSO BuffData; // Get the data of buffSO
-    public GameObject Source;   // Who deal this buff
-    public GameObject Target;   // Who take this buff
-    public int CurrentStack;    // How many stacks
-
-    public BuffItem(
-        BuffDataSO buffData,
-        GameObject caster,
-        GameObject target,
-        int curStack
-    )
-    {
-        BuffData = buffData;
-        Source = caster;
-        Target = target;
-        CurrentStack = curStack;
-    }
-    public int CompareTo(BuffItem other)
-    {
-        if (other == null) return 1;
-        return BuffData.Priority.CompareTo(other.BuffData.Priority);
-    }
-}
-
-public enum BuffType
-{
-    Unique,
-    Stackable,
-    Independent
-}
-public enum BuffStackType
-{
-    ExtendDuration,
-    RefreshDuration,
-    None
-}
-public enum BuffRemoveType
-{
-    Reduce,
-    Clear
-}
-#endregion
-
 #region TimerBuilder
+[Serializable]
 public class TimerItem : IComparable<TimerItem>
 {
     public float TriggerTime;   // Absolute trigger time on the timeline

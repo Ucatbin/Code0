@@ -1,5 +1,7 @@
+using System;
+
 /// <summary>
-/// 可受伤接口，所有可以被攻击的物体都应该实现此接口
+/// All entity can be hit 
 /// </summary>
 public interface IDamageable
 {
@@ -11,7 +13,8 @@ public interface IDamageable
     /// Entity's current health
     /// </summary>
     int CurrentHealth { get; }
+
     void TakeDamage(DamageData damageData);
     void TakeHeal();
-    void Die();
+    void BeKilled(DamageData damageData);
 }
