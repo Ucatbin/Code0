@@ -9,10 +9,10 @@ public class PlayerController_Visual : MonoBehaviour
 
     void Update()
     {
-        Flip();
+        TryFlip();
     }
 
-    public void Flip()
+    public void TryFlip()
     {
         if (_player.InputSys.MoveInput.x == 0f &&   // Can flip while moving
                 !_player.IsHooked ||              // Can flip while attached
@@ -21,9 +21,6 @@ public class PlayerController_Visual : MonoBehaviour
             return;
 
         if (_player.Rb.linearVelocityX * _player.FacingDir < 0)
-        {
-            _player.Root.Rotate(new Vector2(0f, 180f));
-            _player.FacingDir = _player.FacingDir * -1;
-        }
+            _player.HandleFlip();
     }
 }

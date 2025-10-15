@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -43,6 +44,7 @@ public interface IMoveable
     #endregion
 
     #region Function
+    List<Transform> ShouldFlip { get; }
     /// <summary>
     /// Change speed quickly by adjust TargetSpeed directly
     /// </summary>
@@ -60,5 +62,6 @@ public interface IMoveable
     void HandleMovement();
     void ApplyMovement();
     void HandleGravity();
+    void HandleFlip();
     #endregion
 }

@@ -8,6 +8,7 @@ public class PlayerController_Main : Character
 
     [Header("PlayerComponents")]
     public Camera MainCam;
+    public Collider2D Collider;
     
     [Header("PlayerDatas")]
     public PlayerPropertySO PropertySO;
