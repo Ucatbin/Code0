@@ -14,11 +14,11 @@ public class Player_JumpState : Player_AirState
 
         _jumpSkill = Player_SkillManager.Instance.Jump;
 
-        _player.SetTargetVelocityY(_player.PropertySO.JumpInitPower);
+        _player.SetTargetVelocityY(_jumpSkill.JumpInitPower);
         _player.ApplyMovement();
 
         TimerManager.Instance.AddTimer(
-            _player.PropertySO.JumpInputWindow,
+            _jumpSkill.JumpInputWindow,
             () => SkillEvents.TriggerJumpEnd(),
             "JumpStateTimer"
         );
@@ -40,7 +40,7 @@ public class Player_JumpState : Player_AirState
             SkillEvents.TriggerJumpEnd();
         else
         {
-            _player.SetTargetVelocityY(_player.PropertySO.JumpHoldSpeed);
+            _player.SetTargetVelocityY(_jumpSkill.JumpHoldSpeed);
             _player.ApplyMovement();
         }        
     }

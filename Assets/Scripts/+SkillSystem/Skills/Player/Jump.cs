@@ -2,6 +2,16 @@ using UnityEngine;
 
 public class PlayerSkill_Jump : PlayerSkill_BaseSkill
 {
+    [Header("Jump")]
+    public float JumpInitPower = 14f;
+    public float JumpInputWindow = 0.25f;
+    public float JumpHoldSpeed = 10f;
+    public float CoyoteWindow = 0.15f;
+    [Header("WallJump")]
+    public float WallJumpPower = 14f;
+    public float WallJumpWindow = 0.15f;
+    public Vector2 WallJumpDir = new Vector2(0.8f, 1f);
+
     public PlayerSkill_Jump(PlayerController_Main player) : base(player)
     {
     }

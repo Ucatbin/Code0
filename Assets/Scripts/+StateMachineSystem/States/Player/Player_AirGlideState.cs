@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Player_AirGlideState : Player_AirState
@@ -10,6 +11,7 @@ public class Player_AirGlideState : Player_AirState
     {
         base.Enter();
 
+        _player.IsPhysicsDriven = true;
         _player.Rb.gravityScale = _player.PropertySO.AirGlideGravity;
     }
     
@@ -28,5 +30,10 @@ public class Player_AirGlideState : Player_AirState
 
         _player.Rb.gravityScale = 0f;
         _player.IsPhysicsDriven = false;
+    }
+    
+    void HandleHDamping()
+    {
+
     }
 }

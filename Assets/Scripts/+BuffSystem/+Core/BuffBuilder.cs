@@ -58,14 +58,14 @@ public class BuffDataSO : ScriptableObject
 public class BaseBuffItem : IComparable<BaseBuffItem>
 {
     public BuffDataSO BuffData; // Get the data of buffSO
-    public Character Source;        // Who deal this buff
-    public Character Target;        // Who take this buff
+    public EntityController Source;        // Who deal this buff
+    public EntityController Target;        // Who take this buff
     public int CurrentStack;        // How many stacks
 
     public BaseBuffItem(
         BuffDataSO buffData,
-        Character caster,
-        Character target,
+        EntityController caster,
+        EntityController target,
         int curStack
     )
     {

@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
-public class Character : MonoBehaviour, IMoveable, IDamageable
+public class EntityController : MonoBehaviour, IMoveable, IDamageable
 {
     [Header("BaseComponents")]
     public Transform Root;                  // This entity transform

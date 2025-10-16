@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BuffHandler : MonoBehaviour
 {
-    [SerializeField] protected Character _entity;
+    [SerializeField] protected EntityController _entity;
     [SerializeField] List<BaseBuffItem> _buffList = new List<BaseBuffItem>();
     public SortedSet<BaseBuffItem> BuffHeap => new SortedSet<BaseBuffItem>(_buffList);
     public void AddBuff(BaseBuffItem thisBuff)

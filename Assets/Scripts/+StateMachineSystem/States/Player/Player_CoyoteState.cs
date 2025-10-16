@@ -9,7 +9,7 @@ public class Player_CoyoteState : Player_FallState
         base.Enter();
 
         TimerManager.Instance.AddTimer(
-            _player.PropertySO.CoyoteWindow,
+            Player_SkillManager.Instance.Jump.CoyoteWindow,
             () =>
             {
                 _stateMachine.ChangeState(_player.StateSO.FallState, false);

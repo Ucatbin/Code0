@@ -1,7 +1,7 @@
 using UnityEngine;
 using Unity.Cinemachine;
 
-public class PlayerController_Main : Character
+public class PlayerController_Main : EntityController
 {
     [Header("PlayerHandlers")]
     public InputHandler InputSys;
@@ -76,7 +76,6 @@ public class PlayerController_Main : Character
 
         if (IsPhysicsDriven || (InputSys.MoveInput.x == 0 && Rb.linearVelocityX == 0))
             return;
-
         float accel = CheckerSys.IsGrounded ? PropertySO.GroundAccel : PropertySO.AirAccel;        // Decide to use ground accel or air accel
         float damping = CheckerSys.IsGrounded ? PropertySO.GroundDamping : PropertySO.AirDamping;  // Decide to use ground damping or air damping
         float finalSpeed = CheckerSys.IsGrounded                                                   // Decide to use ground max speed or air max final speed

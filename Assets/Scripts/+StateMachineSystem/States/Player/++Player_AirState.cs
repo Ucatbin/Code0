@@ -19,7 +19,8 @@ public class Player_AirState : Player_BaseState
     public override void LogicUpdate()
     {  
         // Reset IsJumping to enable ground check, enter fallState
-        if (_player.Rb.linearVelocityY < 0f && _stateMachine.CurrentState != _player.StateSO.FallState)
+        if (_player.Rb.linearVelocityY < 0f &&
+            _stateMachine.CurrentState != _player.StateSO.FallState)
             _stateMachine.ChangeState(_player.StateSO.FallState, false);
 
         // Exit when detect the ground

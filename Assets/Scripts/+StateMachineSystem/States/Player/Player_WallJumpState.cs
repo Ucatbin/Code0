@@ -16,7 +16,7 @@ public class Player_WallJumpState : Player_AirState
         _jumpSkill = Player_SkillManager.Instance.Jump;
 
         TimerManager.Instance.AddTimer(
-            _player.PropertySO.WallJumpWindow,
+            _jumpSkill.WallJumpWindow,
             () => SkillEvents.TriggerJumpEnd(),
             "JumpStateTimer"
         );
@@ -26,11 +26,12 @@ public class Player_WallJumpState : Player_AirState
             "PlayerSkillGap"
         );
 
-        _wallJumpDir = new Vector2(-_player.FacingDir * _player.PropertySO.WallJumpDir.x, _player.PropertySO.WallJumpDir.y).normalized;
+        _player.HandleFlip();
+        _wallJumpDir = new Vector2(_player.FacingDir * _jumpSkill.WallJumpDir.x, _jumpSkill.WallJumpDir.y).normalized;
     }
     public override void PhysicsUpdate()
     {
-        _player.SetTargetVelocity(_player.PropertySO.WallJumpPower * _wallJumpDir);
+        _player.SetTargetVelocity(_jumpSkill.WallJumpPower * _wallJumpDir);
         _player.ApplyMovement();
     }
     public override void LogicUpdate() { }

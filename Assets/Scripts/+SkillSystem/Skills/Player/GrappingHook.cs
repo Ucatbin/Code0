@@ -222,8 +222,6 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
     void HandleDisable()
     {
         SkillEvents.TriggerHookRelease();
-        _player.IsHooked = false;
-        _player.IsPhysicsDriven = false;
 
         HookPool.Pool.Release(HookPoint);
         RopeJoint.enabled = false;

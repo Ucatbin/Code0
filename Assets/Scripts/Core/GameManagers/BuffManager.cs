@@ -20,7 +20,7 @@ public class BuffManager : MonoBehaviour
 
 public static class BuffFactory
 {
-    public static BaseBuffItem CreateBuffItem(BuffDataSO buffData, Character caster, Character target, int stack)
+    public static BaseBuffItem CreateBuffItem(BuffDataSO buffData, EntityController caster, EntityController target, int stack)
     {
         BaseBuffItem buffItem = new BaseBuffItem(buffData, caster, target, stack);
         return buffItem;
