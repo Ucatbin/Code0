@@ -90,10 +90,11 @@ public class EntityController : MonoBehaviour, IMoveable, IDamageable
     }
     public void HandleGravity()
     {
-        if (IsPhysicsDriven) return;
-
         if (CheckerSys.IsGrounded && TargetVelocity.y <= 0)
             SetTargetVelocityY(-1.5f);
+            
+        if (IsPhysicsDriven) return;
+
         else
         {
             var globalGravity = WorldManager.Instance.GlobalVar;
