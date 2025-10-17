@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81d95d527e051414e924a3df0d4bd12f, type: 3}
   m_Name: GlobalVarSO
   m_EditorClassIdentifier: 
-  MaxGroundSpeed: 12
-  MaxAirSpeed: 20
+  MaxGroundSpeed: 20
+  MaxAirSpeed: 30
   MaxFallSpeed: 20
   ZeroGravity: 0
   DefaultGravity: 1

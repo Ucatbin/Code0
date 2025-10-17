@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerPropertySO
   m_EditorClassIdentifier: 
   MaxHealth: 100
-  MaxGroundMoveSpeed: 10
+  MaxGroundMoveSpeed: 11.5
   GroundAccel: 60
   GroundDamping: 80
   WallSlideSpeed: 0.2

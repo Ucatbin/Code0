@@ -9,6 +9,7 @@ public class PlayerController_Main : EntityController
     [Header("PlayerComponents")]
     public Camera MainCam;
     public Collider2D Collider;
+    public AnimationCurve GravityCurve;
     
     [Header("PlayerDatas")]
     public PlayerPropertySO PropertySO;

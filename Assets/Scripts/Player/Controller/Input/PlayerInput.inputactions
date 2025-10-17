@@ -1,6 +1,6 @@
 {
     "version": 1,
-    "name": "Player",
+    "name": "PlayerInput",
     "maps": [
         {
             "name": "Normal",

@@ -77,8 +77,17 @@ public class EntityController : MonoBehaviour, IMoveable, IDamageable
             Rb.linearVelocityX = 0;
             SetTargetVelocityX(0);
         }
+
+        var maxSpeed = CheckerSys.IsGrounded ? WorldManager.Instance.GlobalVar.MaxGroundSpeed : WorldManager.Instance.GlobalVar.MaxAirSpeed;
+        if (Mathf.Abs(Rb.linearVelocityX) > maxSpeed)
+        {
+            Rb.linearVelocityX = maxSpeed * FacingDir;
+            return;
+        }
     }
-    public virtual void HandleMovement() { }
+    public virtual void HandleMovement()
+    {
+    }
     public void HandleGravity()
     {
         if (IsPhysicsDriven) return;

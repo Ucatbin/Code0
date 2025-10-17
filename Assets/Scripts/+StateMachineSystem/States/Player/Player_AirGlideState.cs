@@ -12,16 +12,20 @@ public class Player_AirGlideState : Player_AirState
         base.Enter();
 
         _player.IsPhysicsDriven = true;
-        _player.Rb.gravityScale = _player.PropertySO.AirGlideGravity;
     }
     
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
+        _player.Rb.linearVelocityX += -0.25f * _player.FacingDir;
+
+        _player.Rb.gravityScale = _player.GravityCurve.Evaluate(Mathf.Abs(_player.Rb.linearVelocity.magnitude));
     }
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+        _player.ApplyMovement();
+
     }
 
     public override void Exit()
@@ -30,10 +34,5 @@ public class Player_AirGlideState : Player_AirState
 
         _player.Rb.gravityScale = 0f;
         _player.IsPhysicsDriven = false;
-    }
-    
-    void HandleHDamping()
-    {
-
     }
 }

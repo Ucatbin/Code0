@@ -834,7 +834,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 405554525}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 74699721c858f7240b2a8bc406f1cb0b, type: 3}
   m_Name: 
@@ -1211,6 +1211,48 @@ MonoBehaviour:
   InputSys: {fileID: 1233298156}
   MainCam: {fileID: 519420031}
   Collider: {fileID: 1614462012}
+  GravityCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 3.5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 8
+      value: 3.5
+      inSlope: -0
+      outSlope: -0.22965012
+      tangentMode: 5
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.0749726
+    - serializedVersion: 3
+      time: 25
+      value: 1.5
+      inSlope: -0.006049858
+      outSlope: 0
+      tangentMode: 65
+      weightedMode: 0
+      inWeight: 0.23622423
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 30
+      value: 1.5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   PropertySO: {fileID: 11400000, guid: fc0fe7c335a11f345a7dc7c3ee3db4d2, type: 2}
   StateSO: {fileID: 11400000, guid: f1dcc5e1b3ca74d42b63f30e30971e1f, type: 2}
   IsJumping: 0
@@ -2697,6 +2739,13 @@ MonoBehaviour:
   MaxCharges: 2
   CurrentCharges: 0
   SkillCD: 0.12
+  JumpInitPower: 14
+  JumpInputWindow: 0.25
+  JumpHoldSpeed: 10
+  CoyoteWindow: 0.15
+  WallJumpPower: 14
+  WallJumpWindow: 0.15
+  WallJumpDir: {x: 0.8, y: 1}
 --- !u!1 &1017291975
 GameObject:
   m_ObjectHideFlags: 0
