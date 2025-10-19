@@ -17,14 +17,14 @@ public class Player_AirGlideState : Player_AirState
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-        _player.Rb.linearVelocityX += -0.25f * _player.FacingDir;
-
         _player.Rb.gravityScale = _player.GravityCurve.Evaluate(Mathf.Abs(_player.Rb.linearVelocity.magnitude));
     }
     public override void LogicUpdate()
     {
         base.LogicUpdate();
         _player.ApplyMovement();
+        if (Mathf.Abs(_player.Rb.linearVelocityX) < 6)
+            _stateMachine.ChangeState(_player.StateSO.FallState, true);
 
     }
 
