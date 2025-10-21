@@ -55,10 +55,7 @@ public class PlayerSkill_Jump : PlayerSkill_BaseSkill
     }
     public override void UseSkill()
     {
-        if (_player.IsWallSliding)
-            SkillEvents.TriggerWallJumpStart();
-        else
-            SkillEvents.TriggerJumpStart();
+        SkillEvents.TriggerJumpStart();
     }
     public override void CoolDownSkill(float coolDown, string tag)
     {

@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class PlayerController_Main : EntityController
@@ -9,6 +10,7 @@ public class PlayerController_Main : EntityController
     public Camera MainCam;
     public Collider2D Collider;
     public AnimationCurve GravityCurve;
+    [SerializeField] TextMeshProUGUI _countDownDisplay;
     
     [Header("PlayerDatas")]
     public PlayerPropertySO PropertySO;
@@ -25,7 +27,6 @@ public class PlayerController_Main : EntityController
     void OnEnable()
     {
         SkillEvents.OnJumpStart += HandleJumpStart;
-        SkillEvents.OnWallJumpStart += HandleWallJumpStart;
         SkillEvents.OnJumpEnd += HandleJumpEnd;
         SkillEvents.OnHookAttach += HandleHookAtteched;
         SkillEvents.OnHookRelease += HandleHookReleased;
@@ -35,7 +36,6 @@ public class PlayerController_Main : EntityController
     void OnDisable()
     {
         SkillEvents.OnJumpStart -= HandleJumpStart;
-        SkillEvents.OnWallJumpStart -= HandleWallJumpStart;
         SkillEvents.OnJumpEnd -= HandleJumpEnd;
         SkillEvents.OnHookAttach -= HandleHookAtteched;
         SkillEvents.OnHookRelease -= HandleHookReleased;
@@ -59,6 +59,14 @@ public class PlayerController_Main : EntityController
     protected override void Start()
     {
         base.Start();
+
+        var Buff_CountDown = new BuffItem_CountDown(
+            BuffManager.Instance.BuffData_CountDown,
+            this,
+            this,
+            1,
+            _countDownDisplay);
+        BuffSys.AddBuff(Buff_CountDown);
     }
 
     protected override void FixedUpdate()
@@ -98,21 +106,7 @@ public class PlayerController_Main : EntityController
     void HandleJumpStart()
     {
         var jumpSkill = Player_SkillManager.Instance.Jump;
-        bool sucess = _stateMachine.ChangeState(StateSO.JumpState, false);
-        if (sucess)
-        {
-            IsJumping = true;
-            IsBusy = true;
-
-            jumpSkill.ConsumeSkill();
-        }
-        else
-            Player_SkillManager.Instance.Jump.TryResetSkill();
-    }
-    void HandleWallJumpStart()
-    {
-        var jumpSkill = Player_SkillManager.Instance.Jump;
-        bool sucess = _stateMachine.ChangeState(StateSO.WallJumpState, false);
+        bool sucess = _stateMachine.ChangeState(IsWallSliding ? StateSO.WallJumpState : StateSO.JumpState, false);
         if (sucess)
         {
             IsJumping = true;

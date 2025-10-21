@@ -41,7 +41,8 @@ public class PlayerSkill_GrappingHookDash : PlayerSkill_BaseSkill
         // TODO:Havent complete if yet
         if (!_isReady ||
             !IsInputReset ||
-            CurrentCharges == 0
+            CurrentCharges == 0 ||
+            !_player.IsHooked
         )
             return;
         UseSkill();
