@@ -27,7 +27,7 @@ public class Player_WallJumpState : Player_AirState
         );
 
         _player.HandleFlip();
-        _wallJumpDir = new Vector2(-_jumpSkill.WallJumpDir.x, _jumpSkill.WallJumpDir.y).normalized;
+        _wallJumpDir = new Vector2(_jumpSkill.WallJumpDir.x * _player.FacingDir, _jumpSkill.WallJumpDir.y).normalized;
     }
     public override void PhysicsUpdate()
     {
