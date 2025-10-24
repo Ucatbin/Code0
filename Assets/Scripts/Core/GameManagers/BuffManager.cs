@@ -4,7 +4,8 @@ public class BuffManager : MonoBehaviour
 {
     public static BuffManager Instance { get; private set; }
 
-    [field: SerializeField] public BuffDataSO Buff_SpeedUp { get; private set; }
+    public BuffDataSO_CountDown BuffData_CountDown;
+    public BuffDataSO BuffData_SpeedUp;
 
     void Awake()
     {
@@ -15,14 +16,5 @@ public class BuffManager : MonoBehaviour
         }
         else
             Destroy(gameObject);
-    }
-}
-
-public static class BuffFactory
-{
-    public static BaseBuffItem CreateBuffItem(BuffDataSO buffData, EntityController caster, EntityController target, int stack)
-    {
-        BaseBuffItem buffItem = new BaseBuffItem(buffData, caster, target, stack);
-        return buffItem;
     }
 }

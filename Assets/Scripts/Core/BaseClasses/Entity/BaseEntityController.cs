@@ -81,7 +81,7 @@ public class EntityController : MonoBehaviour, IMoveable, IDamageable
         var maxSpeed = CheckerSys.IsGrounded ? WorldManager.Instance.GlobalVar.MaxGroundSpeed : WorldManager.Instance.GlobalVar.MaxAirSpeed;
         if (Mathf.Abs(Rb.linearVelocityX) > maxSpeed)
         {
-            Rb.linearVelocityX = maxSpeed * FacingDir;
+            Rb.linearVelocityX = maxSpeed * Rb.linearVelocityX > 0 ? 1 : -1;
             return;
         }
     }
@@ -90,10 +90,11 @@ public class EntityController : MonoBehaviour, IMoveable, IDamageable
     }
     public void HandleGravity()
     {
-        if (IsPhysicsDriven) return;
-
         if (CheckerSys.IsGrounded && TargetVelocity.y <= 0)
             SetTargetVelocityY(-1.5f);
+            
+        if (IsPhysicsDriven) return;
+
         else
         {
             var globalGravity = WorldManager.Instance.GlobalVar;

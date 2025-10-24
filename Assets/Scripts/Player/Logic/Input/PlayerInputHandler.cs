@@ -4,10 +4,8 @@ using UnityEngine.InputSystem;
 
 public class InputHandler : MonoBehaviour
 {
-    [SerializeField] PlayerController_Main _player;
-
-    [SerializeField] InputActionAsset InputActions;
-
+    [SerializeField] InputActionAsset _inputActions;
+    [SerializeField] Camera _mainCam;
     InputActionMap _normalActionMap;
 
     public Vector2 MouseDir { get; private set; }
@@ -15,12 +13,12 @@ public class InputHandler : MonoBehaviour
 
     void Awake()
     {
-        _normalActionMap = InputActions.FindActionMap("Normal");
+        _normalActionMap = _inputActions.FindActionMap("Normal");
         ChangeActionMap(_normalActionMap);
     }
     public void ChangeActionMap(InputActionMap nextMap)
     {
-        InputActions.Disable();
+        _inputActions.Disable();
         nextMap.Enable();
     }
 
@@ -32,16 +30,16 @@ public class InputHandler : MonoBehaviour
 
     public void HandleJump(InputAction.CallbackContext context)
     {
-        if (context.performed && !_player.IsHooked)
+        if (context.performed)
             InputEvents.TriggerJumpPressed();
-        if (context.canceled && !_player.IsHooked)
+        if (context.canceled)
             InputEvents.TriggerJumpReleased();
     }
 
     public void HandleGHook(InputAction.CallbackContext context)
     {
-        Vector2 mousePos = _player.MainCam.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 dir = (mousePos - (Vector2)_player.transform.position).normalized;
+        Vector2 mousePos = _mainCam.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 dir = (mousePos - (Vector2)transform.position).normalized;
         MouseDir = dir;
         if (context.performed)
             InputEvents.TriggerGHookPressed();
@@ -53,8 +51,8 @@ public class InputHandler : MonoBehaviour
     }
     public void HandleAttack(InputAction.CallbackContext context)
     {
-        Vector2 mousePos = _player.MainCam.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 dir = (mousePos - (Vector2)_player.transform.position).normalized;
+        Vector2 mousePos = _mainCam.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 dir = (mousePos - (Vector2)transform.position).normalized;
         MouseDir = dir;
         if (context.performed)
             InputEvents.TriggerAttackPressed();
@@ -66,9 +64,9 @@ public class InputHandler : MonoBehaviour
     }
     public void HandleLineDash(InputAction.CallbackContext context)
     {
-        if (context.performed && _player.IsHooked)
+        if (context.performed)
             InputEvents.TriggerLineDashPressed();
-        if (context.canceled && _player.IsHooked)
+        if (context.canceled)
             InputEvents.TriggerLineDashReleased();
     }
     #endregion
