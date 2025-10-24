@@ -70,12 +70,12 @@ public class PlayerSkill_GrappingHookDash : PlayerSkill_BaseSkill
 
     IEnumerator ApplyLineDash()
     {
+        Vector2 playerToHook = (_gHookSkill.HookPoint.transform.position - _player.transform.position).normalized;
+        Vector2 tangent1 = new Vector2(-playerToHook.y, playerToHook.x);
+        Vector2 tangent2 = new Vector2(playerToHook.y, -playerToHook.x);
+        Vector2 dashDir = _player.FacingDir >= 0 ? tangent2 : tangent1;
         while (!_stopDash && _player.IsHooked && _currentGas > 0)
         {
-            Vector2 playerToHook = (_gHookSkill.HookPoint.transform.position - _player.transform.position).normalized;
-            Vector2 tangent1 = new Vector2(-playerToHook.y, playerToHook.x);
-            Vector2 tangent2 = new Vector2(playerToHook.y, -playerToHook.x);
-            Vector2 dashDir = _player.FacingDir >= 0 ? tangent2 : tangent1;
 
             _player.Rb.AddForce(_lineDashForce * dashDir.normalized, ForceMode2D.Force);
             _currentGas -= _gasConsumSpeed;
