@@ -1,20 +1,23 @@
-using AbilitySystem;
 using UnityEngine;
 
-public class AbilitySystemBootstrap<T> : MonoBehaviour where T : CharacterModel
+namespace AbilitySystem
 {
-    [SerializeField] AbilityData[] _abilityDataList;
-    readonly EventBus _eventBus;
-
-    readonly T _charModel;
-    AbilitySysPresenter<T> _abilityPresenter;
-
-
-    void Start()
+    public class AbilitySystemBootstrap : MonoBehaviour
     {
-        _abilityPresenter = new AbilitySysPresenter<T>(_eventBus, _charModel);
+        [SerializeField] AbilityData[] _abilityDataList;
+        [SerializeField] EventBus _eventBus;
+        [SerializeField] CharacterModel _charModel;
+        AbilitySysPresenter _abilityPresenter;
 
-        foreach (var a in _abilityDataList)
-            _abilityPresenter.RegisterAbility(a);
+        void Start()
+        {
+            _abilityPresenter = new AbilitySysPresenter(_eventBus, _charModel);
+            RegisterExcutions();
+        }
+
+        void RegisterExcutions()
+        {
+            _abilityPresenter.RegisterAbility(_abilityDataList[0], new JumpAbilityExcution());
+        }
     }
 }

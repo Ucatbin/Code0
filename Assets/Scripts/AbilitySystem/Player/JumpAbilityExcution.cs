@@ -1,7 +1,6 @@
 using AbilitySystem;
 using UnityEngine;
 
-public class JumpAbilityExcution : PlayerAbilityExcution
+public class JumpAbilityExcution : AbilityExcution
 {
-    
 }

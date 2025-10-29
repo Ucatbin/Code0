@@ -1,35 +1,37 @@
+using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace AbilitySystem
 {
-    public class AbilitySysPresenter<T> where T : CharacterModel
+    public class AbilitySysPresenter
     {
-        protected readonly Dictionary<int, AbilityModel> _abilities;
-        protected readonly Dictionary<int, AbilityExcution> _excutions;
+        readonly Dictionary<int, AbilityModel> _abilityModels;
+        readonly Dictionary<int, AbilityExcution> _abilityexcutions;
 
         // Dependency
-        readonly T _charModel;
+        readonly CharacterModel _charModel;
         readonly EventBus _eventBus;
-        public AbilitySysPresenter(EventBus eventBus, T charModel)
+        public AbilitySysPresenter(EventBus eventBus, CharacterModel charModel)
         {
             _charModel = charModel;
             _eventBus = eventBus;
-            _abilities = new Dictionary<int, AbilityModel>();
+            _abilityModels = new Dictionary<int, AbilityModel>();
+            _abilityexcutions = new Dictionary<int, AbilityExcution>();
         }
 
-        public void RegisterAbility(AbilityData data)
+        public void RegisterAbility(AbilityData data, AbilityExcution excution)
         {
             var model = new AbilityModel(data);
-            _abilities[data.AbilityHash] = model;
+            _abilityModels[data.AbilityHash] = model;
+            _abilityexcutions[data.AbilityHash] = excution;
 
             model.OnAbilityUpgraded += HandelAbilityUpgraded;
         }
         public void UnregisterAbility(AbilityData data)
         {
-            if (_abilities.TryGetValue(data.AbilityHash, out var model))
+            if (_abilityModels.TryGetValue(data.AbilityHash, out var model))
             {
-                _abilities.Remove(data.AbilityHash);
+                _abilityModels.Remove(data.AbilityHash);
 
                 model.OnAbilityUpgraded -= HandelAbilityUpgraded;
             }

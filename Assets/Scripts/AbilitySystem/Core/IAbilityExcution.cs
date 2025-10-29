@@ -1,11 +1,10 @@
-using UnityEngine;
 
 namespace AbilitySystem
 {
-    public interface IAbilityExcution<T> where T : CharacterModel
+    public interface IAbilityExcution
     {
-        bool CanExcute(AbilityModel ability, T character);
-        void Excute(AbilityModel ability, T character);
-        void ConsumeResources(AbilityModel ability, T character);
+        bool CanExcute(AbilityModel ability, CharacterModel character);
+        void Excute(AbilityModel ability, CharacterModel character);
+        void ConsumeResources(AbilityModel ability, CharacterModel character);
     }
 }
