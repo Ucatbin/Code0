@@ -14,8 +14,6 @@ namespace AbilitySystem
 
             _abilityPresenter = new AbilitySysPresenter();
             RegisterExcutions();
-            Debug.Log(_abilityDataList[0]);
-
 
             InputEvents.OnJumpPressed += _abilityPresenter.OnJumpPressed;
         }

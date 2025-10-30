@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37dfe9090c4681c4d91939ddc4f2a884, type: 3}
   m_Name: Jump
   m_EditorClassIdentifier: 
-  _abilityName: 
-  AbilityHash: 0
-  MaxLevel: 0
+  _abilityName: Jump
+  AbilityHash: 842948034
+  MaxLevel: 3
   CoolDown: 0
-  MaxCharges: 0
+  MaxCharges: 1
   Icon: {fileID: 0}
