@@ -5,14 +5,19 @@ namespace AbilitySystem
     public class AbilitySystemBootstrap : MonoBehaviour
     {
         [SerializeField] AbilityData[] _abilityDataList;
-        [SerializeField] EventBus _eventBus;
-        [SerializeField] CharacterModel _charModel;
         AbilitySysPresenter _abilityPresenter;
 
         void Start()
         {
-            _abilityPresenter = new AbilitySysPresenter(_eventBus, _charModel);
+            // Services
+
+
+            _abilityPresenter = new AbilitySysPresenter();
             RegisterExcutions();
+            Debug.Log(_abilityDataList[0]);
+
+
+            InputEvents.OnJumpPressed += _abilityPresenter.OnJumpPressed;
         }
 
         void RegisterExcutions()

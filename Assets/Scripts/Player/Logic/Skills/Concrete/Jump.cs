@@ -16,26 +16,26 @@ public class PlayerSkill_Jump : PlayerSkill_BaseSkill
     {
     }
 
-    void OnEnable()
-    {
-        InputEvents.OnJumpPressed += TryUseSkill;
-        InputEvents.OnJumpReleased += () =>
-        {
-            if (_player.IsJumping)
-                SkillEvents.TriggerJumpEnd();
-            IsInputReset = true;
-        };
-    }
-    void OnDisable()
-    {
-        InputEvents.OnJumpPressed -= TryUseSkill;
-        InputEvents.OnJumpReleased -= () =>
-        {
-            if (_player.IsJumping)
-                SkillEvents.TriggerJumpEnd();
-            IsInputReset = true;
-        };
-    }
+    // void OnEnable()
+    // {
+    //     InputEvents.OnJumpPressed += TryUseSkill;
+    //     InputEvents.OnJumpReleased += () =>
+    //     {
+    //         if (_player.IsJumping)
+    //             SkillEvents.TriggerJumpEnd();
+    //         IsInputReset = true;
+    //     };
+    // }
+    // void OnDisable()
+    // {
+    //     InputEvents.OnJumpPressed -= TryUseSkill;
+    //     InputEvents.OnJumpReleased -= () =>
+    //     {
+    //         if (_player.IsJumping)
+    //             SkillEvents.TriggerJumpEnd();
+    //         IsInputReset = true;
+    //     };
+    // }
 
     void Update()
     {

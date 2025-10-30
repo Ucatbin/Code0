@@ -4,18 +4,22 @@ namespace AbilitySystem
 {
     public class AbilityModel
     {
-        public bool IsUnlocked;
-        public bool IsReady;
-        public bool IsReset;
+        // Info
         public int CurrentLevel;
         public int CurrentCharges;
         public float CurrentCoolDown;
+        // State
+        public bool IsUnlocked;
+        public bool IsReady;
+        public bool IsReset;
 
         // Dependency
         public readonly AbilityData Data;
-        public AbilityModel(AbilityData data)
+        public readonly AbilityExcution Excution;
+        public AbilityModel(AbilityData data, AbilityExcution excution)
         {
             Data = data;
+            Excution = excution;
         }
 
         // Actions

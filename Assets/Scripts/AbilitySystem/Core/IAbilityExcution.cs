@@ -3,8 +3,8 @@ namespace AbilitySystem
 {
     public interface IAbilityExcution
     {
-        bool CanExcute(AbilityModel ability, CharacterModel character);
-        void Excute(AbilityModel ability, CharacterModel character);
-        void ConsumeResources(AbilityModel ability, CharacterModel character);
+        bool CanExcute(AbilityModel ability, EntityModel character);
+        void Excute(AbilityModel ability, EntityModel character);
+        void ConsumeResources(AbilityModel ability, EntityModel character);
     }
 }

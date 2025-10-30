@@ -1,24 +1,17 @@
 
 namespace AbilitySystem
 {
-    public class AbilityExcution : IAbilityExcution
+    public abstract class AbilityExcution : IAbilityExcution
     {
-        public virtual bool CanExcute(AbilityModel ability, CharacterModel character)
+        public virtual bool CanExcute(AbilityModel ability, EntityModel character)
         {
             return ability.IsUnlocked &&
                 ability.IsReady &&
                 ability.IsReset;
         }
 
-        public virtual void ConsumeResources(AbilityModel ability, CharacterModel character)
-        {
-            if (!CanExcute(ability, character)) return;
-            ConsumeResources(ability, character);
-        }
+        public abstract void ConsumeResources(AbilityModel ability, EntityModel character);
 
-        public virtual void Excute(AbilityModel ability, CharacterModel character)
-        {
-            
-        }
+        public abstract void Excute(AbilityModel ability, EntityModel character);
     }
 }
