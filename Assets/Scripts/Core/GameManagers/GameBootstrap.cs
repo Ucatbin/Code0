@@ -19,9 +19,8 @@ namespace GameSystem
         
         private void InitializeGlobalServices()
         {
-            ServiceLocator.Register<IEventBus>(new EventBus());
-            
-            Debug.Log("All system initialize sucess");
+            var eventBus = new EventBus();
+            ServiceLocator.Register<IEventBus>(eventBus);
         }
         
         private void Start()

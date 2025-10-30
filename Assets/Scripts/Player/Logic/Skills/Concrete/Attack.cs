@@ -19,13 +19,13 @@ public class PlayerSkill_Attack : PlayerSkill_BaseSkill
 
     void OnEnable()
     {
-        InputEvents.OnAttackPressed += TryUseSkill;
-        InputEvents.OnAttackReleased += () => IsInputReset = true;
+        PlayerInputEvents.OnAttackPressed += TryUseSkill;
+        PlayerInputEvents.OnAttackReleased += () => IsInputReset = true;
     }
     void OnDisable()
     {
-        InputEvents.OnAttackPressed -= TryUseSkill;
-        InputEvents.OnAttackReleased -= () => IsInputReset = true;
+        PlayerInputEvents.OnAttackPressed -= TryUseSkill;
+        PlayerInputEvents.OnAttackReleased -= () => IsInputReset = true;
     }
 
     public override void TryUseSkill()

@@ -1,6 +1,6 @@
 using System;
 
-public static class InputEvents
+public static class PlayerInputEvents
 {
     // Jump
     public static event Action OnJumpPressed;

@@ -31,9 +31,9 @@ public class InputHandler : MonoBehaviour
     public void HandleJump(InputAction.CallbackContext context)
     {
         if (context.performed)
-            InputEvents.TriggerJumpPressed();
+            PlayerInputEvents.TriggerJumpPressed();
         if (context.canceled)
-            InputEvents.TriggerJumpReleased();
+            PlayerInputEvents.TriggerJumpReleased();
     }
 
     public void HandleGHook(InputAction.CallbackContext context)
@@ -42,10 +42,10 @@ public class InputHandler : MonoBehaviour
         Vector2 dir = (mousePos - (Vector2)transform.position).normalized;
         MouseDir = dir;
         if (context.performed)
-            InputEvents.TriggerGHookPressed();
+            PlayerInputEvents.TriggerGHookPressed();
         if (context.canceled)
         {
-            InputEvents.TriggerGHookReleased();
+            PlayerInputEvents.TriggerGHookReleased();
             MouseDir = Vector2.zero;
         }
     }
@@ -55,19 +55,19 @@ public class InputHandler : MonoBehaviour
         Vector2 dir = (mousePos - (Vector2)transform.position).normalized;
         MouseDir = dir;
         if (context.performed)
-            InputEvents.TriggerAttackPressed();
+            PlayerInputEvents.TriggerAttackPressed();
         if (context.canceled)
         {
-            InputEvents.TriggerAttackReleased();
+            PlayerInputEvents.TriggerAttackReleased();
             MouseDir = Vector2.zero;
         }
     }
     public void HandleLineDash(InputAction.CallbackContext context)
     {
         if (context.performed)
-            InputEvents.TriggerLineDashPressed();
+            PlayerInputEvents.TriggerLineDashPressed();
         if (context.canceled)
-            InputEvents.TriggerLineDashReleased();
+            PlayerInputEvents.TriggerLineDashReleased();
     }
     #endregion
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Game.Events;
 
 namespace AbilitySystem
 {
@@ -13,6 +14,8 @@ namespace AbilitySystem
         {
             _abilityModels = new Dictionary<int, AbilityModel>();
             _abilityexcutions = new Dictionary<int, AbilityExcution>();
+
+            RegisterAbilityInput();
         }
 
         public void RegisterAbility(AbilityData data, AbilityExcution excution)
@@ -39,15 +42,22 @@ namespace AbilitySystem
 
         }
 
-        public void OnJumpPressed()
+        public void OnJumpPressed(JumpInputEvent jumpEvent)
         {
             int abilityId = "Jump".GetHashCode();
-            
-            if (_abilityexcutions.TryGetValue(abilityId, out var execution) && 
+
+            if (_abilityexcutions.TryGetValue(abilityId, out var execution) &&
                 _abilityModels.TryGetValue(abilityId, out var model))
             {
                 execution.Excute(model, null);
             }
+        }
+        
+        void RegisterAbilityInput()
+        {
+            var eventBus = ServiceLocator.Get<IEventBus>();
+
+            eventBus.Subscribe<JumpInputEvent>(OnJumpPressed);
         }
     }
 }

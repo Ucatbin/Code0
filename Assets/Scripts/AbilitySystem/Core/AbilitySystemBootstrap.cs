@@ -11,11 +11,8 @@ namespace AbilitySystem
         {
             // Services
 
-
             _abilityPresenter = new AbilitySysPresenter();
             RegisterExcutions();
-
-            InputEvents.OnJumpPressed += _abilityPresenter.OnJumpPressed;
         }
 
         void RegisterExcutions()
