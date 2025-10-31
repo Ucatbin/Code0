@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37dfe9090c4681c4d91939ddc4f2a884, type: 3}
   m_Name: Attack
   m_EditorClassIdentifier: 
-  _abilityName: 
-  AbilityHash: 0
-  MaxLevel: 0
+  _abilityName: Attack
+  AbilityHash: -143874694
+  MaxLevel: 1
   CoolDown: 0
-  MaxCharges: 0
+  MaxCharges: 1
   Icon: {fileID: 0}

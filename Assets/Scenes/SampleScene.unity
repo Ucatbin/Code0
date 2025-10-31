@@ -777,6 +777,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _abilityDataList:
   - {fileID: 11400000, guid: 5ca2c85c33316ae4a94ad09d08435a3b, type: 2}
+  - {fileID: 11400000, guid: 5f9b7295105b28b469a2cba0c40877ae, type: 2}
 --- !u!114 &1159164790
 MonoBehaviour:
   m_ObjectHideFlags: 0
