@@ -1,3 +1,4 @@
+using Ucatbin.Events.AbilityEvents;
 using UnityEngine;
 
 public class Player_AttackState : Player_BaseState
@@ -20,7 +21,11 @@ public class Player_AttackState : Player_BaseState
 
         TimerManager.Instance.AddTimer(
             _attackSkill.AttackDuration,
-            () => { SkillEvents.TriggerAttackEnd(); },
+            () =>
+            {
+                var eventBus = ServiceLocator.Get<IEventBus>();
+                eventBus.Publish(new Plr_AttackExecTriggerEnd());
+            },
             "Player_AbilityTimer"
         );
 

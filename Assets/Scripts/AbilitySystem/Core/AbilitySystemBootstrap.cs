@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace AbilitySystem
+namespace Ucatbin.AbilitySystem
 {
     public class AbilitySystemBootstrap : MonoBehaviour
     {
@@ -17,7 +17,8 @@ namespace AbilitySystem
 
         void RegisterExcutions()
         {
-            _abilityPresenter.RegisterAbility(_abilityDataList[0], new JumpAbilityExcution());
+            _abilityPresenter.RegisterAbility(_abilityDataList[0], new Plr_JumpExec());
+            _abilityPresenter.RegisterAbility(_abilityDataList[1], new Plr_AttackExec());
         }
     }
 }

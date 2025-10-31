@@ -1,6 +1,6 @@
 using System;
 
-namespace AbilitySystem
+namespace Ucatbin.AbilitySystem
 {
     public class AbilityModel
     {
@@ -15,11 +15,11 @@ namespace AbilitySystem
 
         // Dependency
         public readonly AbilityData Data;
-        public readonly AbilityExcution Excution;
-        public AbilityModel(AbilityData data, AbilityExcution excution)
+        public readonly AbilityExecution Execution;
+        public AbilityModel(AbilityData data, AbilityExecution excution)
         {
             Data = data;
-            Excution = excution;
+            Execution = excution;
         }
 
         // Actions

@@ -1,28 +1,23 @@
-using System;
 using System.Collections.Generic;
-using Game.Events;
+using Ucatbin.Events.AbilityEvents;
 
-namespace AbilitySystem
+namespace Ucatbin.AbilitySystem
 {
     public class AbilitySysPresenter
     {
         readonly Dictionary<int, AbilityModel> _abilityModels;
-        readonly Dictionary<int, AbilityExcution> _abilityexcutions;
 
         // Dependency
         public AbilitySysPresenter()
         {
             _abilityModels = new Dictionary<int, AbilityModel>();
-            _abilityexcutions = new Dictionary<int, AbilityExcution>();
-
-            RegisterAbilityInput();
+            RegisterAbilityEvents();
         }
 
-        public void RegisterAbility(AbilityData data, AbilityExcution excution)
+        public void RegisterAbility(AbilityData data, AbilityExecution excution)
         {
             var model = new AbilityModel(data, excution);
             _abilityModels[data.AbilityHash] = model;
-            _abilityexcutions[data.AbilityHash] = excution;
 
             model.OnAbilityUpgraded += HandelAbilityUpgraded;
         }
@@ -31,7 +26,6 @@ namespace AbilitySystem
             if (_abilityModels.TryGetValue(data.AbilityHash, out var model))
             {
                 _abilityModels.Remove(data.AbilityHash);
-                _abilityexcutions.Remove(data.AbilityHash);
 
                 model.OnAbilityUpgraded -= HandelAbilityUpgraded;
             }
@@ -42,22 +36,23 @@ namespace AbilitySystem
 
         }
 
-        public void OnJumpPressed(JumpInputEvent jumpEvent)
+        void HandleAbilityInputPressed(AbilityInputTriggerPressed abilityEvent)
         {
-            int abilityId = "Jump".GetHashCode();
-
-            if (_abilityexcutions.TryGetValue(abilityId, out var execution) &&
-                _abilityModels.TryGetValue(abilityId, out var model))
-            {
-                execution.Excute(model, null);
-            }
+            if (_abilityModels.TryGetValue(abilityEvent.AbilityHash, out var model))
+                model.Execution.Excute(model, null);
+        }
+        void HandleAbilityInputReleased(AbilityInputTriggerReleased abilityEvent)
+        {
+            if (_abilityModels.TryGetValue(abilityEvent.AbilityHash, out var model))
+                model.Execution.End(model, null);
         }
         
-        void RegisterAbilityInput()
+        void RegisterAbilityEvents()
         {
             var eventBus = ServiceLocator.Get<IEventBus>();
 
-            eventBus.Subscribe<JumpInputEvent>(OnJumpPressed);
+            eventBus.Subscribe<AbilityInputTriggerPressed>(HandleAbilityInputPressed);
+            eventBus.Subscribe<AbilityInputTriggerReleased>(HandleAbilityInputReleased);
         }
     }
 }

@@ -2,18 +2,6 @@ using System;
 
 public static class PlayerInputEvents
 {
-    // Jump
-    public static event Action OnJumpPressed;
-    public static event Action OnJumpReleased;
-    public static void TriggerJumpPressed() => OnJumpPressed?.Invoke();
-    public static void TriggerJumpReleased() => OnJumpReleased?.Invoke();
-
-    // Attack
-    public static event Action OnAttackPressed;
-    public static event Action OnAttackReleased;
-    public static void TriggerAttackPressed() => OnAttackPressed?.Invoke();
-    public static void TriggerAttackReleased() => OnAttackReleased?.Invoke();
-
     // Grapping hook
     public static event Action OnGHookPressed;
     public static event Action OnGHookReleased;

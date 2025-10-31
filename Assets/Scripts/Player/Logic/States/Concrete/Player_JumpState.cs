@@ -1,3 +1,4 @@
+using Ucatbin.Events.AbilityEvents;
 using UnityEngine;
 
 public class Player_JumpState : Player_AirState
@@ -19,7 +20,11 @@ public class Player_JumpState : Player_AirState
 
         TimerManager.Instance.AddTimer(
             _jumpSkill.JumpInputWindow,
-            () => SkillEvents.TriggerJumpEnd(),
+            () =>
+            {
+                var eventBus = ServiceLocator.Get<IEventBus>();
+                eventBus.Publish(new JumpExcuteTriggerEnd());
+            },
             "JumpStateTimer"
         );
         TimerManager.Instance.AddTimer(
@@ -37,7 +42,11 @@ public class Player_JumpState : Player_AirState
         base.PhysicsUpdate();
 
         if (_player.CheckerSys.IsWallDected)
-            SkillEvents.TriggerJumpEnd();
+        {
+            var eventBus = ServiceLocator.Get<IEventBus>();
+            eventBus.Publish(new JumpExcuteTriggerEnd());
+            
+        }
         else
         {
             _player.SetTargetVelocityY(_jumpSkill.JumpHoldSpeed);

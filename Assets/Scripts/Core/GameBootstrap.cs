@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace GameSystem
+namespace Ucatbin.GameSystem
 {
     public class GameBootstrap : MonoBehaviour
     {
