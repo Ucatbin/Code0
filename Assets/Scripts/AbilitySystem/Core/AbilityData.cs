@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Ucatbin.AbilitySystem
 {
-    [CreateAssetMenu(fileName = "AbilityData", menuName = "Game/AbilitySystem/new abilityData")]
+    [CreateAssetMenu(fileName = "AbilityData", menuName = "Game/AbilitySystem/New AbilityData")]
     public class AbilityData : ScriptableObject
     {
         [SerializeField] string _abilityName;

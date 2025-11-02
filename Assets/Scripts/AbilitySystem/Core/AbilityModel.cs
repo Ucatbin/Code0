@@ -14,12 +14,14 @@ namespace Ucatbin.AbilitySystem
         public bool IsReset;
 
         // Dependency
-        public readonly AbilityData Data;
-        public readonly AbilityExecution Execution;
-        public AbilityModel(AbilityData data, AbilityExecution excution)
+        AbilityData _data;
+        public AbilityData Data => _data;
+        AbilityExecution _execution;
+        public AbilityExecution Execution => _execution;
+        public virtual void Initialize(AbilityData data, AbilityExecution excution)
         {
-            Data = data;
-            Execution = excution;
+            _data = data;
+            _execution = excution;
         }
 
         // Actions

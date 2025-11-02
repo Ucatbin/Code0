@@ -14,9 +14,11 @@ namespace Ucatbin.AbilitySystem
             RegisterAbilityEvents();
         }
 
-        public void RegisterAbility(AbilityData data, AbilityExecution excution)
+        public void RegisterAbility<TModel>(AbilityData data, AbilityExecution execution)
+            where TModel : AbilityModel, new()
         {
-            var model = new AbilityModel(data, excution);
+            var model = new TModel();
+            model.Initialize(data, execution);
             _abilityModels[data.AbilityHash] = model;
 
             model.OnAbilityUpgraded += HandelAbilityUpgraded;

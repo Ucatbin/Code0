@@ -17,8 +17,8 @@ namespace Ucatbin.AbilitySystem
 
         void RegisterExcutions()
         {
-            _abilityPresenter.RegisterAbility(_abilityDataList[0], new Plr_JumpExec());
-            _abilityPresenter.RegisterAbility(_abilityDataList[1], new Plr_AttackExec());
+            _abilityPresenter.RegisterAbility<AttackAbilityModel>(_abilityDataList[0], new Plr_JumpExec());
+            _abilityPresenter.RegisterAbility<JumpAbilityModel>(_abilityDataList[1], new Plr_AttackExec());
         }
     }
 }
