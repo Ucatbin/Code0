@@ -1,5 +1,5 @@
 using System;
-using Ucatbin.AbilitySystem;
+using ThisGame.AbilitySystem;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "AttackAbilityData", menuName = "Game/AbilitySystem/Player/New AttackAbilityData")]

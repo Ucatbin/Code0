@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace CharacterSystem
+namespace ThisGame.EntitySystem
 {
-    [CreateAssetMenu(fileName = "CharacterData", menuName = "Game/CharacterSystem")]
+    [CreateAssetMenu(fileName = "EntityData", menuName = "Game/EntitySystem/New EntityData")]
     public class EntityData : ScriptableObject
     {
         public float MaxHelth;

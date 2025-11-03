@@ -1,10 +1,13 @@
 using UnityEngine;
 
-public class EntityPresenter
+namespace ThisGame.EntitySystem
 {
-    // Dependency
-    public EntityPresenter()
+    public class EntityPresenter
     {
-        
+        // Dependency
+        public EntityPresenter()
+        {
+
+        }
     }
 }

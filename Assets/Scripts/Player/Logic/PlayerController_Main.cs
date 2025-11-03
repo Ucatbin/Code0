@@ -1,5 +1,5 @@
 using TMPro;
-using Ucatbin.Events.AbilityEvents;
+using ThisGame.Events.AbilityEvents;
 using UnityEngine;
 
 public class PlayerController_Main : EntityController
@@ -62,8 +62,8 @@ public class PlayerController_Main : EntityController
         BuffSys.AddBuff(Buff_CountDown);
 
         var eventBus = ServiceLocator.Get<IEventBus>();
-        eventBus.Subscribe<JumpExcuteTriggerStart>(HandleJumpStart);
-        eventBus.Subscribe<JumpExcuteTriggerEnd>(HandleJumpEnd);
+        eventBus.Subscribe<JumpExecuteTriggerStart>(HandleJumpStart);
+        eventBus.Subscribe<JumpExecuteTriggerEnd>(HandleJumpEnd);
         eventBus.Subscribe<Plr_AttackExecTriggerStart>(HandleAttackStart);
         eventBus.Subscribe<Plr_AttackExecTriggerEnd>(HandleAttackEnd);
     }
@@ -102,7 +102,7 @@ public class PlayerController_Main : EntityController
     }
     #region Handle Skill Logics
     // JUMP
-    void HandleJumpStart(JumpExcuteTriggerStart jumpEvent)
+    void HandleJumpStart(JumpExecuteTriggerStart jumpEvent)
     {
         var jumpSkill = Player_SkillManager.Instance.Jump;
         _stateMachine.ChangeState(IsWallSliding ? StateSO.WallJumpState : StateSO.JumpState, false);
@@ -110,7 +110,7 @@ public class PlayerController_Main : EntityController
         IsBusy = true;
         jumpSkill.ConsumeSkill();
     }
-    void HandleJumpEnd(JumpExcuteTriggerEnd jumpEvent)
+    void HandleJumpEnd(JumpExecuteTriggerEnd jumpEvent)
     {
         if (!CheckerSys.IsGrounded)
             _stateMachine.ChangeState(StateSO.AirState, true);

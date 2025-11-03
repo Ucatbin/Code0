@@ -1,60 +1,65 @@
 using System.Collections.Generic;
-using Ucatbin.Events.AbilityEvents;
+using UnityEngine;
+using ThisGame.Events.AbilityEvents;
+using System;
+using ThisGame.EntitySystem;
 
-namespace Ucatbin.AbilitySystem
+namespace ThisGame.AbilitySystem
 {
     public class AbilitySysPresenter
     {
-        readonly Dictionary<int, AbilityModel> _abilityModels;
-
+        readonly Dictionary<int, IAbilityModel> _abilityModels;
         // Dependency
         public AbilitySysPresenter()
         {
-            _abilityModels = new Dictionary<int, AbilityModel>();
-            RegisterAbilityEvents();
+            _abilityModels = new Dictionary<int, IAbilityModel>();
+
+            var eventBus = ServiceLocator.Get<IEventBus>();
+            eventBus.Subscribe<AbilityInputTriggerPressed>(HandleAbilityInputPressed);
+            eventBus.Subscribe<AbilityInputTriggerReleased>(HandleAbilityInputReleased);
         }
 
-        public void RegisterAbility<TModel>(AbilityData data, AbilityExecution execution)
-            where TModel : AbilityModel, new()
+        public void RegisterAbility<TModel>(AbilityData data)
+            where TModel : IAbilityModel, new()
         {
-            var model = new TModel();
-            model.Initialize(data, execution);
-            _abilityModels[data.AbilityHash] = model;
+            // Debug
+            if (_abilityModels.ContainsKey(data.AbilityHash))
+            {
+                Debug.LogWarning($"{data.AbilityName} already registered!");
+                return;
+            }
 
-            model.OnAbilityUpgraded += HandelAbilityUpgraded;
+            var model = new TModel();
+            model.Initialize(data);
+            _abilityModels[data.AbilityHash] = model;
+            model.IsUnlocked = true;
         }
         public void UnregisterAbility(AbilityData data)
         {
             if (_abilityModels.TryGetValue(data.AbilityHash, out var model))
             {
                 _abilityModels.Remove(data.AbilityHash);
-
-                model.OnAbilityUpgraded -= HandelAbilityUpgraded;
             }
-        }
-
-        void HandelAbilityUpgraded(AbilityModel model)
-        {
-
         }
 
         void HandleAbilityInputPressed(AbilityInputTriggerPressed abilityEvent)
         {
             if (_abilityModels.TryGetValue(abilityEvent.AbilityHash, out var model))
-                model.Execution.Excute(model, null);
+            {
+                model.Excute(null);
+            }
         }
         void HandleAbilityInputReleased(AbilityInputTriggerReleased abilityEvent)
         {
             if (_abilityModels.TryGetValue(abilityEvent.AbilityHash, out var model))
-                model.Execution.End(model, null);
+                model.IsReset = true;
         }
-        
-        void RegisterAbilityEvents()
-        {
-            var eventBus = ServiceLocator.Get<IEventBus>();
 
-            eventBus.Subscribe<AbilityInputTriggerPressed>(HandleAbilityInputPressed);
-            eventBus.Subscribe<AbilityInputTriggerReleased>(HandleAbilityInputReleased);
+        public T GetAbilityModel<T>(string abilityName) where T : class, IAbilityModel
+        {
+            if (_abilityModels.TryGetValue(abilityName.GetHashCode(), out var model))
+                return model as T;
+            return null;
         }
     }
 }

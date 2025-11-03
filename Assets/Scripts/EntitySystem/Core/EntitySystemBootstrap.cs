@@ -1,7 +1,9 @@
-using CharacterSystem;
 using UnityEngine;
 
-public class EntitySystemBootstrap : MonoBehaviour
+namespace ThisGame.EntitySystem
 {
-    [SerializeField] EntityData[] _entityDataList;
+    public class EntitySystemBootstrap : MonoBehaviour
+    {
+        [SerializeField] EntityData[] _entityDataList;
+    }
 }

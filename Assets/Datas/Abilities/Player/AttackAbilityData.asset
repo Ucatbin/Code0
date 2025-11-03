@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa50bd96bb8e0ca44bc09400e705966a, type: 3}
   m_Name: AttackAbilityData
   m_EditorClassIdentifier: 
-  _abilityName: Attack
+  AbilityName: Attack
   AbilityHash: -143874694
   MaxLevel: 1
   CoolDown: 0
@@ -20,11 +20,11 @@ MonoBehaviour:
   Icon: {fileID: 0}
   Damage:
     Caster: {fileID: 0}
-    DamageAmount: 0
+    DamageAmount: 5
     DamageDirection: {x: 0, y: 0}
     KnockbackForce: 0
     DamageType: 0
   _animClip: {fileID: 7400000, guid: 28f99c164814ace4083e84c01f4b0697, type: 2}
-  AnimatorHash: 50084
+  AnimatorHash: 33270
   AttackDuration: 0.28
   AttackForce: 3.5
