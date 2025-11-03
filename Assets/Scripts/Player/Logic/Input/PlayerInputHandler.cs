@@ -1,4 +1,4 @@
-using System;
+using ThisGame.Events.AbilityEvents;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,6 +7,7 @@ public class InputHandler : MonoBehaviour
     [SerializeField] InputActionAsset _inputActions;
     [SerializeField] Camera _mainCam;
     InputActionMap _normalActionMap;
+    IEventBus _eventBus;
 
     public Vector2 MouseDir { get; private set; }
     public Vector2 MoveInput { get; private set; }
@@ -15,6 +16,10 @@ public class InputHandler : MonoBehaviour
     {
         _normalActionMap = _inputActions.FindActionMap("Normal");
         ChangeActionMap(_normalActionMap);
+    }
+    void Start()
+    {
+        _eventBus = ServiceLocator.Get<IEventBus>();
     }
     public void ChangeActionMap(InputActionMap nextMap)
     {
@@ -31,9 +36,9 @@ public class InputHandler : MonoBehaviour
     public void HandleJump(InputAction.CallbackContext context)
     {
         if (context.performed)
-            InputEvents.TriggerJumpPressed();
+            _eventBus.Publish(new AbilityInputTriggerPressed("Jump"));
         if (context.canceled)
-            InputEvents.TriggerJumpReleased();
+            _eventBus.Publish(new AbilityInputTriggerReleased("Jump"));
     }
 
     public void HandleGHook(InputAction.CallbackContext context)
@@ -42,10 +47,10 @@ public class InputHandler : MonoBehaviour
         Vector2 dir = (mousePos - (Vector2)transform.position).normalized;
         MouseDir = dir;
         if (context.performed)
-            InputEvents.TriggerGHookPressed();
+            PlayerInputEvents.TriggerGHookPressed();
         if (context.canceled)
         {
-            InputEvents.TriggerGHookReleased();
+            PlayerInputEvents.TriggerGHookReleased();
             MouseDir = Vector2.zero;
         }
     }
@@ -55,19 +60,19 @@ public class InputHandler : MonoBehaviour
         Vector2 dir = (mousePos - (Vector2)transform.position).normalized;
         MouseDir = dir;
         if (context.performed)
-            InputEvents.TriggerAttackPressed();
+            _eventBus.Publish(new AbilityInputTriggerPressed("Attack"));
         if (context.canceled)
         {
-            InputEvents.TriggerAttackReleased();
+            _eventBus.Publish(new AbilityInputTriggerReleased("Attack"));
             MouseDir = Vector2.zero;
         }
     }
     public void HandleLineDash(InputAction.CallbackContext context)
     {
         if (context.performed)
-            InputEvents.TriggerLineDashPressed();
+            PlayerInputEvents.TriggerLineDashPressed();
         if (context.canceled)
-            InputEvents.TriggerLineDashReleased();
+            PlayerInputEvents.TriggerLineDashReleased();
     }
     #endregion
 }

@@ -1,9 +1,10 @@
-using UnityEngine;
+using ThisGame.AbilitySystem;
+using ThisGame.Events.AbilityEvents;
+using Unity.VisualScripting;
 
 public class Player_JumpState : Player_AirState
 {
-    PlayerSkill_Jump _jumpSkill;
-
+    JumpAbilityModel _jumpSkill;
     public Player_JumpState(PlayerController_Main entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
     {
     }
@@ -12,24 +13,19 @@ public class Player_JumpState : Player_AirState
     {
         base.Enter();
 
-        _jumpSkill = Player_SkillManager.Instance.Jump;
-
-        _player.SetTargetVelocityY(_jumpSkill.JumpInitPower);
+        _jumpSkill = ServiceLocator.Get<AbilitySystemBootstrap>().AbilityPresenter.GetAbilityModel<JumpAbilityModel>("Jump");
+        var eventBus = ServiceLocator.Get<IEventBus>();
+        _player.SetTargetVelocityY(_jumpSkill.Data.JumpInitPower);
         _player.ApplyMovement();
 
         TimerManager.Instance.AddTimer(
-            _jumpSkill.JumpInputWindow,
-            () => SkillEvents.TriggerJumpEnd(),
+            _jumpSkill.Data.JumpInputWindow,
+            () => eventBus.Publish(new JumpExecuteTriggerEnd()),
             "JumpStateTimer"
         );
-        TimerManager.Instance.AddTimer(
-            _jumpSkill.SkillCD,
-            () => _jumpSkill.CoolDownSkill(),
-            "PlayerSkillGap"
-        );
 
-        if (_jumpSkill.CurrentCharges != _jumpSkill.MaxCharges)
-            SkillEvents.TriggerJumpEnd();
+        if (_jumpSkill.CurrentCharges != _jumpSkill.Data.MaxCharges)
+            eventBus.Publish(new JumpExecuteTriggerEnd());
     }
 
     public override void PhysicsUpdate()
@@ -37,10 +33,13 @@ public class Player_JumpState : Player_AirState
         base.PhysicsUpdate();
 
         if (_player.CheckerSys.IsWallDected)
-            SkillEvents.TriggerJumpEnd();
+        {
+            var eventBus = ServiceLocator.Get<IEventBus>();
+            eventBus.Publish(new JumpExecuteTriggerEnd());
+        }
         else
         {
-            _player.SetTargetVelocityY(_jumpSkill.JumpHoldSpeed);
+            _player.SetTargetVelocityY(_jumpSkill.Data.JumpHoldPower);
             _player.ApplyMovement();
         }        
     }

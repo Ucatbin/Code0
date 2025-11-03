@@ -5,7 +5,7 @@ public class PlayerSkill_Jump : PlayerSkill_BaseSkill
     [Header("Jump")]
     public float JumpInitPower = 14f;
     public float JumpInputWindow = 0.25f;
-    public float JumpHoldSpeed = 10f;
+    public float JumpHoldPower = 10f;
     public float CoyoteWindow = 0.15f;
     [Header("WallJump")]
     public float WallJumpPower = 14f;
@@ -16,26 +16,26 @@ public class PlayerSkill_Jump : PlayerSkill_BaseSkill
     {
     }
 
-    void OnEnable()
-    {
-        InputEvents.OnJumpPressed += TryUseSkill;
-        InputEvents.OnJumpReleased += () =>
-        {
-            if (_player.IsJumping)
-                SkillEvents.TriggerJumpEnd();
-            IsInputReset = true;
-        };
-    }
-    void OnDisable()
-    {
-        InputEvents.OnJumpPressed -= TryUseSkill;
-        InputEvents.OnJumpReleased -= () =>
-        {
-            if (_player.IsJumping)
-                SkillEvents.TriggerJumpEnd();
-            IsInputReset = true;
-        };
-    }
+    // void OnEnable()
+    // {
+    //     InputEvents.OnJumpPressed += TryUseSkill;
+    //     InputEvents.OnJumpReleased += () =>
+    //     {
+    //         if (_player.IsJumping)
+    //             SkillEvents.TriggerJumpEnd();
+    //         IsInputReset = true;
+    //     };
+    // }
+    // void OnDisable()
+    // {
+    //     InputEvents.OnJumpPressed -= TryUseSkill;
+    //     InputEvents.OnJumpReleased -= () =>
+    //     {
+    //         if (_player.IsJumping)
+    //             SkillEvents.TriggerJumpEnd();
+    //         IsInputReset = true;
+    //     };
+    // }
 
     void Update()
     {
@@ -55,7 +55,7 @@ public class PlayerSkill_Jump : PlayerSkill_BaseSkill
     }
     public override void UseSkill()
     {
-        SkillEvents.TriggerJumpStart();
+
     }
     public override void CoolDownSkill(float coolDown, string tag)
     {

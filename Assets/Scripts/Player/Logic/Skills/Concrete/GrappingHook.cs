@@ -33,8 +33,8 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
 
     void OnEnable()
     {
-        InputEvents.OnGHookPressed += TryUseSkill;
-        InputEvents.OnGHookReleased += () =>
+        PlayerInputEvents.OnGHookPressed += TryUseSkill;
+        PlayerInputEvents.OnGHookReleased += () =>
         {
             IsInputReset = true;
             CheckLineRelease();
@@ -42,8 +42,8 @@ public class PlayerSkill_GrappingHook : PlayerSkill_BaseSkill
     }
     void OnDisable()
     {
-        InputEvents.OnGHookPressed -= TryUseSkill;
-        InputEvents.OnGHookReleased -= () =>
+        PlayerInputEvents.OnGHookPressed -= TryUseSkill;
+        PlayerInputEvents.OnGHookReleased -= () =>
         {
             IsInputReset = true;
             CheckLineRelease();

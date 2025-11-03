@@ -1,4 +1,5 @@
 using TMPro;
+using ThisGame.Events.AbilityEvents;
 using UnityEngine;
 
 public class PlayerController_Main : EntityController
@@ -26,21 +27,13 @@ public class PlayerController_Main : EntityController
 
     void OnEnable()
     {
-        SkillEvents.OnJumpStart += HandleJumpStart;
-        SkillEvents.OnJumpEnd += HandleJumpEnd;
         SkillEvents.OnHookAttach += HandleHookAtteched;
         SkillEvents.OnHookRelease += HandleHookReleased;
-        SkillEvents.OnAttackStart += HandleAttackStart;
-        SkillEvents.OnAttackEnd += HandleAttackEnd;
     }
     void OnDisable()
     {
-        SkillEvents.OnJumpStart -= HandleJumpStart;
-        SkillEvents.OnJumpEnd -= HandleJumpEnd;
         SkillEvents.OnHookAttach -= HandleHookAtteched;
         SkillEvents.OnHookRelease -= HandleHookReleased;
-        SkillEvents.OnAttackStart -= HandleAttackStart;
-        SkillEvents.OnAttackEnd -= HandleAttackEnd;
     }
 
     protected override void Awake()
@@ -67,6 +60,12 @@ public class PlayerController_Main : EntityController
             1,
             _countDownDisplay);
         BuffSys.AddBuff(Buff_CountDown);
+
+        var eventBus = ServiceLocator.Get<IEventBus>();
+        eventBus.Subscribe<JumpExecuteTriggerStart>(HandleJumpStart);
+        eventBus.Subscribe<JumpExecuteTriggerEnd>(HandleJumpEnd);
+        eventBus.Subscribe<Plr_AttackExecTriggerStart>(HandleAttackStart);
+        eventBus.Subscribe<Plr_AttackExecTriggerEnd>(HandleAttackEnd);
     }
 
     protected override void FixedUpdate()
@@ -103,21 +102,15 @@ public class PlayerController_Main : EntityController
     }
     #region Handle Skill Logics
     // JUMP
-    void HandleJumpStart()
+    void HandleJumpStart(JumpExecuteTriggerStart jumpEvent)
     {
         var jumpSkill = Player_SkillManager.Instance.Jump;
-        bool sucess = _stateMachine.ChangeState(IsWallSliding ? StateSO.WallJumpState : StateSO.JumpState, false);
-        if (sucess)
-        {
-            IsJumping = true;
-            IsBusy = true;
-
-            jumpSkill.ConsumeSkill();
-        }
-        else
-            Player_SkillManager.Instance.Jump.TryResetSkill();
+        _stateMachine.ChangeState(IsWallSliding ? StateSO.WallJumpState : StateSO.JumpState, false);
+        IsJumping = true;
+        IsBusy = true;
+        jumpSkill.ConsumeSkill();
     }
-    void HandleJumpEnd()
+    void HandleJumpEnd(JumpExecuteTriggerEnd jumpEvent)
     {
         if (!CheckerSys.IsGrounded)
             _stateMachine.ChangeState(StateSO.AirState, true);
@@ -155,21 +148,15 @@ public class PlayerController_Main : EntityController
     }
 
     // ATTACK
-    void HandleAttackStart()
+    void HandleAttackStart(Plr_AttackExecTriggerStart AttackEvent)
     {
         var attackSkill = Player_SkillManager.Instance.Attack;
-        bool sucess = _stateMachine.ChangeState(StateSO.AttackState, false);
-        if (sucess)
-        {
-            IsAttacking = true;
-            IsBusy = true;
-
-            attackSkill.ConsumeSkill();
-        }
-        else
-            Player_SkillManager.Instance.Attack.TryResetSkill();
+        _stateMachine.ChangeState(StateSO.AttackState, false);
+        IsAttacking = true;
+        IsBusy = true;
+        attackSkill.ConsumeSkill();
     }
-    void HandleAttackEnd()
+    void HandleAttackEnd(Plr_AttackExecTriggerEnd AttackEvent)
     {
         _stateMachine.ChangeState(StateSO.FallState, true);
 

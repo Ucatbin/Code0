@@ -19,8 +19,8 @@ public class PlayerSkill_GrappingHookDash : PlayerSkill_BaseSkill
 
     void OnEnable()
     {
-        InputEvents.OnLineDashPressed += TryUseSkill;
-        InputEvents.OnLineDashReleased += () =>
+        PlayerInputEvents.OnLineDashPressed += TryUseSkill;
+        PlayerInputEvents.OnLineDashReleased += () =>
         {
             IsInputReset = true;
             _stopDash = true;
@@ -28,8 +28,8 @@ public class PlayerSkill_GrappingHookDash : PlayerSkill_BaseSkill
     }
     void OnDisable()
     {
-        InputEvents.OnLineDashPressed -= TryUseSkill;
-        InputEvents.OnLineDashReleased -= () =>
+        PlayerInputEvents.OnLineDashPressed -= TryUseSkill;
+        PlayerInputEvents.OnLineDashReleased -= () =>
         {
             IsInputReset = true;
             _stopDash = true;
