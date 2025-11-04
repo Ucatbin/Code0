@@ -1,24 +1,15 @@
 using ThisGame.AbilitySystem;
 using ThisGame.EntitySystem;
-using ThisGame.Events.AbilityEvents;
-using UnityEngine;
 
 public class JumpAbilityModel : AbilityModel<JumpAbilityData>
 {
-    public override void Excute(EntityModel entity)
+    public override void Excute(IEntityModel entity)
     {
-        base.Excute(entity);
-
         if (!CanExecute(entity)) return;
-        ConsumeResources(entity);
-        var eventBus = ServiceLocator.Get<IEventBus>();
-        eventBus.Publish(new JumpExecuteTriggerStart());
+        base.Excute(entity);
     }
-    public override void EndExecute(EntityModel entity)
+    public override void EndExecute(IEntityModel entity)
     {
         base.EndExecute(entity);
-
-        var eventBus = ServiceLocator.Get<IEventBus>();
-        eventBus.Publish(new JumpExecuteTriggerEnd());
     }
 }

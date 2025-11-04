@@ -1,22 +1,15 @@
 using ThisGame.AbilitySystem;
 using ThisGame.EntitySystem;
-using ThisGame.Events.AbilityEvents;
-using UnityEngine;
 
 public class AttackAbilityModel : AbilityModel<AttackAbilityData>
 {
-    public override void Excute(EntityModel entity)
+    public override void Excute(IEntityModel entity)
     {
+        if (!CanExecute(entity)) return;
         base.Excute(entity);
-
-        var eventBus = ServiceLocator.Get<IEventBus>();
-        eventBus.Publish(new Plr_AttackExecTriggerStart());
     }
-    public override void EndExecute(EntityModel entity)
+    public override void EndExecute(IEntityModel entity)
     {
         base.EndExecute(entity);
-
-        var eventBus = ServiceLocator.Get<IEventBus>();
-        eventBus.Publish(new Plr_AttackExecTriggerEnd());
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using ThisGame.EntitySystem;
+using ThisGame.Events.AbilityEvents;
 using UnityEngine;
 
 namespace ThisGame.AbilitySystem
@@ -38,7 +39,7 @@ namespace ThisGame.AbilitySystem
             OnAbilityUpgraded?.Invoke(this);
         }
 
-        public virtual bool CanExecute(EntityModel entity)
+        public virtual bool CanExecute(IEntityModel entity)
         {
             return IsUnlocked &&
                 IsReady &&
@@ -46,11 +47,14 @@ namespace ThisGame.AbilitySystem
                 CurrentCharges > 0;
         }
 
-        public virtual void Excute(EntityModel entity)
+        public virtual void Excute(IEntityModel entity)
         {
+            ConsumeResources(entity);
+            var eventBus = ServiceLocator.Get<IEventBus>();
+            eventBus.Publish(new AbilityExecuted(Data.AbilityName));
         }
 
-        public virtual void ConsumeResources(EntityModel entity)
+        public virtual void ConsumeResources(IEntityModel entity)
         {
             CurrentCharges -= Data.MaxCharges == -1 ? 1 : 0;
             IsReady = false;
@@ -63,8 +67,10 @@ namespace ThisGame.AbilitySystem
                 () => EndExecute(null)
             );
         }
-        public virtual void EndExecute(EntityModel entity)
+        public virtual void EndExecute(IEntityModel entity)
         {
+            var eventBus = ServiceLocator.Get<IEventBus>();
+            eventBus.Publish(new AbilityCompleted(Data.AbilityName));
         }
         public virtual void Refresh()
         {

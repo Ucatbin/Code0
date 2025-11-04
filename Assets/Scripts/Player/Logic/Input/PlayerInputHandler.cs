@@ -36,9 +36,9 @@ public class InputHandler : MonoBehaviour
     public void HandleJump(InputAction.CallbackContext context)
     {
         if (context.performed)
-            _eventBus.Publish(new AbilityInputTriggerPressed("Jump"));
+            _eventBus.Publish(new AbilityButtonPressed("Jump"));
         if (context.canceled)
-            _eventBus.Publish(new AbilityInputTriggerReleased("Jump"));
+            _eventBus.Publish(new AbilityButtonReleased("Jump"));
     }
 
     public void HandleGHook(InputAction.CallbackContext context)
@@ -60,10 +60,10 @@ public class InputHandler : MonoBehaviour
         Vector2 dir = (mousePos - (Vector2)transform.position).normalized;
         MouseDir = dir;
         if (context.performed)
-            _eventBus.Publish(new AbilityInputTriggerPressed("Attack"));
+            _eventBus.Publish(new AbilityButtonPressed("Attack"));
         if (context.canceled)
         {
-            _eventBus.Publish(new AbilityInputTriggerReleased("Attack"));
+            _eventBus.Publish(new AbilityButtonReleased("Attack"));
             MouseDir = Vector2.zero;
         }
     }

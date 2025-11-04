@@ -9,5 +9,11 @@ namespace ThisGame.EntitySystem
         {
 
         }
+        public void RegisterEntity<TModel>(EntityData data)
+            where TModel : IEntityModel, new()
+        {
+            var model = new TModel();
+            
+        }
     }
 }

@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using ThisGame.Events.AbilityEvents;
-using System;
-using ThisGame.EntitySystem;
 
 namespace ThisGame.AbilitySystem
 {
@@ -15,8 +13,8 @@ namespace ThisGame.AbilitySystem
             _abilityModels = new Dictionary<int, IAbilityModel>();
 
             var eventBus = ServiceLocator.Get<IEventBus>();
-            eventBus.Subscribe<AbilityInputTriggerPressed>(HandleAbilityInputPressed);
-            eventBus.Subscribe<AbilityInputTriggerReleased>(HandleAbilityInputReleased);
+            eventBus.Subscribe<AbilityButtonPressed>(HandleAbilityButtonPressed);
+            eventBus.Subscribe<AbilityButtonReleased>(HandleAbilityButtonReleased);
         }
 
         public void RegisterAbility<TModel>(AbilityData data)
@@ -42,14 +40,14 @@ namespace ThisGame.AbilitySystem
             }
         }
 
-        void HandleAbilityInputPressed(AbilityInputTriggerPressed abilityEvent)
+        void HandleAbilityButtonPressed(AbilityButtonPressed abilityEvent)
         {
             if (_abilityModels.TryGetValue(abilityEvent.AbilityHash, out var model))
             {
                 model.Excute(null);
             }
         }
-        void HandleAbilityInputReleased(AbilityInputTriggerReleased abilityEvent)
+        void HandleAbilityButtonReleased(AbilityButtonReleased abilityEvent)
         {
             if (_abilityModels.TryGetValue(abilityEvent.AbilityHash, out var model))
                 model.IsReset = true;

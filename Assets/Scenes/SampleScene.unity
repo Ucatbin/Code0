@@ -694,6 +694,7 @@ GameObject:
   - component: {fileID: 1159164785}
   - component: {fileID: 1159164788}
   - component: {fileID: 1159164790}
+  - component: {fileID: 1159164791}
   - component: {fileID: 1159164789}
   m_Layer: 0
   m_Name: Game
@@ -791,6 +792,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AbilitySystem: {fileID: 1159164789}
+--- !u!114 &1159164791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159164784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1995f2424957b24ea706ade0cc403e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _entityDataList:
+  - {fileID: 11400000, guid: 7bd1d901a2eb76d4891ba39d1a4b9884, type: 2}
 --- !u!4 &1614462008 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2738143280392743655, guid: eae3492ff2546644b92b7ec3e3433759, type: 3}

@@ -15,12 +15,12 @@ namespace ThisGame.AbilitySystem
         void Initialize(AbilityData data);
         void Upgrade(int deltaLevel);
 
-        bool CanExecute(EntityModel entity);
-        void Excute(EntityModel entity);
+        bool CanExecute(IEntityModel entity);
+        void Excute(IEntityModel entity);
         
-        void ConsumeResources(EntityModel entity);
+        void ConsumeResources(IEntityModel entity);
         void StartCoolDown();
-        void EndExecute(EntityModel entity);
+        void EndExecute(IEntityModel entity);
         void Refresh();
     } 
 }
