@@ -6,7 +6,7 @@ using UnityEngine;
 namespace ThisGame.AbilitySystem
 {
     [Serializable]
-    public class AbilityModel<TData> : IAbilityModel where TData : AbilityData
+    public class AbilityModel : IAbilityModel
     {
         // Info
         public int CurrentLevel { get; set; }
@@ -18,14 +18,12 @@ namespace ThisGame.AbilitySystem
         public bool IsReset { get; set; }
 
         // Dependency
-        public TData Data;
-        public AbilityData AData => Data;
-        public void Initialize(AbilityData data)
+        public IAbilityData Data;
+        public void Initialize(IAbilityData data)
         {
-            Data = data as TData;
+            Data = data;
             IsReady = true;
             IsReset = true;
-            CurrentCharges = Data.MaxCharges;
         }
 
         // Actions
@@ -51,7 +49,7 @@ namespace ThisGame.AbilitySystem
         {
             ConsumeResources(entity);
             var eventBus = ServiceLocator.Get<IEventBus>();
-            eventBus.Publish(new AbilityExecuted(Data.AbilityName));
+            eventBus.Publish(new AbilityExecuted(Data.AbilityHash));
         }
 
         public virtual void ConsumeResources(IEntityModel entity)
@@ -70,7 +68,7 @@ namespace ThisGame.AbilitySystem
         public virtual void EndExecute(IEntityModel entity)
         {
             var eventBus = ServiceLocator.Get<IEventBus>();
-            eventBus.Publish(new AbilityCompleted(Data.AbilityName));
+            eventBus.Publish(new AbilityCompleted(Data.AbilityHash));
         }
         public virtual void Refresh()
         {

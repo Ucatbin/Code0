@@ -4,21 +4,21 @@ namespace ThisGame.AbilitySystem
 {
     public class AbilitySystemBootstrap : MonoBehaviour
     {
-        [SerializeField] AbilityData[] _abilityDataList;
-        public AbilitySysPresenter AbilityPresenter;
+        [SerializeField] IAbilityData[] _abilityDataList;
+        public AbilityPresenter AbilityPresenter;
 
         void Start()
         {
             // Services
 
-            AbilityPresenter = new AbilitySysPresenter();
+            AbilityPresenter = new AbilityPresenter();
             RegisterExcutions();
         }
 
         void RegisterExcutions()
         {
-            AbilityPresenter.RegisterAbility<JumpAbilityModel>(_abilityDataList[0]);
-            AbilityPresenter.RegisterAbility<AttackAbilityModel>(_abilityDataList[1]);
+            AbilityPresenter.RegisterAbility<JumpAbilityModel,JumpAbilityData>((JumpAbilityData)_abilityDataList[0]);
+            AbilityPresenter.RegisterAbility<AttackAbilityModel,AttackAbilityData>((AttackAbilityData)_abilityDataList[1]);
         }
     }
 }

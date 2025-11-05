@@ -3,16 +3,14 @@ using UnityEngine;
 namespace ThisGame.EntitySystem
 {
     [CreateAssetMenu(fileName = "EntityData", menuName = "Game/EntitySystem/New EntityData")]
-    public class EntityData : ScriptableObject
+    public class EntityData : ScriptableObject, IEntityData
     {
-        public string EntityName;
-        [HideInInspector] public int EntityHash;
-        public float MaxHelth;
-        public float BaseSpeed;
+        public string EntityName { get; }
 
-        void OnValidate()
-        {
-            EntityHash = EntityName.GetHashCode();
-        }
+        public int EntityHash { get => EntityName.GetHashCode();  }
+
+        public float MaxHealth { get; }
+
+        public float BaseSpeed { get; }
     }
 }

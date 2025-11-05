@@ -4,11 +4,11 @@ using ThisGame.Events.AbilityEvents;
 
 namespace ThisGame.AbilitySystem
 {
-    public class AbilitySysPresenter
+    public class AbilityPresenter
     {
         readonly Dictionary<int, IAbilityModel> _abilityModels;
         // Dependency
-        public AbilitySysPresenter()
+        public AbilityPresenter()
         {
             _abilityModels = new Dictionary<int, IAbilityModel>();
 
@@ -17,8 +17,9 @@ namespace ThisGame.AbilitySystem
             eventBus.Subscribe<AbilityButtonReleased>(HandleAbilityButtonReleased);
         }
 
-        public void RegisterAbility<TModel>(AbilityData data)
+        public void RegisterAbility<TModel, TData>(TData data)
             where TModel : IAbilityModel, new()
+            where TData : IAbilityData
         {
             // Debug
             if (_abilityModels.ContainsKey(data.AbilityHash))
@@ -27,17 +28,10 @@ namespace ThisGame.AbilitySystem
                 return;
             }
 
-            var model = new TModel();
-            model.Initialize(data);
+            var model = AbilityFactory.CreateAbility<TModel, TData>(data);
             _abilityModels[data.AbilityHash] = model;
+            // TODO:Just for test
             model.IsUnlocked = true;
-        }
-        public void UnregisterAbility(AbilityData data)
-        {
-            if (_abilityModels.TryGetValue(data.AbilityHash, out var model))
-            {
-                _abilityModels.Remove(data.AbilityHash);
-            }
         }
 
         void HandleAbilityButtonPressed(AbilityButtonPressed abilityEvent)

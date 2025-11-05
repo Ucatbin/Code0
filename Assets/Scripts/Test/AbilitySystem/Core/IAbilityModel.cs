@@ -12,7 +12,8 @@ namespace ThisGame.AbilitySystem
         bool IsReady { get; set; }
         bool IsReset { get; set; }
 
-        void Initialize(AbilityData data);
+        void Initialize(IAbilityData data);
+
         void Upgrade(int deltaLevel);
 
         bool CanExecute(IEntityModel entity);

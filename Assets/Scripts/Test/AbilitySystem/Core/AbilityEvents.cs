@@ -12,41 +12,41 @@ namespace ThisGame.Events.AbilityEvents
     public struct AbilityButtonPressed
     {
         readonly public int AbilityHash;
-        public AbilityButtonPressed(string abilityName)
+        public AbilityButtonPressed(int abilityHash)
         {
-            AbilityHash = abilityName.GetHashCode();
+            AbilityHash = abilityHash;
         }
     }
     public struct AbilityButtonReleased
     {
         readonly public int AbilityHash;
-        public AbilityButtonReleased(string abilityName)
+        public AbilityButtonReleased(int abilityHash)
         {
-            AbilityHash = abilityName.GetHashCode();
+            AbilityHash = abilityHash;
         }
     }
     public struct AbilityExecuted
     {
         readonly public int AbilityHash;
-        public AbilityExecuted(string abilityName)
+        public AbilityExecuted(int abilityHash)
         {
-            AbilityHash = abilityName.GetHashCode();
+            AbilityHash = abilityHash;
         }
     }
     public struct AbilityCompleted
     {
         readonly public int AbilityHash;
-        public AbilityCompleted(string abilityName)
+        public AbilityCompleted(int abilityHash)
         {
-            AbilityHash = abilityName.GetHashCode();
+            AbilityHash = abilityHash;
         }
     }
     public struct AbilityInterrupted
     {
         readonly public int AbilityHash;
-        public AbilityInterrupted(string abilityName)
+        public AbilityInterrupted(int abilityHash)
         {
-            AbilityHash = abilityName.GetHashCode();
+            AbilityHash = abilityHash;
         }
     }
 }

@@ -1,7 +1,7 @@
 using ThisGame.AbilitySystem;
 using ThisGame.EntitySystem;
 
-public class AttackAbilityModel : AbilityModel<AttackAbilityData>
+public class AttackAbilityModel : AbilityModel
 {
     public override void Excute(IEntityModel entity)
     {
