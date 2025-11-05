@@ -1,10 +1,11 @@
+using ThisGame.Entity.HealthSystem;
 using TMPro;
 using UnityEngine;
 
 public class PlayerController_Main : EntityController
 {
     [Header("PlayerHandlers")]
-    public InputHandler InputSys;
+    public InputHandlerOld InputSys;
 
     [Header("PlayerComponents")]
     public Camera MainCam;
@@ -23,6 +24,9 @@ public class PlayerController_Main : EntityController
     public bool IsLineDashing = false;
     public bool IsAttacking = false;
     public bool IsWallSliding = false;
+
+    [SerializeField] HealthData _healthData;
+    [SerializeField] IModel _healthModel;
 
     void OnEnable()
     {
@@ -59,6 +63,8 @@ public class PlayerController_Main : EntityController
     protected override void Start()
     {
         base.Start();
+
+        _healthModel = new HealthModel(_healthData);
 
         var Buff_CountDown = new BuffItem_CountDown(
             BuffManager.Instance.BuffData_CountDown,

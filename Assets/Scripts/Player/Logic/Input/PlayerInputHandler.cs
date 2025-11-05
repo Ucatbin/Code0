@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class InputHandler : MonoBehaviour
+public class InputHandlerOld : MonoBehaviour
 {
     [SerializeField] InputActionAsset _inputActions;
     [SerializeField] Camera _mainCam;

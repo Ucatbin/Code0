@@ -11,7 +11,7 @@ public abstract class PlayerSkill_BaseSkill : MonoBehaviour
     [Tooltip("Get player component")]
     [SerializeField] protected PlayerController_Main _player;
     [Tooltip("Get input")]
-    [SerializeField] protected InputHandler _inputSys;
+    [SerializeField] protected InputHandlerOld _inputSys;
     [Tooltip("The max charges of this skill, 0 means dont need charges")]
     public int MaxCharges = 0;
     public int CurrentCharges;
