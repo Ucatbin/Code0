@@ -1,13 +1,14 @@
+using ThisGame.Core;
 using UnityEngine;
 
 namespace ThisGame.Entity.HealthSystem
 {
-    public class HealthController : MonoBehaviour
+    public class HealthController : BaseController
     {
         [SerializeField] HealthData _data;
         public HealthModel Model;
 
-        void Initialize()
+        public override void Initialize()
         {
             Model = new HealthModel(_data);
         }

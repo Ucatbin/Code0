@@ -1,4 +1,4 @@
-using System;
+using ThisGame.Core;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -18,14 +18,20 @@ public class InputHandlerOld : MonoBehaviour
     }
     public void ChangeActionMap(InputActionMap nextMap)
     {
-        _inputActions.Disable();
+        _inputActions?.Disable();
         nextMap.Enable();
     }
 
     #region Normal Map
     public void HandleMove(InputAction.CallbackContext context)
     {
-        MoveInput = context.ReadValue<Vector2>();
+        Vector2 input = context.ReadValue<Vector2>();
+        
+        var moveEvent = new PlayerMoveInputEvent { 
+            MoveDirection = new Vector3(input.x, 0, input.y)
+        };
+
+        EventBus.Publish(moveEvent);
     }
 
     public void HandleJump(InputAction.CallbackContext context)

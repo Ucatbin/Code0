@@ -8,10 +8,9 @@ namespace ThisGame.Entity.MoveSystem
         public event Action<Vector3> OnVelocityChanged;
         public event Action<bool> OnMovementStateChanged;
 
-        float _currentSpeed;
-        public float CurrentSpeed => _currentSpeed;
         Vector3 _inputDir;
         Vector3 _velocity;
+        public Vector3 Velocity => _velocity;
         bool _isMoving;
         public bool IsMoving => _isMoving;
 
@@ -21,7 +20,7 @@ namespace ThisGame.Entity.MoveSystem
         public MoveModel(MoveData data)
         {
             _data = data;
-            _currentSpeed = 0f;
+            _velocity = Vector3.zero;
         }
 
         public void UpdateMovement(Vector3 input, float deltaTime)
@@ -29,7 +28,7 @@ namespace ThisGame.Entity.MoveSystem
             _inputDir = input.normalized;
 
             bool wasMoving = _isMoving;
-            _isMoving = input.magnitude > 0.1f;
+            _isMoving = input.magnitude > 0.01f;
 
             if (wasMoving != _isMoving)
                 OnMovementStateChanged?.Invoke(_isMoving);

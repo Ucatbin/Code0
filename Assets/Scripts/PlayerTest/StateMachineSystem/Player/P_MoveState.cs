@@ -5,17 +5,19 @@ using UnityEngine;
 
 namespace ThisGame.Entity.StateMachineSystem
 {
-    public class P_IdleState : BaseState
+    public class P_MoveState : BaseState
     {
         PlayerController _player;
         MoveModel _movement;
         Vector3 _currentInput;
-        public P_IdleState(PlayerController entity, StateMachine stateMachine, MoveModel model) : base(entity, stateMachine)
+
+        public P_MoveState(PlayerController entity, StateMachine stateMachine, MoveModel model) : base(entity, stateMachine)
         {
             _player = entity;
             _movement = model;
             EventBus.Subscribe<PlayerMoveInputEvent>(this, OnMoveInput);
         }
+
         void OnMoveInput(PlayerMoveInputEvent moveEvent)
         {
             _currentInput = moveEvent.MoveDirection;
@@ -32,13 +34,12 @@ namespace ThisGame.Entity.StateMachineSystem
         }
         public override void LogicUpdate()
         {
-            if (_movement.IsMoving)
-                _stateMachine.ChangeState("Move");
+            if (!_movement.IsMoving)
+                _stateMachine.ChangeState("Idle");
         }
 
         public override void Exit()
         {
-
         }
     }
 }

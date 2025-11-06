@@ -10,9 +10,13 @@ namespace ThisGame.Entity.StateMachineSystem
         IState _currentState;
         public IState CurrentState => _currentState;
         
-        public void Initialize(IState startState)
+        public StateMachine()
         {
-            ChangeState(startState);
+            States = new Dictionary<string, IState>();
+        }
+        public void Initialize(string startStateName)
+        {
+            ChangeState(startStateName);
         }
         public void RegisterState(string stateName, IState state)
         {
@@ -21,11 +25,18 @@ namespace ThisGame.Entity.StateMachineSystem
             else
                 States.Add(stateName, state);
         }
-        public void ChangeState(IState newState)
+        public void ChangeState(string stateName)
         {
-            _currentState?.Exit();
-            _currentState = newState;
-            _currentState.Enter();
+            if (States.TryGetValue(stateName, out IState newState))
+            {
+                Debug.Log($"Exit:'{_currentState}' Enter:'{newState}'");
+                _currentState?.Exit();
+                _currentState = newState;
+                _currentState.Enter();
+            }
+            else
+                throw new ArgumentException($"State '{stateName}' not found.");
+
         }
     }
 }
