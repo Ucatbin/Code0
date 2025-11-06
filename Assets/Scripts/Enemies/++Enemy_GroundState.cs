@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Enemy_GroundState : Enemy_Basestate
 {
-    public Enemy_GroundState(EnemyController_Main entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
+    public Enemy_GroundState(EnemyController_Main entity, StateMachineOld stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
     {
     }
 

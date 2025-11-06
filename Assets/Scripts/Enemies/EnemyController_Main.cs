@@ -1,7 +1,7 @@
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class EnemyController_Main : EntityController
+public class EnemyController_Main : EntityControllerOld
 {
     [Header("Scriptable Object")]
     public EnemyPropertySO PropertySO;

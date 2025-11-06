@@ -4,7 +4,7 @@ public class Player_JumpState : Player_AirState
 {
     PlayerSkill_Jump _jumpSkill;
 
-    public Player_JumpState(PlayerController_Main entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
+    public Player_JumpState(PlayerController_Main entity, StateMachineOld stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
     {
     }
 

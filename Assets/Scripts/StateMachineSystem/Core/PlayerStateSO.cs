@@ -36,7 +36,7 @@ public class PlayerStateSO : ScriptableObject
     [Min(0)] public int DashPriority = 3;
     [Min(0)] public int UltimatePriority = 5;
 
-    public void InstanceState(PlayerController_Main player, StateMachine stateMachine)
+    public void InstanceState(PlayerController_Main player, StateMachineOld stateMachine)
     {
         IdleState = new Player_IdleState(player, stateMachine, IdlePriority, "Idle");
         MoveState = new Player_MoveState(player, stateMachine, MovePriority, "Move");

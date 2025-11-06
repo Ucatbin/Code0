@@ -2,13 +2,13 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
-public class EntityController : MonoBehaviour, IMoveable, IDamageable
+public class EntityControllerOld : MonoBehaviour, IMoveable, IDamageable
 {
     [Header("BaseComponents")]
     public Transform Root;                  // This entity transform
     public Rigidbody2D Rb;                  // Rigibody
     public Animator Anim;                   // Animator
-    protected StateMachine _stateMachine = new StateMachine();   // Statemachine
+    protected StateMachineOld _stateMachine = new StateMachineOld();   // Statemachine
 
     [Header("BaseHandlers")]
     public CheckerHandler CheckerSys;       // Entity collision checkers

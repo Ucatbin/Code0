@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Player_AirGlideState : Player_AirState
 {
-    public Player_AirGlideState(PlayerController_Main entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
+    public Player_AirGlideState(PlayerController_Main entity, StateMachineOld stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
     {
     }
 

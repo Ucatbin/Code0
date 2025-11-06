@@ -1,7 +1,7 @@
 
 public class Player_MoveState : Player_GroundState
 {
-    public Player_MoveState(PlayerController_Main entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
+    public Player_MoveState(PlayerController_Main entity, StateMachineOld stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
     {
     }
 

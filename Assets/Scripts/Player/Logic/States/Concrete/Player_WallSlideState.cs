@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Player_WallSlideState : Player_BaseState
 {
-    public Player_WallSlideState(PlayerController_Main entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
+    public Player_WallSlideState(PlayerController_Main entity, StateMachineOld stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
     {
     }
 

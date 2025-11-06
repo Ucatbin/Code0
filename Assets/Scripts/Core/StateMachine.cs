@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class StateMachine
+public class StateMachineOld
 {
     public EntityState CurrentState;
 

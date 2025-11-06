@@ -5,7 +5,7 @@ public class Player_HookedState : Player_BaseState
 {
     PlayerSkill_GrappingHook _gHookSkill;
 
-    public Player_HookedState(PlayerController_Main entity, StateMachine stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
+    public Player_HookedState(PlayerController_Main entity, StateMachineOld stateMachine, int priority, string stateName) : base(entity, stateMachine, priority, stateName)
     {
     }
 

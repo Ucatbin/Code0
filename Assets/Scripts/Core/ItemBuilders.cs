@@ -9,14 +9,14 @@ using UnityEngine;
 [Serializable]
 public struct DamageData
 {
-    public EntityController Caster;
+    public EntityControllerOld Caster;
     public int DamageAmount;
     public Vector2 DamageDirection;
     public float KnockbackForce;
     public DamageType DamageType;
 
     public DamageData(
-        EntityController caster,
+        EntityControllerOld caster,
         int damageAmount,
         Vector2 damageDirection,
         float knockbackForce,

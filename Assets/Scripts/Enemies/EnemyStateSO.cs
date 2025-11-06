@@ -11,7 +11,7 @@ public class EnemyStateSO : ScriptableObject
     [Min(0)] public int IdlePriority = 1;
     [Min(0)] public int PatrolPriority = 1;
 
-    public void InstanceState(EnemyController_Main enemy, StateMachine stateMachine)
+    public void InstanceState(EnemyController_Main enemy, StateMachineOld stateMachine)
     {
         IdleState = new Enemy_IdleState(enemy, stateMachine, IdlePriority, "Idle");
         PatrolState = new Enemy_PatrolState(enemy, stateMachine, PatrolPriority, "Move");
