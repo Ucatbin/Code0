@@ -5,6 +5,7 @@ namespace ThisGame.Entity.MoveSystem
 {
     public class MoveModel
     {
+        // Events
         public event Action<Vector3> OnVelocityChanged;
         public event Action<bool> OnMovementStateChanged;
 
@@ -16,7 +17,7 @@ namespace ThisGame.Entity.MoveSystem
 
         // Dependency
         MoveData _data;
-        public MoveData Data;
+        public MoveData Data => _data;
         public MoveModel(MoveData data)
         {
             _data = data;
@@ -36,21 +37,30 @@ namespace ThisGame.Entity.MoveSystem
             if (_isMoving)
             {
                 Vector3 targetVelocity = _inputDir * _data.BaseSpeed;
-                _velocity = Vector3.MoveTowards(
-                    _velocity,
-                    targetVelocity,
+                _velocity.x = Mathf.MoveTowards(
+                    _velocity.x,
+                    targetVelocity.x,
                     _data.Acceleration * deltaTime
                 );
+                Debug.Log(_velocity);
             }
             else
             {
-                _velocity = Vector3.MoveTowards(
-                    _velocity,
-                    Vector3.zero,
-                    _data.Deceleration * deltaTime
+                _velocity.x = Mathf.MoveTowards(
+                    _velocity.x,
+                    0f,
+                    _data.Acceleration * deltaTime
                 );
             }
             OnVelocityChanged?.Invoke(_velocity);
+        }
+        public void HandleGravity(float deltaTime)
+        {
+            _velocity.y = Mathf.MoveTowards(
+                _velocity.y,
+                -_data.MaxFallSpeed,
+                _data.Gravity * deltaTime
+            );
         }
 
         public void SetVelocity(Vector3 velocity)

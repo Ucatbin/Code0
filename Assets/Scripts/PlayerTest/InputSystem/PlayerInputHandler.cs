@@ -27,7 +27,7 @@ public class InputHandlerOld : MonoBehaviour
     {
         Vector2 input = context.ReadValue<Vector2>();
         
-        var moveEvent = new PlayerMoveInputEvent { 
+        var moveEvent = new MoveButtonPressed { 
             MoveDirection = new Vector3(input.x, 0, input.y)
         };
 

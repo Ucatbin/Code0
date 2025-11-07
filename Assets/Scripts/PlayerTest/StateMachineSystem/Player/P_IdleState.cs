@@ -1,44 +1,36 @@
-using ThisGame.Core;
 using ThisGame.Entity.EntitySystem;
 using ThisGame.Entity.MoveSystem;
 using UnityEngine;
 
 namespace ThisGame.Entity.StateMachineSystem
 {
-    public class P_IdleState : BaseState
+    public class P_IdleState : P_GroundState
     {
-        PlayerController _player;
-        MoveModel _movement;
-        Vector3 _currentInput;
-        public P_IdleState(PlayerController entity, StateMachine stateMachine, MoveModel model) : base(entity, stateMachine)
+        public P_IdleState(PlayerController entity, StateMachine stateMachine, MoveModel model) : base(entity, stateMachine, model)
         {
-            _player = entity;
-            _movement = model;
-            EventBus.Subscribe<PlayerMoveInputEvent>(this, OnMoveInput);
-        }
-        void OnMoveInput(PlayerMoveInputEvent moveEvent)
-        {
-            _currentInput = moveEvent.MoveDirection;
         }
 
         public override void Enter()
         {
-        }
-
-        public override void PhysicsUpdate()
-        {
-            _movement.UpdateMovement(_currentInput, Time.fixedDeltaTime);
-            _player.Rb.linearVelocity = _movement.Velocity;
-        }
-        public override void LogicUpdate()
-        {
-            if (_movement.IsMoving)
-                _stateMachine.ChangeState("Move");
+            base.Enter();
         }
 
         public override void Exit()
         {
+            base.Exit();
+        }
 
+        public override void LogicUpdate()
+        {
+            base.LogicUpdate();
+
+            if (_movement.IsMoving)
+                _stateMachine.ChangeState("Move");
+        }
+
+        public override void PhysicsUpdate()
+        {
+            base.PhysicsUpdate();
         }
     }
 }

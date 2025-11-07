@@ -6,6 +6,10 @@ namespace ThisGame.Entity.MoveSystem
     public class MoveData : ScriptableObject
     {
         public float BaseSpeed;
+        public float BaseJumpSpeed;
+        public float HoldJumpSpeed;
+        public float Gravity;
+        public float MaxFallSpeed;
         public float RotationSpeed;
         public float Acceleration;
         public float Deceleration;
