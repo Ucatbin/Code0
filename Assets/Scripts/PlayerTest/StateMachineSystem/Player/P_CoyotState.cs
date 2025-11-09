@@ -1,3 +1,5 @@
+using ThisGame.Core.CheckerSystem;
+using ThisGame.Entity.SkillSystem;
 using ThisGame.Entity.EntitySystem;
 using ThisGame.Entity.MoveSystem;
 
@@ -5,7 +7,7 @@ namespace ThisGame.Entity.StateMachineSystem
 {
     public class P_CoyotState : P_GroundState
     {
-        public P_CoyotState(PlayerController entity, StateMachine stateMachine, MoveModel model) : base(entity, stateMachine, model)
+        public P_CoyotState(PlayerController entity, StateMachine stateMachine, CheckerController checkers, MoveModel movement) : base(entity, stateMachine, checkers, movement)
         {
         }
 

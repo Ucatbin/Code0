@@ -9,13 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c31c3722937c8bd448d12f729cb11167, type: 3}
-  m_Name: Move Data
+  m_Script: {fileID: 11500000, guid: 6af022589fd705a45aaa218f9d4964bc, type: 3}
+  m_Name: GrappingHookData
   m_EditorClassIdentifier: 
-  BaseSpeed: 8
-  BaseJumpSpeed: 12
-  Gravity: 40
-  MaxFallSpeed: 10
-  RotationSpeed: 0
-  Acceleration: 50
-  Deceleration: 65
+  MaxLevel: 1
+  CoolDown: -1
+  MaxCharges: 1
+  IsUnlocked: 1
+  MaxDetectDist: 20
+  CanHookLayer:
+    serializedVersion: 2
+    m_Bits: 65
+  MaxLineDist: 10

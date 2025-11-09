@@ -9,13 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c31c3722937c8bd448d12f729cb11167, type: 3}
-  m_Name: Move Data
+  m_Script: {fileID: 11500000, guid: a294e9e7b10aedd4abcc5dbf7f369bbb, type: 3}
+  m_Name: Player MoveData
   m_EditorClassIdentifier: 
   BaseSpeed: 8
-  BaseJumpSpeed: 12
-  Gravity: 40
-  MaxFallSpeed: 10
+  BaseJumpSpeed: 10
+  Gravity: 50
+  MaxFallSpeed: 25
   RotationSpeed: 0
   Acceleration: 50
   Deceleration: 65
+  JumpInputWindow: 0.26
+  WallSlideSpeed: -1
+  WallJumpDirection: {x: 1.35, y: 1, z: 0}

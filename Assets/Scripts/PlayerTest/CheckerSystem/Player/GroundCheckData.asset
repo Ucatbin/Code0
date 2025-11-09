@@ -9,13 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c31c3722937c8bd448d12f729cb11167, type: 3}
-  m_Name: Move Data
+  m_Script: {fileID: 11500000, guid: c30e2d6102fa7d740b75af98649d5706, type: 3}
+  m_Name: GroundCheckData
   m_EditorClassIdentifier: 
-  BaseSpeed: 8
-  BaseJumpSpeed: 12
-  Gravity: 40
-  MaxFallSpeed: 10
-  RotationSpeed: 0
-  Acceleration: 50
-  Deceleration: 65
+  CheckLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  CheckCount: 3
+  CheckWidth: 0.5
+  Direction: {x: 0, y: -1}
+  Distance: 0.1
+  CheckRadius: 0
+  Angle: 0

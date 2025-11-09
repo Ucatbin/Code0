@@ -9,16 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c30e2d6102fa7d740b75af98649d5706, type: 3}
-  m_Name: GroundChecker Data
+  m_Script: {fileID: 11500000, guid: 8908ca1fd7146df4b953f8cd166ab221, type: 3}
+  m_Name: DoubleJumpData
   m_EditorClassIdentifier: 
-  CheckType: 0
-  CheckLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  CheckCount: 3
-  CheckWidth: 0.5
-  Direction: {x: 0, y: -1}
-  Distance: 0.1
-  CheckRadius: 0
-  Angle: 0
+  MaxLevel: 1
+  CoolDown: -1
+  MaxCharges: 1
+  IsUnlocked: 1
+  JumpSpeed: 12

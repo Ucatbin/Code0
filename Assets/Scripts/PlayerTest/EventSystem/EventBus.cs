@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace ThisGame.Core
 {
@@ -41,6 +42,39 @@ namespace ThisGame.Core
                 _ownerHandlers.Remove(owner);
             }
         }
+        public static void SubscribeByType(object owner, Type eventType)
+        {
+            var handlerMethod = FindEventHandlerMethod(owner, eventType);
+            if (handlerMethod != null)
+            {
+                var subscribeMethod = typeof(EventBus).GetMethod("Subscribe", BindingFlags.Public | BindingFlags.Static);
+                var genericMethod = subscribeMethod.MakeGenericMethod(eventType);
+                
+                var delegateType = typeof(Action<>).MakeGenericType(eventType);
+                var handlerDelegate = Delegate.CreateDelegate(delegateType, owner, handlerMethod);
+                
+                genericMethod.Invoke(null, new object[] { owner, handlerDelegate });
+            }
+        }
+
+        private static MethodInfo FindEventHandlerMethod(object owner, Type eventType)
+        {
+            var methods = owner.GetType().GetMethods(
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+
+            foreach (var method in methods)
+            {
+                var parameters = method.GetParameters();
+                if (parameters.Length == 1 && parameters[0].ParameterType == eventType)
+                {
+                    return method;
+                }
+            }
+            
+            UnityEngine.Debug.LogWarning($"No event handler method found for {eventType} in {owner.GetType()}");
+            return null;
+        }
+
 
         public static void Publish<T>(T eventData) where T : struct
         {

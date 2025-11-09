@@ -1,4 +1,6 @@
 using System;
+using System.Reflection.Emit;
+using ThisGame.Core;
 using UnityEngine;
 
 namespace ThisGame.Entity.MoveSystem
@@ -9,6 +11,8 @@ namespace ThisGame.Entity.MoveSystem
         public event Action<Vector3> OnVelocityChanged;
         public event Action<bool> OnMovementStateChanged;
 
+        int _facingDir;
+        public int FacingDir => _facingDir;
         Vector3 _inputDir;
         Vector3 _velocity;
         public Vector3 Velocity => _velocity;
@@ -22,14 +26,16 @@ namespace ThisGame.Entity.MoveSystem
         {
             _data = data;
             _velocity = Vector3.zero;
+            _facingDir = 1;
         }
 
         public void UpdateMovement(Vector3 input, float deltaTime)
         {
             _inputDir = input.normalized;
+            HandleFlip(input);
 
             bool wasMoving = _isMoving;
-            _isMoving = input.magnitude > 0.01f;
+            _isMoving = input.magnitude != 0;
 
             if (wasMoving != _isMoving)
                 OnMovementStateChanged?.Invoke(_isMoving);
@@ -42,7 +48,6 @@ namespace ThisGame.Entity.MoveSystem
                     targetVelocity.x,
                     _data.Acceleration * deltaTime
                 );
-                Debug.Log(_velocity);
             }
             else
             {
@@ -61,6 +66,18 @@ namespace ThisGame.Entity.MoveSystem
                 -_data.MaxFallSpeed,
                 _data.Gravity * deltaTime
             );
+        }
+        public void HandleFlip(Vector3 input)
+        {
+            if (_facingDir * input.x < 0f)
+            {
+                _facingDir *= -1;
+                var flip = new FlipAction
+                {
+                    FacingDir = _facingDir
+                };
+                EventBus.Publish(flip);
+            }
         }
 
         public void SetVelocity(Vector3 velocity)

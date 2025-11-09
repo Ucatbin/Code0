@@ -27,6 +27,9 @@ namespace ThisGame.Entity.StateMachineSystem
         }
         public void ChangeState(string stateName)
         {
+            if (_currentState != null && _currentState.GetType().Name == stateName)
+                return;
+                
             if (States.TryGetValue(stateName, out IState newState))
             {
                 Debug.Log($"Exit:'{_currentState}' Enter:'{newState}'");

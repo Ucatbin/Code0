@@ -1,79 +1,64 @@
-using System;
+using ThisGame.Core;
 using ThisGame.Core.CheckerSystem;
 using ThisGame.Entity.SkillSystem;
 using ThisGame.Entity.EntitySystem;
 using ThisGame.Entity.MoveSystem;
 using UnityEngine;
-using ThisGame.Core;
+using System;
 
 namespace ThisGame.Entity.StateMachineSystem
 {
-    public class P_AirState : P_BaseState
+    public class P_WallSlideState : P_BaseState
     {
-        public P_AirState(PlayerController entity, StateMachine stateMachine, CheckerController checkers, MoveModel movement) : base(entity, stateMachine, checkers, movement)
+        public P_WallSlideState(PlayerController entity, StateMachine stateMachine, CheckerController checkers, MoveModel movement) : base(entity, stateMachine, checkers, movement)
         {
         }
 
         protected override Type[] SubscribeEvents => new Type[]
         {
+            // Checkers
+            typeof(GroundCheckChange),
+            typeof(WallCheckChange),
             // Skills
-            typeof(P_Skill_DoubleJumpPressed),
-            typeof(P_Skill_DoubleJumpPrepare),
             typeof(P_Skill_GrappingHookPressed),
             typeof(P_Skill_GrappingHookPrepare)
         };
 
         public override void Enter()
         {
-            base.Enter();
+            EventBus.Subscribe<JumpButtonPressed>(this, HandleJumpPressed);
         }
 
         public override void Exit()
         {
-            base.Exit();
+            EventBus.Unsubscribe<JumpButtonPressed>(HandleJumpPressed);
         }
 
         public override void LogicUpdate()
         {
-            _movement.UpdateMovement(_player.InputValue, Time.deltaTime);
-            _player.Rb.linearVelocity = _movement.Velocity;
-
             var wallCheck = _checkers.GetChecker<WallCheckModel>("WallCheckModel");
-            if (wallCheck.IsDetected &&
-                _player.Rb.linearVelocityY <= 0 &&
-                _player.InputValue != Vector3.zero
-            )
-                _stateMachine.ChangeState("WallSlide");
-
             var groundCheck = _checkers.GetChecker<GroundCheckModel>("GroundCheckModel");
-            if (groundCheck.IsDetected && _player.Rb.linearVelocityY <= 0)
+            if (groundCheck.IsDetected || !wallCheck.IsDetected || _player.InputValue == Vector3.zero)
                 _stateMachine.ChangeState("Idle");
         }
 
         public override void PhysicsUpdate()
         {
-            _movement.HandleGravity(Time.fixedDeltaTime);
+            _movement.SetVelocity(new Vector3(_movement.Velocity.x, _moveData.WallSlideSpeed, _movement.Velocity.z));
+            _player.Rb.linearVelocity = _movement.Velocity;
         }
-
-        void HandleDoubleJumpPressed(P_Skill_DoubleJumpPressed e)
-        {
-            e.Skill.HandleSkillButtonPressed(e);
-        }
-        void HandleDoubleJumpPrepare(P_Skill_DoubleJumpPrepare e)
+        void HandleJumpPressed(JumpButtonPressed jumpPressed)
         {
             _stateMachine.ChangeState("Jump");
-
-            var jumpData = e.Skill.Data as P_DoubleJumpData;
-            var doubleJumpExecute = new P_Skill_DoubleJumpExecuted()
+            var jumpExecute = new JumpExecute
             {
-                DoubleJumpSpeed = jumpData.JumpSpeed
+                JumpDir = new Vector3(_moveData.WallJumpDirection.x * -_player.InputValue.x, _moveData.WallJumpDirection.y, _moveData.WallJumpDirection.z),
+                EndEarly = true
             };
-            EventBus.Publish(doubleJumpExecute);
+            EventBus.Publish(jumpExecute);
         }
-
         void HandleGrappingHookPressed(P_Skill_GrappingHookPressed e)
         {
-            Debug.Log(e.Skill);
             e.Skill.HandleSkillButtonPressed(e);
         }
         void HandleGrappingHookPrepare(P_Skill_GrappingHookPrepare e)
@@ -82,8 +67,7 @@ namespace ThisGame.Entity.StateMachineSystem
             var grappingHookExecute = new P_Skill_GrappingHookExecuted()
             {
                 Skill = _player.GetController<SkillController>().GetSkill<P_GrappingHookModel>("P_GrappingHook"),
-                IsGrounded = true,
-                TargetPosition = e.TargetPosition
+                IsGrounded = false
             };
             EventBus.Publish(grappingHookExecute);
         }

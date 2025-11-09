@@ -2,18 +2,9 @@ using UnityEngine;
 
 namespace ThisGame.Core.CheckerSystem
 {
-    public enum CheckType
-    {
-        Ray,
-        Circle,
-        // Sector,
-        // Box
-    }
-
-    [CreateAssetMenu(fileName = "Checker Data", menuName = "ThisGame/Core/CheckerSystem/CheckerData")]
+    [CreateAssetMenu(fileName = "Checker Data", menuName = "ThisGame/Core/CheckerSystem/CheckerData0")]
     public class CheckerData : ScriptableObject
     {
-        public CheckType CheckType;
         public LayerMask CheckLayer;
         public int CheckCount;
         public float CheckWidth;

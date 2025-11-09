@@ -12,13 +12,3 @@ public class MoveController : BaseController
         Model = new MoveModel(_data);
     }
 }
-
-#region MoveEvents
-public struct MoveButtonPressed
-{
-    public Vector3 MoveDirection;
-}
-public struct JumpButtonPressed { }
-public struct JumpButtonReleased { }
-
-#endregion
