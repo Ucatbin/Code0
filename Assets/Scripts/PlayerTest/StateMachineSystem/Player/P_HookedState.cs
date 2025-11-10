@@ -48,7 +48,6 @@ namespace ThisGame.Entity.StateMachineSystem
         }
         protected override void HandleGrappingHookExecute(P_Skill_GrappingHookExecuted @event)
         {
-            base.HandleGrappingHookExecute(@event);
             _skill = @event.Skill;
             _player.Joint.connectedBody = _skill.HookPoint.GetComponent<Rigidbody2D>();
             _player.Joint.distance = Vector2.Distance(_player.transform.position, @event.Skill.HookPoint.transform.position);
