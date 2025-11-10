@@ -30,7 +30,7 @@ namespace ThisGame.Entity.InputSystem
                 var jumpPressedEvent = new JumpButtonPressed();
                 EventBus.Publish(jumpPressedEvent);
 
-                var doubleJumpSkill = _player.GetController<SkillController>().GetSkill<P_DoubleJumpModel>("P_DoubleJump");
+                var doubleJumpSkill = _player.GetController<SkillController>().GetSkill<P_DoubleJumpModel>();
                 var doubleJumpPressedEvent = new P_Skill_DoubleJumpPressed()
                 {
                     Skill = doubleJumpSkill
@@ -39,7 +39,7 @@ namespace ThisGame.Entity.InputSystem
             }
             if (context.canceled)
             {
-                var jumpReleaseEvent = new JumpButtonReleased();
+                var jumpReleaseEvent = new JumpButtonRelease();
                 EventBus.Publish(jumpReleaseEvent);
             }
         }
@@ -50,10 +50,10 @@ namespace ThisGame.Entity.InputSystem
             {
                 var grappingHookPressedEvent = new P_Skill_GrappingHookPressed()
                 {
-                    Skill = _player.GetController<SkillController>().GetSkill<P_GrappingHookModel>("P_GrappingHook"),
+                    Skill = _player.GetController<SkillController>().GetSkill<P_GrappingHookModel>(),
                     CurrentPosition = _player.transform.position,
                     InputDirection = _player.MainCam.ScreenToWorldPoint(Input.mousePosition),
-                    IsGrounded = _player.GetController<CheckerController>().GetChecker<GroundCheckModel>("GroundCheckModel").IsDetected
+                    IsGrounded = _player.GetController<CheckerController>().GetChecker<GroundCheckModel>().IsDetected
                 };
                 EventBus.Publish(grappingHookPressedEvent);
             }
@@ -61,7 +61,7 @@ namespace ThisGame.Entity.InputSystem
             {
                 var grappingHookRelease = new P_Skill_GrappingHookReleased()
                 {
-                    Skill = _player.GetController<SkillController>().GetSkill<P_GrappingHookModel>("P_GrappingHook"),
+                    Skill = _player.GetController<SkillController>().GetSkill<P_GrappingHookModel>(),
                 };
                 EventBus.Publish(grappingHookRelease);
             }

@@ -8,20 +8,20 @@ namespace ThisGame.Entity.SkillSystem
     public abstract class SkillController : BaseController
     {
         [SerializeField] protected SkillModelEntry[] _skillEnties;
-        protected Dictionary<string, SkillModel> _models;
+        protected Dictionary<Type, SkillModel> _models;
 
         public override void Initialize()
         {
-            _models = new Dictionary<string, SkillModel>();
+            _models = new Dictionary<Type, SkillModel>();
 
             RegisterModels();
         }
         public abstract void RegisterModels();
 
-        public T GetSkill<T>(string skillName) where T : SkillModel
+        public T GetSkill<T>() where T : SkillModel
         {
-            if (_models.ContainsKey(skillName))
-                return _models[skillName] as T;
+            if (_models.ContainsKey(typeof(T)))
+                return _models[typeof(T)] as T;
             else
                 return null;
         }

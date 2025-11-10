@@ -7,14 +7,14 @@ public struct MoveButtonPressed : IPlayerInputEvent
 {
     public Vector3 MoveDirection;
 }
-public struct MoveButtonReleased : IPlayerInputEvent { }
+public struct MoveButtonRelease : IPlayerInputEvent { }
 public struct JumpButtonPressed : IPlayerInputEvent { }
 public struct JumpExecute : IPlayerInputEvent
 {
     public Vector3 JumpDir;
     public bool EndEarly;
 }
-public struct JumpButtonReleased : IPlayerInputEvent { }
+public struct JumpButtonRelease : IPlayerInputEvent { }
 public struct FlipAction
 {
     public int FacingDir;
@@ -42,7 +42,7 @@ public struct P_Skill_DoubleJumpPrepare : ISkillEvent
 {
     public P_DoubleJumpModel Skill;
 }
-public struct P_Skill_DoubleJumpExecuted : ISkillEvent
+public struct P_Skill_DoubleJumpExecute : ISkillEvent
 {
     public float DoubleJumpSpeed;
 }

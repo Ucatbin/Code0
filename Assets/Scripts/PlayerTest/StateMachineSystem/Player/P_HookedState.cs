@@ -13,10 +13,15 @@ namespace ThisGame.Entity.StateMachineSystem
         public P_HookedState(PlayerController entity, StateMachine stateMachine, CheckerController checkers, MoveModel movement) : base(entity, stateMachine, checkers, movement)
         {
         }
-
-        protected override Type[] SubscribeEvents => new Type[]
+        protected override Type[] GetInputEvents() => new Type[]
         {
-            // Skills
+            typeof(P_Skill_DoubleJumpPressed),
+            typeof(P_Skill_DoubleJumpPrepare),
+            typeof(P_Skill_GrappingHookPressed),
+            typeof(P_Skill_GrappingHookPrepare)
+        };
+        protected override Type[] GetSkillEvents() => new Type[]
+        {
             typeof(P_Skill_GrappingHookExecuted),
             typeof(P_Skill_GrappingHookReleased)
         };
@@ -41,18 +46,13 @@ namespace ThisGame.Entity.StateMachineSystem
         {
             _skill.ControlRope(_player.InputValue, _player.Rb, _player.Joint, Time.fixedDeltaTime);
         }
-
-        void HandleGrappingHookExecute(P_Skill_GrappingHookExecuted e)
+        protected override void HandleGrappingHookExecute(P_Skill_GrappingHookExecuted @event)
         {
-            _skill = e.Skill;
+            base.HandleGrappingHookExecute(@event);
+            _skill = @event.Skill;
             _player.Joint.connectedBody = _skill.HookPoint.GetComponent<Rigidbody2D>();
-            _player.Joint.distance = Vector2.Distance(_player.transform.position, e.Skill.HookPoint.transform.position);
+            _player.Joint.distance = Vector2.Distance(_player.transform.position, @event.Skill.HookPoint.transform.position);
             _player.Joint.enabled = true;
-        }
-        void HandleGrappingHookReleased(P_Skill_GrappingHookReleased e)
-        {
-            _player.Joint.enabled = false;
-            _stateMachine.ChangeState("Idle");
         }
     }
 }

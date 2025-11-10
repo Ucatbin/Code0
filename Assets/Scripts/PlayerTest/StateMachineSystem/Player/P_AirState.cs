@@ -13,10 +13,9 @@ namespace ThisGame.Entity.StateMachineSystem
         public P_AirState(PlayerController entity, StateMachine stateMachine, CheckerController checkers, MoveModel movement) : base(entity, stateMachine, checkers, movement)
         {
         }
-
-        protected override Type[] SubscribeEvents => new Type[]
+        protected override Type[] GetInputEvents() => Array.Empty<Type>();
+        protected override Type[] GetSkillEvents() => new Type[]
         {
-            // Skills
             typeof(P_Skill_DoubleJumpPressed),
             typeof(P_Skill_DoubleJumpPrepare),
             typeof(P_Skill_GrappingHookPressed),
@@ -38,14 +37,14 @@ namespace ThisGame.Entity.StateMachineSystem
             _movement.UpdateMovement(_player.InputValue, Time.deltaTime);
             _player.Rb.linearVelocity = _movement.Velocity;
 
-            var wallCheck = _checkers.GetChecker<WallCheckModel>("WallCheckModel");
+            var wallCheck = _checkers.GetChecker<WallCheckModel>();
             if (wallCheck.IsDetected &&
                 _player.Rb.linearVelocityY <= 0 &&
                 _player.InputValue != Vector3.zero
             )
                 _stateMachine.ChangeState("WallSlide");
 
-            var groundCheck = _checkers.GetChecker<GroundCheckModel>("GroundCheckModel");
+            var groundCheck = _checkers.GetChecker<GroundCheckModel>();
             if (groundCheck.IsDetected && _player.Rb.linearVelocityY <= 0)
                 _stateMachine.ChangeState("Idle");
         }
@@ -53,39 +52,6 @@ namespace ThisGame.Entity.StateMachineSystem
         public override void PhysicsUpdate()
         {
             _movement.HandleGravity(Time.fixedDeltaTime);
-        }
-
-        void HandleDoubleJumpPressed(P_Skill_DoubleJumpPressed e)
-        {
-            e.Skill.HandleSkillButtonPressed(e);
-        }
-        void HandleDoubleJumpPrepare(P_Skill_DoubleJumpPrepare e)
-        {
-            _stateMachine.ChangeState("Jump");
-
-            var jumpData = e.Skill.Data as P_DoubleJumpData;
-            var doubleJumpExecute = new P_Skill_DoubleJumpExecuted()
-            {
-                DoubleJumpSpeed = jumpData.JumpSpeed
-            };
-            EventBus.Publish(doubleJumpExecute);
-        }
-
-        void HandleGrappingHookPressed(P_Skill_GrappingHookPressed e)
-        {
-            Debug.Log(e.Skill);
-            e.Skill.HandleSkillButtonPressed(e);
-        }
-        void HandleGrappingHookPrepare(P_Skill_GrappingHookPrepare e)
-        {
-            _stateMachine.ChangeState("Hooked");
-            var grappingHookExecute = new P_Skill_GrappingHookExecuted()
-            {
-                Skill = _player.GetController<SkillController>().GetSkill<P_GrappingHookModel>("P_GrappingHook"),
-                IsGrounded = true,
-                TargetPosition = e.TargetPosition
-            };
-            EventBus.Publish(grappingHookExecute);
         }
     }
 }

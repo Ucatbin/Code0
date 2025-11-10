@@ -349,14 +349,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 213296279}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff7618edfb617554c95097accc34eb9e, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a6941ba3a7d10442ba860edc9475b40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _checkerEntries:
-  - CheckerType: GroundCheckModel
+  - CheckerName: GroundCheck
     Data: {fileID: 11400000, guid: 952ad966d4396b1468ef4f3e32bac55a, type: 2}
     CheckPoint: {fileID: 47616775}
-  - CheckerType: WallCheckModel
+  - CheckerName: WallCheck
     Data: {fileID: 11400000, guid: 6a8cdfd3bb82f454f822d157fada5919, type: 2}
     CheckPoint: {fileID: 844464494}
 --- !u!1 &282388292
@@ -1155,7 +1155,7 @@ DistanceJoint2D:
   m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
-  m_AutoConfigureDistance: 1
+  m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_MaxDistanceOnly: 0
 --- !u!70 &1679723856

@@ -17,7 +17,7 @@ public class P_SkillController : SkillController
                 };
 
                 if (model != null)
-                    _models[entry.SkillName] = model;
+                    _models[model.GetType()] = model;
             }
         }
     }

@@ -13,14 +13,14 @@ namespace ThisGame.Entity.StateMachineSystem
         public P_JumpState(PlayerController entity, StateMachine stateMachine, CheckerController checkers, MoveModel movement) : base(entity, stateMachine, checkers, movement)
         {
         }
-
-        protected override Type[] SubscribeEvents => new Type[]
+        protected override Type[] GetInputEvents() => new Type[]
         {
-            // Movement
             typeof(JumpExecute),
-            typeof(JumpButtonReleased),
-            // Skills
-            typeof(P_Skill_DoubleJumpExecuted),
+            typeof(JumpButtonRelease)
+        };
+        protected override Type[] GetSkillEvents() => new Type[]
+        {
+            typeof(P_Skill_DoubleJumpExecute),
             typeof(P_Skill_GrappingHookPressed),
             typeof(P_Skill_GrappingHookPrepare)
         };
@@ -68,30 +68,6 @@ namespace ThisGame.Entity.StateMachineSystem
                 _movement.SetVelocity(new Vector3(_movement.Velocity.x, jumpSpeed, _movement.Velocity.z));
                 _player.Rb.linearVelocity = _movement.Velocity;
             }
-        }
-        void HandleJumpEnd(JumpButtonReleased e)
-        {
-            _stateMachine.ChangeState("Air");
-        }
-        void HandleDoubleJump(P_Skill_DoubleJumpExecuted e)
-        {
-            _movement.SetVelocity(new Vector3(_movement.Velocity.x, e.DoubleJumpSpeed, _movement.Velocity.z));
-            _player.Rb.linearVelocity = _movement.Velocity;
-            _stateMachine.ChangeState("Air");
-        }
-        void HandleGrappingHookPressed(P_Skill_GrappingHookPressed e)
-        {
-            e.Skill.HandleSkillButtonPressed(e);
-        }
-        void HandleGrappingHookPrepare(P_Skill_GrappingHookPrepare e)
-        {
-            _stateMachine.ChangeState("Hooked");
-            var grappingHookExecute = new P_Skill_GrappingHookExecuted()
-            {
-                Skill = _player.GetController<SkillController>().GetSkill<P_GrappingHookModel>("P_GrappingHook"),
-                IsGrounded = false
-            };
-            EventBus.Publish(grappingHookExecute);
         }
     }
 }

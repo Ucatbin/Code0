@@ -1,6 +1,6 @@
+using System;
 using ThisGame.Core;
 using ThisGame.Core.CheckerSystem;
-using ThisGame.Entity.SkillSystem;
 using ThisGame.Entity.EntitySystem;
 using ThisGame.Entity.MoveSystem;
 using UnityEngine;
@@ -12,7 +12,9 @@ namespace ThisGame.Entity.StateMachineSystem
         public P_GroundState(PlayerController entity, StateMachine stateMachine, CheckerController checkers, MoveModel movement) : base(entity, stateMachine, checkers, movement)
         {
         }
-
+        protected override Type[] GetInputEvents() =>Array.Empty<Type>();
+        protected override Type[] GetSkillEvents() => Array.Empty<Type>();
+        
         public override void Enter()
         {
             base.Enter();
@@ -33,21 +35,6 @@ namespace ThisGame.Entity.StateMachineSystem
 
         public override void PhysicsUpdate()
         {
-        }
-
-        protected void HandleJumpPressed(JumpButtonPressed e)
-        {
-            _stateMachine.ChangeState("Jump");
-            var jumpExecute = new JumpExecute
-            {
-                JumpDir = new Vector3(0f, 1f, 0f),
-                EndEarly = false
-            };
-            EventBus.Publish(jumpExecute);
-        }
-        protected void HandleGrappingHookExecuted(P_Skill_GrappingHookExecuted e)
-        {
-            
         }
     }
 }

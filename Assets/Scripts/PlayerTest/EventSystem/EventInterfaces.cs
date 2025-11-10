@@ -1,5 +1,6 @@
 using UnityEngine;
 
-public interface ISkillEvent { }
-public interface IPlayerInputEvent { }
+public interface IEvent { }
+public interface ISkillEvent : IEvent { }
+public interface IPlayerInputEvent : IEvent { }
 

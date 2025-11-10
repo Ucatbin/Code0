@@ -45,7 +45,6 @@ namespace ThisGame.Entity.SkillSystem
 
         public void ControlRope(Vector3 input, Rigidbody2D rb, DistanceJoint2D joint, float deltaTime)
         {
-            Debug.Log(input);
             var data = Data as P_GrappingHookData;
             // Swing
             if (Mathf.Abs(rb.linearVelocity.magnitude) < data.MaxSwingSpeed && input.x != 0f)

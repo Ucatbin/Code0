@@ -1,39 +1,23 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace ThisGame.Core.CheckerSystem
 {
-    public class CheckerController : BaseController
+    public abstract class CheckerController : BaseController
     {
-        [System.Serializable]
-        public class CheckerModelEntry
-        {
-            public string CheckerType;
-            public CheckerData Data;
-            public Transform CheckPoint;
-        }
-        [SerializeField] CheckerModelEntry[] _checkerEntries;
-        Dictionary<string, CheckerModel> _models;
+        [SerializeField] protected CheckerModelEntry[] _checkerEntries;
+        protected Dictionary<Type, CheckerModel> _models;
 
         public override void Initialize()
         {
-            _models = new Dictionary<string, CheckerModel>();
+            _models = new Dictionary<Type, CheckerModel>();
 
             RegisterModels();
         }
-        void RegisterModels()
-        {
-            foreach (var entry in _checkerEntries)
-            {
-                if (!string.IsNullOrEmpty(entry.CheckerType) && entry.Data != null)
-                {
-                    var model = CheckerModelFactory.CreateModel(entry.CheckerType, entry.Data, entry.CheckPoint);
-                    _models[entry.CheckerType] = model;
-                }
-            }
-        }
+        public abstract void RegisterModels();
 
-        void Update()
+        protected void Update()
         {
             foreach (var model in _models.Values)
             {
@@ -41,12 +25,19 @@ namespace ThisGame.Core.CheckerSystem
             }
         }
 
-        public virtual T GetChecker<T>(string checkerName) where T : CheckerModel
+        public T GetChecker<T>() where T : CheckerModel
         {
-            if (_models.ContainsKey(checkerName))
-                return _models[checkerName] as T;
+            if (_models.ContainsKey(typeof(T)))
+                return _models[typeof(T)] as T;
             else
                 return null;
         }
+    }
+    [Serializable]
+    public class CheckerModelEntry
+    {
+        public string CheckerName;
+        public CheckerData Data;
+        public Transform CheckPoint;
     }
 }
