@@ -35,7 +35,7 @@ namespace ThisGame.Entity.MoveSystem
             HandleFlip(input);
 
             bool wasMoving = _isMoving;
-            _isMoving = input.magnitude != 0;
+            _isMoving = input.x != 0;
 
             if (wasMoving != _isMoving)
                 OnMovementStateChanged?.Invoke(_isMoving);
@@ -54,7 +54,7 @@ namespace ThisGame.Entity.MoveSystem
                 _velocity.x = Mathf.MoveTowards(
                     _velocity.x,
                     0f,
-                    _data.Acceleration * deltaTime
+                    _data.Deceleration * deltaTime
                 );
             }
             OnVelocityChanged?.Invoke(_velocity);

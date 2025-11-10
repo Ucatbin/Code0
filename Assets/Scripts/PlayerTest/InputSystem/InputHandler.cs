@@ -59,7 +59,10 @@ namespace ThisGame.Entity.InputSystem
             }
             if (context.canceled)
             {
-                var grappingHookRelease = new P_Skill_GrappingHookReleased();
+                var grappingHookRelease = new P_Skill_GrappingHookReleased()
+                {
+                    Skill = _player.GetController<SkillController>().GetSkill<P_GrappingHookModel>("P_GrappingHook"),
+                };
                 EventBus.Publish(grappingHookRelease);
             }
         }

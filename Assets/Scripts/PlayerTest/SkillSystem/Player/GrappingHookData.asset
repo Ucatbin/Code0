@@ -21,3 +21,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 65
   MaxLineDist: 10
+  SwingForce: 15
+  MaxSwingSpeed: 10
+  ExtendSpeed: 6.5

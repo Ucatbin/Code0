@@ -16,11 +16,11 @@ namespace ThisGame.Entity.EntitySystem
         public BaseController[] Controllers;
         void OnEnable()
         {
-            EventBus.Subscribe<MoveButtonPressed>(this, OnMovePressed);
+            EventBus.Subscribe<MoveButtonPressed>(this, HandleMovePressed);
         }
         void OnDisable()
         {
-            EventBus.Unsubscribe<MoveButtonPressed>(OnMovePressed);
+            EventBus.Unsubscribe<MoveButtonPressed>(HandleMovePressed);
         }
         
         protected override void Start()
@@ -43,7 +43,7 @@ namespace ThisGame.Entity.EntitySystem
 
         Vector3 _inputValue;
         public Vector3 InputValue => _inputValue;
-        public void OnMovePressed(MoveButtonPressed moveInputInfo)
+        public void HandleMovePressed(MoveButtonPressed moveInputInfo)
         {
             _inputValue = moveInputInfo.MoveDirection;
         }

@@ -65,5 +65,8 @@ public struct P_Skill_GrappingHookExecuted : ISkillEvent
     public bool IsGrounded;
     public Vector3 TargetPosition;
 }
-public struct P_Skill_GrappingHookReleased : ISkillEvent { }
+public struct P_Skill_GrappingHookReleased : ISkillEvent
+{
+    public P_GrappingHookModel Skill;
+}
 #endregion
