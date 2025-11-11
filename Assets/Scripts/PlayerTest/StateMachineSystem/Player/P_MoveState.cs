@@ -12,12 +12,11 @@ namespace ThisGame.Entity.StateMachineSystem
         public P_MoveState(PlayerController entity, StateMachine stateMachine, CheckerController checkers, MoveModel movement) : base(entity, stateMachine, checkers, movement)
         {
         }
-        protected override Type[] GetInputEvents() => new Type[]
+        protected override Type[] GetEvents() => new Type[]
         {
-            typeof(JumpButtonPressed)
-        };
-        protected override Type[] GetSkillEvents() => new Type[]
-        {
+            // Input
+            typeof(JumpButtonPressed),
+            // Skills
             typeof(P_Skill_GrappingHookPressed),
             typeof(P_Skill_GrappingHookPrepare)
         };

@@ -13,13 +13,12 @@ namespace ThisGame.Entity.StateMachineSystem
         public P_JumpState(PlayerController entity, StateMachine stateMachine, CheckerController checkers, MoveModel movement) : base(entity, stateMachine, checkers, movement)
         {
         }
-        protected override Type[] GetInputEvents() => new Type[]
+        protected override Type[] GetEvents() => new Type[]
         {
+            // Input
             typeof(JumpExecute),
-            typeof(JumpButtonRelease)
-        };
-        protected override Type[] GetSkillEvents() => new Type[]
-        {
+            typeof(JumpButtonRelease),
+            // Skills
             typeof(P_Skill_DoubleJumpExecute),
             typeof(P_Skill_GrappingHookPressed),
             typeof(P_Skill_GrappingHookPrepare)

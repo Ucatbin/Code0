@@ -12,8 +12,7 @@ namespace ThisGame.Entity.StateMachineSystem
         public P_GroundState(PlayerController entity, StateMachine stateMachine, CheckerController checkers, MoveModel movement) : base(entity, stateMachine, checkers, movement)
         {
         }
-        protected override Type[] GetInputEvents() =>Array.Empty<Type>();
-        protected override Type[] GetSkillEvents() => Array.Empty<Type>();
+        protected override Type[] GetEvents() =>Array.Empty<Type>();
         
         public override void Enter()
         {

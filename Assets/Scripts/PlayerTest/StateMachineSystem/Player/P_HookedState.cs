@@ -13,15 +13,9 @@ namespace ThisGame.Entity.StateMachineSystem
         public P_HookedState(PlayerController entity, StateMachine stateMachine, CheckerController checkers, MoveModel movement) : base(entity, stateMachine, checkers, movement)
         {
         }
-        protected override Type[] GetInputEvents() => new Type[]
+        protected override Type[] GetEvents() => new Type[]
         {
-            typeof(P_Skill_DoubleJumpPressed),
-            typeof(P_Skill_DoubleJumpPrepare),
-            typeof(P_Skill_GrappingHookPressed),
-            typeof(P_Skill_GrappingHookPrepare)
-        };
-        protected override Type[] GetSkillEvents() => new Type[]
-        {
+            // Skills
             typeof(P_Skill_GrappingHookExecuted),
             typeof(P_Skill_GrappingHookReleased)
         };
