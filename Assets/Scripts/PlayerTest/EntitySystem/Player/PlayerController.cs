@@ -12,7 +12,7 @@ namespace ThisGame.Entity.EntitySystem
         public Camera MainCam;
         public DistanceJoint2D Joint;
 
-        public StateMachine StateMachine;
+        StateMachine _stateMachine;
         public BaseController[] Controllers;
         void OnEnable()
         {
@@ -29,16 +29,16 @@ namespace ThisGame.Entity.EntitySystem
                 controller.Initialize();
 
             RegisterStates();
-            StateMachine.Initialize("Idle");
+            _stateMachine.Initialize<P_IdleState>();
         }
         
         protected override void Update()
         {
-            StateMachine.CurrentState.LogicUpdate();
+            _stateMachine.CurrentState.LogicUpdate();
         }
         protected override void FixedUpdate()
         {
-            StateMachine.CurrentState.PhysicsUpdate();
+            _stateMachine.CurrentState.PhysicsUpdate();
         }
 
         Vector3 _inputValue;
@@ -54,41 +54,30 @@ namespace ThisGame.Entity.EntitySystem
         }
         void RegisterStates()
         {
-            StateMachine = new StateMachine();
+            _stateMachine = new StateMachine();
             var checkerController = GetController<CheckerController>();
             var moveController = GetController<MoveController>();
 
-            StateMachine.RegisterState(
-                "Ground",
-                new P_GroundState(this, StateMachine, checkerController, moveController.Model)
+            _stateMachine.RegisterState<P_AirState>(
+                new P_AirState(this, _stateMachine, "Air", checkerController, moveController.Model)
             );
-            StateMachine.RegisterState(
-                "Air",
-                new P_AirState(this, StateMachine, checkerController, moveController.Model)
+            _stateMachine.RegisterState<P_IdleState>(
+                new P_IdleState(this, _stateMachine, "Idle", checkerController, moveController.Model)
             );
-            StateMachine.RegisterState(
-                "Idle",
-                new P_IdleState(this, StateMachine, checkerController, moveController.Model)
+            _stateMachine.RegisterState<P_MoveState>(
+                new P_MoveState(this, _stateMachine, "Move", checkerController, moveController.Model)
             );
-            StateMachine.RegisterState(
-                "Move",
-                new P_MoveState(this, StateMachine, checkerController, moveController.Model)
+            _stateMachine.RegisterState<P_JumpState>(
+                new P_JumpState(this, _stateMachine, "Jump", checkerController, moveController.Model)
             );
-            StateMachine.RegisterState(
-                "Jump",
-                new P_JumpState(this, StateMachine, checkerController, moveController.Model)
+            _stateMachine.RegisterState<P_WallSlideState>(
+                new P_WallSlideState(this, _stateMachine, "WallSlide", checkerController, moveController.Model)
             );
-            StateMachine.RegisterState(
-                "WallSlide",
-                new P_WallSlideState(this, StateMachine, checkerController, moveController.Model)
+            _stateMachine.RegisterState<P_CoyotState>(
+                new P_CoyotState(this, _stateMachine, "Air", checkerController, moveController.Model)
             );
-            StateMachine.RegisterState(
-                "Coyot",
-                new P_CoyotState(this, StateMachine, checkerController, moveController.Model)
-            );
-            StateMachine.RegisterState(
-                "Hooked",
-                new P_HookedState(this, StateMachine, checkerController, moveController.Model)
+            _stateMachine.RegisterState<P_HookedState>(
+                new P_HookedState(this, _stateMachine, "Hooked", checkerController, moveController.Model)
             );
         }
     }

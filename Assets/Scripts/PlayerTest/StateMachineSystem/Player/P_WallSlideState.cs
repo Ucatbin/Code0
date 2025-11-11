@@ -10,9 +10,10 @@ namespace ThisGame.Entity.StateMachineSystem
 {
     public class P_WallSlideState : P_BaseState
     {
-        public P_WallSlideState(PlayerController entity, StateMachine stateMachine, CheckerController checkers, MoveModel movement) : base(entity, stateMachine, checkers, movement)
+        public P_WallSlideState(PlayerController entity, StateMachine stateMachine, string animName, CheckerController checkers, MoveModel movement) : base(entity, stateMachine, animName, checkers, movement)
         {
         }
+
         protected override Type[] GetEvents() => new Type[]
         {
             // Input
@@ -37,7 +38,7 @@ namespace ThisGame.Entity.StateMachineSystem
             var wallCheck = _checkers.GetChecker<WallCheckModel>();
             var groundCheck = _checkers.GetChecker<GroundCheckModel>();
             if (groundCheck.IsDetected || !wallCheck.IsDetected || _player.InputValue == Vector3.zero)
-                _stateMachine.ChangeState("Idle");
+                _stateMachine.ChangeState<P_IdleState>();
         }
 
         public override void PhysicsUpdate()
@@ -49,7 +50,7 @@ namespace ThisGame.Entity.StateMachineSystem
         {
             if (@event is JumpButtonPressed inputEvent)
             {
-                _stateMachine.ChangeState("Jump");
+                _stateMachine.ChangeState<P_JumpState>();
                 var jumpExecute = new JumpExecute
                 {
                     JumpDir = new Vector3(_moveData.WallJumpDirection.x * -_player.InputValue.x, _moveData.WallJumpDirection.y, _moveData.WallJumpDirection.z),

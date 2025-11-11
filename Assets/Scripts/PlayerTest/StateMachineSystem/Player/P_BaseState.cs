@@ -15,14 +15,14 @@ namespace ThisGame.Entity.StateMachineSystem
         protected CheckerController _checkers;
         protected MoveModel _movement;
         protected PlayerMoveData _moveData;
-        protected Dictionary<Type, Action<ISkillEvent>> _skillHandlers;
         
         public P_BaseState(
             PlayerController entity,
             StateMachine stateMachine,
+            string animName,
             CheckerController checkers,
             MoveModel movement
-        ) : base(entity, stateMachine)
+        ) : base(entity, stateMachine, animName)
         {
             _player = entity;
             _checkers = checkers;
@@ -60,16 +60,16 @@ namespace ThisGame.Entity.StateMachineSystem
         // Move
         protected virtual void HandleMovePressed(MoveButtonPressed @event)
         {
-            _stateMachine.ChangeState("Move");
+            _stateMachine.ChangeState<P_MoveState>();
         }
         protected virtual void HandleMoveRelease(MoveButtonRelease @event)
         {
-            _stateMachine.ChangeState("Idle");
+            _stateMachine.ChangeState<P_IdleState>();
         }
         // Jump
         protected virtual void HandleJumpPressed(JumpButtonPressed @event)
         {
-                _stateMachine.ChangeState("Jump");
+                _stateMachine.ChangeState<P_JumpState>();
                 var jumpExecute = new JumpExecute
                 {
                     JumpDir = new Vector3(0f, 1f, 0f),
@@ -79,7 +79,13 @@ namespace ThisGame.Entity.StateMachineSystem
         }
         protected virtual void HandleJumpRelease(JumpButtonRelease @event)
         {
-            _stateMachine.ChangeState("Air");
+            _stateMachine.ChangeState<P_AirState>();
+        }
+        #endregion
+        #region State
+        protected virtual void HandleStateChanged(StateChange @event)
+        {
+            // TODO : Fnish view
         }
         #endregion
         #region Skills
@@ -90,7 +96,7 @@ namespace ThisGame.Entity.StateMachineSystem
         }
         protected virtual void HandleDoubleJumpPrepare(P_Skill_DoubleJumpPrepare @event)
         {
-            _stateMachine.ChangeState("Jump");
+            _stateMachine.ChangeState<P_JumpState>();
             var jumpData = @event.Skill.Data as P_DoubleJumpData;
             var doubleJumpExecute = new P_Skill_DoubleJumpExecute()
             {
@@ -102,7 +108,7 @@ namespace ThisGame.Entity.StateMachineSystem
         {
             _movement.SetVelocity(new Vector3(_movement.Velocity.x, @event.DoubleJumpSpeed, _movement.Velocity.z));
             _player.Rb.linearVelocity = _movement.Velocity;
-            _stateMachine.ChangeState("Air");
+            _stateMachine.ChangeState<P_AirState>();
         }
 
         // GrappingHook
@@ -112,7 +118,7 @@ namespace ThisGame.Entity.StateMachineSystem
         }
         protected virtual void HandleGrappingHookPrepare(P_Skill_GrappingHookPrepare @event)
         {
-            _stateMachine.ChangeState("Hooked");
+            _stateMachine.ChangeState<P_HookedState>();
             var grappingHookExecute = new P_Skill_GrappingHookExecuted()
             {
                 Skill = _player.GetController<SkillController>().GetSkill<P_GrappingHookModel>(),
@@ -126,7 +132,7 @@ namespace ThisGame.Entity.StateMachineSystem
         protected virtual void HandleGrappingHookRelease(P_Skill_GrappingHookReleased @event)
         {
             _player.Joint.enabled = false;
-            _stateMachine.ChangeState("Idle");
+            _stateMachine.ChangeState<P_IdleState>();
         }
         #endregion
         #endregion

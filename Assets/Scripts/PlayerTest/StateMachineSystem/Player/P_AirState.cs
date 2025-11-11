@@ -10,9 +10,10 @@ namespace ThisGame.Entity.StateMachineSystem
 {
     public class P_AirState : P_BaseState
     {
-        public P_AirState(PlayerController entity, StateMachine stateMachine, CheckerController checkers, MoveModel movement) : base(entity, stateMachine, checkers, movement)
+        public P_AirState(PlayerController entity, StateMachine stateMachine, string animName, CheckerController checkers, MoveModel movement) : base(entity, stateMachine, animName, checkers, movement)
         {
         }
+
         protected override Type[] GetEvents() => new Type[]
         {
             // Skills
@@ -42,11 +43,11 @@ namespace ThisGame.Entity.StateMachineSystem
                 _player.Rb.linearVelocityY <= 0 &&
                 _player.InputValue != Vector3.zero
             )
-                _stateMachine.ChangeState("WallSlide");
+                _stateMachine.ChangeState<P_WallSlideState>();
 
             var groundCheck = _checkers.GetChecker<GroundCheckModel>();
             if (groundCheck.IsDetected && _player.Rb.linearVelocityY <= 0)
-                _stateMachine.ChangeState("Idle");
+                _stateMachine.ChangeState<P_IdleState>();
         }
 
         public override void PhysicsUpdate()

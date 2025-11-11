@@ -2,7 +2,7 @@ using ThisGame.Entity.SkillSystem;
 using ThisGame.Entity.StateMachineSystem;
 using UnityEngine;
 
-#region Movement
+#region Input
 public struct MoveButtonPressed : IPlayerInputEvent
 {
     public Vector3 MoveDirection;
@@ -29,6 +29,14 @@ public struct GroundCheckChange
 public struct WallCheckChange
 {
     public bool ChangeToWalled;
+}
+#endregion
+
+#region State
+public struct StateChange
+{
+    public string LastStateAnim;
+    public string NeWStateAnim;
 }
 #endregion
 

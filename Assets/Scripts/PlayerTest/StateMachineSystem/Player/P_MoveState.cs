@@ -9,9 +9,10 @@ namespace ThisGame.Entity.StateMachineSystem
 {
     public class P_MoveState : P_GroundState
     {
-        public P_MoveState(PlayerController entity, StateMachine stateMachine, CheckerController checkers, MoveModel movement) : base(entity, stateMachine, checkers, movement)
+        public P_MoveState(PlayerController entity, StateMachine stateMachine, string animName, CheckerController checkers, MoveModel movement) : base(entity, stateMachine, animName, checkers, movement)
         {
         }
+
         protected override Type[] GetEvents() => new Type[]
         {
             // Input
@@ -37,7 +38,7 @@ namespace ThisGame.Entity.StateMachineSystem
 
             var groundCheck = _checkers.GetChecker<GroundCheckModel>();
             if (!groundCheck.IsDetected)
-                _stateMachine.ChangeState("Air");        
+                _stateMachine.ChangeState<P_AirState>();        
         }
 
         public override void PhysicsUpdate()

@@ -10,9 +10,10 @@ namespace ThisGame.Entity.StateMachineSystem
 {
     public class P_JumpState : P_AirState
     {
-        public P_JumpState(PlayerController entity, StateMachine stateMachine, CheckerController checkers, MoveModel movement) : base(entity, stateMachine, checkers, movement)
+        public P_JumpState(PlayerController entity, StateMachine stateMachine, string animName, CheckerController checkers, MoveModel movement) : base(entity, stateMachine, animName, checkers, movement)
         {
         }
+
         protected override Type[] GetEvents() => new Type[]
         {
             // Input
@@ -30,7 +31,7 @@ namespace ThisGame.Entity.StateMachineSystem
 
             TimerManager.Instance.AddTimer(
                 _moveData.JumpInputWindow,
-                () => _stateMachine.ChangeState("Air"),
+                () => _stateMachine.ChangeState<P_AirState>(),
                 "JumpStateTimer"
             );
         }
@@ -59,7 +60,7 @@ namespace ThisGame.Entity.StateMachineSystem
             {
                 _movement.SetVelocity(e.JumpDir * _moveData.BaseJumpSpeed);
                 _player.Rb.linearVelocity = _movement.Velocity;
-                _stateMachine.ChangeState("Air");
+                _stateMachine.ChangeState<P_AirState>();
             }
             else
             {

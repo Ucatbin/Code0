@@ -8,10 +8,12 @@ namespace ThisGame.Entity.StateMachineSystem
         // Dependency
         protected EntityController _entity;
         protected StateMachine _stateMachine;
-        public BaseState(EntityController entity, StateMachine stateMachine)
+        public string AnimName;
+        public BaseState(EntityController entity, StateMachine stateMachine, string animName)
         {
             _entity = entity;
             _stateMachine = stateMachine;
+            AnimName = animName;
         }
 
         public abstract void Enter();

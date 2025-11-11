@@ -1,45 +1,59 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection.Emit;
+using ThisGame.Core;
 using UnityEngine;
 
 namespace ThisGame.Entity.StateMachineSystem
 {
     public class StateMachine
     {
-        public Dictionary<string, IState> States;
+        Dictionary<Type, IState> _states;
         IState _currentState;
         public IState CurrentState => _currentState;
         
         public StateMachine()
         {
-            States = new Dictionary<string, IState>();
+            _states = new Dictionary<Type, IState>();
         }
-        public void Initialize(string startStateName)
+        public void Initialize<T>() where T : IState
         {
-            ChangeState(startStateName);
+            ChangeState<T>();
         }
-        public void RegisterState(string stateName, IState state)
+        public void RegisterState<T>(IState state) where T : IState
         {
-            if (States.ContainsKey(stateName))
-                throw new InvalidOperationException($"State '{stateName}' is already registered.");
+            if (_states.ContainsKey(typeof(T)))
+                throw new InvalidOperationException($"State '{state}' is already registered.");
             else
-                States.Add(stateName, state);
+                _states[typeof(T)] = state;
         }
-        public void ChangeState(string stateName)
+        public void ChangeState<T>() where T : IState
         {
-            if (_currentState != null && _currentState.GetType().Name == stateName)
-                return;
-                
-            if (States.TryGetValue(stateName, out IState newState))
+            Type targetType = typeof(T);
+
+            if (_currentState?.GetType() == targetType) return;
+                        
+            if (_states.TryGetValue(targetType, out IState newState))
             {
                 Debug.Log($"Exit:'{_currentState}' Enter:'{newState}'");
+                var lastState = _currentState;
+                string lastAnimName = (lastState as BaseState)?.AnimName;
+                string newAnimName = (newState as BaseState)?.AnimName;
+
                 _currentState?.Exit();
                 _currentState = newState;
                 _currentState.Enter();
+                var StateChange = new StateChange()
+                {
+                    LastStateAnim = lastAnimName,
+                    NeWStateAnim = newAnimName
+                };
+                EventBus.Publish(StateChange);
             }
             else
-                throw new ArgumentException($"State '{stateName}' not found.");
-
+            {
+                throw new ArgumentException($"State '{targetType.Name}' not found.");
+            }
         }
     }
 }

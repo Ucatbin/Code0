@@ -7,7 +7,7 @@ namespace ThisGame.Entity.StateMachineSystem
 {
     public class P_CoyotState : P_GroundState
     {
-        public P_CoyotState(PlayerController entity, StateMachine stateMachine, CheckerController checkers, MoveModel movement) : base(entity, stateMachine, checkers, movement)
+        public P_CoyotState(PlayerController entity, StateMachine stateMachine, string animName, CheckerController checkers, MoveModel movement) : base(entity, stateMachine, animName, checkers, movement)
         {
         }
 
