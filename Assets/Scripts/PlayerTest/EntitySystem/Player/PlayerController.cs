@@ -12,6 +12,7 @@ namespace ThisGame.Entity.EntitySystem
         public Camera MainCam;
         public DistanceJoint2D Joint;
 
+        [SerializeField] PlayerView _view;
         StateMachine _stateMachine;
         public BaseController[] Controllers;
         void OnEnable()
