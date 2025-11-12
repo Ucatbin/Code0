@@ -36,7 +36,7 @@ public struct WallCheckChange
 public struct StateChange
 {
     public string LastStateAnim;
-    public string NeWStateAnim;
+    public string NewStateAnim;
 }
 #endregion
 

@@ -48,6 +48,8 @@ namespace ThisGame.Entity.StateMachineSystem
             var groundCheck = _checkers.GetChecker<GroundCheckModel>();
             if (groundCheck.IsDetected && _player.Rb.linearVelocityY <= 0)
                 _stateMachine.ChangeState<P_IdleState>();
+
+            _player.View.Animator.SetFloat("velocityY", _player.Rb.linearVelocityY);
         }
 
         public override void PhysicsUpdate()

@@ -15,12 +15,18 @@ namespace ThisGame.Entity.InputSystem
         {
             Vector2 input = context.ReadValue<Vector2>();
 
-            var movePressed = new MoveButtonPressed
+            if (context.performed)
             {
-                MoveDirection = new Vector3(input.x, 0, input.y)
-            };
-
-            EventBus.Publish(movePressed);
+                var movePressed = new MoveButtonPressed
+                {
+                    MoveDirection = new Vector3(input.x, 0, input.y)
+                };
+                EventBus.Publish(movePressed);
+            }
+            if  (context.canceled)
+            {
+                EventBus.Publish(new MoveButtonRelease());
+            }
         }
 
         public void HandleJump(InputAction.CallbackContext context)

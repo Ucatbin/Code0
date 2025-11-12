@@ -15,7 +15,6 @@ namespace ThisGame.Entity.StateMachineSystem
         {
             // Input
             typeof(JumpButtonPressed),
-            typeof(MoveButtonPressed),
             // Skillss
             typeof(P_Skill_GrappingHookPressed),
             typeof(P_Skill_GrappingHookPrepare)
@@ -38,6 +37,9 @@ namespace ThisGame.Entity.StateMachineSystem
             var groundCheck = _checkers.GetChecker<GroundCheckModel>();
             if (!groundCheck.IsDetected)
                 _stateMachine.ChangeState<P_AirState>();
+
+            if (_player.InputValue.x != 0 && _player.Rb.linearVelocityX != 0)
+                _stateMachine.ChangeState<P_MoveState>();
         }
 
         public override void PhysicsUpdate()

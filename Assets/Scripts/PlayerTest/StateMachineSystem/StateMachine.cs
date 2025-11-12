@@ -46,7 +46,7 @@ namespace ThisGame.Entity.StateMachineSystem
                 var StateChange = new StateChange()
                 {
                     LastStateAnim = lastAnimName,
-                    NeWStateAnim = newAnimName
+                    NewStateAnim = newAnimName
                 };
                 EventBus.Publish(StateChange);
             }

@@ -69,13 +69,13 @@ namespace ThisGame.Entity.StateMachineSystem
         // Jump
         protected virtual void HandleJumpPressed(JumpButtonPressed @event)
         {
-                _stateMachine.ChangeState<P_JumpState>();
-                var jumpExecute = new JumpExecute
-                {
-                    JumpDir = new Vector3(0f, 1f, 0f),
-                    EndEarly = false
-                };
-                EventBus.Publish(jumpExecute);
+            _stateMachine.ChangeState<P_JumpState>();
+            var jumpExecute = new JumpExecute
+            {
+                JumpDir = new Vector3(0f, 1f, 0f),
+                EndEarly = false
+            };
+            EventBus.Publish(jumpExecute);
         }
         protected virtual void HandleJumpRelease(JumpButtonRelease @event)
         {

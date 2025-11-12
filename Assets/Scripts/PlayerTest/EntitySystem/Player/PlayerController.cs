@@ -8,20 +8,21 @@ namespace ThisGame.Entity.EntitySystem
 {
     public class PlayerController : EntityController
     {
-        public Rigidbody2D Rb;
         public Camera MainCam;
         public DistanceJoint2D Joint;
 
-        [SerializeField] PlayerView _view;
+        public PlayerView View;
         StateMachine _stateMachine;
         public BaseController[] Controllers;
         void OnEnable()
         {
             EventBus.Subscribe<MoveButtonPressed>(this, HandleMovePressed);
+            EventBus.Subscribe<MoveButtonRelease>(this, HandleMoveRelease);
+            EventBus.Subscribe<StateChange>(this, View.HandleStateChange);
         }
         void OnDisable()
         {
-            EventBus.Unsubscribe<MoveButtonPressed>(HandleMovePressed);
+            EventBus.UnsubscribeAll(this);
         }
         
         protected override void Start()
@@ -44,9 +45,18 @@ namespace ThisGame.Entity.EntitySystem
 
         Vector3 _inputValue;
         public Vector3 InputValue => _inputValue;
-        public void HandleMovePressed(MoveButtonPressed moveInputInfo)
+        public void HandleMovePressed(MoveButtonPressed e)
         {
-            _inputValue = moveInputInfo.MoveDirection;
+            _inputValue = e.MoveDirection;
+            if (_inputValue.x * FacingDir < 0)
+            {
+                _facingDir *= -1;
+                View.FlipSprite(FacingDir);
+            }
+        }
+        public void HandleMoveRelease(MoveButtonRelease e)
+        {
+            _inputValue = Vector3.zero;
         }
 
         public T GetController<T>() where T : BaseController
