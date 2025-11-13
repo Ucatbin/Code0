@@ -23,9 +23,10 @@ public class InputHandlerOld : MonoBehaviour
     }
 
     #region Normal Map
-    public void HandleMove(InputAction.CallbackContext context)
+    // Abilities
+    public void HandleMove(InputAction.CallbackContext ctx)
     {
-        Vector2 input = context.ReadValue<Vector2>();
+        Vector2 input = ctx.ReadValue<Vector2>();
         
         var moveEvent = new MoveButtonPressed { 
             MoveDirection = new Vector3(input.x, 0, input.y)
@@ -34,45 +35,46 @@ public class InputHandlerOld : MonoBehaviour
         EventBus.Publish(moveEvent);
     }
 
-    public void HandleJump(InputAction.CallbackContext context)
+    public void HandleJump(InputAction.CallbackContext ctx)
     {
-        if (context.performed)
+        if (ctx.performed)
             InputEvents.TriggerJumpPressed();
-        if (context.canceled)
+        if (ctx.canceled)
             InputEvents.TriggerJumpReleased();
     }
 
-    public void HandleGHook(InputAction.CallbackContext context)
+    // Skills
+    public void HandleGHook(InputAction.CallbackContext ctx)
     {
         Vector2 mousePos = _mainCam.ScreenToWorldPoint(Input.mousePosition);
         Vector2 dir = (mousePos - (Vector2)transform.position).normalized;
         MouseDir = dir;
-        if (context.performed)
+        if (ctx.performed)
             InputEvents.TriggerGHookPressed();
-        if (context.canceled)
+        if (ctx.canceled)
         {
             InputEvents.TriggerGHookReleased();
             MouseDir = Vector2.zero;
         }
     }
-    public void HandleAttack(InputAction.CallbackContext context)
+    public void HandleAttack(InputAction.CallbackContext ctx)
     {
         Vector2 mousePos = _mainCam.ScreenToWorldPoint(Input.mousePosition);
         Vector2 dir = (mousePos - (Vector2)transform.position).normalized;
         MouseDir = dir;
-        if (context.performed)
+        if (ctx.performed)
             InputEvents.TriggerAttackPressed();
-        if (context.canceled)
+        if (ctx.canceled)
         {
             InputEvents.TriggerAttackReleased();
             MouseDir = Vector2.zero;
         }
     }
-    public void HandleLineDash(InputAction.CallbackContext context)
+    public void HandleLineDash(InputAction.CallbackContext ctx)
     {
-        if (context.performed)
+        if (ctx.performed)
             InputEvents.TriggerLineDashPressed();
-        if (context.canceled)
+        if (ctx.canceled)
             InputEvents.TriggerLineDashReleased();
     }
     #endregion

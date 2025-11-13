@@ -243,13 +243,13 @@ MonoBehaviour:
     m_ActionName: 'Normal/GrappingHook[/Mouse/rightButton]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 3432991}
+        m_TargetAssemblyTypeName: ThisGame.Entity.InputSystem.InputHandler, Assembly-CSharp
+        m_MethodName: HandleAttack
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -746,6 +746,8 @@ MonoBehaviour:
     Data: {fileID: 11400000, guid: 9771afc43ec56ea4b934736f629d02af, type: 2}
   - SkillName: P_GrappingHook
     Data: {fileID: 11400000, guid: 1cdca544609f5e142b9805f038cad80e, type: 2}
+  - SkillName: P_Attack
+    Data: {fileID: 11400000, guid: f5e8e3d4e69432d4c88bddbcb0df38a0, type: 2}
 --- !u!1 &844464493
 GameObject:
   m_ObjectHideFlags: 0

@@ -85,10 +85,25 @@ namespace ThisGame.Entity.StateMachineSystem
         #region State
         protected virtual void HandleStateChanged(StateChange @event)
         {
-            // TODO : Fnish view
+            // TODO : Finish view
         }
         #endregion
         #region Skills
+        // Attack
+        protected virtual void HandleAttackPressed(P_Skill_AttackPressed @event)
+        {
+            @event.Skill.HandleSkillButtonPressed(@event);
+        }
+        protected virtual void HandleAttackPrepre(P_SKill_AttackPrepare @event)
+        {
+            _stateMachine.ChangeState<P_AttackState>();
+            var attackExecute = new P_Skill_AttackExecute()
+            {
+                Skill = _player.GetController<SkillController>().GetSkill<P_AttackModel>()
+            };
+            EventBus.Publish(attackExecute);
+        }
+        protected virtual void HandleAttackExecute(P_Skill_AttackExecute @event) { }
         // DoubleJump
         protected virtual void HandleDoubleJumpPressed(P_Skill_DoubleJumpPressed @event)
         {
@@ -97,10 +112,10 @@ namespace ThisGame.Entity.StateMachineSystem
         protected virtual void HandleDoubleJumpPrepare(P_Skill_DoubleJumpPrepare @event)
         {
             _stateMachine.ChangeState<P_JumpState>();
-            var jumpData = @event.Skill.Data as P_DoubleJumpData;
+            var data = @event.Skill.Data as P_DoubleJumpData;
             var doubleJumpExecute = new P_Skill_DoubleJumpExecute()
             {
-                DoubleJumpSpeed = jumpData.JumpSpeed
+                DoubleJumpSpeed = data.JumpSpeed
             };
             EventBus.Publish(doubleJumpExecute);
         }
@@ -119,16 +134,14 @@ namespace ThisGame.Entity.StateMachineSystem
         protected virtual void HandleGrappingHookPrepare(P_Skill_GrappingHookPrepare @event)
         {
             _stateMachine.ChangeState<P_HookedState>();
-            var grappingHookExecute = new P_Skill_GrappingHookExecuted()
+            var grappingHookExecute = new P_Skill_GrappingHookExecute()
             {
                 Skill = _player.GetController<SkillController>().GetSkill<P_GrappingHookModel>(),
                 IsGrounded = false
             };
             EventBus.Publish(grappingHookExecute);
         }
-        protected virtual void HandleGrappingHookExecute(P_Skill_GrappingHookExecuted @event)
-        {
-        }
+        protected virtual void HandleGrappingHookExecute(P_Skill_GrappingHookExecute @event) { }
         protected virtual void HandleGrappingHookRelease(P_Skill_GrappingHookReleased @event)
         {
             _player.Joint.enabled = false;

@@ -18,7 +18,7 @@ namespace ThisGame.Entity.StateMachineSystem
         protected override Type[] GetEvents() => new Type[]
         {
             // Skills
-            typeof(P_Skill_GrappingHookExecuted),
+            typeof(P_Skill_GrappingHookExecute),
             typeof(P_Skill_GrappingHookReleased)
         };
 
@@ -42,7 +42,7 @@ namespace ThisGame.Entity.StateMachineSystem
         {
             _skill.ControlRope(_player.InputValue, _player.Rb, _player.Joint, Time.fixedDeltaTime);
         }
-        protected override void HandleGrappingHookExecute(P_Skill_GrappingHookExecuted @event)
+        protected override void HandleGrappingHookExecute(P_Skill_GrappingHookExecute @event)
         {
             _skill = @event.Skill;
             _player.Joint.connectedBody = _skill.HookPoint.GetComponent<Rigidbody2D>();

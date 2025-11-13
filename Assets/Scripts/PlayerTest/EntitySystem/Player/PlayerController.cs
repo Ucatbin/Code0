@@ -81,6 +81,9 @@ namespace ThisGame.Entity.EntitySystem
             _stateMachine.RegisterState<P_JumpState>(
                 new P_JumpState(this, _stateMachine, "Jump", checkerController, moveController.Model)
             );
+            _stateMachine.RegisterState<P_AttackState>(
+                new P_AttackState(this, _stateMachine, "Attack", checkerController, moveController.Model)
+            );
             _stateMachine.RegisterState<P_WallSlideState>(
                 new P_WallSlideState(this, _stateMachine, "WallSlide", checkerController, moveController.Model)
             );

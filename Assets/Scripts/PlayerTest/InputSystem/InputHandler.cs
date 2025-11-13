@@ -11,6 +11,7 @@ namespace ThisGame.Entity.InputSystem
     {
         [SerializeField] PlayerController _player;
 
+        #region Abilities
         public void HandleMove(InputAction.CallbackContext context)
         {
             Vector2 input = context.ReadValue<Vector2>();
@@ -50,6 +51,20 @@ namespace ThisGame.Entity.InputSystem
             }
         }
 
+        public void HandleAttack(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                var attackSkill =  _player.GetController<SkillController>().GetSkill<P_AttackModel>();
+                var attackPressedEvent = new P_Skill_AttackPressed()
+                {
+                    Skill =  attackSkill
+                };
+                EventBus.Publish(attackPressedEvent);
+            }
+        }
+        #endregion
+        #region Skills
         public void HandleGrappingHook(InputAction.CallbackContext context)
         {
             if (context.performed)
@@ -72,5 +87,6 @@ namespace ThisGame.Entity.InputSystem
                 EventBus.Publish(grappingHookRelease);
             }
         }
+        #endregion
     }
 }

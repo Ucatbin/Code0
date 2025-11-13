@@ -13,6 +13,7 @@ public class P_SkillController : SkillController
                 {
                     "P_DoubleJump" => new P_DoubleJumpModel(entry.Data),
                     "P_GrappingHook" => new P_GrappingHookModel(entry.Data),
+                    "P_Attack" => new P_AttackModel(entry.Data),
                     _ => null
                 };
 

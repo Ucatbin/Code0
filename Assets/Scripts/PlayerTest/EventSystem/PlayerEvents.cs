@@ -1,13 +1,13 @@
 using ThisGame.Entity.SkillSystem;
-using ThisGame.Entity.StateMachineSystem;
 using UnityEngine;
 
-#region Input
+#region Abilities
 public struct MoveButtonPressed : IPlayerInputEvent
 {
     public Vector3 MoveDirection;
 }
 public struct MoveButtonRelease : IPlayerInputEvent { }
+
 public struct JumpButtonPressed : IPlayerInputEvent { }
 public struct JumpExecute : IPlayerInputEvent
 {
@@ -41,6 +41,16 @@ public struct StateChange
 #endregion
 
 #region Skills
+// Attack
+public struct P_Skill_AttackPressed : ISkillEvent
+{
+    public P_AttackModel Skill;
+}
+public struct P_SKill_AttackPrepare : ISkillEvent { }
+public struct P_Skill_AttackExecute : ISkillEvent
+{
+    public P_AttackModel Skill;
+}
 // DoubleJump
 public struct P_Skill_DoubleJumpPressed : ISkillEvent
 {
@@ -67,7 +77,7 @@ public struct P_Skill_GrappingHookPrepare : ISkillEvent
 {
     public Vector3 TargetPosition;
 }
-public struct P_Skill_GrappingHookExecuted : ISkillEvent
+public struct P_Skill_GrappingHookExecute : ISkillEvent
 {
     public P_GrappingHookModel Skill;
     public bool IsGrounded;

@@ -17,6 +17,8 @@ namespace ThisGame.Entity.StateMachineSystem
         protected override Type[] GetEvents() => new Type[]
         {
             // Skills
+            typeof(P_Skill_AttackPressed),
+            typeof(P_SKill_AttackPrepare),
             typeof(P_Skill_DoubleJumpPressed),
             typeof(P_Skill_DoubleJumpPrepare),
             typeof(P_Skill_GrappingHookPressed),
