@@ -16,12 +16,9 @@ namespace ThisGame.Entity.SkillSystem
 
             if (e is P_Skill_DoubleJumpPressed thisSkillEvent)
             {
-                var doubleJumpPrepare = new P_Skill_DoubleJumpPrepare()
-                {
-                    Skill = thisSkillEvent.Skill
-                };
-                EventBus.Publish(doubleJumpPrepare);
-                ExecuteSkill(doubleJumpPrepare);         
+                var doubleJumpExecute = new P_Skill_DoubleJumpExecute();
+                EventBus.Publish(doubleJumpExecute);
+                ExecuteSkill(doubleJumpExecute);         
             }
         }
         public override void ExecuteSkill(ISkillEvent e)

@@ -77,6 +77,21 @@ namespace ThisGame.Entity.StateMachineSystem
             };
             EventBus.Publish(jumpExecute);
         }
+        protected virtual void HandleJumpExecute(JumpExecute e)
+        {
+            if (e.EndEarly)
+            {
+                _movement.SetVelocity(e.JumpDir * _moveData.BaseJumpSpeed);
+                _player.Rb.linearVelocity = _movement.Velocity;
+                _stateMachine.ChangeState<P_AirState>();
+            }
+            else
+            {
+                var jumpSpeed = e.JumpDir.y * _moveData.BaseJumpSpeed;
+                _movement.SetVelocity(new Vector3(_movement.Velocity.x, jumpSpeed, _movement.Velocity.z));
+                _player.Rb.linearVelocity = _movement.Velocity;
+            }
+        }
         protected virtual void HandleJumpRelease(JumpButtonRelease @event)
         {
             _stateMachine.ChangeState<P_AirState>();
@@ -94,52 +109,30 @@ namespace ThisGame.Entity.StateMachineSystem
         {
             @event.Skill.HandleSkillButtonPressed(@event);
         }
-        protected virtual void HandleAttackPrepre(P_SKill_AttackPrepare @event)
+        protected virtual void HandleAttackExecute(P_Skill_AttackExecute @event)
         {
             _stateMachine.ChangeState<P_AttackState>();
-            var attackExecute = new P_Skill_AttackExecute()
-            {
-                Skill = _player.GetController<SkillController>().GetSkill<P_AttackModel>()
-            };
-            EventBus.Publish(attackExecute);
         }
-        protected virtual void HandleAttackExecute(P_Skill_AttackExecute @event) { }
         // DoubleJump
         protected virtual void HandleDoubleJumpPressed(P_Skill_DoubleJumpPressed @event)
         {
             @event.Skill.HandleSkillButtonPressed(@event);
         }
-        protected virtual void HandleDoubleJumpPrepare(P_Skill_DoubleJumpPrepare @event)
-        {
-            _stateMachine.ChangeState<P_JumpState>();
-            var data = @event.Skill.Data as P_DoubleJumpData;
-            var doubleJumpExecute = new P_Skill_DoubleJumpExecute()
-            {
-                DoubleJumpSpeed = data.JumpSpeed
-            };
-            EventBus.Publish(doubleJumpExecute);
-        }
         protected virtual void HandleDoubleJumpExecute(P_Skill_DoubleJumpExecute @event)
         {
-            _movement.SetVelocity(new Vector3(_movement.Velocity.x, @event.DoubleJumpSpeed, _movement.Velocity.z));
-            _player.Rb.linearVelocity = _movement.Velocity;
-            _stateMachine.ChangeState<P_AirState>();
+            _stateMachine.ChangeState<P_JumpState>();
+            var jumpExecute = new JumpExecute()
+            {
+                JumpDir = new Vector3(0f, 1f, 0f),
+                EndEarly = true
+            };
+            EventBus.Publish(jumpExecute);
         }
 
         // GrappingHook
         protected virtual void HandleGrappingHookPressed(P_Skill_GrappingHookPressed @event)
         {
             @event.Skill.HandleSkillButtonPressed(@event);
-        }
-        protected virtual void HandleGrappingHookPrepare(P_Skill_GrappingHookPrepare @event)
-        {
-            _stateMachine.ChangeState<P_HookedState>();
-            var grappingHookExecute = new P_Skill_GrappingHookExecute()
-            {
-                Skill = _player.GetController<SkillController>().GetSkill<P_GrappingHookModel>(),
-                IsGrounded = false
-            };
-            EventBus.Publish(grappingHookExecute);
         }
         protected virtual void HandleGrappingHookExecute(P_Skill_GrappingHookExecute @event) { }
         protected virtual void HandleGrappingHookRelease(P_Skill_GrappingHookReleased @event)

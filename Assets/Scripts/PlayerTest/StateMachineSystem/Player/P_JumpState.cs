@@ -22,7 +22,6 @@ namespace ThisGame.Entity.StateMachineSystem
             // Skills
             typeof(P_Skill_DoubleJumpExecute),
             typeof(P_Skill_GrappingHookPressed),
-            typeof(P_Skill_GrappingHookPrepare)
         };
 
         public override void Enter()
@@ -52,22 +51,6 @@ namespace ThisGame.Entity.StateMachineSystem
             base.PhysicsUpdate();
 
             _movement.SetVelocity(new Vector3(_movement.Velocity.x, _moveData.BaseJumpSpeed, _movement.Velocity.z));
-        }
-
-        void HandleJump(JumpExecute e)
-        {
-            if (e.EndEarly)
-            {
-                _movement.SetVelocity(e.JumpDir * _moveData.BaseJumpSpeed);
-                _player.Rb.linearVelocity = _movement.Velocity;
-                _stateMachine.ChangeState<P_AirState>();
-            }
-            else
-            {
-                var jumpSpeed = e.JumpDir.y * _moveData.BaseJumpSpeed;
-                _movement.SetVelocity(new Vector3(_movement.Velocity.x, jumpSpeed, _movement.Velocity.z));
-                _player.Rb.linearVelocity = _movement.Velocity;
-            }
         }
     }
 }

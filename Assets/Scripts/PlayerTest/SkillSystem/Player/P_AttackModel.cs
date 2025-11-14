@@ -15,10 +15,14 @@ namespace ThisGame.Entity.SkillSystem
 
             if (e is P_Skill_AttackPressed thisSkillEvent)
             {
-                var attackPrepare = new P_SKill_AttackPrepare();
-                EventBus.Publish(attackPrepare);
-                ExecuteSkill(attackPrepare);
+                var attackExecute = new P_Skill_AttackExecute();
+                EventBus.Publish(attackExecute);
+                ExecuteSkill(attackExecute);
             }
+        }
+        public override void ExecuteSkill(ISkillEvent e)
+        {
+            base.ExecuteSkill(e);
         }
     }
 }

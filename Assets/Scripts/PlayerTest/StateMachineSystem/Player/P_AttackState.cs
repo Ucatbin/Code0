@@ -8,8 +8,11 @@ using ThisGame.Entity.StateMachineSystem;
 public class P_AttackState : P_BaseState
 {
     P_AttackModel _skill;
-    public P_AttackState(PlayerController entity, StateMachine stateMachine, string animName, CheckerController checkers, MoveModel movement) : base(entity, stateMachine, animName, checkers, movement)
+    P_AttackData _data;
+    public P_AttackState(PlayerController entity, StateMachine stateMachine, string animName, CheckerController checkers, MoveModel movement, P_AttackModel skill) : base(entity, stateMachine, animName, checkers, movement)
     {
+        _skill = skill;
+        _data = _skill.Data as P_AttackData;
     }
 
     protected override Type[] GetEvents() => new Type[]
@@ -38,6 +41,5 @@ public class P_AttackState : P_BaseState
 
     protected override void HandleAttackExecute(P_Skill_AttackExecute @event)
     {
-        _skill = @event.Skill;
     }
 }

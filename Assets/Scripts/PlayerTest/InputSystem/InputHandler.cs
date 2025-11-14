@@ -58,7 +58,7 @@ namespace ThisGame.Entity.InputSystem
                 var attackSkill =  _player.GetController<SkillController>().GetSkill<P_AttackModel>();
                 var attackPressedEvent = new P_Skill_AttackPressed()
                 {
-                    Skill =  attackSkill
+                    Skill =  attackSkill,
                 };
                 EventBus.Publish(attackPressedEvent);
             }

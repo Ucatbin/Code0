@@ -33,12 +33,6 @@ namespace ThisGame.Entity.SkillSystem
                     }
                     HookPoint.transform.SetPositionAndRotation(hit.point, Quaternion.identity);
                     HookPoint.transform.parent = hit.transform;
-
-                    var grappingHookPrepare = new P_Skill_GrappingHookPrepare()
-                    {
-                        TargetPosition = new Vector3(hit.point.x, thisSkillEvent.CurrentPosition.y, 0f)
-                    };
-                    EventBus.Publish(grappingHookPrepare);
                 }
             }
         }

@@ -10,9 +10,12 @@ namespace ThisGame.Entity.StateMachineSystem
     public class P_HookedState : P_BaseState
     {
         P_GrappingHookModel _skill;
+        P_GrappingHookData _data;
 
-        public P_HookedState(PlayerController entity, StateMachine stateMachine, string animName, CheckerController checkers, MoveModel movement) : base(entity, stateMachine, animName, checkers, movement)
+        public P_HookedState(PlayerController entity, StateMachine stateMachine, string animName, CheckerController checkers, MoveModel movement, P_GrappingHookModel skill) : base(entity, stateMachine, animName, checkers, movement)
         {
+            _skill = skill;
+            _data = _skill.Data as P_GrappingHookData;
         }
 
         protected override Type[] GetEvents() => new Type[]

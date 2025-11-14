@@ -1,4 +1,6 @@
+using System;
 using ThisGame.Entity.SkillSystem;
+using ThisGame.Entity.StateMachineSystem;
 using UnityEngine;
 
 #region Abilities
@@ -20,43 +22,16 @@ public struct FlipAction
     public int FacingDir;
 }
 #endregion
-
-#region Checkers
-public struct GroundCheckChange
-{
-    public bool ChangeToGrounded;
-}
-public struct WallCheckChange
-{
-    public bool ChangeToWalled;
-}
-#endregion
-
-#region State
-public struct StateChange
-{
-    public string LastStateAnim;
-    public string NewStateAnim;
-}
-#endregion
-
 #region Skills
 // Attack
 public struct P_Skill_AttackPressed : ISkillEvent
 {
     public P_AttackModel Skill;
+    public StateMachine StateMachine;
 }
-public struct P_SKill_AttackPrepare : ISkillEvent { }
-public struct P_Skill_AttackExecute : ISkillEvent
-{
-    public P_AttackModel Skill;
-}
+public struct P_Skill_AttackExecute : ISkillEvent { }
 // DoubleJump
 public struct P_Skill_DoubleJumpPressed : ISkillEvent
-{
-    public P_DoubleJumpModel Skill;
-}
-public struct P_Skill_DoubleJumpPrepare : ISkillEvent
 {
     public P_DoubleJumpModel Skill;
 }
@@ -73,10 +48,6 @@ public struct P_Skill_GrappingHookPressed : ISkillEvent
     public Vector3 InputDirection;
     public bool IsGrounded;
 }
-public struct P_Skill_GrappingHookPrepare : ISkillEvent
-{
-    public Vector3 TargetPosition;
-}
 public struct P_Skill_GrappingHookExecute : ISkillEvent
 {
     public P_GrappingHookModel Skill;
@@ -86,5 +57,23 @@ public struct P_Skill_GrappingHookExecute : ISkillEvent
 public struct P_Skill_GrappingHookReleased : ISkillEvent
 {
     public P_GrappingHookModel Skill;
+}
+#endregion
+#region Checkers
+public struct GroundCheckChange
+{
+    public bool ChangeToGrounded;
+}
+public struct WallCheckChange
+{
+    public bool ChangeToWalled;
+}
+#endregion
+
+#region State
+public struct StateChange
+{
+    public string LastStateAnim;
+    public string NewStateAnim;
 }
 #endregion

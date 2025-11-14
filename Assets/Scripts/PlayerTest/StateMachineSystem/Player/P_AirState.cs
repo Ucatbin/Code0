@@ -18,11 +18,10 @@ namespace ThisGame.Entity.StateMachineSystem
         {
             // Skills
             typeof(P_Skill_AttackPressed),
-            typeof(P_SKill_AttackPrepare),
+            typeof(P_Skill_AttackExecute),
             typeof(P_Skill_DoubleJumpPressed),
-            typeof(P_Skill_DoubleJumpPrepare),
+            typeof(P_Skill_DoubleJumpExecute),
             typeof(P_Skill_GrappingHookPressed),
-            typeof(P_Skill_GrappingHookPrepare)
         };
 
         public override void Enter()
@@ -57,6 +56,20 @@ namespace ThisGame.Entity.StateMachineSystem
         public override void PhysicsUpdate()
         {
             _movement.HandleGravity(Time.fixedDeltaTime);
+        }
+
+        protected override void HandleJumpPressed(JumpButtonPressed @event)
+        {
+            if (@event is JumpButtonPressed inputEvent)
+            {
+                _stateMachine.ChangeState<P_JumpState>();
+                var jumpExecute = new JumpExecute
+                {
+                    JumpDir = new Vector3(_moveData.WallJumpDirection.x * -_player.InputValue.x, _moveData.WallJumpDirection.y, _moveData.WallJumpDirection.z),
+                    EndEarly = true
+                };
+                EventBus.Publish(jumpExecute);
+            }
         }
     }
 }

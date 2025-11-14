@@ -17,9 +17,8 @@ namespace ThisGame.Entity.StateMachineSystem
             typeof(JumpButtonPressed),
             // Skills
             typeof(P_Skill_AttackPressed),
-            typeof(P_SKill_AttackPrepare),
+            typeof(P_Skill_AttackExecute),
             typeof(P_Skill_GrappingHookPressed),
-            typeof(P_Skill_GrappingHookPrepare)
         };
 
         public override void Enter()

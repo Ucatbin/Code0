@@ -1,6 +1,7 @@
 using System.Linq;
 using ThisGame.Core;
 using ThisGame.Core.CheckerSystem;
+using ThisGame.Entity.SkillSystem;
 using ThisGame.Entity.StateMachineSystem;
 using UnityEngine;
 
@@ -43,6 +44,15 @@ namespace ThisGame.Entity.EntitySystem
             _stateMachine.CurrentState.PhysicsUpdate();
         }
 
+        public T GetController<T>() where T : BaseController
+        {
+            return Controllers.OfType<T>().FirstOrDefault();
+        }
+        public void RequestStateChange<T>() where T : IState
+        {
+            _stateMachine.ChangeState<T>();
+        }
+        #region InputSystem
         Vector3 _inputValue;
         public Vector3 InputValue => _inputValue;
         public void HandleMovePressed(MoveButtonPressed e)
@@ -58,11 +68,9 @@ namespace ThisGame.Entity.EntitySystem
         {
             _inputValue = Vector3.zero;
         }
+        #endregion
 
-        public T GetController<T>() where T : BaseController
-        {
-            return Controllers.OfType<T>().FirstOrDefault();
-        }
+        #region StateMachineSystem
         void RegisterStates()
         {
             _stateMachine = new StateMachine();
@@ -81,18 +89,22 @@ namespace ThisGame.Entity.EntitySystem
             _stateMachine.RegisterState<P_JumpState>(
                 new P_JumpState(this, _stateMachine, "Jump", checkerController, moveController.Model)
             );
-            _stateMachine.RegisterState<P_AttackState>(
-                new P_AttackState(this, _stateMachine, "Attack", checkerController, moveController.Model)
-            );
             _stateMachine.RegisterState<P_WallSlideState>(
                 new P_WallSlideState(this, _stateMachine, "WallSlide", checkerController, moveController.Model)
             );
             _stateMachine.RegisterState<P_CoyotState>(
                 new P_CoyotState(this, _stateMachine, "Air", checkerController, moveController.Model)
             );
+            // Skills
+            var attackSkill = GetController<SkillController>().GetSkill<P_AttackModel>();
+            _stateMachine.RegisterState<P_AttackState>(
+                new P_AttackState(this, _stateMachine, "Attack", checkerController, moveController.Model, attackSkill)
+            );
+            var grappingHookSkill = GetController<SkillController>().GetSkill<P_GrappingHookModel>();
             _stateMachine.RegisterState<P_HookedState>(
-                new P_HookedState(this, _stateMachine, "Hooked", checkerController, moveController.Model)
+                new P_HookedState(this, _stateMachine, "Hooked", checkerController, moveController.Model, grappingHookSkill)
             );
         }
+        #endregion
     }
 }
