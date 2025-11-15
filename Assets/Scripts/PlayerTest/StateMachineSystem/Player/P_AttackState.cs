@@ -35,6 +35,8 @@ public class P_AttackState : P_BaseState
     public override void Exit()
     {
         base.Exit();
+
+        _skill.StartCoolDown();
     }
     public override void LogicUpdate() { }
     public override void PhysicsUpdate() { }

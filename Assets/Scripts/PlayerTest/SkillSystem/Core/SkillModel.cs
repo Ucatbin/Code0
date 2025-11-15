@@ -38,7 +38,6 @@ namespace ThisGame.Entity.SkillSystem
         }
         public virtual void StartCoolDown()
         {
-            
         }
     }
 }

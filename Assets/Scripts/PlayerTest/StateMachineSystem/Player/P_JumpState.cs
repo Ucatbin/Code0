@@ -28,8 +28,9 @@ namespace ThisGame.Entity.StateMachineSystem
         {
             base.Enter();
 
+            var moveData = _movement.Data as PlayerMoveData;
             TimerManager.Instance.AddTimer(
-                _moveData.JumpInputWindow,
+                moveData.JumpInputWindow,
                 () => _stateMachine.ChangeState<P_AirState>(),
                 "JumpStateTimer"
             );
@@ -49,8 +50,8 @@ namespace ThisGame.Entity.StateMachineSystem
         public override void PhysicsUpdate()
         {
             base.PhysicsUpdate();
-
-            _movement.SetVelocity(new Vector3(_movement.Velocity.x, _moveData.BaseJumpSpeed, _movement.Velocity.z));
+            var moveData = _movement.Data as PlayerMoveData;
+            _movement.SetVelocity(new Vector3(_movement.Velocity.x, moveData.BaseJumpSpeed, _movement.Velocity.z));
         }
     }
 }

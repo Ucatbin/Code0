@@ -57,19 +57,5 @@ namespace ThisGame.Entity.StateMachineSystem
         {
             _movement.HandleGravity(Time.fixedDeltaTime);
         }
-
-        protected override void HandleJumpPressed(JumpButtonPressed @event)
-        {
-            if (@event is JumpButtonPressed inputEvent)
-            {
-                _stateMachine.ChangeState<P_JumpState>();
-                var jumpExecute = new JumpExecute
-                {
-                    JumpDir = new Vector3(_moveData.WallJumpDirection.x * -_player.InputValue.x, _moveData.WallJumpDirection.y, _moveData.WallJumpDirection.z),
-                    EndEarly = true
-                };
-                EventBus.Publish(jumpExecute);
-            }
-        }
     }
 }

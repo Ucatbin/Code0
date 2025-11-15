@@ -16,7 +16,11 @@ namespace ThisGame.Entity.SkillSystem
 
             if (e is P_Skill_DoubleJumpPressed thisSkillEvent)
             {
-                var doubleJumpExecute = new P_Skill_DoubleJumpExecute();
+                var doubleJumpData = Data as P_DoubleJumpData;
+                var doubleJumpExecute = new P_Skill_DoubleJumpExecute()
+                {
+                    DoubleJumpSpeed = doubleJumpData.JumpSpeed
+                };
                 EventBus.Publish(doubleJumpExecute);
                 ExecuteSkill(doubleJumpExecute);         
             }

@@ -24,5 +24,16 @@ namespace ThisGame.Entity.SkillSystem
         {
             base.ExecuteSkill(e);
         }
+        public override void StartCoolDown()
+        {
+            base.StartCoolDown();
+
+            TimerManager.Instance.AddTimer(
+                Data.CoolDown,
+                () =>{
+                    _isReady = true;
+                }
+            );
+        }
     }
 }

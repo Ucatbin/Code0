@@ -44,21 +44,27 @@ namespace ThisGame.Entity.StateMachineSystem
 
         public override void PhysicsUpdate()
         {
-            _movement.SetVelocity(new Vector3(_movement.Velocity.x, _moveData.WallSlideSpeed, _movement.Velocity.z));
+            var moveData = _movement.Data as PlayerMoveData;
+            var maxFallSpeed = moveData.WallSlideSpeed;
+            var velocity = _movement.Velocity;
+            velocity.y = Mathf.MoveTowards(
+                velocity.y,
+                maxFallSpeed,
+                moveData.WallSlideAcceleration * Time.fixedDeltaTime
+            );
+            _movement.SetVelocity(velocity);
             _player.Rb.linearVelocity = _movement.Velocity;
         }
         protected override void HandleJumpPressed(JumpButtonPressed @event)
         {
-            if (@event is JumpButtonPressed inputEvent)
+            _stateMachine.ChangeState<P_JumpState>();
+            var moveData = _movement.Data as PlayerMoveData;
+            var jumpExecute = new JumpExecute
             {
-                _stateMachine.ChangeState<P_JumpState>();
-                var jumpExecute = new JumpExecute
-                {
-                    JumpDir = new Vector3(_moveData.WallJumpDirection.x * -_player.InputValue.x, _moveData.WallJumpDirection.y, _moveData.WallJumpDirection.z),
-                    EndEarly = true
-                };
-                EventBus.Publish(jumpExecute);
-            }
+                JumpType = JumpType.WallJump,
+                JumpDir = moveData.WallJumpDirection * -_player.FacingDir
+            };
+            EventBus.Publish(jumpExecute);
         }
     }
 }

@@ -4,17 +4,24 @@ using ThisGame.Entity.StateMachineSystem;
 using UnityEngine;
 
 #region Abilities
+// Move
 public struct MoveButtonPressed : IPlayerInputEvent
 {
     public Vector3 MoveDirection;
 }
 public struct MoveButtonRelease : IPlayerInputEvent { }
-
+// Jump
+public enum JumpType
+{
+    Jump,
+    WallJump,
+    DoubleJump
+}
 public struct JumpButtonPressed : IPlayerInputEvent { }
 public struct JumpExecute : IPlayerInputEvent
 {
+    public JumpType JumpType;
     public Vector3 JumpDir;
-    public bool EndEarly;
 }
 public struct JumpButtonRelease : IPlayerInputEvent { }
 public struct FlipAction

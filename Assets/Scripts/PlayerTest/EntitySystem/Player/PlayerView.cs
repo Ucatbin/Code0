@@ -6,10 +6,10 @@ namespace ThisGame.Entity.EntitySystem
     {
         public Animator Animator;
 
-        public void HandleStateChange(StateChange e)
+        public void HandleStateChange(StateChange @event)
         {
-            Animator.SetBool(e.LastStateAnim, false);
-            Animator.SetBool(e.NewStateAnim, true);
+            Animator.SetBool(@event.LastStateAnim, false);
+            Animator.SetBool(@event.NewStateAnim, true);
         }
         public void FlipSprite(int facingDir)
         {

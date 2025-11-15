@@ -14,7 +14,6 @@ namespace ThisGame.Entity.StateMachineSystem
         protected PlayerController _player;
         protected CheckerController _checkers;
         protected MoveModel _movement;
-        protected PlayerMoveData _moveData;
         
         public P_BaseState(
             PlayerController entity,
@@ -27,7 +26,6 @@ namespace ThisGame.Entity.StateMachineSystem
             _player = entity;
             _checkers = checkers;
             _movement = movement;
-            _moveData = _movement.Data as PlayerMoveData;
         }
 
         public override void Enter()
@@ -72,29 +70,37 @@ namespace ThisGame.Entity.StateMachineSystem
             _stateMachine.ChangeState<P_JumpState>();
             var jumpExecute = new JumpExecute
             {
+                JumpType = JumpType.Jump,
                 JumpDir = new Vector3(0f, 1f, 0f),
-                EndEarly = false
             };
             EventBus.Publish(jumpExecute);
         }
-        protected virtual void HandleJumpExecute(JumpExecute e)
+        protected virtual void HandleJumpExecute(JumpExecute @event)
         {
-            if (e.EndEarly)
+            var moveData = _movement.Data as PlayerMoveData;
+            Vector3 jumpSpeed = @event.JumpDir * moveData.BaseJumpSpeed;
+            switch (@event.JumpType)
             {
-                _movement.SetVelocity(e.JumpDir * _moveData.BaseJumpSpeed);
-                _player.Rb.linearVelocity = _movement.Velocity;
-                _stateMachine.ChangeState<P_AirState>();
-            }
-            else
-            {
-                var jumpSpeed = e.JumpDir.y * _moveData.BaseJumpSpeed;
-                _movement.SetVelocity(new Vector3(_movement.Velocity.x, jumpSpeed, _movement.Velocity.z));
-                _player.Rb.linearVelocity = _movement.Velocity;
+                case JumpType.Jump:
+                    _movement.SetVelocity(new Vector3(_movement.Velocity.x, jumpSpeed.y, _movement.Velocity.z));
+                    _player.Rb.linearVelocity = _movement.Velocity;
+                    break;
+                case JumpType.WallJump:
+                    _player.View.Animator.SetFloat("IsWallJump", 1);
+                    _movement.SetVelocity(jumpSpeed);
+                    _stateMachine.ChangeState<P_AirState>();
+                    break;
+                case JumpType.DoubleJump:
+                    _movement.SetVelocity(new Vector3(_movement.Velocity.x, jumpSpeed.y, _movement.Velocity.z));
+                    _player.Rb.linearVelocity = _movement.Velocity;
+                    _stateMachine.ChangeState<P_AirState>();
+                    break;
             }
         }
         protected virtual void HandleJumpRelease(JumpButtonRelease @event)
         {
             _stateMachine.ChangeState<P_AirState>();
+            _player.View.Animator.SetFloat("IsWallJump", 0);
         }
         #endregion
         #region State
@@ -123,8 +129,8 @@ namespace ThisGame.Entity.StateMachineSystem
             _stateMachine.ChangeState<P_JumpState>();
             var jumpExecute = new JumpExecute()
             {
-                JumpDir = new Vector3(0f, 1f, 0f),
-                EndEarly = true
+                JumpType = JumpType.DoubleJump,
+                JumpDir = new Vector3(0f, @event.DoubleJumpSpeed, 0f),
             };
             EventBus.Publish(jumpExecute);
         }

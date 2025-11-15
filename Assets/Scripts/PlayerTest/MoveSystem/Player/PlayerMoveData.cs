@@ -8,6 +8,7 @@ namespace ThisGame.Entity.MoveSystem
     {
         public float JumpInputWindow;
         public float WallSlideSpeed;
+        public float WallSlideAcceleration;
         public Vector3 WallJumpDirection;
     }
 }
