@@ -1,10 +1,8 @@
 using System;
 using ThisGame.Core.CheckerSystem;
-using ThisGame.Entity.SkillSystem;
 using ThisGame.Entity.EntitySystem;
 using ThisGame.Entity.MoveSystem;
 using UnityEngine;
-using ThisGame.Core;
 
 namespace ThisGame.Entity.StateMachineSystem
 {

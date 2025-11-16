@@ -59,10 +59,11 @@ namespace ThisGame.Entity.StateMachineSystem
         {
             _stateMachine.ChangeState<P_JumpState>();
             var moveData = _movement.Data as PlayerMoveData;
+            var jumpDir = moveData.WallJumpDirection;
             var jumpExecute = new JumpExecute
             {
                 JumpType = JumpType.WallJump,
-                JumpDir = moveData.WallJumpDirection * -_player.FacingDir
+                JumpDir = new Vector3(jumpDir.x * -_player.FacingDir, jumpDir.y)
             };
             EventBus.Publish(jumpExecute);
         }

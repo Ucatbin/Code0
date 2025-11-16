@@ -239,13 +239,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.6
-  m_fontSizeBase: 0.6
+  m_fontSize: 0.5
+  m_fontSizeBase: 0.5
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -291,11 +291,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 322348062}
   m_CullTransparentMesh: 1
---- !u!4 &402628155 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6060854404198448708, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
-  m_PrefabInstance: {fileID: 3067571798909076832}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &409454062
 GameObject:
   m_ObjectHideFlags: 0
@@ -313,7 +308,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &409454063
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -464,7 +459,7 @@ RectTransform:
   m_Children:
   - {fileID: 1327218849}
   - {fileID: 892825599}
-  m_Father: {fileID: 402628155}
+  m_Father: {fileID: 1679723854}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1548,8 +1543,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 6060854404198448708, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
-      insertIndex: -1
+    - targetCorrespondingSourceObject: {fileID: 2217446904863355595, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
+      insertIndex: 1
       addedObject: {fileID: 431573613}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 236540776271286730, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
@@ -1606,7 +1601,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1497086792676214613, guid: cc13061b108035943bb6dba69daf5f94, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7
+      value: -1.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 1497086792676214613, guid: cc13061b108035943bb6dba69daf5f94, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 20.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 1829688818845659054, guid: cc13061b108035943bb6dba69daf5f94, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.35
       objectReference: {fileID: 0}
     - target: {fileID: 5636161583565181075, guid: cc13061b108035943bb6dba69daf5f94, type: 3}
       propertyPath: m_Name

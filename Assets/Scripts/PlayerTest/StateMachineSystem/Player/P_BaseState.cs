@@ -90,7 +90,6 @@ namespace ThisGame.Entity.StateMachineSystem
                 case JumpType.WallJump:
                     animator.SetInteger("JumpType", 1);
                     _movement.SetVelocity(jumpSpeed);
-                    //_stateMachine.ChangeState<P_AirState>();
                     break;
                 case JumpType.DoubleJump:
                     animator.SetInteger("JumpType", 0);

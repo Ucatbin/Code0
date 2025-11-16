@@ -10,6 +10,7 @@ namespace ThisGame.Entity.StateMachineSystem
 {
     public class P_JumpState : P_AirState
     {
+        bool _canHold;
         public P_JumpState(PlayerController entity, StateMachine stateMachine, string animName, CheckerController checkers, MoveModel movement) : base(entity, stateMachine, animName, checkers, movement)
         {
         }
@@ -52,10 +53,31 @@ namespace ThisGame.Entity.StateMachineSystem
         public override void PhysicsUpdate()
         {
             base.PhysicsUpdate();
+            
+            if (!_canHold) return;
+
             var moveData = _movement.Data as PlayerMoveData;
             var velocity = _movement.Velocity;
             velocity.y = moveData.BaseJumpSpeed;
             _movement.SetVelocity(velocity);
+        }
+
+        protected override void HandleJumpExecute(JumpExecute @event)
+        {
+            base.HandleJumpExecute(@event);
+
+            switch (@event.JumpType)
+            {
+                case JumpType.Jump:
+                    _canHold = true;
+                    break;
+                case JumpType.WallJump:
+                    _canHold = false;
+                    break;
+                case JumpType.DoubleJump:
+                    _canHold = false;
+                    break;
+            }
         }
     }
 }
