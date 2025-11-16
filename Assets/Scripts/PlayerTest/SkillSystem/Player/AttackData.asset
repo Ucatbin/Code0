@@ -16,4 +16,4 @@ MonoBehaviour:
   CoolDown: 0.4
   MaxCharges: -1
   IsUnlocked: 1
-  AttackDuration: 0.2
+  AttackDuration: 0.33

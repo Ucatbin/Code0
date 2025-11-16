@@ -19,7 +19,9 @@ namespace ThisGame.Entity.StateMachineSystem
         {
             base.Enter();
 
-            _movement.SetVelocity(new Vector3(_movement.Velocity.x, 0f, _movement.Velocity.z));
+            var velocity = _movement.Velocity;
+            velocity.y = 0f;
+            _movement.SetVelocity(velocity);
         }
 
         public override void Exit()

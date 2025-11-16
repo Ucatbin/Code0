@@ -28,6 +28,7 @@ namespace ThisGame.Entity.StateMachineSystem
         {
             base.Enter();
 
+            _player.View.Animator.SetBool("Air", true);
             var moveData = _movement.Data as PlayerMoveData;
             TimerManager.Instance.AddTimer(
                 moveData.JumpInputWindow,
@@ -39,6 +40,7 @@ namespace ThisGame.Entity.StateMachineSystem
         public override void Exit()
         {
             base.Exit();
+
             TimerManager.Instance.CancelTimersWithTag("JumpStateTimer");
         }
 
@@ -51,7 +53,9 @@ namespace ThisGame.Entity.StateMachineSystem
         {
             base.PhysicsUpdate();
             var moveData = _movement.Data as PlayerMoveData;
-            _movement.SetVelocity(new Vector3(_movement.Velocity.x, moveData.BaseJumpSpeed, _movement.Velocity.z));
+            var velocity = _movement.Velocity;
+            velocity.y = moveData.BaseJumpSpeed;
+            _movement.SetVelocity(velocity);
         }
     }
 }

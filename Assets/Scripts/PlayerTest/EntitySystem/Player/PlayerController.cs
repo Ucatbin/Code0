@@ -14,12 +14,11 @@ namespace ThisGame.Entity.EntitySystem
 
         public PlayerView View;
         StateMachine _stateMachine;
-        public BaseController[] Controllers;
+
         void OnEnable()
         {
             EventBus.Subscribe<MoveButtonPressed>(this, HandleMovePressed);
             EventBus.Subscribe<MoveButtonRelease>(this, HandleMoveRelease);
-            EventBus.Subscribe<StateChange>(this, View.HandleStateChange);
         }
         void OnDisable()
         {
@@ -28,9 +27,8 @@ namespace ThisGame.Entity.EntitySystem
         
         protected override void Start()
         {
-            foreach (var controller in Controllers)
-                controller.Initialize();
-
+            base.Start();
+            
             RegisterStates();
             _stateMachine.Initialize<P_IdleState>();
         }
@@ -44,10 +42,6 @@ namespace ThisGame.Entity.EntitySystem
             _stateMachine.CurrentState.PhysicsUpdate();
         }
 
-        public T GetController<T>() where T : BaseController
-        {
-            return Controllers.OfType<T>().FirstOrDefault();
-        }
         public void RequestStateChange<T>() where T : IState
         {
             _stateMachine.ChangeState<T>();
@@ -55,16 +49,20 @@ namespace ThisGame.Entity.EntitySystem
         #region InputSystem
         Vector3 _inputValue;
         public Vector3 InputValue => _inputValue;
-        public void HandleMovePressed(MoveButtonPressed e)
+        public void HandleMovePressed(MoveButtonPressed @event)
         {
-            _inputValue = e.MoveDirection;
+            _inputValue = @event.MoveDirection;
             if (_inputValue.x * FacingDir < 0)
             {
                 _facingDir *= -1;
-                View.FlipSprite(FacingDir);
+                var viewFlip = new ViewFlip
+                {
+                    FacingDir = _facingDir
+                };
+                EventBus.Publish(viewFlip);
             }
         }
-        public void HandleMoveRelease(MoveButtonRelease e)
+        public void HandleMoveRelease(MoveButtonRelease @event)
         {
             _inputValue = Vector3.zero;
         }

@@ -47,8 +47,6 @@ namespace ThisGame.Entity.StateMachineSystem
 
             foreach (var eventType in events)
                 EventBus.SubscribeByType(this, eventType);
-
-            Debug.Log($"📢 {GetType().Name} Suscribed {events.Length} events");
         }
         protected virtual void UnsubscribeAllEvents()
         {
@@ -77,21 +75,27 @@ namespace ThisGame.Entity.StateMachineSystem
         }
         protected virtual void HandleJumpExecute(JumpExecute @event)
         {
+            var animator = _player.View.Animator;
             var moveData = _movement.Data as PlayerMoveData;
+            var velocity = _movement.Velocity;
             Vector3 jumpSpeed = @event.JumpDir * moveData.BaseJumpSpeed;
             switch (@event.JumpType)
             {
                 case JumpType.Jump:
-                    _movement.SetVelocity(new Vector3(_movement.Velocity.x, jumpSpeed.y, _movement.Velocity.z));
+                    animator.SetInteger("JumpType", 0);
+                    velocity.y = jumpSpeed.y;
+                    _movement.SetVelocity(velocity);
                     _player.Rb.linearVelocity = _movement.Velocity;
                     break;
                 case JumpType.WallJump:
-                    _player.View.Animator.SetFloat("IsWallJump", 1);
+                    animator.SetInteger("JumpType", 1);
                     _movement.SetVelocity(jumpSpeed);
-                    _stateMachine.ChangeState<P_AirState>();
+                    //_stateMachine.ChangeState<P_AirState>();
                     break;
                 case JumpType.DoubleJump:
-                    _movement.SetVelocity(new Vector3(_movement.Velocity.x, jumpSpeed.y, _movement.Velocity.z));
+                    animator.SetInteger("JumpType", 0);
+                    velocity.y = jumpSpeed.y;
+                    _movement.SetVelocity(velocity);
                     _player.Rb.linearVelocity = _movement.Velocity;
                     _stateMachine.ChangeState<P_AirState>();
                     break;
@@ -100,14 +104,9 @@ namespace ThisGame.Entity.StateMachineSystem
         protected virtual void HandleJumpRelease(JumpButtonRelease @event)
         {
             _stateMachine.ChangeState<P_AirState>();
-            _player.View.Animator.SetFloat("IsWallJump", 0);
         }
         #endregion
         #region State
-        protected virtual void HandleStateChanged(StateChange @event)
-        {
-            // TODO : Finish view
-        }
         #endregion
         #region Skills
         // Attack

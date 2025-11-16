@@ -1,3 +1,4 @@
+using ThisGame.Core;
 using UnityEngine;
 
 namespace ThisGame.Entity.EntitySystem
@@ -6,15 +7,24 @@ namespace ThisGame.Entity.EntitySystem
     {
         public Animator Animator;
 
+        void OnEnable()
+        {
+            EventBus.Subscribe<ViewFlip>(this, HandleFlip);
+            EventBus.Subscribe<StateChange>(this, HandleStateChange);
+        }
+        void OnDisable()
+        {
+            EventBus.UnsubscribeAll(this);
+        }
         public void HandleStateChange(StateChange @event)
         {
             Animator.SetBool(@event.LastStateAnim, false);
             Animator.SetBool(@event.NewStateAnim, true);
         }
-        public void FlipSprite(int facingDir)
+        public void HandleFlip(ViewFlip @event)
         {
             var scale = transform.localScale;
-            scale.x = facingDir == 1 ? 1 : -1;
+            scale.x = @event.FacingDir == 1 ? 1 : -1;
             transform.localScale = scale;
         }
     }

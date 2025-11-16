@@ -1,4 +1,5 @@
 using System;
+using ThisGame.Core;
 using UnityEngine;
 
 namespace ThisGame.Entity.HealthSystem
@@ -19,11 +20,12 @@ namespace ThisGame.Entity.HealthSystem
             _currentHealth = data.MaxHealth;
         }
 
-        public void TakeDamage(float damage)
+        public void TakeDamage(DamageInfo info)
         {
-            _currentHealth -= damage;
+            _currentHealth -= info.DamageAmount;
             _currentHealth = Mathf.Max(0, _currentHealth);
-            OnHealthChanged?.Invoke(-damage);
+            OnHealthChanged?.Invoke(-info.DamageAmount);
+            Debug.Log($"{info.DamageTarget} takes {info.DamageAmount} damage from {info.DamageSource}, currentHealth : {_currentHealth}");
 
             if (_currentHealth <= 0)
                 OnDeath?.Invoke();

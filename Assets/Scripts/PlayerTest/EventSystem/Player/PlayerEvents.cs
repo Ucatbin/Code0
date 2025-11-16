@@ -77,7 +77,11 @@ public struct WallCheckChange
 }
 #endregion
 
-#region State
+#region Universal
+public struct ViewFlip
+{
+    public int FacingDir;
+}
 public struct StateChange
 {
     public string LastStateAnim;

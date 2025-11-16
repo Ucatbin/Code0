@@ -43,6 +43,7 @@ namespace ThisGame.Entity.StateMachineSystem
                 _currentState?.Exit();
                 _currentState = newState;
                 _currentState.Enter();
+                
                 var StateChange = new StateChange()
                 {
                     LastStateAnim = lastAnimName,

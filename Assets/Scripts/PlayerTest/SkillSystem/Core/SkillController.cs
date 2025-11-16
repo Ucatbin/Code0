@@ -32,5 +32,6 @@ namespace ThisGame.Entity.SkillSystem
     {
         public string SkillName;
         public SkillData Data;
+        public SkillView View;
     }
 }

@@ -1,24 +1,25 @@
-using ThisGame.Entity.SkillSystem;
-using UnityEngine;
 
-public class P_SkillController : SkillController
+namespace ThisGame.Entity.SkillSystem
 {
-    public override void RegisterModels()
+    public class P_SkillController : SkillController
     {
-        foreach (var entry in _skillEnties)
+        public override void RegisterModels()
         {
-            if (!string.IsNullOrEmpty(entry.SkillName) && entry.Data != null)
+            foreach (var entry in _skillEnties)
             {
-                SkillModel model = entry.SkillName switch
+                if (!string.IsNullOrEmpty(entry.SkillName) && entry.Data != null)
                 {
-                    "P_DoubleJump" => new P_DoubleJumpModel(entry.Data),
-                    "P_GrappingHook" => new P_GrappingHookModel(entry.Data),
-                    "P_Attack" => new P_AttackModel(entry.Data),
-                    _ => null
-                };
+                    SkillModel model = entry.SkillName switch
+                    {
+                        "P_DoubleJump" => new P_DoubleJumpModel(entry.Data),
+                        "P_GrappingHook" => new P_GrappingHookModel(entry.Data),
+                        "P_Attack" => new P_AttackModel(entry.Data),
+                        _ => null
+                    };
 
-                if (model != null)
-                    _models[model.GetType()] = model;
+                    if (model != null)
+                        _models[model.GetType()] = model;
+                }
             }
         }
     }

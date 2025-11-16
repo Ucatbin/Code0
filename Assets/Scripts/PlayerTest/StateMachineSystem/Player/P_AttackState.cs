@@ -4,6 +4,7 @@ using ThisGame.Entity.EntitySystem;
 using ThisGame.Entity.MoveSystem;
 using ThisGame.Entity.SkillSystem;
 using ThisGame.Entity.StateMachineSystem;
+using UnityEngine;
 
 public class P_AttackState : P_BaseState
 {
@@ -38,8 +39,15 @@ public class P_AttackState : P_BaseState
 
         _skill.StartCoolDown();
     }
-    public override void LogicUpdate() { }
-    public override void PhysicsUpdate() { }
+    public override void LogicUpdate()
+    {
+        _movement.UpdateMovement(Vector3.zero, Time.deltaTime);
+        _player.Rb.linearVelocity = _movement.Velocity;
+    }
+    public override void PhysicsUpdate()
+    {
+        _movement.HandleGravity(Time.fixedDeltaTime);
+    }
 
     protected override void HandleAttackExecute(P_Skill_AttackExecute @event)
     {
