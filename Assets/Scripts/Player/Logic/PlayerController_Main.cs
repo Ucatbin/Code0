@@ -63,13 +63,13 @@ public class PlayerController_Main : EntityControllerOld
     {
         base.Start();
 
-        var Buff_CountDown = new BuffItem_CountDown(
-            BuffManager.Instance.BuffData_CountDown,
-            this,
-            this,
-            1,
-            _countDownDisplay);
-        BuffSys.AddBuff(Buff_CountDown);
+        // var Buff_CountDown = new BuffItem_CountDown(
+        //     BuffManager.Instance.BuffData_CountDown,
+        //     this,
+        //     this,
+        //     1,
+        //     _countDownDisplay);
+        // BuffSys.AddBuff(Buff_CountDown);
     }
 
     protected override void FixedUpdate()

@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class BuffHandler : MonoBehaviour
 {
-    [SerializeField] List<BaseBuffItem> _buffList = new List<BaseBuffItem>();
-    public SortedSet<BaseBuffItem> BuffHeap => new SortedSet<BaseBuffItem>(_buffList);
-    public void AddBuff(BaseBuffItem thisBuff)
+    [SerializeField] List<BaseBuffModel> _buffList = new List<BaseBuffModel>();
+    public SortedSet<BaseBuffModel> BuffHeap => new SortedSet<BaseBuffModel>(_buffList);
+    public void AddBuff(BaseBuffModel thisBuff)
     {
-        BaseBuffItem existingBuff = FindBuff(thisBuff.BuffData.Id);
+        BaseBuffModel existingBuff = FindBuff(thisBuff.BuffData.Id);
         // If entity already have this buff and it's not independent
         if (existingBuff != null && existingBuff.BuffData.BuffType != BuffType.Independent)
         {
@@ -61,7 +61,7 @@ public class BuffHandler : MonoBehaviour
         }
         Debug.Log(thisBuff.BuffData.BuffName + BuffHeap.Count);
     }
-    void RemoveBuff(BaseBuffItem thisBuff)
+    void RemoveBuff(BaseBuffModel thisBuff)
     {
         switch (thisBuff.BuffData.BuffRemoveType)
         {
@@ -82,7 +82,7 @@ public class BuffHandler : MonoBehaviour
         }
     }
 
-    BaseBuffItem FindBuff(int buffDataId)
+    BaseBuffModel FindBuff(int buffDataId)
     {
         foreach (var buffInfo in BuffHeap)
         {

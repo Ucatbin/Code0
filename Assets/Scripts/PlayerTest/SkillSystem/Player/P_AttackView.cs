@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using ThisGame.Core;
 using ThisGame.Entity.EntitySystem;
 using ThisGame.Entity.HealthSystem;
@@ -13,10 +14,13 @@ namespace ThisGame.Entity.SkillSystem
         [SerializeField] LayerMask _canHit;
         List<Collider2D> _hitTargets = new List<Collider2D>();
 
+        [SerializeField] BuffHandler _buffHandler;
+
         void OnEnable()
         {
             EventBus.Subscribe<AttackAnimationEvent>(this, HandleAttackAnim);
             EventBus.Subscribe<ViewFlip>(this, HandleFlip);
+            EventBus.Subscribe<BeKilled>(this, HandleKill);
         }
         void OnDisable()
         {
@@ -57,6 +61,13 @@ namespace ThisGame.Entity.SkillSystem
                 DamageAmount = 10
             };
             target.GetController<HealthController>().Model.TakeDamage(damageInfo);
+        }
+
+        void HandleKill(BeKilled @event)
+        {
+            var buffsToProcess = _buffHandler.BuffHeap.ToList();
+            foreach (var buffInfo in buffsToProcess)
+                buffInfo?.BuffData.OnKill?.Apply(buffInfo);
         }
         void HandleFlip(ViewFlip @event)
         {

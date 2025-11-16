@@ -87,4 +87,8 @@ public struct StateChange
     public string LastStateAnim;
     public string NewStateAnim;
 }
+public struct BeKilled
+{
+    
+}
 #endregion

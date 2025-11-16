@@ -1,4 +1,5 @@
 using System;
+using ThisGame.Entity.EntitySystem;
 using UnityEngine;
 
 #region Data
@@ -55,17 +56,17 @@ public class BuffDataSO : ScriptableObject
 
 #region Item
 [Serializable]
-public class BaseBuffItem : IComparable<BaseBuffItem>
+public class BaseBuffModel : IComparable<BaseBuffModel>
 {
     public BuffDataSO BuffData; // Get the data of buffSO
-    public EntityControllerOld Source;        // Who deal this buff
-    public EntityControllerOld Target;        // Who take this buff
+    public EntityController Source;        // Who deal this buff
+    public EntityController Target;        // Who take this buff
     public int CurrentStack;        // How many stacks
 
-    public BaseBuffItem(
+    public BaseBuffModel(
         BuffDataSO buffData,
-        EntityControllerOld caster,
-        EntityControllerOld target,
+        EntityController caster,
+        EntityController target,
         int curStack
     )
     {
@@ -74,7 +75,7 @@ public class BaseBuffItem : IComparable<BaseBuffItem>
         Target = target;
         CurrentStack = curStack;
     }
-    public int CompareTo(BaseBuffItem other)
+    public int CompareTo(BaseBuffModel other)
     {
         if (other == null) return 1;
         return BuffData.Priority.CompareTo(other.BuffData.Priority);

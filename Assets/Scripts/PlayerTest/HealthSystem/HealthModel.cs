@@ -28,7 +28,14 @@ namespace ThisGame.Entity.HealthSystem
             Debug.Log($"{info.DamageTarget} takes {info.DamageAmount} damage from {info.DamageSource}, currentHealth : {_currentHealth}");
 
             if (_currentHealth <= 0)
+            {
+                var beKilled = new BeKilled
+                {
+                    
+                };
+                EventBus.Publish(beKilled);
                 OnDeath?.Invoke();
+            }
         }
         public void TakeHeal(float heal)
         {
