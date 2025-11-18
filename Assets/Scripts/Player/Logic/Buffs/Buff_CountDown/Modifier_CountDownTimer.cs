@@ -1,3 +1,4 @@
+using ThisGame.Entity.BuffSystem;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CountDownTimer", menuName = "Game/BuffSys/CountDownBuilder/TimerMD")]
 public class Modifier_CountDownTimer : BaseBuffModifier
 {
-    public override void Apply(BaseBuffModel buffInfo)
+    public override void Apply(BuffModel buffInfo)
     {
         var buff = buffInfo.ConvertTo<BuffItem_CountDown>();
         buff.CountDownTimer -= 0.1f;

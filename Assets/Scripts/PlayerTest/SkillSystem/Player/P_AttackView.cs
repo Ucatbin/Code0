@@ -14,8 +14,6 @@ namespace ThisGame.Entity.SkillSystem
         [SerializeField] LayerMask _canHit;
         List<Collider2D> _hitTargets = new List<Collider2D>();
 
-        [SerializeField] BuffHandler _buffHandler;
-
         void OnEnable()
         {
             EventBus.Subscribe<AttackAnimationEvent>(this, HandleAttackAnim);
@@ -65,9 +63,6 @@ namespace ThisGame.Entity.SkillSystem
 
         void HandleKill(BeKilled @event)
         {
-            var buffsToProcess = _buffHandler.BuffHeap.ToList();
-            foreach (var buffInfo in buffsToProcess)
-                buffInfo?.BuffData.OnKill?.Apply(buffInfo);
         }
         void HandleFlip(ViewFlip @event)
         {

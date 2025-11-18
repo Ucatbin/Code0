@@ -1,51 +1,62 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using ThisGame.Core;
+using ThisGame.Entity.EntitySystem;
 using UnityEngine;
 
 namespace ThisGame.Entity.BuffSystem
 {
-    public abstract class BuffController : BaseController
+    public class BuffController : BaseController
     {
         [SerializeField] protected BuffModelEntry[] _buffEntries;
         protected Dictionary<Type, BuffModel> _models;
+
+        [SerializeField] protected List<BuffModel> _activeBuffs;
         [SerializeField] SortedSet<BuffModel> _buffHeap;
 
         public override void Initialize()
         {
             _models = new Dictionary<Type, BuffModel>();
-            _buffHeap = new SortedSet<BuffModel>();
+            _buffHeap = new SortedSet<BuffModel>(_activeBuffs);
 
             RegisterModels();
         }
-        public abstract void RegisterModels();
+        public virtual void RegisterModels() { }
 
-        public void AddBuff<T>(T thisBuff) where T : BuffModel
+        public void AddBuff<T>(T thisBuff, int stacks) where T : BuffModel
         {
-            BuffModel existingBuff = GetBuff<T>();
+            Type newBuffType = thisBuff.GetType();
+            BuffModel existingBuff = _activeBuffs.FirstOrDefault(buff => buff.GetType() == newBuffType);
 
             if (existingBuff != null && existingBuff.Data.BuffType != BuffType.Independent)
             {
-                var addStack =
-                    (existingBuff.Data.BuffType == BuffType.Stackable) &&
-                    (existingBuff.CurrentStacks < existingBuff.Data.MaxStacks)
-                        ? 1
-                        : 0;
-                existingBuff.AddStack(addStack);
+                int stacksAdd = stacks;
+                if (existingBuff.Data.BuffType == BuffType.Stackable)
+                {
+                    if (existingBuff.CurrentStacks < existingBuff.Data.MaxStacks)
+                    {
+                        if (existingBuff.CurrentStacks + stacks <= existingBuff.Data.MaxStacks)
+                            stacksAdd = stacks;
+                        else
+                            stacksAdd = existingBuff.Data.MaxStacks - existingBuff.CurrentStacks + stacks;
+                    }
+                    else
+                        stacksAdd = 0;
+                }
+                existingBuff.AddStack(stacksAdd);
 
                 switch (existingBuff.Data.BuffStackType)
                 {
                     case BuffStackType.Extend:
-                        // Extend duration
                         TimerManager.Instance.ExtendTimersWithTag(
-                            existingBuff.Data.Id,
+                            existingBuff.Data.BuffName,
                             existingBuff.Data.Duration
                         );
                         break;
                     case BuffStackType.Refresh:
-                        // Refresh duration
                         TimerManager.Instance.SetTimersWithTag(
-                            existingBuff.Data.Id,
+                            existingBuff.Data.BuffName,
                             existingBuff.Data.Duration
                         );
                         break;
@@ -57,43 +68,55 @@ namespace ThisGame.Entity.BuffSystem
             else
             {
                 if (thisBuff.Data.Duration != -1)
-                    // Duration
                     TimerManager.Instance.AddTimer(
                         thisBuff.Data.Duration,
                         () => RemoveBuff(thisBuff),
-                        thisBuff.Data.Id
+                        thisBuff.Data.BuffName
                     );
-                // Tick callback
                 if (thisBuff.Data.Interval != -1)
                     TimerManager.Instance.AddLoopTimer(
                         thisBuff.Data.Interval,
                         () => thisBuff.Data.OnInvoke?.Apply(thisBuff),
                         false,
-                        thisBuff.Data.Id + "Loop"
+                        thisBuff.Data.BuffName
                     );
                 thisBuff.Data.OnCreat?.Apply(thisBuff);
-                _buffList.Add(thisBuff);
+                _activeBuffs.Add(thisBuff);
             }
-            Debug.Log(thisBuff.Data.BuffName + BuffHeap.Count);
         }
-        void RemoveBuff(BaseBuffModel thisBuff)
+        void RemoveBuff<T>(T thisBuff) where T : BuffModel
         {
-            switch (thisBuff.BuffData.BuffRemoveType)
+            switch (thisBuff.Data.BuffRemoveType)
             {
-                case BuffRemoveType.Clear:  // Clear this buff no matter how many stacks
-                    thisBuff.BuffData.OnRemove.Apply(thisBuff);
-                    _buffList.Remove(thisBuff);
-                    TimerManager.Instance.CancelTimersWithTag(thisBuff.BuffData.Id + "Loop");
+                case BuffRemoveType.Clear:
+                    thisBuff.Data.OnRemove.Apply(thisBuff);
+                    _activeBuffs.Remove(thisBuff);
+                    TimerManager.Instance.CancelTimersWithTag(thisBuff.Data.BuffName);
                     break;
-                case BuffRemoveType.Reduce: // Reduce 1 stack, remove if stack reduce to 0
-                    thisBuff.CurrentStack--;
-                    thisBuff.BuffData.OnRemove.Apply(thisBuff);
-                    if (thisBuff.CurrentStack == 0)
+                case BuffRemoveType.Reduce:
+                    thisBuff.ReduceStack(1);
+                    thisBuff.Data.OnRemove.Apply(thisBuff);
+                    if (thisBuff.CurrentStacks == 0)
                     {
-                        _buffList.Remove(thisBuff);
-                        TimerManager.Instance.CancelTimersWithTag(thisBuff.BuffData.Id + "Loop");
+                        _activeBuffs.Remove(thisBuff);
+                        TimerManager.Instance.CancelTimersWithTag(thisBuff.Data.BuffName);
                     }
                     break;
+            }
+            _buffHeap.Remove(thisBuff);
+        }
+        public T CreateBuffModel<T>(EntityController source, EntityController target, int stacks = 1) where T : BuffModel
+        {
+            Type buffType = typeof(T);
+            if (_models.TryGetValue(buffType, out BuffModel model))
+            {
+                T newBuff = (T)Activator.CreateInstance(buffType, model.Data, stacks, source, target);
+                return newBuff;
+            }
+            else
+            {
+                Debug.LogError($"Buff type {buffType.Name} not found in registered models");
+                return null;
             }
         }
         public T GetBuff<T>() where T : BuffModel

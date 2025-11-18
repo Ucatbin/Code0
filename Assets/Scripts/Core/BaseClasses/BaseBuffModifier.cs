@@ -1,7 +1,10 @@
 using UnityEngine;
 
-[System.Serializable]
-public abstract class BaseBuffModifier : ScriptableObject
+namespace ThisGame.Entity.BuffSystem
 {
-    public abstract void Apply(BaseBuffModel buffInfo);
+    [System.Serializable]
+    public abstract class BaseBuffModifier : ScriptableObject
+    {
+        public abstract void Apply(BuffModel buffInfo);
+    }
 }

@@ -28,6 +28,10 @@ namespace ThisGame.Entity.BuffSystem
         {
             _currentStacks += stacks;
         }
+        public void ReduceStack(int stacks)
+        {
+            _currentStacks -= stacks;
+        }
         public int CompareTo(BuffModel other)
         {
             if (other == null) return 1;

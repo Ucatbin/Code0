@@ -32,15 +32,15 @@ public struct DamageData
 
     public void HandleHit()
     {
-        var buffsToProcess = Caster.BuffSys.BuffHeap.ToList();
-        foreach (var buffInfo in buffsToProcess)
-            buffInfo?.BuffData.OnHit?.Apply(buffInfo);
+        // var buffsToProcess = Caster.BuffSys.BuffHeap.ToList();
+        // foreach (var buffInfo in buffsToProcess)
+        //     buffInfo?.BuffData.OnHit?.Apply(buffInfo);
     }
     public void HandleKill()
     {
-        var buffsToProcess = Caster.BuffSys.BuffHeap.ToList();
-        foreach (var buffInfo in buffsToProcess)
-            buffInfo?.BuffData.OnKill?.Apply(buffInfo);
+        // var buffsToProcess = Caster.BuffSys.BuffHeap.ToList();
+        // foreach (var buffInfo in buffsToProcess)
+        //     buffInfo?.BuffData.OnKill?.Apply(buffInfo);
     }
 }
 #endregion

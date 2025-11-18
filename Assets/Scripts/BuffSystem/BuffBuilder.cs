@@ -1,4 +1,5 @@
 using System;
+using ThisGame.Entity.BuffSystem;
 using ThisGame.Entity.EntitySystem;
 using UnityEngine;
 

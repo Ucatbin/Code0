@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
-public class EntityControllerOld : MonoBehaviour, IMoveable, IDamageable
+public class EntityControllerOld : MonoBehaviour, IMoveable
 {
     [Header("BaseComponents")]
     public Transform Root;                  // This entity transform
@@ -12,7 +12,7 @@ public class EntityControllerOld : MonoBehaviour, IMoveable, IDamageable
 
     [Header("BaseHandlers")]
     public CheckerHandler CheckerSys;       // Entity collision checkers
-    public BuffHandler BuffSys;             // Handle buff system
+    //public BuffHandler BuffSys;             // Handle buff system
 
     [Header("BaseStateMarks")]
     public bool IsBusy = false;
@@ -125,31 +125,31 @@ public class EntityControllerOld : MonoBehaviour, IMoveable, IDamageable
     public int MaxHealth { get; set; }
     [field: SerializeField] public int CurrentHealth { get; set; }
 
-    public void TakeDamage(DamageData damageData)
-    {
-        damageData.HandleHit();
+    // public void TakeDamage(DamageData damageData)
+    // {
+    //     damageData.HandleHit();
 
-        var buffsToProcess = BuffSys.BuffHeap;
-        foreach (var buffInfo in buffsToProcess)
-            buffInfo?.BuffData.OnBeHit?.Apply(buffInfo);
+    //     var buffsToProcess = BuffSys.BuffHeap;
+    //     foreach (var buffInfo in buffsToProcess)
+    //         buffInfo?.BuffData.OnBeHit?.Apply(buffInfo);
 
-        Debug.Log($"{Root.name} take {damageData.DamageAmount} damage from {damageData.Caster}");
-        CurrentHealth -= damageData.DamageAmount;
-        if (CurrentHealth <= 0)
-            BeKilled(damageData);
-    }
-    public void TakeHeal()
-    {
-        CurrentHealth += 1;
-    }
-    public void BeKilled(DamageData damageData)
-    {
-        damageData.HandleKill();
+    //     Debug.Log($"{Root.name} take {damageData.DamageAmount} damage from {damageData.Caster}");
+    //     CurrentHealth -= damageData.DamageAmount;
+    //     if (CurrentHealth <= 0)
+    //         BeKilled(damageData);
+    // }
+    // public void TakeHeal()
+    // {
+    //     CurrentHealth += 1;
+    // }
+    // public void BeKilled(DamageData damageData)
+    // {
+    //     damageData.HandleKill();
 
-        var buffsToProcess = BuffSys.BuffHeap;
-        foreach (var buffInfo in buffsToProcess)
-            buffInfo.BuffData.OnBekill.Apply(buffInfo);         
-        Destroy(Root.gameObject);
-    }
+    //     var buffsToProcess = BuffSys.BuffHeap;
+    //     foreach (var buffInfo in buffsToProcess)
+    //         buffInfo.BuffData.OnBekill.Apply(buffInfo);         
+    //     Destroy(Root.gameObject);
+    // }
     #endregion
 }
