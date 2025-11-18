@@ -92,3 +92,10 @@ public struct BeKilled
     
 }
 #endregion
+#region Buffs
+// Countdown
+public struct UpdateCountdownDisplay
+{
+    public float TimerDisplay;
+}
+#endregion

@@ -26,32 +26,32 @@ public class BuffDataSO : ScriptableObject
     /// <summary>
     /// Invoke when buff first added
     /// </summary>
-    public BaseBuffModifier OnCreat;
+    public BuffModifier OnCreat;
     /// <summary>
     /// Invoke when buff just removed
     /// </summary>
-    public BaseBuffModifier OnRemove;
+    public BuffModifier OnRemove;
     /// <summary>
     /// Invoke when buff should be handle based on timer
     /// </summary>
-    public BaseBuffModifier OnInvoke;
+    public BuffModifier OnInvoke;
 
     /// <summary>
     /// Invoke when hit other
     /// </summary>
-    public BaseBuffModifier OnHit;
+    public BuffModifier OnHit;
     /// <summary>
     /// Invoke when be hit
     /// </summary>
-    public BaseBuffModifier OnBeHit;
+    public BuffModifier OnBeHit;
     /// <summary>
     /// Invoke when killed other
     /// </summary>
-    public BaseBuffModifier OnKill;
+    public BuffModifier OnKill;
     /// <summary>
     /// Invoke when be killed
     /// </summary>
-    public BaseBuffModifier OnBekill;
+    public BuffModifier OnBekill;
 }
 #endregion
 

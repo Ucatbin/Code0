@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace ThisGame.Entity.BuffSystem
 {
+    [Serializable]
     public class BuffModel : IComparable<BuffModel>
     {
         protected int _currentStacks;
@@ -16,10 +17,9 @@ namespace ThisGame.Entity.BuffSystem
         // Dependency
         BuffData _data;
         public BuffData Data => _data;
-        public BuffModel(BuffData data, int stacks, EntityController source, EntityController target)
+        public BuffModel(BuffData data, EntityController source, EntityController target)
         {
             _data = data;
-            _currentStacks = stacks;
             _source = source;
             _target = target;
         }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ThisGame.Entity.MoveSystem
 {
-    [CreateAssetMenu(fileName = "Player MoveData", menuName = "ThisGame/Player/MoveSystem/MoveData")]
+    [CreateAssetMenu(fileName = "Player MoveData", menuName = "ThisGame/Player/MoveSystem/PlayerMoveData")]
 
     public class PlayerMoveData : MoveData
     {

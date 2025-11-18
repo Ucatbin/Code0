@@ -17,6 +17,7 @@ namespace ThisGame.Entity.BuffSystem
         public override void Initialize()
         {
             _models = new Dictionary<Type, BuffModel>();
+            _activeBuffs = new List<BuffModel>();
             _buffHeap = new SortedSet<BuffModel>(_activeBuffs);
 
             RegisterModels();
@@ -26,7 +27,9 @@ namespace ThisGame.Entity.BuffSystem
         public void AddBuff<T>(T thisBuff, int stacks) where T : BuffModel
         {
             Type newBuffType = thisBuff.GetType();
-            BuffModel existingBuff = _activeBuffs.FirstOrDefault(buff => buff.GetType() == newBuffType);
+            BuffModel existingBuff = _activeBuffs
+                .Where(buff => buff != null)
+                .FirstOrDefault(buff => buff.GetType() == newBuffType);
 
             if (existingBuff != null && existingBuff.Data.BuffType != BuffType.Independent)
             {
@@ -104,20 +107,7 @@ namespace ThisGame.Entity.BuffSystem
             }
             _buffHeap.Remove(thisBuff);
         }
-        public T CreateBuffModel<T>(EntityController source, EntityController target, int stacks = 1) where T : BuffModel
-        {
-            Type buffType = typeof(T);
-            if (_models.TryGetValue(buffType, out BuffModel model))
-            {
-                T newBuff = (T)Activator.CreateInstance(buffType, model.Data, stacks, source, target);
-                return newBuff;
-            }
-            else
-            {
-                Debug.LogError($"Buff type {buffType.Name} not found in registered models");
-                return null;
-            }
-        }
+
         public T GetBuff<T>() where T : BuffModel
         {
             if (_models.ContainsKey(typeof(T)))

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ThisGame.Entity.SkillSystem
 {
-    [CreateAssetMenu(fileName = "Skill Data", menuName = "ThisGame/Entity/SkillSystem/SkillData")]
+    [CreateAssetMenu(fileName = "SkillData", menuName = "ThisGame/Entity/SkillSystem/SkillData")]
     public class SkillData : ScriptableObject
     {
         public int MaxLevel;
