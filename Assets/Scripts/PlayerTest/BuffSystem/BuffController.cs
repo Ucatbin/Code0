@@ -9,7 +9,6 @@ namespace ThisGame.Entity.BuffSystem
 {
     public class BuffController : BaseController
     {
-        [SerializeField] protected BuffModelEntry[] _buffEntries;
         protected Dictionary<Type, BuffModel> _models;
 
         [SerializeField] protected List<BuffModel> _activeBuffs;
