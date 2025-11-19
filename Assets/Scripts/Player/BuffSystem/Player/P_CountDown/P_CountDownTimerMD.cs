@@ -10,7 +10,6 @@ namespace ThisGame.Entity.BuffSystem
         {
             var buff = buffInfo.ConvertTo<P_CountDownModel>();
             buff.CountdownTimer -= 0.1f;
-            Debug.Log(buff.CountdownTimer);
 
             var display = Mathf.Max(buff.CountdownTimer, 0);
             var updateDisplay = new UpdateCountdownDisplay

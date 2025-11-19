@@ -12,13 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c30e2d6102fa7d740b75af98649d5706, type: 3}
   m_Name: WallCheckData
   m_EditorClassIdentifier: 
-  CheckType: 1
   CheckLayer:
     serializedVersion: 2
     m_Bits: 65
   CheckCount: 1
   CheckWidth: 0
   Direction: {x: 1, y: 0}
-  Distance: 0.6
+  Distance: 0.175
   CheckRadius: 0
   Angle: 0
