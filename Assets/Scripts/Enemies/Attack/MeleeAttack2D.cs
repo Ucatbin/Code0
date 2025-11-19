@@ -10,11 +10,6 @@ public class MeleeAttack2D : Attack2D
     protected override void DoAttack(Transform target)
     {
         Collider2D hit = Physics2D.OverlapCircle(hitOrigin.position, radius, targetMask);
-         if (hit != null && hit.TryGetComponent(out IDamageable dmg))
-        {
-            //dmg.TakeDamage(damage);
-        }
-        // TODO: ���Ŷ���/��Ч
     }
 
     void OnDrawGizmosSelected()

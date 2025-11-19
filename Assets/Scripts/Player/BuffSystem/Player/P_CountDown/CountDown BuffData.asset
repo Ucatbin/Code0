@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 191a4cc9eef23724bad2b87607b958e9, type: 3}
+  m_Name: CountDown BuffData
+  m_EditorClassIdentifier: 
+  BuffName: 
+  Icon: {fileID: 0}
+  Priority: 0
+  MaxStacks: 1
+  Tags: []
+  Duration: -1
+  Interval: 0.1
+  BuffType: 1
+  BuffStackType: 1
+  BuffRemoveType: 1
+  OnCreat: {fileID: 0}
+  OnRemove: {fileID: 0}
+  OnInvoke: {fileID: 11400000, guid: 2264961d54866144b9089c401b337ac0, type: 2}
+  OnHit: {fileID: 0}
+  OnBeHit: {fileID: 0}
+  OnKill: {fileID: 11400000, guid: b81594d295be71c4fab318fd0e2d6000, type: 2}
+  OnBekill: {fileID: 0}
+  MaxCountDown: 10
