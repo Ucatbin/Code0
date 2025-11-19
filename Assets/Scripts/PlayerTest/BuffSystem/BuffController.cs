@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ThisGame.Core;
-using ThisGame.Entity.EntitySystem;
 using UnityEngine;
 
 namespace ThisGame.Entity.BuffSystem
@@ -12,7 +11,7 @@ namespace ThisGame.Entity.BuffSystem
         protected Dictionary<Type, BuffModel> _models;
 
         [SerializeField] protected List<BuffModel> _activeBuffs;
-        [SerializeField] SortedSet<BuffModel> _buffHeap;
+        SortedSet<BuffModel> _buffHeap;
 
         public override void Initialize()
         {
@@ -27,9 +26,7 @@ namespace ThisGame.Entity.BuffSystem
         public void AddBuff<T>(T thisBuff, int stacks) where T : BuffModel
         {
             Type newBuffType = thisBuff.GetType();
-            BuffModel existingBuff = _activeBuffs
-                .Where(buff => buff != null)
-                .FirstOrDefault(buff => buff.GetType() == newBuffType);
+            BuffModel existingBuff = _activeBuffs.FirstOrDefault(buff => buff.GetType() == newBuffType);
 
             if (existingBuff != null && existingBuff.Data.BuffType != BuffType.Independent)
             {
