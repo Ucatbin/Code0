@@ -1,73 +1,91 @@
 fileFormatVersion: 2
-guid: 63bf4685ffd9bc64ca97112c9f5be22d
+guid: 9ad26f7000bc8654a99b8ff687022916
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3452003290241149812
-    second: img_v3_02r4_f03806c0-fefd-4591-8312-83383e51d71g_0
+      213: 7480294812703646717
+    second: img_v3_02rf_bc032d82-e26b-4d34-8bb5-0d7430226d1g_0
   - first:
-      213: -3775317607114347971
-    second: img_v3_02r4_f03806c0-fefd-4591-8312-83383e51d71g_1
+      213: -3022412171326952325
+    second: img_v3_02rf_bc032d82-e26b-4d34-8bb5-0d7430226d1g_1
   - first:
-      213: 6394368802040540498
-    second: img_v3_02r4_f03806c0-fefd-4591-8312-83383e51d71g_2
+      213: -2502407958273258532
+    second: img_v3_02rf_bc032d82-e26b-4d34-8bb5-0d7430226d1g_2
   - first:
-      213: 4368488948737008647
-    second: img_v3_02r4_f03806c0-fefd-4591-8312-83383e51d71g_3
+      213: -3514961314190040540
+    second: img_v3_02rf_bc032d82-e26b-4d34-8bb5-0d7430226d1g_3
   - first:
-      213: 8062853889502031775
-    second: img_v3_02r4_f03806c0-fefd-4591-8312-83383e51d71g_4
+      213: 7535749957418568906
+    second: img_v3_02rf_bc032d82-e26b-4d34-8bb5-0d7430226d1g_4
   - first:
-      213: -3233258610600498244
-    second: img_v3_02r4_f03806c0-fefd-4591-8312-83383e51d71g_5
+      213: -5964962669228464524
+    second: img_v3_02rf_bc032d82-e26b-4d34-8bb5-0d7430226d1g_5
   - first:
-      213: -7045600277485470088
-    second: img_v3_02r4_f03806c0-fefd-4591-8312-83383e51d71g_6
+      213: 2112948161748604142
+    second: img_v3_02rf_bc032d82-e26b-4d34-8bb5-0d7430226d1g_6
   - first:
-      213: 8252228545750997567
-    second: img_v3_02r4_f03806c0-fefd-4591-8312-83383e51d71g_7
+      213: -5982690921835380645
+    second: img_v3_02rf_bc032d82-e26b-4d34-8bb5-0d7430226d1g_7
   - first:
-      213: -3458063577346928908
-    second: img_v3_02r4_f03806c0-fefd-4591-8312-83383e51d71g_8
+      213: 6898605989177889264
+    second: img_v3_02rf_bc032d82-e26b-4d34-8bb5-0d7430226d1g_8
   - first:
-      213: -3445176469675359961
-    second: img_v3_02r4_f03806c0-fefd-4591-8312-83383e51d71g_9
+      213: -7390316677366677846
+    second: img_v3_02rf_bc032d82-e26b-4d34-8bb5-0d7430226d1g_9
   - first:
-      213: 1653171827826074503
-    second: img_v3_02r4_f03806c0-fefd-4591-8312-83383e51d71g_10
+      213: 6206618106251747939
+    second: img_v3_02rf_bc032d82-e26b-4d34-8bb5-0d7430226d1g_10
   - first:
-      213: -8994055996858871208
-    second: img_v3_02r4_f03806c0-fefd-4591-8312-83383e51d71g_11
+      213: 1357912918998637935
+    second: img_v3_02rf_bc032d82-e26b-4d34-8bb5-0d7430226d1g_11
   - first:
-      213: -8682088412891127910
-    second: img_v3_02r4_f03806c0-fefd-4591-8312-83383e51d71g_12
+      213: 7661554610503415388
+    second: img_v3_02rf_bc032d82-e26b-4d34-8bb5-0d7430226d1g_12
   - first:
-      213: -8204136951056042164
-    second: img_v3_02r4_f03806c0-fefd-4591-8312-83383e51d71g_13
+      213: -8250716133663044738
+    second: img_v3_02rf_bc032d82-e26b-4d34-8bb5-0d7430226d1g_13
   - first:
-      213: -6979589125218527472
-    second: img_v3_02r4_f03806c0-fefd-4591-8312-83383e51d71g_14
+      213: 1206740018480875222
+    second: img_v3_02rf_bc032d82-e26b-4d34-8bb5-0d7430226d1g_14
   - first:
-      213: 4838839520981471195
-    second: img_v3_02r4_f03806c0-fefd-4591-8312-83383e51d71g_15
+      213: -330310587217570261
+    second: img_v3_02rf_bc032d82-e26b-4d34-8bb5-0d7430226d1g_15
   - first:
-      213: 2009848398353553191
-    second: img_v3_02r4_f03806c0-fefd-4591-8312-83383e51d71g_16
+      213: 8205731683935171461
+    second: img_v3_02rf_bc032d82-e26b-4d34-8bb5-0d7430226d1g_16
   - first:
-      213: 8710851091787690208
-    second: img_v3_02r4_f03806c0-fefd-4591-8312-83383e51d71g_17
+      213: 2232313034777356553
+    second: img_v3_02rf_bc032d82-e26b-4d34-8bb5-0d7430226d1g_17
   - first:
-      213: 4363181034020858651
-    second: img_v3_02r4_f03806c0-fefd-4591-8312-83383e51d71g_18
+      213: -7511901103330531353
+    second: img_v3_02rf_bc032d82-e26b-4d34-8bb5-0d7430226d1g_18
   - first:
-      213: 3907684512618270026
-    second: img_v3_02r4_f03806c0-fefd-4591-8312-83383e51d71g_19
+      213: 4659021964130118184
+    second: img_v3_02rf_bc032d82-e26b-4d34-8bb5-0d7430226d1g_19
   - first:
-      213: -4094261737480212464
-    second: img_v3_02r4_f03806c0-fefd-4591-8312-83383e51d71g_20
+      213: -7174122513446017380
+    second: img_v3_02rf_bc032d82-e26b-4d34-8bb5-0d7430226d1g_20
   - first:
-      213: 5515917519747505615
-    second: img_v3_02r4_f03806c0-fefd-4591-8312-83383e51d71g_21
+      213: -3446802593957650586
+    second: img_v3_02rf_bc032d82-e26b-4d34-8bb5-0d7430226d1g_21
+  - first:
+      213: 1256240957086791805
+    second: img_v3_02rf_bc032d82-e26b-4d34-8bb5-0d7430226d1g_22
+  - first:
+      213: -7949027294387435192
+    second: img_v3_02rf_bc032d82-e26b-4d34-8bb5-0d7430226d1g_23
+  - first:
+      213: -6532448355914367329
+    second: img_v3_02rf_bc032d82-e26b-4d34-8bb5-0d7430226d1g_24
+  - first:
+      213: 6911627160616832561
+    second: img_v3_02rf_bc032d82-e26b-4d34-8bb5-0d7430226d1g_25
+  - first:
+      213: 8003037222180508554
+    second: img_v3_02rf_bc032d82-e26b-4d34-8bb5-0d7430226d1g_26
+  - first:
+      213: -1784058613337465965
+    second: img_v3_02rf_bc032d82-e26b-4d34-8bb5-0d7430226d1g_27
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -114,7 +132,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 48
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -138,7 +156,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -159,30 +177,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: P_Jump_0
+      name: Wizad_Attack_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 800
-        width: 200
-        height: 200
+        y: 384
+        width: 300
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -191,20 +196,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 919b75947858f7a4fbf67dd0cf1c2e0c
-      internalID: -1934689315
+      spriteID: 9ceb543ee0d75584586983f5cd01f437
+      internalID: -2122368786
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_Jump_1
+      name: Wizad_Attack_1
       rect:
         serializedVersion: 2
-        x: 200
-        y: 800
-        width: 200
-        height: 200
+        x: 300
+        y: 384
+        width: 300
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,42 +218,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5843168bcb477814481365ee920c38af
-      internalID: -800108144
+      spriteID: 822d9101167e1af43989d0fe8691a7ef
+      internalID: 174808294
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_Jump_2
-      rect:
-        serializedVersion: 2
-        x: 400
-        y: 800
-        width: 200
-        height: 200
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9e72eb2bfefac1e4da60185de645ecfa
-      internalID: -659064131
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: P_Jump_3
+      name: Wizad_Attack_2
       rect:
         serializedVersion: 2
         x: 600
-        y: 800
-        width: 200
-        height: 200
+        y: 384
+        width: 300
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -257,20 +240,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 687eca54f7292cf438d4ac4538f9407f
-      internalID: -766674075
+      spriteID: fd730335330e1c24ab7d529d42ec9cdf
+      internalID: -1177598922
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_Jump_4
+      name: Wizad_Attack_3
       rect:
         serializedVersion: 2
-        x: 800
-        y: 800
-        width: 200
-        height: 200
+        x: 900
+        y: 384
+        width: 300
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -279,20 +262,42 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3fcedea0d21903d41ae00afb4eb8df3b
-      internalID: 633222291
+      spriteID: 31515be9ff401db4383f3f5fd2bb1a0f
+      internalID: -240075838
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_Jump_5
+      name: Wizad_Attack_4
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 384
+        width: 300
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2ef0b9e94abb8a418b8183e4a4c955c
+      internalID: -1727476439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wizad_Attack_5
       rect:
         serializedVersion: 2
         x: 0
-        y: 600
-        width: 200
-        height: 200
+        y: 256
+        width: 300
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -301,20 +306,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 290db143f554f5640b11f726fef955f7
-      internalID: 807631842
+      spriteID: 102fe61fc0b361547aa3c2b384e978a9
+      internalID: -1449918486
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_Jump_6
+      name: Wizad_Attack_6
       rect:
         serializedVersion: 2
-        x: 200
-        y: 600
-        width: 200
-        height: 200
+        x: 300
+        y: 256
+        width: 300
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -323,42 +328,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 46c289f701faaa54883661643ede021a
-      internalID: 2086146415
+      spriteID: 62b4c62326b61d540bf2a9c65e02661b
+      internalID: -1212582311
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_Jump_7
-      rect:
-        serializedVersion: 2
-        x: 400
-        y: 600
-        width: 200
-        height: 200
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ca1a023b87c9473489991ff563279f88
-      internalID: -938495926
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: P_Jump_8
+      name: Wizad_Attack_7
       rect:
         serializedVersion: 2
         x: 600
-        y: 600
-        width: 200
-        height: 200
+        y: 256
+        width: 300
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -367,20 +350,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f2496e2c4defadc4eafbaf4c1ab534ce
-      internalID: -1158866816
+      spriteID: 9db62a1ec8a5c5d4ea46765766f0a849
+      internalID: 157925497
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_Jump_9
+      name: Wizad_Attack_8
       rect:
         serializedVersion: 2
-        x: 800
-        y: 600
-        width: 200
-        height: 200
+        x: 900
+        y: 256
+        width: 300
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -389,20 +372,42 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c363020e688a0ff4fb974ebb43767618
-      internalID: 177294893
+      spriteID: 0a49a19cc9559814e99afbba8cf202f7
+      internalID: -971745502
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_Jump_10
+      name: Wizad_Attack_9
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 256
+        width: 300
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5fd34e41e6a6945458b9011ab8d095c5
+      internalID: 256159893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wizad_Attack_10
       rect:
         serializedVersion: 2
         x: 0
-        y: 400
-        width: 200
-        height: 200
+        y: 128
+        width: 300
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -411,20 +416,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2b7ecafe88ccc4d469bba9a3b8753816
-      internalID: 1104885271
+      spriteID: 537d18c69fc2a7a47a404f7b8bc00366
+      internalID: -149781381
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_Jump_11
+      name: Wizad_Attack_11
       rect:
         serializedVersion: 2
-        x: 200
-        y: 400
-        width: 200
-        height: 200
+        x: 300
+        y: 128
+        width: 300
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -433,42 +438,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4073f8168192eed458b97bd16675eec0
-      internalID: -149492093
+      spriteID: cdd6d03a9102d9547be547d8b032ffd1
+      internalID: -1800315195
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_Jump_12
-      rect:
-        serializedVersion: 2
-        x: 400
-        y: 400
-        width: 200
-        height: 200
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3bfde718324b2384689433bfa6c296e8
-      internalID: 147968336
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: P_Jump_13
+      name: Wizad_Attack_12
       rect:
         serializedVersion: 2
         x: 600
-        y: 400
-        width: 200
-        height: 200
+        y: 128
+        width: 300
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -477,20 +460,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 09f6b5fe509787c4bb6ce4ec29d0f8cb
-      internalID: -359049744
+      spriteID: ad0ed935aa68cc245a741ec18f44d061
+      internalID: 1238438561
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_Jump_14
+      name: Wizad_Attack_13
       rect:
         serializedVersion: 2
-        x: 800
-        y: 400
-        width: 200
-        height: 200
+        x: 900
+        y: 128
+        width: 300
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -499,20 +482,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c64262df74bad8d45b925a0a97477e2e
-      internalID: -837458117
+      spriteID: e738d8041108dfb41978e5fa0fa7a0fc
+      internalID: -479339614
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_Jump_15
+      name: Wizad_Attack_14
       rect:
         serializedVersion: 2
-        x: 0
-        y: 200
-        width: 200
-        height: 200
+        x: 1200
+        y: 128
+        width: 300
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -521,108 +504,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5986907f4e1e5594eabea8bad26c6252
-      internalID: -715250818
+      spriteID: e32ea3126765a1e43add2a07b722d203
+      internalID: 637285612
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_Jump_16
-      rect:
-        serializedVersion: 2
-        x: 200
-        y: 200
-        width: 200
-        height: 200
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 284d93871d36b6540b241d411040b5e0
-      internalID: 522565490
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: P_Jump_17
-      rect:
-        serializedVersion: 2
-        x: 400
-        y: 200
-        width: 200
-        height: 200
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d0a971031a2b4e347a16daa2e1a5bfde
-      internalID: -1131585635
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: P_Jump_18
-      rect:
-        serializedVersion: 2
-        x: 600
-        y: 200
-        width: 200
-        height: 200
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6985c72f42f5c314c826a290821c22f2
-      internalID: 1588578254
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: P_Jump_19
-      rect:
-        serializedVersion: 2
-        x: 800
-        y: 200
-        width: 200
-        height: 200
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 090eefa8630e624468811923b0976bbb
-      internalID: -1465868157
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: P_Jump_20
+      name: Wizad_Attack_15
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 200
-        height: 200
+        width: 300
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -631,8 +526,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c1d2d05380d97f64085b257e3851818b
-      internalID: -1061391609
+      spriteID: ae0e1c448769f4f4188daa94b388de53
+      internalID: -2105781620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wizad_Attack_16
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 0
+        width: 300
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f064fa20cd53c349b8ff928418cd1a8
+      internalID: 429177578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wizad_Attack_17
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 0
+        width: 300
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98cb16a2c08ff3045a185b7b46356183
+      internalID: 1444157796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wizad_Attack_18
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 0
+        width: 300
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5124e062637dc9a4c9f263f25585aac5
+      internalID: -802100242
       vertices: []
       indices: 
       edges: []
@@ -641,7 +602,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 188d170b7f17f5b4f86167fd9c92d11f
+    spriteID: 73415a95259de2a498cb020671e11dbf
     internalID: 0
     vertices: []
     indices: 
@@ -651,27 +612,25 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      P_Jump_0: -1934689315
-      P_Jump_1: -800108144
-      P_Jump_10: 1104885271
-      P_Jump_11: -149492093
-      P_Jump_12: 147968336
-      P_Jump_13: -359049744
-      P_Jump_14: -837458117
-      P_Jump_15: -715250818
-      P_Jump_16: 522565490
-      P_Jump_17: -1131585635
-      P_Jump_18: 1588578254
-      P_Jump_19: -1465868157
-      P_Jump_2: -659064131
-      P_Jump_20: -1061391609
-      P_Jump_3: -766674075
-      P_Jump_4: 633222291
-      P_Jump_5: 807631842
-      P_Jump_6: 2086146415
-      P_Jump_7: -938495926
-      P_Jump_8: -1158866816
-      P_Jump_9: 177294893
+      Wizad_Attack_0: -2122368786
+      Wizad_Attack_1: 174808294
+      Wizad_Attack_10: -149781381
+      Wizad_Attack_11: -1800315195
+      Wizad_Attack_12: 1238438561
+      Wizad_Attack_13: -479339614
+      Wizad_Attack_14: 637285612
+      Wizad_Attack_15: -2105781620
+      Wizad_Attack_16: 429177578
+      Wizad_Attack_17: 1444157796
+      Wizad_Attack_18: -802100242
+      Wizad_Attack_2: -1177598922
+      Wizad_Attack_3: -240075838
+      Wizad_Attack_4: -1727476439
+      Wizad_Attack_5: -1449918486
+      Wizad_Attack_6: -1212582311
+      Wizad_Attack_7: 157925497
+      Wizad_Attack_8: -971745502
+      Wizad_Attack_9: 256159893
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

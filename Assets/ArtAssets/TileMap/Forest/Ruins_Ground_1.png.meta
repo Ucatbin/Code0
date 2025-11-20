@@ -1,37 +1,10 @@
 fileFormatVersion: 2
-guid: 9e40033c0b340524c8dc286dae5deddf
+guid: d7e252575fca8cb429a0b625237538de
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1107389251255476384
-    second: P_WallJump_0
-  - first:
-      213: -7699646700409757379
-    second: P_WallJump_1
-  - first:
-      213: 5763581224953485215
-    second: P_WallJump_2
-  - first:
-      213: 7752294562635913448
-    second: P_WallJump_3
-  - first:
-      213: -2631408994400085076
-    second: P_WallJump_4
-  - first:
-      213: 8080979862868044161
-    second: P_WallJump_5
-  - first:
-      213: 979823010595793269
-    second: P_WallJump_6
-  - first:
-      213: -1196819359829276957
-    second: P_WallJump_7
-  - first:
-      213: 4462602083278934248
-    second: P_WallJump_8
-  - first:
-      213: 5961025563058608086
-    second: P_WallJump_9
+      213: 6242920381699216795
+    second: "\u5FAE\u4FE1\u56FE\u7247_20251120094846_279_5_0"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -64,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -102,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -123,238 +96,203 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: P_WallJump_0
+      name: Ruins_Ground_1_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 400
-        width: 200
-        height: 200
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 0a02b2528ac3e5f00800000000000000
-      internalID: 1107389251255476384
+      spriteID: d1fa9afc7d156564db7fd7497216405e
+      internalID: 51773256
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_WallJump_1
+      name: Ruins_Ground_1_1
       rect:
         serializedVersion: 2
-        x: 200
-        y: 400
-        width: 200
-        height: 200
+        x: 32
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: d316116de1c552590800000000000000
-      internalID: -7699646700409757379
+      spriteID: e5a7c1367dd9d6241bc5c092b1e838bf
+      internalID: 1050310631
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_WallJump_2
+      name: Ruins_Ground_1_2
       rect:
         serializedVersion: 2
-        x: 400
-        y: 400
-        width: 200
-        height: 200
+        x: 64
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: f97967b569a5cff40800000000000000
-      internalID: 5763581224953485215
+      spriteID: e4ccd346e6940e64fbd2bba2b695a7b4
+      internalID: -2146605392
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_WallJump_3
-      rect:
-        serializedVersion: 2
-        x: 600
-        y: 400
-        width: 200
-        height: 200
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8e81b10d4dea59b60800000000000000
-      internalID: 7752294562635913448
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: P_WallJump_4
+      name: Ruins_Ground_1_3
       rect:
         serializedVersion: 2
         x: 0
-        y: 200
-        width: 200
-        height: 200
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: cabd30e167b5b7bd0800000000000000
-      internalID: -2631408994400085076
+      spriteID: 6224dbff0e201c1488193f1f4c645266
+      internalID: -1658102558
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_WallJump_5
+      name: Ruins_Ground_1_4
       rect:
         serializedVersion: 2
-        x: 200
-        y: 200
-        width: 200
-        height: 200
+        x: 32
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 189a553de58652070800000000000000
-      internalID: 8080979862868044161
+      spriteID: 76aa739301e9256469f14656a79d71eb
+      internalID: 1279351967
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_WallJump_6
+      name: Ruins_Ground_1_5
       rect:
         serializedVersion: 2
-        x: 400
-        y: 200
-        width: 200
-        height: 200
+        x: 64
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 579e05936d7099d00800000000000000
-      internalID: 979823010595793269
+      spriteID: 677542645083fae40a2c8debce1caa3e
+      internalID: 1822793599
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_WallJump_7
-      rect:
-        serializedVersion: 2
-        x: 600
-        y: 200
-        width: 200
-        height: 200
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3e6c01d122b046fe0800000000000000
-      internalID: -1196819359829276957
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: P_WallJump_8
+      name: Ruins_Ground_1_6
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 200
-        height: 200
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 8e052cb63f85eed30800000000000000
-      internalID: 4462602083278934248
+      spriteID: d3478d32062950f42a04b46719a12c58
+      internalID: 1269555658
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_WallJump_9
+      name: Ruins_Ground_1_7
       rect:
         serializedVersion: 2
-        x: 200
+        x: 32
         y: 0
-        width: 200
-        height: 200
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 6d7912faa21d9b250800000000000000
-      internalID: 5961025563058608086
+      spriteID: 185932410486f324d88a2b976ce48470
+      internalID: 989938514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ruins_Ground_1_8
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 355cf9fd9830c5e4d8cbd644053cc7a0
+      internalID: 1374278783
       vertices: []
       indices: 
       edges: []
@@ -363,7 +301,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: a64c55f15840fb94898c37e5a6a2d20d
+    spriteID: c1988dad8d8ed2a4aad640fb1aa8c3b8
     internalID: 0
     vertices: []
     indices: 
@@ -373,16 +311,15 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      P_WallJump_0: 1107389251255476384
-      P_WallJump_1: -7699646700409757379
-      P_WallJump_2: 5763581224953485215
-      P_WallJump_3: 7752294562635913448
-      P_WallJump_4: -2631408994400085076
-      P_WallJump_5: 8080979862868044161
-      P_WallJump_6: 979823010595793269
-      P_WallJump_7: -1196819359829276957
-      P_WallJump_8: 4462602083278934248
-      P_WallJump_9: 5961025563058608086
+      Ruins_Ground_1_0: 51773256
+      Ruins_Ground_1_1: 1050310631
+      Ruins_Ground_1_2: -2146605392
+      Ruins_Ground_1_3: -1658102558
+      Ruins_Ground_1_4: 1279351967
+      Ruins_Ground_1_5: 1822793599
+      Ruins_Ground_1_6: 1269555658
+      Ruins_Ground_1_7: 989938514
+      Ruins_Ground_1_8: 1374278783
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

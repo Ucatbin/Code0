@@ -1,0 +1,825 @@
+fileFormatVersion: 2
+guid: a4f343e539c58724684cc478b9b43ea4
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6596823217742804479
+    second: img_v3_02r5_2f46c02d-e319-4b66-9b5a-069991dfab8g_0
+  - first:
+      213: -2975149746645308537
+    second: img_v3_02r5_2f46c02d-e319-4b66-9b5a-069991dfab8g_1
+  - first:
+      213: -920819705096627356
+    second: img_v3_02r5_2f46c02d-e319-4b66-9b5a-069991dfab8g_2
+  - first:
+      213: -5434388200982037073
+    second: img_v3_02r5_2f46c02d-e319-4b66-9b5a-069991dfab8g_3
+  - first:
+      213: 8458230036387303830
+    second: img_v3_02r5_2f46c02d-e319-4b66-9b5a-069991dfab8g_4
+  - first:
+      213: -8149547774030248083
+    second: img_v3_02r5_2f46c02d-e319-4b66-9b5a-069991dfab8g_5
+  - first:
+      213: 7259618420602366781
+    second: img_v3_02r5_2f46c02d-e319-4b66-9b5a-069991dfab8g_6
+  - first:
+      213: -3314421084805449224
+    second: img_v3_02r5_2f46c02d-e319-4b66-9b5a-069991dfab8g_7
+  - first:
+      213: -3881633389161214423
+    second: img_v3_02r5_2f46c02d-e319-4b66-9b5a-069991dfab8g_8
+  - first:
+      213: -3496272668765819030
+    second: img_v3_02r5_2f46c02d-e319-4b66-9b5a-069991dfab8g_9
+  - first:
+      213: 8077631078882036501
+    second: img_v3_02r5_2f46c02d-e319-4b66-9b5a-069991dfab8g_10
+  - first:
+      213: -6455330250717466647
+    second: img_v3_02r5_2f46c02d-e319-4b66-9b5a-069991dfab8g_11
+  - first:
+      213: -2075925651807681909
+    second: img_v3_02r5_2f46c02d-e319-4b66-9b5a-069991dfab8g_12
+  - first:
+      213: -15906365258768419
+    second: img_v3_02r5_2f46c02d-e319-4b66-9b5a-069991dfab8g_13
+  - first:
+      213: 4103382434317698917
+    second: img_v3_02r5_2f46c02d-e319-4b66-9b5a-069991dfab8g_14
+  - first:
+      213: 2278389309381239692
+    second: img_v3_02r5_2f46c02d-e319-4b66-9b5a-069991dfab8g_15
+  - first:
+      213: 5172620730407402675
+    second: img_v3_02r5_2f46c02d-e319-4b66-9b5a-069991dfab8g_16
+  - first:
+      213: 7212126378955775159
+    second: img_v3_02r5_2f46c02d-e319-4b66-9b5a-069991dfab8g_17
+  - first:
+      213: 2440839494768103986
+    second: img_v3_02r5_2f46c02d-e319-4b66-9b5a-069991dfab8g_18
+  - first:
+      213: -6209654274672660632
+    second: img_v3_02r5_2f46c02d-e319-4b66-9b5a-069991dfab8g_19
+  - first:
+      213: 7649529910591148660
+    second: img_v3_02r5_2f46c02d-e319-4b66-9b5a-069991dfab8g_20
+  - first:
+      213: 6215632971539127134
+    second: img_v3_02r5_2f46c02d-e319-4b66-9b5a-069991dfab8g_21
+  - first:
+      213: -915456364502956239
+    second: img_v3_02r5_2f46c02d-e319-4b66-9b5a-069991dfab8g_22
+  - first:
+      213: -1453450135390774516
+    second: img_v3_02r5_2f46c02d-e319-4b66-9b5a-069991dfab8g_23
+  - first:
+      213: -4885964395901111735
+    second: img_v3_02r5_2f46c02d-e319-4b66-9b5a-069991dfab8g_24
+  - first:
+      213: 606406395692719412
+    second: img_v3_02r5_2f46c02d-e319-4b66-9b5a-069991dfab8g_25
+  - first:
+      213: -8199301229432261344
+    second: img_v3_02r5_2f46c02d-e319-4b66-9b5a-069991dfab8g_26
+  - first:
+      213: -8552233562875982433
+    second: img_v3_02r5_2f46c02d-e319-4b66-9b5a-069991dfab8g_27
+  - first:
+      213: 146799601864038364
+    second: img_v3_02r5_2f46c02d-e319-4b66-9b5a-069991dfab8g_28
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: DistanceAttack_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 512
+        width: 300
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfe161cb51138fc4286766b2c0e9ff78
+      internalID: -513816118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DistanceAttack_1
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 512
+        width: 300
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 404c7cc9ca3da5c4baf521d141a74cfd
+      internalID: 1681361507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DistanceAttack_2
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 512
+        width: 300
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d8cfd6b7cacf3d4e889436945f7d2ab
+      internalID: -1217355249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DistanceAttack_3
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 512
+        width: 300
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04248587e6a0b9c4eb1e901530a969e6
+      internalID: -337074997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DistanceAttack_4
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 512
+        width: 300
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c0b07dbf9128b14b9e687985cd986a2
+      internalID: -1205441205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DistanceAttack_5
+      rect:
+        serializedVersion: 2
+        x: 1500
+        y: 512
+        width: 300
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6acb39c0475d8b49b242e6c38cddd38
+      internalID: -507850593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DistanceAttack_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 384
+        width: 300
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb8131266fba4894080a0aedb2fec019
+      internalID: -72757594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DistanceAttack_7
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 384
+        width: 300
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cdf1e2a66d4f1544c898997fa2961917
+      internalID: 1520199436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DistanceAttack_8
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 384
+        width: 300
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15ce5e2922cbb6443be477b1a32bfd54
+      internalID: 1127986106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DistanceAttack_9
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 384
+        width: 300
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb7975029d627ca4699f34334d7cb102
+      internalID: 837590220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DistanceAttack_10
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 384
+        width: 300
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 598f018706f54a648bb03a7e4fc1b04b
+      internalID: -1780392267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DistanceAttack_11
+      rect:
+        serializedVersion: 2
+        x: 1500
+        y: 384
+        width: 300
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53d366676ac9fb34a998e024ebc43b35
+      internalID: 1786680003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DistanceAttack_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 300
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c30162a98aa9794887c21d19566529e
+      internalID: -1808344636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DistanceAttack_13
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 256
+        width: 300
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85a65fb77d344ec47966dd87b3efc5fe
+      internalID: 1005595231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DistanceAttack_14
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 256
+        width: 300
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37481d9b85642e64db9cd2de8f7b46c9
+      internalID: 1837914142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DistanceAttack_15
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 256
+        width: 300
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91ca84941576c3141a9b642f61034523
+      internalID: -1115030409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DistanceAttack_16
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 256
+        width: 300
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ef52df318e8e984395449522bc744dc
+      internalID: -1989552940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DistanceAttack_17
+      rect:
+        serializedVersion: 2
+        x: 1500
+        y: 256
+        width: 300
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 096f96a8fd129774380fdf099d41c0a3
+      internalID: -270861159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DistanceAttack_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 300
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd902068266d15b4c9e0e461d62e1953
+      internalID: -216580918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DistanceAttack_19
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 128
+        width: 300
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e2f692b0b12b8c43b6ecf3775ddd734
+      internalID: -141534629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DistanceAttack_20
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 128
+        width: 300
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7bd4aaa627670394fa677f430e5549ab
+      internalID: 2023992610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DistanceAttack_21
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 128
+        width: 300
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c88f0fbe0b24375449232f98107c5ff4
+      internalID: 1239446025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DistanceAttack_22
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 128
+        width: 300
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df5f9cdd6e40937419962962df1f8d08
+      internalID: 2000335559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DistanceAttack_23
+      rect:
+        serializedVersion: 2
+        x: 1500
+        y: 128
+        width: 300
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21ad5f8f65cc2174eafb13c01b73b9f6
+      internalID: -506814453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DistanceAttack_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 300
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ce03b418ede4834daaf45a551cbf75c
+      internalID: 1827878388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DistanceAttack_25
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 0
+        width: 300
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed9239e9a9bd0e64bad59f2e438ae6e5
+      internalID: -1716490385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DistanceAttack_26
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 0
+        width: 300
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4708566e6287d6842b8d6304f59f7630
+      internalID: -1600483049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 93321ecad002b0f4a8fbc04b0707b1da
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      DistanceAttack_0: -513816118
+      DistanceAttack_1: 1681361507
+      DistanceAttack_10: -1780392267
+      DistanceAttack_11: 1786680003
+      DistanceAttack_12: -1808344636
+      DistanceAttack_13: 1005595231
+      DistanceAttack_14: 1837914142
+      DistanceAttack_15: -1115030409
+      DistanceAttack_16: -1989552940
+      DistanceAttack_17: -270861159
+      DistanceAttack_18: -216580918
+      DistanceAttack_19: -141534629
+      DistanceAttack_2: -1217355249
+      DistanceAttack_20: 2023992610
+      DistanceAttack_21: 1239446025
+      DistanceAttack_22: 2000335559
+      DistanceAttack_23: -506814453
+      DistanceAttack_24: 1827878388
+      DistanceAttack_25: -1716490385
+      DistanceAttack_26: -1600483049
+      DistanceAttack_3: -337074997
+      DistanceAttack_4: -1205441205
+      DistanceAttack_5: -507850593
+      DistanceAttack_6: -72757594
+      DistanceAttack_7: 1520199436
+      DistanceAttack_8: 1127986106
+      DistanceAttack_9: 837590220
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

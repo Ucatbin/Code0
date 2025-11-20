@@ -1,37 +1,43 @@
 fileFormatVersion: 2
-guid: 9e40033c0b340524c8dc286dae5deddf
+guid: 37e1166e33179554388443403edeee6b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1107389251255476384
-    second: P_WallJump_0
+      213: -8397047481134746239
+    second: img_v3_02rf_e74e696f-d9de-45c3-b204-cbaee2ebe53g_0
   - first:
-      213: -7699646700409757379
-    second: P_WallJump_1
+      213: -5968639151394161168
+    second: img_v3_02rf_e74e696f-d9de-45c3-b204-cbaee2ebe53g_1
   - first:
-      213: 5763581224953485215
-    second: P_WallJump_2
+      213: -1571922789188526663
+    second: img_v3_02rf_e74e696f-d9de-45c3-b204-cbaee2ebe53g_2
   - first:
-      213: 7752294562635913448
-    second: P_WallJump_3
+      213: -7784589785039671342
+    second: img_v3_02rf_e74e696f-d9de-45c3-b204-cbaee2ebe53g_3
   - first:
-      213: -2631408994400085076
-    second: P_WallJump_4
+      213: -3706214734670202797
+    second: img_v3_02rf_e74e696f-d9de-45c3-b204-cbaee2ebe53g_4
   - first:
-      213: 8080979862868044161
-    second: P_WallJump_5
+      213: -2981971336473277875
+    second: img_v3_02rf_e74e696f-d9de-45c3-b204-cbaee2ebe53g_5
   - first:
-      213: 979823010595793269
-    second: P_WallJump_6
+      213: -9115819978116326681
+    second: img_v3_02rf_e74e696f-d9de-45c3-b204-cbaee2ebe53g_6
   - first:
-      213: -1196819359829276957
-    second: P_WallJump_7
+      213: 3113776233197068865
+    second: img_v3_02rf_e74e696f-d9de-45c3-b204-cbaee2ebe53g_7
   - first:
-      213: 4462602083278934248
-    second: P_WallJump_8
+      213: -7546744484011193066
+    second: img_v3_02rf_e74e696f-d9de-45c3-b204-cbaee2ebe53g_8
   - first:
-      213: 5961025563058608086
-    second: P_WallJump_9
+      213: -9031405465568612423
+    second: img_v3_02rf_e74e696f-d9de-45c3-b204-cbaee2ebe53g_9
+  - first:
+      213: -3363704079988415530
+    second: img_v3_02rf_e74e696f-d9de-45c3-b204-cbaee2ebe53g_10
+  - first:
+      213: -7539942891604715156
+    second: img_v3_02rf_e74e696f-d9de-45c3-b204-cbaee2ebe53g_11
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -78,7 +84,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 48
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -102,7 +108,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -123,238 +129,269 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: P_WallJump_0
+      name: Wizard_Walk_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 400
-        width: 200
-        height: 200
+        y: 256
+        width: 300
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 0a02b2528ac3e5f00800000000000000
-      internalID: 1107389251255476384
+      spriteID: 2265a59b54dc4cb4b92272e629a92f4e
+      internalID: -1099519654
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_WallJump_1
+      name: Wizard_Walk_1
       rect:
         serializedVersion: 2
-        x: 200
-        y: 400
-        width: 200
-        height: 200
+        x: 300
+        y: 256
+        width: 300
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: d316116de1c552590800000000000000
-      internalID: -7699646700409757379
+      spriteID: ef6f659aecf60e24eae6a60894fcec93
+      internalID: -1464465881
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_WallJump_2
-      rect:
-        serializedVersion: 2
-        x: 400
-        y: 400
-        width: 200
-        height: 200
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f97967b569a5cff40800000000000000
-      internalID: 5763581224953485215
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: P_WallJump_3
+      name: Wizard_Walk_2
       rect:
         serializedVersion: 2
         x: 600
-        y: 400
-        width: 200
-        height: 200
+        y: 256
+        width: 300
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 8e81b10d4dea59b60800000000000000
-      internalID: 7752294562635913448
+      spriteID: c37ebf98ff5a0d0408b3d19d9a2801aa
+      internalID: -275961278
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_WallJump_4
+      name: Wizard_Walk_3
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 256
+        width: 300
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1fd4c4f64161bc418b17daaeb67c418
+      internalID: -701613965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wizard_Walk_4
       rect:
         serializedVersion: 2
         x: 0
-        y: 200
-        width: 200
-        height: 200
+        y: 128
+        width: 300
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: cabd30e167b5b7bd0800000000000000
-      internalID: -2631408994400085076
+      spriteID: b5809a31667ea8440a9265f4871a00b1
+      internalID: 1104315065
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_WallJump_5
+      name: Wizard_Walk_5
       rect:
         serializedVersion: 2
-        x: 200
-        y: 200
-        width: 200
-        height: 200
+        x: 300
+        y: 128
+        width: 300
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 189a553de58652070800000000000000
-      internalID: 8080979862868044161
+      spriteID: c387ca9cacb91c841bcb029cc3875ed2
+      internalID: -1483513585
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_WallJump_6
-      rect:
-        serializedVersion: 2
-        x: 400
-        y: 200
-        width: 200
-        height: 200
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 579e05936d7099d00800000000000000
-      internalID: 979823010595793269
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: P_WallJump_7
+      name: Wizard_Walk_6
       rect:
         serializedVersion: 2
         x: 600
-        y: 200
-        width: 200
-        height: 200
+        y: 128
+        width: 300
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 3e6c01d122b046fe0800000000000000
-      internalID: -1196819359829276957
+      spriteID: e0c4ae512d14c6a479cc0bd0aa27be46
+      internalID: 971347085
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_WallJump_8
+      name: Wizard_Walk_7
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 128
+        width: 300
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6481b3daae6a3b45a8f6a1568000f1a
+      internalID: -602982509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wizard_Walk_8
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 200
-        height: 200
+        width: 300
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 8e052cb63f85eed30800000000000000
-      internalID: 4462602083278934248
+      spriteID: b4a2f52343461dd49b04f4cf3bcd466b
+      internalID: 1648979453
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_WallJump_9
+      name: Wizard_Walk_9
       rect:
         serializedVersion: 2
-        x: 200
+        x: 300
         y: 0
-        width: 200
-        height: 200
+        width: 300
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 6d7912faa21d9b250800000000000000
-      internalID: 5961025563058608086
+      spriteID: 25c572a2796d257408282c778657b585
+      internalID: -1196045267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wizard_Walk_10
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 0
+        width: 300
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e59c38c5a50ac6343a506160a10225ef
+      internalID: -1543279463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wizard_Walk_11
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 0
+        width: 300
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa662d174e2a2014ab2ea1c50c0bfa0a
+      internalID: 223572324
       vertices: []
       indices: 
       edges: []
@@ -363,7 +400,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: a64c55f15840fb94898c37e5a6a2d20d
+    spriteID: e24879862801ab5449c5d8884d7b97e4
     internalID: 0
     vertices: []
     indices: 
@@ -373,16 +410,18 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      P_WallJump_0: 1107389251255476384
-      P_WallJump_1: -7699646700409757379
-      P_WallJump_2: 5763581224953485215
-      P_WallJump_3: 7752294562635913448
-      P_WallJump_4: -2631408994400085076
-      P_WallJump_5: 8080979862868044161
-      P_WallJump_6: 979823010595793269
-      P_WallJump_7: -1196819359829276957
-      P_WallJump_8: 4462602083278934248
-      P_WallJump_9: 5961025563058608086
+      Wizard_Walk_0: -1099519654
+      Wizard_Walk_1: -1464465881
+      Wizard_Walk_10: -1543279463
+      Wizard_Walk_11: 223572324
+      Wizard_Walk_2: -275961278
+      Wizard_Walk_3: -701613965
+      Wizard_Walk_4: 1104315065
+      Wizard_Walk_5: -1483513585
+      Wizard_Walk_6: 971347085
+      Wizard_Walk_7: -602982509
+      Wizard_Walk_8: 1648979453
+      Wizard_Walk_9: -1196045267
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

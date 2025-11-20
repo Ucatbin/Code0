@@ -12,6 +12,7 @@ public class EnemyController : MonoBehaviour
 
     [Header("Configs")]
     public Transform target;
+    public EnemyAnimationController enemyAnimationController;
     public EnemyMoveRange moveRange;
     public EnemyEyeSight sight;
     public EnemyAttackRange attackRange;
@@ -33,6 +34,7 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
+        enemyAnimationController.enemy = this;
         moveRange.enemy = this;
         sight.enemy = this;
         attackRange.enemy = this;
