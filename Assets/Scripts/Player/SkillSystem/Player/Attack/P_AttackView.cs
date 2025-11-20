@@ -10,6 +10,7 @@ namespace ThisGame.Entity.SkillSystem
     public class P_AttackView : SkillView
     {
         [SerializeField] PlayerController _player;
+        [SerializeField] Animator _anim;
         [SerializeField] Collider2D _attackCollider;
         [SerializeField] LayerMask _canHit;
         List<Collider2D> _hitTargets = new List<Collider2D>();
@@ -38,12 +39,14 @@ namespace ThisGame.Entity.SkillSystem
             switch (@event.AttackEventType)
             {
                 case AttackEventType.ColliderEnable:
+                    _anim.SetTrigger("StartTrigger");
                     _attackCollider.enabled = true;
                     break;
                 case AttackEventType.ColliderDisable:
                     _attackCollider.enabled = false;
                     break;
             }
+
         }
         void OnTriggerEnter2D(Collider2D other)
         {
