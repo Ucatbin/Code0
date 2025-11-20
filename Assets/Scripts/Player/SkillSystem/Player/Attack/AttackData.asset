@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AttackData
   m_EditorClassIdentifier: 
   MaxLevel: 1
-  CoolDown: 0.4
+  CoolDown: 0.25
   MaxCharges: -1
   IsUnlocked: 1
   AttackDuration: 0.33

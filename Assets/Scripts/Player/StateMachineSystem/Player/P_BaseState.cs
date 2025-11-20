@@ -138,7 +138,10 @@ namespace ThisGame.Entity.StateMachineSystem
         {
             @event.Skill.HandleSkillButtonPressed(@event);
         }
-        protected virtual void HandleGrappingHookExecute(P_Skill_GrappingHookExecute @event) { }
+        protected virtual void HandleGrappingHookExecute(P_Skill_GrappingHookExecute @event)
+        {
+            _stateMachine.ChangeState<P_HookedState>();
+        }
         protected virtual void HandleGrappingHookRelease(P_Skill_GrappingHookReleased @event)
         {
             _player.Joint.enabled = false;

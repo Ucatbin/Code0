@@ -21,6 +21,7 @@ namespace ThisGame.Entity.StateMachineSystem
             typeof(P_Skill_AttackPressed),
             typeof(P_Skill_AttackExecute),
             typeof(P_Skill_GrappingHookPressed),
+            typeof(P_Skill_GrappingHookExecute),
         };
 
         public override void Enter()

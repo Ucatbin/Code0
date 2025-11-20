@@ -1,37 +1,40 @@
 fileFormatVersion: 2
-guid: 9e40033c0b340524c8dc286dae5deddf
+guid: c12825db30137c64cb24f126188f1fed
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1107389251255476384
-    second: P_WallJump_0
+      213: 8213388115735736581
+    second: "\u94A9\u722A\u53D1\u5C04_0"
   - first:
-      213: -7699646700409757379
-    second: P_WallJump_1
+      213: 2040106549946801761
+    second: "\u94A9\u722A\u53D1\u5C04_1"
   - first:
-      213: 5763581224953485215
-    second: P_WallJump_2
+      213: -2036804583806923953
+    second: "\u94A9\u722A\u53D1\u5C04_2"
   - first:
-      213: 7752294562635913448
-    second: P_WallJump_3
+      213: -7214785516353606856
+    second: "\u94A9\u722A\u53D1\u5C04_3"
   - first:
-      213: -2631408994400085076
-    second: P_WallJump_4
+      213: 2584567167572789978
+    second: "\u94A9\u722A\u53D1\u5C04_4"
   - first:
-      213: 8080979862868044161
-    second: P_WallJump_5
+      213: 560508576842885232
+    second: "\u94A9\u722A\u53D1\u5C04_5"
   - first:
-      213: 979823010595793269
-    second: P_WallJump_6
+      213: 7314181157851160125
+    second: "\u94A9\u722A\u53D1\u5C04_6"
   - first:
-      213: -1196819359829276957
-    second: P_WallJump_7
+      213: 9199390483730285922
+    second: "\u94A9\u722A\u53D1\u5C04_7"
   - first:
-      213: 4462602083278934248
-    second: P_WallJump_8
+      213: -4083481066868764621
+    second: "\u94A9\u722A\u53D1\u5C04_8"
   - first:
-      213: 5961025563058608086
-    second: P_WallJump_9
+      213: 6330320841103504758
+    second: "\u94A9\u722A\u53D1\u5C04_9"
+  - first:
+      213: 3153853345245310668
+    second: "\u94A9\u722A\u53D1\u5C04_10"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -64,7 +67,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -102,7 +105,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -123,24 +126,11 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: P_WallJump_0
+      name: P_GrappingHookStart_0
       rect:
         serializedVersion: 2
         x: 0
@@ -153,16 +143,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 0a02b2528ac3e5f00800000000000000
-      internalID: 1107389251255476384
+      spriteID: f7a60b7b87145a64f9de1cb3b1dba738
+      internalID: -1315391797
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_WallJump_1
+      name: P_GrappingHookStart_1
       rect:
         serializedVersion: 2
         x: 200
@@ -175,16 +165,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: d316116de1c552590800000000000000
-      internalID: -7699646700409757379
+      spriteID: 94e9c168dab0b0f4ba22060a67a453fc
+      internalID: 691201025
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_WallJump_2
+      name: P_GrappingHookStart_2
       rect:
         serializedVersion: 2
         x: 400
@@ -197,38 +187,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: f97967b569a5cff40800000000000000
-      internalID: 5763581224953485215
+      spriteID: 97b2d26a47ab03041b026bebfa4030d3
+      internalID: -224171501
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_WallJump_3
-      rect:
-        serializedVersion: 2
-        x: 600
-        y: 400
-        width: 200
-        height: 200
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8e81b10d4dea59b60800000000000000
-      internalID: 7752294562635913448
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: P_WallJump_4
+      name: P_GrappingHookStart_3
       rect:
         serializedVersion: 2
         x: 0
@@ -241,16 +209,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: cabd30e167b5b7bd0800000000000000
-      internalID: -2631408994400085076
+      spriteID: 5ace0d4d91f4b8741901497f2faa9bae
+      internalID: 1370069767
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_WallJump_5
+      name: P_GrappingHookStart_4
       rect:
         serializedVersion: 2
         x: 200
@@ -263,16 +231,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 189a553de58652070800000000000000
-      internalID: 8080979862868044161
+      spriteID: 7e573470e33425d49bd922aa805dc42e
+      internalID: -1876423408
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_WallJump_6
+      name: P_GrappingHookStart_5
       rect:
         serializedVersion: 2
         x: 400
@@ -285,38 +253,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 579e05936d7099d00800000000000000
-      internalID: 979823010595793269
+      spriteID: 1aad6e571f5f7c0459a7ee34f790faaa
+      internalID: -1984231654
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_WallJump_7
-      rect:
-        serializedVersion: 2
-        x: 600
-        y: 200
-        width: 200
-        height: 200
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3e6c01d122b046fe0800000000000000
-      internalID: -1196819359829276957
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: P_WallJump_8
+      name: P_GrappingHookStart_6
       rect:
         serializedVersion: 2
         x: 0
@@ -329,16 +275,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 8e052cb63f85eed30800000000000000
-      internalID: 4462602083278934248
+      spriteID: dcff7a81e9f8c9a4b8c6fa5919c1de4f
+      internalID: 2127415185
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_WallJump_9
+      name: P_GrappingHookStart_7
       rect:
         serializedVersion: 2
         x: 200
@@ -351,10 +297,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 6d7912faa21d9b250800000000000000
-      internalID: 5961025563058608086
+      spriteID: 85e7e58dd81a90540af37eb3cbb12093
+      internalID: 1335218465
       vertices: []
       indices: 
       edges: []
@@ -363,7 +309,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: a64c55f15840fb94898c37e5a6a2d20d
+    spriteID: f24e95e3b967bdd4eb97974b4fe49a06
     internalID: 0
     vertices: []
     indices: 
@@ -373,16 +319,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      P_WallJump_0: 1107389251255476384
-      P_WallJump_1: -7699646700409757379
-      P_WallJump_2: 5763581224953485215
-      P_WallJump_3: 7752294562635913448
-      P_WallJump_4: -2631408994400085076
-      P_WallJump_5: 8080979862868044161
-      P_WallJump_6: 979823010595793269
-      P_WallJump_7: -1196819359829276957
-      P_WallJump_8: 4462602083278934248
-      P_WallJump_9: 5961025563058608086
+      P_GrappingHookStart_0: -1315391797
+      P_GrappingHookStart_1: 691201025
+      P_GrappingHookStart_2: -224171501
+      P_GrappingHookStart_3: 1370069767
+      P_GrappingHookStart_4: -1876423408
+      P_GrappingHookStart_5: -1984231654
+      P_GrappingHookStart_6: 2127415185
+      P_GrappingHookStart_7: 1335218465
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
