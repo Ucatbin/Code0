@@ -1,4 +1,5 @@
 using System;
+using ThisGame.Core;
 using ThisGame.Core.CheckerSystem;
 using ThisGame.Entity.EntitySystem;
 using ThisGame.Entity.MoveSystem;
@@ -28,6 +29,14 @@ namespace ThisGame.Entity.StateMachineSystem
         {
             base.Enter();
 
+            if ((_skill.HookPoint.transform.position.x - _player.transform.position.x) * _player.FacingDir < 0)
+            {
+                var viewFlip = new ViewFlip()
+                {
+                    FacingDir = -_player.FacingDir
+                };
+                EventBus.Publish(viewFlip);
+            }
             _player.Rb.gravityScale = 4f;
             _player.Joint.connectedBody = _skill.HookPoint.GetComponent<Rigidbody2D>();
             _player.Joint.distance = Vector2.Distance(_player.transform.position, _skill.HookPoint.transform.position);
@@ -42,7 +51,7 @@ namespace ThisGame.Entity.StateMachineSystem
 
         public override void LogicUpdate()
         {
-
+            _player.View.Animator.SetFloat("HookedDir", _player.FacingDir * _player.Rb.linearVelocityX);
         }
         public override void PhysicsUpdate()
         {

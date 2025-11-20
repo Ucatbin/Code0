@@ -9,8 +9,7 @@ namespace ThisGame.Entity.EntitySystem
 
         void OnEnable()
         {
-            EventBus.Subscribe<ViewFlip>(this, HandleFlip);
-            EventBus.Subscribe<StateChange>(this, HandleStateChange);
+
         }
         void OnDisable()
         {
@@ -21,8 +20,9 @@ namespace ThisGame.Entity.EntitySystem
             Animator.SetBool(@event.LastStateAnim, false);
             Animator.SetBool(@event.NewStateAnim, true);
         }
-        public void HandleFlip(ViewFlip @event)
+        public void HandleFlip(ViewFlip @event, PlayerController player)
         {
+            player.Flip();
             var scale = transform.localScale;
             scale.x = @event.FacingDir == 1 ? 1 : -1;
             transform.localScale = scale;

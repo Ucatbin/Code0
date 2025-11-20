@@ -19,6 +19,12 @@ namespace ThisGame.Entity.EntitySystem
         {
             EventBus.Subscribe<MoveButtonPressed>(this, HandleMovePressed);
             EventBus.Subscribe<MoveButtonRelease>(this, HandleMoveRelease);
+
+            EventBus.Subscribe<ViewFlip>(this, (viewFlipEvent) => 
+            {
+                View.HandleFlip(viewFlipEvent, this);
+            });
+            EventBus.Subscribe<StateChange>(this, View.HandleStateChange);
         }
         void OnDisable()
         {
@@ -54,10 +60,9 @@ namespace ThisGame.Entity.EntitySystem
             _inputValue = @event.MoveDirection;
             if (_inputValue.x * FacingDir < 0)
             {
-                _facingDir *= -1;
                 var viewFlip = new ViewFlip
                 {
-                    FacingDir = _facingDir
+                    FacingDir = -_facingDir
                 };
                 EventBus.Publish(viewFlip);
             }
