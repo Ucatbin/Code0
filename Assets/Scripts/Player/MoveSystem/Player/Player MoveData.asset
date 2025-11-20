@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BaseSpeed: 8
   BaseJumpSpeed: 10
-  Gravity: 50
+  Gravity: 30
   MaxFallSpeed: 25
   RotationSpeed: 0
   Acceleration: 50
