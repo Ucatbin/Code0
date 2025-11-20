@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class AnimationEvents : MonoBehaviour
 {
-    [SerializeField] PlayerController _player;
-    Animator _playerAnimator;
+    Animator _animator;
     void Start()
     {
-        _playerAnimator = _player?.View.Animator;
+        _animator = GetComponent<Animator>();
     }
+    #region Universal
     public void OnAnimClipComplete()
     {
-        _playerAnimator.SetTrigger("EndTrigger");
+        _animator.SetTrigger("EndTrigger");
     }
+    #endregion
 
+    #region Attack
     public void OnAttackEventInvoke(AttackEventType type)
     {
         var attackAnimEvent = new AttackAnimationEvent
@@ -23,14 +25,14 @@ public class AnimationEvents : MonoBehaviour
         };
         EventBus.Publish(attackAnimEvent);
     }
+    #endregion
 }
-
-public enum AttackEventType
-{
-    ColliderEnable,
-    ColliderDisable
-}
-public struct AttackAnimationEvent
-{
-    public AttackEventType AttackEventType;
-}
+    public enum AttackEventType
+    {
+        ColliderEnable,
+        ColliderDisable
+    }
+    public struct AttackAnimationEvent
+    {
+        public AttackEventType AttackEventType;
+    }

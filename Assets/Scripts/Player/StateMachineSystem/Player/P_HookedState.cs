@@ -21,14 +21,17 @@ namespace ThisGame.Entity.StateMachineSystem
         protected override Type[] GetEvents() => new Type[]
         {
             // Skills
-            typeof(P_Skill_GrappingHookExecute),
             typeof(P_Skill_GrappingHookReleased)
         };
 
         public override void Enter()
         {
             base.Enter();
+
             _player.Rb.gravityScale = 4f;
+            _player.Joint.connectedBody = _skill.HookPoint.GetComponent<Rigidbody2D>();
+            _player.Joint.distance = Vector2.Distance(_player.transform.position, _skill.HookPoint.transform.position);
+            _player.Joint.enabled = true;
         }
         public override void Exit()
         {
@@ -44,13 +47,6 @@ namespace ThisGame.Entity.StateMachineSystem
         public override void PhysicsUpdate()
         {
             _skill.ControlRope(_player.InputValue, _player.Rb, _player.Joint, Time.fixedDeltaTime);
-        }
-        protected override void HandleGrappingHookExecute(P_Skill_GrappingHookExecute @event)
-        {
-            _skill = @event.Skill;
-            _player.Joint.connectedBody = _skill.HookPoint.GetComponent<Rigidbody2D>();
-            _player.Joint.distance = Vector2.Distance(_player.transform.position, @event.Skill.HookPoint.transform.position);
-            _player.Joint.enabled = true;
         }
     }
 }
