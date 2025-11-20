@@ -450,6 +450,7 @@ MonoBehaviour:
   left: {fileID: 8845990096948137817}
   right: {fileID: 2418822766917701762}
   target: {fileID: 0}
+  enemyAnimationController: {fileID: 7402809583049094057}
   moveRange: {fileID: 6410552325341775317}
   sight: {fileID: 6893424638158627767}
   attackRange: {fileID: 3387843371992757570}
@@ -983,6 +984,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 0}
   animator: {fileID: 0}
+  rb: {fileID: 0}
 --- !u!82 &2583030436596520120
 AudioSource:
   m_ObjectHideFlags: 0
