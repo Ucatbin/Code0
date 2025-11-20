@@ -34,5 +34,9 @@ namespace ThisGame.Entity.EntitySystem
         {
             return Controllers.OfType<T>().FirstOrDefault();
         }
+        public void Flip()
+        {
+            _facingDir *= -1;
+        }
     }
 }

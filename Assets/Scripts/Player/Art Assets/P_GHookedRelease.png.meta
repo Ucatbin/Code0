@@ -1,40 +1,25 @@
 fileFormatVersion: 2
-guid: c12825db30137c64cb24f126188f1fed
+guid: 8298acdea8653df4aa327f9d52dbcaa1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8213388115735736581
-    second: "\u94A9\u722A\u53D1\u5C04_0"
+      213: -715202219092031476
+    second: "\u94A9\u722A\u8131\u94A9\u52A8\u753B_0"
   - first:
-      213: 2040106549946801761
-    second: "\u94A9\u722A\u53D1\u5C04_1"
+      213: -2878300570197983578
+    second: "\u94A9\u722A\u8131\u94A9\u52A8\u753B_1"
   - first:
-      213: -2036804583806923953
-    second: "\u94A9\u722A\u53D1\u5C04_2"
+      213: -1023523803173121940
+    second: "\u94A9\u722A\u8131\u94A9\u52A8\u753B_2"
   - first:
-      213: -7214785516353606856
-    second: "\u94A9\u722A\u53D1\u5C04_3"
+      213: -8909449092422385127
+    second: "\u94A9\u722A\u8131\u94A9\u52A8\u753B_3"
   - first:
-      213: 2584567167572789978
-    second: "\u94A9\u722A\u53D1\u5C04_4"
+      213: 986857839710029323
+    second: "\u94A9\u722A\u8131\u94A9\u52A8\u753B_4"
   - first:
-      213: 560508576842885232
-    second: "\u94A9\u722A\u53D1\u5C04_5"
-  - first:
-      213: 7314181157851160125
-    second: "\u94A9\u722A\u53D1\u5C04_6"
-  - first:
-      213: 9199390483730285922
-    second: "\u94A9\u722A\u53D1\u5C04_7"
-  - first:
-      213: -4083481066868764621
-    second: "\u94A9\u722A\u53D1\u5C04_8"
-  - first:
-      213: 6330320841103504758
-    second: "\u94A9\u722A\u53D1\u5C04_9"
-  - first:
-      213: 3153853345245310668
-    second: "\u94A9\u722A\u53D1\u5C04_10"
+      213: 5374756166095559610
+    second: "\u94A9\u722A\u8131\u94A9\u52A8\u753B_5"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -130,73 +115,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: P_GrappingHookStart_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 400
-        width: 200
-        height: 200
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f7a60b7b87145a64f9de1cb3b1dba738
-      internalID: -1315391797
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: P_GrappingHookStart_1
-      rect:
-        serializedVersion: 2
-        x: 200
-        y: 400
-        width: 200
-        height: 200
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 94e9c168dab0b0f4ba22060a67a453fc
-      internalID: 691201025
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: P_GrappingHookStart_2
-      rect:
-        serializedVersion: 2
-        x: 400
-        y: 400
-        width: 200
-        height: 200
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 97b2d26a47ab03041b026bebfa4030d3
-      internalID: -224171501
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: P_GrappingHookStart_3
+      name: P_GHookedRelease_0
       rect:
         serializedVersion: 2
         x: 0
@@ -211,14 +130,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5ace0d4d91f4b8741901497f2faa9bae
-      internalID: 1370069767
+      spriteID: 7f78a66a3ee7024449b5ac32a032bde1
+      internalID: 1607191974
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_GrappingHookStart_4
+      name: P_GHookedRelease_1
       rect:
         serializedVersion: 2
         x: 200
@@ -233,36 +152,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7e573470e33425d49bd922aa805dc42e
-      internalID: -1876423408
+      spriteID: 1bf3649b37611fb4d965683fb12a4227
+      internalID: 141964980
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_GrappingHookStart_5
-      rect:
-        serializedVersion: 2
-        x: 400
-        y: 200
-        width: 200
-        height: 200
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1aad6e571f5f7c0459a7ee34f790faaa
-      internalID: -1984231654
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: P_GrappingHookStart_6
+      name: P_GHookedRelease_2
       rect:
         serializedVersion: 2
         x: 0
@@ -277,14 +174,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dcff7a81e9f8c9a4b8c6fa5919c1de4f
-      internalID: 2127415185
+      spriteID: fe27a0fa02c12b84b8ddd4992ffc4d8c
+      internalID: -1638889650
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_GrappingHookStart_7
+      name: P_GHookedRelease_3
       rect:
         serializedVersion: 2
         x: 200
@@ -299,8 +196,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 85e7e58dd81a90540af37eb3cbb12093
-      internalID: 1335218465
+      spriteID: 69ae4e6145d053548a53463b218e4778
+      internalID: 27377648
       vertices: []
       indices: 
       edges: []
@@ -309,7 +206,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: f24e95e3b967bdd4eb97974b4fe49a06
+    spriteID: ad9ba92c2ac97ec4b9833b211e1d4245
     internalID: 0
     vertices: []
     indices: 
@@ -319,14 +216,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      P_GrappingHookStart_0: -1315391797
-      P_GrappingHookStart_1: 691201025
-      P_GrappingHookStart_2: -224171501
-      P_GrappingHookStart_3: 1370069767
-      P_GrappingHookStart_4: -1876423408
-      P_GrappingHookStart_5: -1984231654
-      P_GrappingHookStart_6: 2127415185
-      P_GrappingHookStart_7: 1335218465
+      P_GHookedRelease_0: 1607191974
+      P_GHookedRelease_1: 141964980
+      P_GHookedRelease_2: -1638889650
+      P_GHookedRelease_3: 27377648
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
