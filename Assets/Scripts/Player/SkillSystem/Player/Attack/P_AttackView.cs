@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using ThisGame.Core;
@@ -18,9 +19,10 @@ namespace ThisGame.Entity.SkillSystem
         void OnEnable()
         {
             EventBus.Subscribe<AttackAnimationEvent>(this, HandleAttackAnim);
-            EventBus.Subscribe<ViewFlip>(this, HandleFlip);
             EventBus.Subscribe<BeKilled>(this, HandleKill);
+            EventBus.Subscribe<P_Skill_AttackExecute>(this, HandleAttackView);
         }
+
         void OnDisable()
         {
             EventBus.UnsubscribeAll(this);
@@ -34,12 +36,21 @@ namespace ThisGame.Entity.SkillSystem
             _attackCollider.callbackLayers = _canHit;
         }
 
+        void HandleAttackView(P_Skill_AttackExecute @event)
+        {
+            Vector2 attackDirection2D = @event.AttackDirection;
+            Vector2 currentPos2D = transform.position;
+
+            Vector2 targetDirection = (attackDirection2D - currentPos2D).normalized;
+            transform.parent.right = targetDirection;
+            _anim.SetTrigger("StartTrigger");
+        }
+
         void HandleAttackAnim(AttackAnimationEvent @event)
         {
             switch (@event.AttackEventType)
             {
                 case AttackEventType.ColliderEnable:
-                    _anim.SetTrigger("StartTrigger");
                     _attackCollider.enabled = true;
                     break;
                 case AttackEventType.ColliderDisable:
@@ -66,12 +77,6 @@ namespace ThisGame.Entity.SkillSystem
 
         void HandleKill(BeKilled @event)
         {
-        }
-        void HandleFlip(ViewFlip @event)
-        {
-            var scale = transform.localScale;
-            scale.x = @event.FacingDir == 1 ? 1 : -1;
-            transform.localScale = scale;
         }
     }
 }

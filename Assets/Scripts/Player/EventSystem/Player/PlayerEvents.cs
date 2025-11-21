@@ -34,9 +34,12 @@ public struct FlipAction
 public struct P_Skill_AttackPressed : ISkillEvent
 {
     public P_AttackModel Skill;
-    public StateMachine StateMachine;
+    public Vector3 InputDirection;
 }
-public struct P_Skill_AttackExecute : ISkillEvent { }
+public struct P_Skill_AttackExecute : ISkillEvent
+{
+    public Vector3 AttackDirection;
+}
 // DoubleJump
 public struct P_Skill_DoubleJumpPressed : ISkillEvent
 {
@@ -57,7 +60,6 @@ public struct P_Skill_GrappingHookPressed : ISkillEvent
 }
 public struct P_Skill_GrappingHookExecute : ISkillEvent
 {
-    public P_GrappingHookModel Skill;
     public bool IsGrounded;
     public Vector3 TargetPosition;
 }

@@ -15,7 +15,10 @@ namespace ThisGame.Entity.SkillSystem
 
             if (e is P_Skill_AttackPressed thisSkillEvent)
             {
-                var attackExecute = new P_Skill_AttackExecute();
+                var attackExecute = new P_Skill_AttackExecute()
+                {
+                    AttackDirection = thisSkillEvent.InputDirection
+                };
                 EventBus.Publish(attackExecute);
                 ExecuteSkill(attackExecute);
             }

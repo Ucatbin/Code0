@@ -59,6 +59,7 @@ namespace ThisGame.Entity.InputSystem
                 var attackPressedEvent = new P_Skill_AttackPressed()
                 {
                     Skill =  attackSkill,
+                    InputDirection = _player.MainCam.ScreenToWorldPoint(Input.mousePosition),
                 };
                 EventBus.Publish(attackPressedEvent);
             }

@@ -18,15 +18,14 @@ public class P_AttackState : P_BaseState
 
     protected override Type[] GetEvents() => new Type[]
     {
-        typeof(P_Skill_AttackExecute)
+
     };
     public override void Enter()
     {
         base.Enter();
 
-        var data = _skill.Data as P_AttackData;
         TimerManager.Instance.AddTimer(
-            data.AttackDuration,
+            _data.AttackDuration,
             () => {
                 _stateMachine.ChangeState<P_IdleState>();
             },
@@ -47,9 +46,5 @@ public class P_AttackState : P_BaseState
     public override void PhysicsUpdate()
     {
         _movement.HandleGravity(Time.fixedDeltaTime);
-    }
-
-    protected override void HandleAttackExecute(P_Skill_AttackExecute @event)
-    {
     }
 }
