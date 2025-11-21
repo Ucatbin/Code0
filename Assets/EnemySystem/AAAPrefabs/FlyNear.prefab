@@ -134,6 +134,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -155,6 +157,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
@@ -303,6 +306,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -324,6 +329,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
@@ -348,6 +354,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8653972989953990977}
   - component: {fileID: 293088075823453443}
+  - component: {fileID: 6373422882126224394}
   m_Layer: 0
   m_Name: FlyNear
   m_TagString: Untagged
@@ -386,12 +393,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d309027d4c62d64eaaafe2306e74f6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
+  Rb: {fileID: 0}
+  Controllers: []
   currentStat: {fileID: 3098406389918726115}
   config: {fileID: 11400000, guid: 030f3dfeb92c8ad4aaba94466905eb17, type: 2}
   origin: {fileID: 5045132895678606740}
   left: {fileID: 2058556405479932313}
   right: {fileID: 3930947920320816350}
   target: {fileID: 0}
+  enemyAnimationController: {fileID: 1512169288614963707}
   moveRange: {fileID: 5002850036161148824}
   sight: {fileID: 2427584336297516429}
   attackRange: {fileID: 8589167565691668243}
@@ -403,6 +413,19 @@ MonoBehaviour:
   playerInAttackRange: 0
   playerOutOfRange: 0
   reachOriginPlace: 0
+--- !u!114 &6373422882126224394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2682309006396256597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e54482957522e1449ace5b1a7a19568, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ThisGame.Entity.HealthSystem.HealthController
+  _data: {fileID: 11400000, guid: e438dd91c3c41334c82dd062baba80ac, type: 2}
 --- !u!1 &3046643657909014729
 GameObject:
   m_ObjectHideFlags: 0
@@ -537,6 +560,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -558,6 +583,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
@@ -589,6 +615,7 @@ GameObject:
   - component: {fileID: 6050076020407639399}
   - component: {fileID: 3105370847822691780}
   - component: {fileID: 685370142700985661}
+  - component: {fileID: 1512169288614963707}
   m_Layer: 9
   m_Name: Body
   m_TagString: Untagged
@@ -634,6 +661,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -655,6 +684,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -813,3 +843,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1512169288614963707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7440242094514010883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9d4d0c11511a9e459eab0533646cde1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 0}
+  animator: {fileID: 685370142700985661}
+  rb: {fileID: 7998811807800291342}
