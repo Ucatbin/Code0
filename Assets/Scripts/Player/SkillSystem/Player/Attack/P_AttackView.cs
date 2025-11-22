@@ -43,6 +43,10 @@ namespace ThisGame.Entity.SkillSystem
 
             Vector2 targetDirection = (attackDirection2D - currentPos2D).normalized;
             transform.parent.right = targetDirection;
+
+            var scale = transform.localScale;
+            scale.y = targetDirection.x >= 0 ? 1 : -1;
+            transform.parent.localScale = scale;
             _anim.SetTrigger("StartTrigger");
         }
 
