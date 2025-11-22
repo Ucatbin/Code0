@@ -47,7 +47,7 @@ public class EnemyController : EntityController
         enemyGoBack.enemy = this;
 
         attackStat.attackInterval = config.attackInterval;
-        attackStat.attackTimer = config.attackInterval / 2f;
+        attackStat.attackTimer = 0f;
 
         left.gameObject.GetComponent<SpriteRenderer>().enabled = false;
         right.gameObject.GetComponent<SpriteRenderer>().enabled = false;

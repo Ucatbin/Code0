@@ -18,13 +18,9 @@ public class AttackFar : EnemyAttackStat
         bulletTimer = bulletInterval;
     }
 
-public override void Tick()
+    public override void Tick()
     {
         bulletProducer.SetActive(true);
-        
-        // 始终进行瞄准，无论是准备阶段还是射击阶段
-        Aim();
-        
         if (!isAttacking)
         {
             if (!audioPlayed)
@@ -41,6 +37,8 @@ public override void Tick()
                 Attack();
                 attackTimer = 0;
             }
+
+            Aim();
         }
         else
         {
