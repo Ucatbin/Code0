@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 191a4cc9eef23724bad2b87607b958e9, type: 3}
   m_Name: CountDown BuffData
   m_EditorClassIdentifier: 
-  BuffName: 
+  BuffName: P_CountDown
   Icon: {fileID: 0}
   Priority: 0
   MaxStacks: 1

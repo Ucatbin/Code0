@@ -12,6 +12,8 @@ namespace ThisGame.Entity.StateMachineSystem
     {
         P_GrappingHookModel _skill;
         P_GrappingHookData _data;
+        bool _isInited => _initLength <= _data.MaxLineDist;
+        float _initLength;
 
         public P_HookedState(PlayerController entity, StateMachine stateMachine, string animName, CheckerController checkers, MoveModel movement, P_GrappingHookModel skill) : base(entity, stateMachine, animName, checkers, movement)
         {
@@ -41,10 +43,12 @@ namespace ThisGame.Entity.StateMachineSystem
             _player.Joint.connectedBody = _skill.HookPoint.GetComponent<Rigidbody2D>();
             _player.Joint.distance = Vector2.Distance(_player.transform.position, _skill.HookPoint.transform.position);
             _player.Joint.enabled = true;
+            _initLength = _player.Joint.distance;
         }
         public override void Exit()
         {
             base.Exit();
+
             _movement.SetVelocity(_player.Rb.linearVelocity);
             _player.Rb.gravityScale = 0f;
         }
@@ -55,7 +59,16 @@ namespace ThisGame.Entity.StateMachineSystem
         }
         public override void PhysicsUpdate()
         {
-            _skill.ControlRope(_player.InputValue, _player.Rb, _player.Joint, Time.fixedDeltaTime);
+            if (_isInited)
+                _skill.ControlRope(_player.InputValue, _player.Rb, _player.Joint, Time.fixedDeltaTime);
+            else
+            {
+                _player.Joint.distance = Mathf.MoveTowards(
+                    _initLength,
+                    _data.MaxLineDist,
+                    10f
+                );
+            }
         }
     }
 }

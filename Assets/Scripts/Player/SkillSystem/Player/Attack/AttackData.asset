@@ -17,3 +17,4 @@ MonoBehaviour:
   MaxCharges: -1
   IsUnlocked: 1
   AttackDuration: 0.33
+  AttackForce: {x: 16, y: 8, z: 0}

@@ -6,6 +6,7 @@ public class TimerManager : MonoBehaviour
 {
     public static TimerManager Instance { get; private set; }
     [SerializeField] List<TimerItem> _timerList = new List<TimerItem>();
+    List<TimerItem> _toResume = new List<TimerItem>();
     SortedSet<TimerItem> _timerHeap => new SortedSet<TimerItem>(_timerList);
     float _currentTime;
 
@@ -119,59 +120,55 @@ public class TimerManager : MonoBehaviour
 
                 timer.RemainingTime = timer.TriggerTime - _currentTime;
                 timer.IsPaused = true;
+                _toResume.Add(timer);
                 _timerList.Remove(timer);
             }
         }
     }
     public void ResumeTimerWithTag(object tag)
     {
-        List<TimerItem> toResume = new List<TimerItem>();
-        foreach (var timer in _timerHeap)
+        foreach (var timer in _toResume)
         {
             if (Equals(timer.Tag, tag) && timer.IsPaused)
-                toResume.Add(timer);
-        }
-        foreach (var timer in toResume)
-        {
-            if (!timer.IsPaused) return;
-
-            timer.TriggerTime = _currentTime + timer.RemainingTime;
-            timer.IsPaused = false;
-            _timerList.Add(timer);
-        }
-    }
-    public void PauseAllTimers()
-    {
-        foreach (var timer in _timerHeap)
-        {
-            if (!timer.IsPaused)
             {
-                if (timer.IsPaused) return;
-
-                timer.RemainingTime = timer.TriggerTime - _currentTime;
-                timer.IsPaused = true;
-                _timerList.Remove(timer);
+                timer.TriggerTime = _currentTime + timer.RemainingTime;
+                timer.IsPaused = false;
+                _timerList.Add(timer);
             }
         }
     }
-    public void ResumeAllTimers()
-    {
-        List<TimerItem> toResume = new List<TimerItem>();
-        foreach (var timer in _timerHeap)
-        {
-            if (timer.IsPaused)
-                toResume.Add(timer);
-        }
+    // public void PauseAllTimers()
+    // {
+    //     foreach (var timer in _timerHeap)
+    //     {
+    //         if (!timer.IsPaused)
+    //         {
+    //             if (timer.IsPaused) return;
 
-        foreach (var timer in toResume)
-        {
-            if (timer.IsPaused) return;
+    //             timer.RemainingTime = timer.TriggerTime - _currentTime;
+    //             timer.IsPaused = true;
+    //             _timerList.Remove(timer);
+    //         }
+    //     }
+    // }
+    // public void ResumeAllTimers()
+    // {
+    //     List<TimerItem> toResume = new List<TimerItem>();
+    //     foreach (var timer in _timerHeap)
+    //     {
+    //         if (timer.IsPaused)
+    //             toResume.Add(timer);
+    //     }
 
-            timer.RemainingTime = timer.TriggerTime - _currentTime;
-            timer.IsPaused = true;
-            _timerList.Remove(timer);
-        }
-    }
+    //     foreach (var timer in toResume)
+    //     {
+    //         if (timer.IsPaused) return;
+
+    //         timer.RemainingTime = timer.TriggerTime - _currentTime;
+    //         timer.IsPaused = true;
+    //         _timerList.Remove(timer);
+    //     }
+    // }
     #endregion
 
     # region Clear Timers

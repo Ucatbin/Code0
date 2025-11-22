@@ -6,5 +6,6 @@ namespace ThisGame.Entity.SkillSystem
     public class P_AttackData : SkillData
     {
         public float AttackDuration;
+        public Vector3 AttackForce;
     }
 }
