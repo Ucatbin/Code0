@@ -23,6 +23,9 @@ public class P_AttackState : P_BaseState
     public override void Enter()
     {
         base.Enter();
+        var attackDir = (_skill.InputDir - _player.transform.position).normalized;
+        _movement.SetVelocity(Vector3.Scale(attackDir, _data.AttackForce));
+        _player.Rb.linearVelocity = _movement.Velocity;
 
         TimerManager.Instance.AddTimer(
             _data.AttackDuration,
@@ -36,6 +39,7 @@ public class P_AttackState : P_BaseState
     {
         base.Exit();
 
+        _movement.SetVelocity(_player.Rb.linearVelocity);
         _skill.StartCoolDown();
     }
     public override void LogicUpdate()

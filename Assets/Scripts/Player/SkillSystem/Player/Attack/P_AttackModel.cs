@@ -5,6 +5,7 @@ namespace ThisGame.Entity.SkillSystem
 {
     public class P_AttackModel : SkillModel
     {
+        public Vector3 InputDir;
         public P_AttackModel(SkillData data) : base(data)
         {
         }
@@ -13,12 +14,13 @@ namespace ThisGame.Entity.SkillSystem
         {
             if (!_isReady || _currentCharges == 0) return;
 
-            if (e is P_Skill_AttackPressed thisSkillEvent)
+            if (e is P_Skill_AttackPressed thisSkill)
             {
                 var attackExecute = new P_Skill_AttackExecute()
                 {
-                    AttackDirection = thisSkillEvent.InputDirection
+                    AttackDirection = thisSkill.InputDirection
                 };
+                InputDir = thisSkill.InputDirection;
                 EventBus.Publish(attackExecute);
                 ExecuteSkill(attackExecute);
             }
