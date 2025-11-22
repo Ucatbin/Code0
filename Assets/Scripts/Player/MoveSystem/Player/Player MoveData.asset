@@ -22,4 +22,4 @@ MonoBehaviour:
   JumpInputWindow: 0.26
   WallSlideSpeed: -1
   WallSlideAcceleration: 35
-  WallJumpDirection: {x: 2, y: 1, z: 0}
+  WallJumpDirection: {x: 2, y: 1.5, z: 0}
