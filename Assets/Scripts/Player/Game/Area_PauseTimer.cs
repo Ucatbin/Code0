@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Area_PauseTimer : MonoBehaviour
 {
-    Collider2D _area;
+    [SerializeField] Collider2D _area;
     [SerializeField] LayerMask _player;
 
 
