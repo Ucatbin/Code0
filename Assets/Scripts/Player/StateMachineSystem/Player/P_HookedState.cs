@@ -68,6 +68,7 @@ namespace ThisGame.Entity.StateMachineSystem
                     _data.MaxLineDist,
                     10f
                 );
+                _initLength = _player.Joint.distance;
             }
         }
     }

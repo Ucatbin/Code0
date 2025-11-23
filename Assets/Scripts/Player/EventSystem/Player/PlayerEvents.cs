@@ -67,6 +67,15 @@ public struct P_Skill_GrappingHookReleased : ISkillEvent
 {
     public P_GrappingHookModel Skill;
 }
+// TheWorld
+public struct P_Skill_TheWorldPressed : ISkillEvent
+{
+    public P_TheWorldModel Skill;
+}
+public struct P_Skill_TheWorldExecuted : ISkillEvent
+{
+    
+}
 #endregion
 #region Checkers
 public struct GroundCheckChange
