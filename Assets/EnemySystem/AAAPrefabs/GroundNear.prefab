@@ -190,6 +190,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3725889146728396591}
   - component: {fileID: 3819780705799899747}
+  - component: {fileID: 1254324609792832892}
   m_Layer: 0
   m_Name: GroundNear
   m_TagString: Untagged
@@ -228,12 +229,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d309027d4c62d64eaaafe2306e74f6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
+  Rb: {fileID: 0}
+  Controllers: []
   currentStat: {fileID: 44394222541421710}
   config: {fileID: 11400000, guid: 0815100a2b71a214da7aeaa1f6fe123f, type: 2}
   origin: {fileID: 7915275627772464773}
   left: {fileID: 2490145769505263620}
   right: {fileID: 5166366639974076004}
   target: {fileID: 0}
+  enemyAnimationController: {fileID: 0}
   moveRange: {fileID: 2387628654277537226}
   sight: {fileID: 5614489204892222000}
   attackRange: {fileID: 5419951785937115571}
@@ -245,6 +249,19 @@ MonoBehaviour:
   playerInAttackRange: 0
   playerOutOfRange: 0
   reachOriginPlace: 0
+--- !u!114 &1254324609792832892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3717217391090144383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e54482957522e1449ace5b1a7a19568, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ThisGame.Entity.HealthSystem.HealthController
+  _data: {fileID: 11400000, guid: e438dd91c3c41334c82dd062baba80ac, type: 2}
 --- !u!1 &4319937887621139794
 GameObject:
   m_ObjectHideFlags: 0
