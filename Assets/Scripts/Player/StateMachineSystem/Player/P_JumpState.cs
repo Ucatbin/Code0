@@ -23,6 +23,8 @@ namespace ThisGame.Entity.StateMachineSystem
             // Skills
             typeof(P_Skill_DoubleJumpExecute),
             typeof(P_Skill_GrappingHookPressed),
+            typeof(P_Skill_TheWorldPressed),
+            typeof(P_Skill_TheWorldExecuted)
         };
 
         public override void Enter()

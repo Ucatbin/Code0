@@ -14,6 +14,7 @@ namespace ThisGame.Entity.SkillSystem
                         "P_DoubleJump" => new P_DoubleJumpModel(entry.Data),
                         "P_GrappingHook" => new P_GrappingHookModel(entry.Data),
                         "P_Attack" => new P_AttackModel(entry.Data),
+                        "P_TheWorld" => new P_TheWorldModel(entry.Data),
                         _ => null
                     };
 

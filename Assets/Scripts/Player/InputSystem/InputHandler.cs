@@ -81,7 +81,7 @@ namespace ThisGame.Entity.InputSystem
             }
             if (context.canceled)
             {
-                var grappingHookRelease = new P_Skill_GrappingHookReleased()
+                var grappingHookRelease = new P_Skill_GrappingHookRelease()
                 {
                     Skill = _player.GetController<SkillController>().GetSkill<P_GrappingHookModel>(),
                 };
@@ -97,6 +97,11 @@ namespace ThisGame.Entity.InputSystem
                     Skill = _player.GetController<SkillController>().GetSkill<P_TheWorldModel>(),
                 };
                 EventBus.Publish(skillPressed);
+            }
+            if (context.canceled)
+            {
+                var skillRelersed = new P_Skill_TheWorldRelease();
+                EventBus.Publish(skillRelersed);
             }
         }
         #endregion

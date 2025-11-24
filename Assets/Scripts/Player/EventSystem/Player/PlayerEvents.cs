@@ -63,7 +63,7 @@ public struct P_Skill_GrappingHookExecute : ISkillEvent
     public bool IsGrounded;
     public Vector3 TargetPosition;
 }
-public struct P_Skill_GrappingHookReleased : ISkillEvent
+public struct P_Skill_GrappingHookRelease : ISkillEvent
 {
     public P_GrappingHookModel Skill;
 }
@@ -73,6 +73,10 @@ public struct P_Skill_TheWorldPressed : ISkillEvent
     public P_TheWorldModel Skill;
 }
 public struct P_Skill_TheWorldExecuted : ISkillEvent
+{
+    
+}
+public struct P_Skill_TheWorldRelease : ISkillEvent
 {
     
 }

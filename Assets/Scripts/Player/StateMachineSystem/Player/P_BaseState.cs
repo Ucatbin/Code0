@@ -140,7 +140,6 @@ namespace ThisGame.Entity.StateMachineSystem
             };
             EventBus.Publish(jumpExecute);
         }
-
         // GrappingHook
         protected virtual void HandleGrappingHookPressed(P_Skill_GrappingHookPressed @event)
         {
@@ -150,10 +149,23 @@ namespace ThisGame.Entity.StateMachineSystem
         {
             _stateMachine.ChangeState<P_HookedState>();
         }
-        protected virtual void HandleGrappingHookRelease(P_Skill_GrappingHookReleased @event)
+        protected virtual void HandleGrappingHookRelease(P_Skill_GrappingHookRelease @event)
         {
             _player.Joint.enabled = false;
             _stateMachine.ChangeState<P_IdleState>();
+        }
+        // TheWorld
+        protected virtual void HandleTheWorldPressed(P_Skill_TheWorldPressed @event)
+        {
+            @event.Skill.HandleSkillButtonPressed(@event);
+        }
+        protected virtual void HandleTheWorldExecute(P_Skill_TheWorldExecuted @event)
+        {
+            _stateMachine.ChangeState<P_TheWorldState>();
+        }
+        protected virtual void HandleTheWorldRelease(P_Skill_TheWorldRelease @event)
+        {
+            _stateMachine.ChangeState<P_AirState>();
         }
         #endregion
         #endregion

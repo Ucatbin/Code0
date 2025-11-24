@@ -16,8 +16,35 @@ public class P_TheWorldState : P_BaseState
         _data = _skill.Data as P_TheWorldData;
     }
 
-    protected override Type[] GetEvents()
+    protected override Type[] GetEvents() => new Type[]
     {
-        throw new NotImplementedException();
+        typeof(P_Skill_TheWorldRelease),
+    };
+
+    public override void Enter()
+    {
+        base.Enter();
+        
+        Time.timeScale = _data.SlowTimeScale;
+    }
+    public override void Exit()
+    {
+        base.Exit();
+
+        Time.timeScale = _data.NormalTimeScale;
+    }
+    public override void LogicUpdate()
+    {
+        _movement.UpdateMovement(Vector3.zero, Time.deltaTime * 100);
+    }
+    public override void PhysicsUpdate()
+    {
+        _movement.HandleGravity(Time.fixedDeltaTime * 100);
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Time.timeScale = 1f;
+            _player.View.Animator.SetTrigger("DashAttackDash");
+        }
     }
 }

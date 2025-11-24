@@ -26,6 +26,8 @@ namespace ThisGame.Entity.SkillSystem
         public override void ExecuteSkill(ISkillEvent e)
         {
             base.ExecuteSkill(e);
+
+            _isReady = true;
         }
         public override void StartCoolDown()
         {

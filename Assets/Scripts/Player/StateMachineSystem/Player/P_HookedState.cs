@@ -24,7 +24,9 @@ namespace ThisGame.Entity.StateMachineSystem
         protected override Type[] GetEvents() => new Type[]
         {
             // Skills
-            typeof(P_Skill_GrappingHookReleased)
+            typeof(P_Skill_GrappingHookRelease),
+            typeof(P_Skill_TheWorldPressed),
+            typeof(P_Skill_TheWorldExecuted)
         };
 
         public override void Enter()

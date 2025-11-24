@@ -5,7 +5,7 @@ namespace ThisGame.Entity.SkillSystem
     [CreateAssetMenu(fileName = "TheWorldData", menuName = "ThisGame/Player/SkillSystem/TheWorldData")]
     public class P_TheWorldData : SkillData
     {
-        public float TimeScale;
+        public float SlowTimeScale;
+        public float NormalTimeScale;
     }
-    
 }
