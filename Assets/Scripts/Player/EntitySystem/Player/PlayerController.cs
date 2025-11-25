@@ -107,9 +107,9 @@ namespace ThisGame.Entity.EntitySystem
             _stateMachine.RegisterState<P_HookedState>(
                 new P_HookedState(this, _stateMachine, "Hooked", checkerController, moveController.Model, grappingHookSkill)
             );
-            var attackDashSkill = GetController<SkillController>().GetSkill<P_TheWorldModel>();
-            _stateMachine.RegisterState<P_TheWorldState>(
-                new P_TheWorldState(this, _stateMachine, "DashAttack", checkerController, moveController.Model, attackDashSkill)
+            var dashAttackSkill = GetController<SkillController>().GetSkill<P_DashAttackModel>();
+            _stateMachine.RegisterState<P_DashAttackState>(
+                new P_DashAttackState(this, _stateMachine, "DashAttack", checkerController, moveController.Model, dashAttackSkill)
             );
         }
         #endregion

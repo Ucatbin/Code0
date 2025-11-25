@@ -25,8 +25,8 @@ namespace ThisGame.Entity.StateMachineSystem
         {
             // Skills
             typeof(P_Skill_GrappingHookRelease),
-            typeof(P_Skill_TheWorldPressed),
-            typeof(P_Skill_TheWorldExecuted)
+            typeof(P_Skill_DashAttackPressed),
+            typeof(P_Skill_DashAttackExecuted)
         };
 
         public override void Enter()

@@ -155,13 +155,13 @@ namespace ThisGame.Entity.StateMachineSystem
             _stateMachine.ChangeState<P_IdleState>();
         }
         // TheWorld
-        protected virtual void HandleTheWorldPressed(P_Skill_TheWorldPressed @event)
+        protected virtual void HandleTheWorldPressed(P_Skill_DashAttackPressed @event)
         {
             @event.Skill.HandleSkillButtonPressed(@event);
         }
-        protected virtual void HandleTheWorldExecute(P_Skill_TheWorldExecuted @event)
+        protected virtual void HandleTheWorldExecute(P_Skill_DashAttackExecuted @event)
         {
-            _stateMachine.ChangeState<P_TheWorldState>();
+            _stateMachine.ChangeState<P_DashAttackState>();
         }
         protected virtual void HandleTheWorldRelease(P_Skill_TheWorldRelease @event)
         {

@@ -20,8 +20,8 @@ namespace ThisGame.Entity.StateMachineSystem
             typeof(P_Skill_AttackExecute),
             typeof(P_Skill_GrappingHookPressed),
             typeof(P_Skill_GrappingHookExecute),
-            typeof(P_Skill_TheWorldPressed),
-            typeof(P_Skill_TheWorldExecuted)
+            typeof(P_Skill_DashAttackPressed),
+            typeof(P_Skill_DashAttackExecuted)
         };
 
         public override void Enter()

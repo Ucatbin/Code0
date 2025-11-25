@@ -68,11 +68,11 @@ public struct P_Skill_GrappingHookRelease : ISkillEvent
     public P_GrappingHookModel Skill;
 }
 // TheWorld
-public struct P_Skill_TheWorldPressed : ISkillEvent
+public struct P_Skill_DashAttackPressed : ISkillEvent
 {
-    public P_TheWorldModel Skill;
+    public P_DashAttackModel Skill;
 }
-public struct P_Skill_TheWorldExecuted : ISkillEvent
+public struct P_Skill_DashAttackExecuted : ISkillEvent
 {
     
 }

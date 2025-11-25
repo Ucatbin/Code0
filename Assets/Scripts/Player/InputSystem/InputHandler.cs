@@ -92,9 +92,9 @@ namespace ThisGame.Entity.InputSystem
         {
             if (context.performed)
             {
-                var skillPressed = new P_Skill_TheWorldPressed()
+                var skillPressed = new P_Skill_DashAttackPressed()
                 {
-                    Skill = _player.GetController<SkillController>().GetSkill<P_TheWorldModel>(),
+                    Skill = _player.GetController<SkillController>().GetSkill<P_DashAttackModel>(),
                 };
                 EventBus.Publish(skillPressed);
             }

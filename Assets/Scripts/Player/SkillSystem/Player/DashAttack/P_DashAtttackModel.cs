@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace ThisGame.Entity.SkillSystem
 {
-    public class P_TheWorldModel : SkillModel
+    public class P_DashAttackModel : SkillModel
     {
-        public P_TheWorldModel(SkillData data) : base(data)
+        public P_DashAttackModel(SkillData data) : base(data)
         {
         }
 
@@ -13,9 +13,9 @@ namespace ThisGame.Entity.SkillSystem
         {
             if (!_isReady || _currentCharges == 0) return;
 
-            if (e is P_Skill_TheWorldPressed thisSkill)
+            if (e is P_Skill_DashAttackPressed thisSkill)
             {
-                var skillExecute = new P_Skill_TheWorldExecuted()
+                var skillExecute = new P_Skill_DashAttackExecuted()
                 {
 
                 };
