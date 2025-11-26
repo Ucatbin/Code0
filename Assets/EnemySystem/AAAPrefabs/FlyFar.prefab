@@ -351,6 +351,7 @@ GameObject:
   - component: {fileID: 2833211740890671904}
   - component: {fileID: 8907752627979970962}
   - component: {fileID: 5032455658822482346}
+  - component: {fileID: 9008167814556999997}
   m_Layer: 9
   m_Name: Body
   m_TagString: Untagged
@@ -676,6 +677,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &9008167814556999997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3132193902567788415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9d4d0c11511a9e459eab0533646cde1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 2421440248678433768}
+  animator: {fileID: 5032455658822482346}
+  rb: {fileID: 1482376565395389574}
 --- !u!1 &5843658961364006898
 GameObject:
   m_ObjectHideFlags: 0
@@ -826,6 +842,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4361604180883845020}
   - component: {fileID: 2421440248678433768}
+  - component: {fileID: 6464942255149746581}
   m_Layer: 0
   m_Name: FlyFar
   m_TagString: Untagged
@@ -864,12 +881,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d309027d4c62d64eaaafe2306e74f6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
+  Rb: {fileID: 0}
+  Controllers:
+  - {fileID: 6464942255149746581}
   currentStat: {fileID: 2096007947243875065}
   config: {fileID: 11400000, guid: 030f3dfeb92c8ad4aaba94466905eb17, type: 2}
   origin: {fileID: 4667221713356034391}
   left: {fileID: 1763430630245381685}
   right: {fileID: 6977941393760158789}
   target: {fileID: 0}
+  enemyAnimationController: {fileID: 9008167814556999997}
   moveRange: {fileID: 6097949634653697753}
   sight: {fileID: 4181392488246070683}
   attackRange: {fileID: 7711008628403768391}
@@ -881,6 +902,21 @@ MonoBehaviour:
   playerInAttackRange: 0
   playerOutOfRange: 0
   reachOriginPlace: 0
+--- !u!114 &6464942255149746581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5924456857998512127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e54482957522e1449ace5b1a7a19568, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ThisGame.Entity.HealthSystem.HealthController
+  _controllerObj: {fileID: 5924456857998512127}
+  _thisEntity: {fileID: 5924456857998512127}
+  _data: {fileID: 11400000, guid: 19ba46b92da68a34792621035dc4a28f, type: 2}
 --- !u!1 &6804747060478162051
 GameObject:
   m_ObjectHideFlags: 0

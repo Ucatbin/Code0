@@ -64,6 +64,15 @@ public struct P_Skill_GrappingHookRelease : ISkillEvent
 {
     public P_GrappingHookModel Skill;
 }
+
+public struct P_Skill_RopeDashPressed : ISkillEvent
+{
+    public P_GrappingHookModel Skill;
+}
+public struct P_Skill_RopeDashExecute : ISkillEvent
+{
+    public int FacingDir;
+}
 // TheWorld
 public struct P_Skill_DashAttackPressed : ISkillEvent
 {
@@ -101,7 +110,8 @@ public struct StateChange
 }
 public struct BeKilled
 {
-    
+    public GameObject TargetEntity;
+    public GameObject Killer;
 }
 #endregion
 #region Buffs

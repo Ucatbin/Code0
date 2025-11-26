@@ -37,7 +37,6 @@ namespace ThisGame.Entity.SkillSystem
                 }
             }
         }
-
         public void ControlRope(Vector3 input, Rigidbody2D rb, DistanceJoint2D joint, float deltaTime)
         {
             var data = Data as P_GrappingHookData;
@@ -48,5 +47,20 @@ namespace ThisGame.Entity.SkillSystem
             if (input.z != 0f)
                 joint.distance -= input.z * data.ExtendSpeed * deltaTime;
         }
+        // public void RopeDash(Vector3 input, Rigidbody2D rb)
+        // {
+        //     var data = Data as P_GrappingHookData;
+        //     Vector2 dashDirection = rb.linearVelocity.normalized;
+
+        //     if (input.x < 0.1f)
+        //     {
+        //         dashDirection = transform.right; // 或者根据你的玩家朝向调整
+        //     }
+            
+        //     // 施加瞬间的冲量力
+        //     rb.AddForce(dashDirection * data.DashForce, ForceMode2D.Impulse);
+            
+        //     EventBus.Publish(new P_Skill_RopeDashExecute());
+        // }
     }
 }

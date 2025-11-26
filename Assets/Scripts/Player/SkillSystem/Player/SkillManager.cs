@@ -8,13 +8,11 @@ namespace ThisGame.Entity.SkillSystem
     public class SkillManager : MonoBehaviour
     {
         public static SkillManager Instance;
-        Dictionary<Type, SkillEntry> _skillEntryMap;
+        Dictionary<Type, SkillEntry> _skillEntryMap = new Dictionary<Type, SkillEntry>();
         [SerializeField] protected SkillEntry[] _skillEnties;
 
         void Awake()
         {
-            _skillEntryMap = new Dictionary<Type, SkillEntry>();
-
             if (Instance == null)
                 Instance = this;
             else
@@ -50,7 +48,7 @@ namespace ThisGame.Entity.SkillSystem
                 {
                     _skillModelType = Type.GetType($"ThisGame.Entity.SkillSystem.{_skillModelName}, Assembly-CSharp");
                     if (_skillModelType == null)
-                        Debug.LogError($"Can't match: {_skillModelType}");
+                        Debug.LogError($"Can't match skill model type: {_skillModelType}");
 
                 }
                 return _skillModelType;

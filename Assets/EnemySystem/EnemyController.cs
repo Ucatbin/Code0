@@ -1,7 +1,8 @@
 using System.Collections.Generic;
+using ThisGame.Entity.EntitySystem;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : EntityController
 {
     [Header("Components")]
     [SerializeField] public EnemyStat currentStat;
@@ -27,13 +28,15 @@ public class EnemyController : MonoBehaviour
     public bool playerOutOfRange;
     public bool reachOriginPlace;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         enemyAnimationController.enemy = this;
         moveRange.enemy = this;
         sight.enemy = this;
@@ -44,14 +47,14 @@ public class EnemyController : MonoBehaviour
         enemyGoBack.enemy = this;
 
         attackStat.attackInterval = config.attackInterval;
-        attackStat.attackTimer = config.attackInterval / 2f;
+        attackStat.attackTimer = 0f;
 
         left.gameObject.GetComponent<SpriteRenderer>().enabled = false;
         right.gameObject.GetComponent<SpriteRenderer>().enabled = false;
         origin.gameObject.GetComponent<SpriteRenderer>().enabled = false;
     }
 
-    void FixedUpdate()
+    protected override void FixedUpdate()
     {
         currentStat.CheckStat();
         currentStat.Tick();

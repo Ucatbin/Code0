@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Security;
 using ThisGame.Core;
 using ThisGame.Core.CheckerSystem;
 using ThisGame.Entity.EntitySystem;
@@ -145,6 +146,10 @@ namespace ThisGame.Entity.StateMachineSystem
         {
             _player.Joint.enabled = false;
             _stateMachine.ChangeState<P_IdleState>();
+        }
+        protected virtual void HandleRopeDash(P_Skill_RopeDashPressed @event)
+        {
+
         }
         // TheWorld
         protected virtual void HandleTheWorldPressed(P_Skill_DashAttackPressed @event)

@@ -406,6 +406,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3728648200898063111}
   - component: {fileID: 8149075353103615318}
+  - component: {fileID: 1020106845305185887}
   m_Layer: 0
   m_Name: GroundFar
   m_TagString: Untagged
@@ -426,6 +427,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 712239141905902879}
   - {fileID: 6117142362138644526}
   - {fileID: 8845990096948137817}
   - {fileID: 2418822766917701762}
@@ -444,6 +446,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d309027d4c62d64eaaafe2306e74f6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
+  Rb: {fileID: 0}
+  Controllers:
+  - {fileID: 1020106845305185887}
   currentStat: {fileID: 7948020530441073517}
   config: {fileID: 11400000, guid: 53a1e26914397a94d95627d3175088f1, type: 2}
   origin: {fileID: 1924477121137565857}
@@ -462,6 +467,21 @@ MonoBehaviour:
   playerInAttackRange: 0
   playerOutOfRange: 0
   reachOriginPlace: 0
+--- !u!114 &1020106845305185887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1548918267610693058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e54482957522e1449ace5b1a7a19568, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ThisGame.Entity.HealthSystem.HealthController
+  _controllerObj: {fileID: 1548918267610693058}
+  _thisEntity: {fileID: 1548918267610693058}
+  _data: {fileID: 11400000, guid: 19ba46b92da68a34792621035dc4a28f, type: 2}
 --- !u!1 &2224215179371108244
 GameObject:
   m_ObjectHideFlags: 0
@@ -575,6 +595,37 @@ Transform:
   m_Children:
   - {fileID: 8707254715648893640}
   m_Father: {fileID: 6117142362138644526}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5039060253694678358
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 712239141905902879}
+  m_Layer: 0
+  m_Name: Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &712239141905902879
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5039060253694678358}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3728648200898063111}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6722916042133452482
 GameObject:
@@ -982,7 +1033,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9d4d0c11511a9e459eab0533646cde1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 0}
+  enemy: {fileID: 8149075353103615318}
   animator: {fileID: 0}
   rb: {fileID: 0}
 --- !u!82 &2583030436596520120

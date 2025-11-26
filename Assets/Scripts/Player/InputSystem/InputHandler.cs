@@ -88,7 +88,12 @@ namespace ThisGame.Entity.InputSystem
                 EventBus.Publish(grappingHookRelease);
             }
         }
-        public void HandleTheWorld(InputAction.CallbackContext context)
+        public void HandleRopeDash(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+                EventBus.Publish(new P_Skill_RopeDashPressed());
+        }
+        public void HandleDashAttack(InputAction.CallbackContext context)
         {
             if (context.performed)
             {

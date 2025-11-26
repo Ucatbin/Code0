@@ -23,6 +23,7 @@ public class P_AttackState : P_BaseState
     {
         _skill = skill;
         _data = _skill.Data as P_AttackData;
+        _view = SkillManager.Instance.GetSkillEntry(typeof(P_AttackModel)).View as P_AttackView;
     }
 
     protected override Type[] GetEvents() => new Type[]

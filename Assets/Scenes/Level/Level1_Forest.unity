@@ -124,7 +124,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 980961686366673609, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
   m_PrefabInstance: {fileID: 1383833045}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &35666434
+--- !u!114 &35666436
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133,7 +133,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 35666431}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c889dbec917cf064a91136b50eea06c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a13d67ba09f9af43b4f8ddaa87d782c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &271258503
@@ -417,7 +417,7 @@ PrefabInstance:
     - target: {fileID: 7402809583049094057, guid: d20fdbcc2fad28d45950dc66c6f32f75, type: 3}
       propertyPath: enemy
       value: 
-      objectReference: {fileID: 1073439721}
+      objectReference: {fileID: 0}
     - target: {fileID: 8149075353103615318, guid: d20fdbcc2fad28d45950dc66c6f32f75, type: 3}
       propertyPath: enemyAnimationController
       value: 
@@ -447,7 +447,21 @@ MonoBehaviour:
   _skillEnties:
   - _skillModelName: P_AttackModel
     Data: {fileID: 11400000, guid: f5e8e3d4e69432d4c88bddbcb0df38a0, type: 2}
+    View: {fileID: 1086195656}
+  - _skillModelName: P_DoubleJumpModel
+    Data: {fileID: 11400000, guid: 9771afc43ec56ea4b934736f629d02af, type: 2}
     View: {fileID: 0}
+  - _skillModelName: P_GrappingHookModel
+    Data: {fileID: 11400000, guid: 1cdca544609f5e142b9805f038cad80e, type: 2}
+    View: {fileID: 0}
+  - _skillModelName: P_DashAttackModel
+    Data: {fileID: 11400000, guid: 15f2bfb0f8f8aac4794942abe4c80586, type: 2}
+    View: {fileID: 0}
+--- !u!1 &738909370 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 236540776271286730, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
+  m_PrefabInstance: {fileID: 1383833045}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &768224062
 GameObject:
   m_ObjectHideFlags: 0
@@ -14723,17 +14737,17 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!114 &1073439721 stripped
+--- !u!114 &1086195656 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8149075353103615318, guid: d20fdbcc2fad28d45950dc66c6f32f75, type: 3}
-  m_PrefabInstance: {fileID: 612107877}
+  m_CorrespondingSourceObject: {fileID: 5502402076427084390, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
+  m_PrefabInstance: {fileID: 1383833045}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d309027d4c62d64eaaafe2306e74f6e, type: 3}
+  m_Script: {fileID: 11500000, guid: dfb227e136d60a24c918797dc1fbc43c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyController
+  m_EditorClassIdentifier: 
 --- !u!1001 &1383833045
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14818,6 +14832,14 @@ PrefabInstance:
       propertyPath: _skillEnties.Array.data[3].SkillName
       value: P_TheWorld
       objectReference: {fileID: 0}
+    - target: {fileID: 5318754920750335886, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
+      propertyPath: _thisEntity
+      value: 
+      objectReference: {fileID: 717492060}
+    - target: {fileID: 5318754920750335886, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
+      propertyPath: _controllerObj
+      value: 
+      objectReference: {fileID: 738909370}
     - target: {fileID: 6968512398489348358, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
       propertyPath: MainCam
       value: 
@@ -14825,7 +14847,7 @@ PrefabInstance:
     - target: {fileID: 6968512398489348358, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
       propertyPath: 'Controllers.Array.data[3]'
       value: 
-      objectReference: {fileID: 35666434}
+      objectReference: {fileID: 35666436}
     - target: {fileID: 6987640101168264479, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -14899,7 +14921,7 @@ PrefabInstance:
       addedObject: {fileID: 717492065}
     - targetCorrespondingSourceObject: {fileID: 980961686366673609, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 35666434}
+      addedObject: {fileID: 35666436}
   m_SourcePrefab: {fileID: 100100000, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
 --- !u!1 &1987208379
 GameObject:

@@ -62,14 +62,14 @@ namespace ThisGame.Entity.SkillSystem
         {
             if (_hitTargets.Contains(other)) return;
 
-            var target = other.GetComponentInChildren<EntityController>();
+            var target = other.transform.parent.GetComponent<EntityController>();
             if (target == null || target.GetController<HealthController>() == null) return;
 
             var damageInfo = new DamageInfo()
             {
                 DamageSource = _player,
                 DamageTarget = target,
-                DamageAmount = 10
+                DamageAmount = 1
             };
             target.GetController<HealthController>().Model.TakeDamage(damageInfo);
         }
