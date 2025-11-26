@@ -16,11 +16,10 @@ namespace ThisGame.Entity.SkillSystem
 
             if (e is P_Skill_AttackPressed thisSkill)
             {
+                InputDir = thisSkill.InputDirection;
                 var attackExecute = new P_Skill_AttackExecute()
                 {
-                    AttackDirection = thisSkill.InputDirection
                 };
-                InputDir = thisSkill.InputDirection;
                 EventBus.Publish(attackExecute);
                 ExecuteSkill(attackExecute);
             }

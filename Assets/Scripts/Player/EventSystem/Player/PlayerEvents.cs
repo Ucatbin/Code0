@@ -36,10 +36,7 @@ public struct P_Skill_AttackPressed : ISkillEvent
     public P_AttackModel Skill;
     public Vector3 InputDirection;
 }
-public struct P_Skill_AttackExecute : ISkillEvent
-{
-    public Vector3 AttackDirection;
-}
+public struct P_Skill_AttackExecute : ISkillEvent { }
 // DoubleJump
 public struct P_Skill_DoubleJumpPressed : ISkillEvent
 {

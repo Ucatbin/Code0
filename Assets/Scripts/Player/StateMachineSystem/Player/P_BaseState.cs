@@ -115,14 +115,6 @@ namespace ThisGame.Entity.StateMachineSystem
         }
         protected virtual void HandleAttackExecute(P_Skill_AttackExecute @event)
         {
-            if ((@event.AttackDirection.x - _player.transform.position.x) * _player.FacingDir < 0)
-            {
-                var viewFlip = new ViewFlip()
-                {
-                    FacingDir = -_player.FacingDir
-                };
-                EventBus.Publish(viewFlip);
-            }
             _stateMachine.ChangeState<P_AttackState>();
         }
         // DoubleJump

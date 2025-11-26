@@ -3,25 +3,11 @@ namespace ThisGame.Entity.SkillSystem
 {
     public class P_SkillController : SkillController
     {
-        public override void RegisterModels()
+        void Start()
         {
-            foreach (var entry in _skillEnties)
-            {
-                if (!string.IsNullOrEmpty(entry.SkillName) && entry.Data != null)
-                {
-                    SkillModel model = entry.SkillName switch
-                    {
-                        "P_DoubleJump" => new P_DoubleJumpModel(entry.Data),
-                        "P_GrappingHook" => new P_GrappingHookModel(entry.Data),
-                        "P_Attack" => new P_AttackModel(entry.Data),
-                        "P_TheWorld" => new P_DashAttackModel(entry.Data),
-                        _ => null
-                    };
-
-                    if (model != null)
-                        _models[model.GetType()] = model;
-                }
-            }
+            var skillEntry = SkillManager.Instance.GetSkillEntry(typeof(P_AttackModel));
+            var attack = new P_AttackModel(skillEntry.Data as P_AttackData);
+            UnlockSkill(attack);
         }
     }
 }

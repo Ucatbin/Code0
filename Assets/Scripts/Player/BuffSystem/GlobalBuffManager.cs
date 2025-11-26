@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ThisGame.Entity.EntitySystem;
 using UnityEngine;
 
 namespace ThisGame.Entity.BuffSystem
@@ -9,11 +8,13 @@ namespace ThisGame.Entity.BuffSystem
     public class GlobalBuffManager : MonoBehaviour
     {
         public static GlobalBuffManager Instance;
-        Dictionary<Type, BuffData> _typeToDataMap = new Dictionary<Type, BuffData>();
-        [SerializeField] protected BuffModelEntry[] _buffEntries;
+        Dictionary<Type, BuffEntry> _buffEntryMap;
+        [SerializeField] protected BuffEntry[] _buffEntries;
 
         void Awake()
         {
+            _buffEntryMap = new Dictionary<Type, BuffEntry>();
+
             if (Instance == null)
             {
                 Instance = this;
@@ -22,36 +23,44 @@ namespace ThisGame.Entity.BuffSystem
             else
                 Destroy(gameObject);
 
-            RegisterBuffDataMapping();
+            RegisterBuffMapping();
         }
         
-        void RegisterBuffDataMapping()
+        void RegisterBuffMapping()
         {
-            _typeToDataMap.Clear();
-            
-            _typeToDataMap[typeof(P_CountDownModel)] = GetDataByName("P_CountDown");
-            // TODO: More mappings
-            
-            Debug.Log($"Register {_typeToDataMap.Count} buffs");
+            _buffEntryMap.Clear();
+            _buffEntryMap = _buffEntries.ToDictionary(entry => entry.BuffModelType, entry => entry);
         }
-        BuffData GetDataByName(string buffName)
+        public BuffEntry GetBuffEntry(Type buffType)
         {
-            var entry = _buffEntries.FirstOrDefault(e => e.BuffName == buffName);
-            if (entry != null && entry.Data != null)
-                return entry.Data;
-            
-            Debug.LogError($"Cant find '{buffName}' 's buffData");
-            return null;
+            _buffEntryMap.TryGetValue(buffType, out BuffEntry entry);
+            return entry;
         }
+    }
 
-        public BuffData GetDataForType<T>() where T : BuffModel
+    [Serializable]
+    public class BuffEntry
+    {
+        [SerializeField] string _buffModelName;
+        public BuffData Data;
+        Type _buffModelType;
+        public Type BuffModelType 
         {
-            var buffType = typeof(T);
-            if (_typeToDataMap.TryGetValue(buffType, out BuffData data))
-                return data;
-            
-            Debug.LogError($"Buff: {buffType.Name} is not registered");
-            return null;
+            get
+            {
+                if (_buffModelType == null && !string.IsNullOrEmpty(_buffModelName))
+                {
+                    _buffModelType = Type.GetType($"ThisGame.Entity.BuffSystem.{_buffModelName}, Assembly-CSharp");
+                    if (_buffModelType == null)
+                        Debug.LogError($"Can't match: {_buffModelName}");
+                }
+                return _buffModelType;
+            }
+            set
+            {
+                _buffModelType = value;
+                _buffModelName = value?.AssemblyQualifiedName;
+            }
         }
     }
 }

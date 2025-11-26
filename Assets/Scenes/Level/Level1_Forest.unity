@@ -119,6 +119,23 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &35666431 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 980961686366673609, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
+  m_PrefabInstance: {fileID: 1383833045}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &35666434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 35666431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c889dbec917cf064a91136b50eea06c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &271258503
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,6 +427,27 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d20fdbcc2fad28d45950dc66c6f32f75, type: 3}
+--- !u!1 &717492060 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1754830729038959751, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
+  m_PrefabInstance: {fileID: 1383833045}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &717492065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 717492060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3b497f16456d0b409c00c290b2c48bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _skillEnties:
+  - _skillModelName: P_AttackModel
+    Data: {fileID: 11400000, guid: f5e8e3d4e69432d4c88bddbcb0df38a0, type: 2}
+    View: {fileID: 0}
 --- !u!1 &768224062
 GameObject:
   m_ObjectHideFlags: 0
@@ -500,37 +538,6 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2.1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &808189801
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 808189802}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Player
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &808189802
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 808189801}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14815,6 +14822,10 @@ PrefabInstance:
       propertyPath: MainCam
       value: 
       objectReference: {fileID: 390109020}
+    - target: {fileID: 6968512398489348358, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
+      propertyPath: 'Controllers.Array.data[3]'
+      value: 
+      objectReference: {fileID: 35666434}
     - target: {fileID: 6987640101168264479, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -14882,7 +14893,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1754830729038959751, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 717492065}
+    - targetCorrespondingSourceObject: {fileID: 980961686366673609, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 35666434}
   m_SourcePrefab: {fileID: 100100000, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
 --- !u!1 &1987208379
 GameObject:
@@ -14915,7 +14932,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _buffEntries:
-  - BuffName: P_CountDown
+  - _buffModelName: P_CountDownModel
     Data: {fileID: 11400000, guid: c37ea9f4f1703a84d90cda3270c6dc01, type: 2}
 --- !u!114 &1987208381
 MonoBehaviour:
@@ -14963,7 +14980,6 @@ SceneRoots:
   - {fileID: 271258505}
   - {fileID: 1987208382}
   - {fileID: 612107877}
-  - {fileID: 808189802}
   - {fileID: 1383833045}
   - {fileID: 390109021}
   - {fileID: 962701666}

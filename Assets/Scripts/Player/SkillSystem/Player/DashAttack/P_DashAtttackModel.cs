@@ -5,6 +5,7 @@ namespace ThisGame.Entity.SkillSystem
 {
     public class P_DashAttackModel : SkillModel
     {
+        public Vector3 InputDir;
         public P_DashAttackModel(SkillData data) : base(data)
         {
         }

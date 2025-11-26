@@ -9,7 +9,6 @@ namespace ThisGame.Entity.BuffSystem
     public class BuffController : BaseController
     {
         protected Dictionary<Type, BuffModel> _models;
-
         [SerializeField] protected List<BuffModel> _activeBuffs;
         SortedSet<BuffModel> _buffHeap;
 
@@ -112,12 +111,5 @@ namespace ThisGame.Entity.BuffSystem
             else
                 return null;
         }
-    }
-
-    [Serializable]
-    public class BuffModelEntry
-    {
-        public string BuffName;
-        public BuffData Data;
     }
 }
