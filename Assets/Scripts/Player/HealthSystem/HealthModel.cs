@@ -31,7 +31,8 @@ namespace ThisGame.Entity.HealthSystem
             {
                 var beKilled = new BeKilled
                 {
-                    
+                    TargetEntity = info.DamageTarget.gameObject,
+                    // Killer = info.DamageSource.gameObject
                 };
                 EventBus.Publish(beKilled);
                 OnDeath?.Invoke();
@@ -44,6 +45,5 @@ namespace ThisGame.Entity.HealthSystem
             _currentHealth += heal;
             OnHealthChanged?.Invoke(heal);
         }
-
     }
 } 

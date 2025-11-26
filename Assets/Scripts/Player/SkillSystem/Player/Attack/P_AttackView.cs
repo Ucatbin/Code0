@@ -20,7 +20,6 @@ namespace ThisGame.Entity.SkillSystem
         {
             EventBus.Subscribe<AttackAnimationEvent>(this, HandleAttackAnim);
             EventBus.Subscribe<BeKilled>(this, HandleKill);
-            EventBus.Subscribe<P_Skill_AttackExecute>(this, HandleAttackView);
         }
 
         void OnDisable()
@@ -36,13 +35,13 @@ namespace ThisGame.Entity.SkillSystem
             _attackCollider.callbackLayers = _canHit;
         }
 
-        void HandleAttackView(P_Skill_AttackExecute @event)
+        public void HandleAttackView(Vector3 attackDir)
         {
-            Vector2 attackDirection2D = @event.AttackDirection;
-            Vector2 currentPos2D = transform.position;
+            transform.parent.right = attackDir.normalized;
 
-            Vector2 targetDirection = (attackDirection2D - currentPos2D).normalized;
-            transform.parent.right = targetDirection;
+            var scale = transform.localScale;
+            scale.y = attackDir.normalized.x >= 0 ? 1 : -1;
+            transform.parent.localScale = scale;
             _anim.SetTrigger("StartTrigger");
         }
 
@@ -63,14 +62,14 @@ namespace ThisGame.Entity.SkillSystem
         {
             if (_hitTargets.Contains(other)) return;
 
-            var target = other.GetComponentInChildren<EntityController>();
+            var target = other.transform.parent.GetComponent<EntityController>();
             if (target == null || target.GetController<HealthController>() == null) return;
 
             var damageInfo = new DamageInfo()
             {
                 DamageSource = _player,
                 DamageTarget = target,
-                DamageAmount = 10
+                DamageAmount = 1
             };
             target.GetController<HealthController>().Model.TakeDamage(damageInfo);
         }

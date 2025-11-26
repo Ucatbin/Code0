@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Security;
 using ThisGame.Core;
 using ThisGame.Core.CheckerSystem;
 using ThisGame.Entity.EntitySystem;
@@ -115,14 +116,6 @@ namespace ThisGame.Entity.StateMachineSystem
         }
         protected virtual void HandleAttackExecute(P_Skill_AttackExecute @event)
         {
-            if ((@event.AttackDirection.x - _player.transform.position.x) * _player.FacingDir < 0)
-            {
-                var viewFlip = new ViewFlip()
-                {
-                    FacingDir = -_player.FacingDir
-                };
-                EventBus.Publish(viewFlip);
-            }
             _stateMachine.ChangeState<P_AttackState>();
         }
         // DoubleJump
@@ -140,7 +133,6 @@ namespace ThisGame.Entity.StateMachineSystem
             };
             EventBus.Publish(jumpExecute);
         }
-
         // GrappingHook
         protected virtual void HandleGrappingHookPressed(P_Skill_GrappingHookPressed @event)
         {
@@ -150,10 +142,27 @@ namespace ThisGame.Entity.StateMachineSystem
         {
             _stateMachine.ChangeState<P_HookedState>();
         }
-        protected virtual void HandleGrappingHookRelease(P_Skill_GrappingHookReleased @event)
+        protected virtual void HandleGrappingHookRelease(P_Skill_GrappingHookRelease @event)
         {
             _player.Joint.enabled = false;
             _stateMachine.ChangeState<P_IdleState>();
+        }
+        protected virtual void HandleRopeDash(P_Skill_RopeDashPressed @event)
+        {
+
+        }
+        // TheWorld
+        protected virtual void HandleTheWorldPressed(P_Skill_DashAttackPressed @event)
+        {
+            @event.Skill.HandleSkillButtonPressed(@event);
+        }
+        protected virtual void HandleTheWorldExecute(P_Skill_DashAttackExecuted @event)
+        {
+            _stateMachine.ChangeState<P_DashAttackState>();
+        }
+        protected virtual void HandleTheWorldRelease(P_Skill_TheWorldRelease @event)
+        {
+            _stateMachine.ChangeState<P_AirState>();
         }
         #endregion
         #endregion

@@ -25,7 +25,7 @@ public class Bullet : MonoBehaviour
             PlayerController playerController = controller.GetComponent<PlayerController>();
             HealthController healthController = controller.GetComponent<HealthController>();
             DamageInfo damage = new DamageInfo();
-            damage.DamageAmount = 10f;
+            damage.DamageAmount = 2f;
             damage.DamageSource = null;
             damage.DamageTarget = playerController;
             healthController.Model.TakeDamage(damage);

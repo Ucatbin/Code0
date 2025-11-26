@@ -7,6 +7,8 @@ namespace ThisGame.Entity.SkillSystem
 {
     public class SkillModel
     {
+        protected bool _isUnlocked;
+        public bool IsUnlocked => _isUnlocked;
         protected int _currentLevel;
         public int CurrentLevel => _currentLevel;
         protected float _currentCoolDown;
@@ -39,5 +41,6 @@ namespace ThisGame.Entity.SkillSystem
         public virtual void StartCoolDown()
         {
         }
+        public void Unlock() => _isUnlocked = true;
     }
 }

@@ -24,7 +24,9 @@ namespace ThisGame.Entity.StateMachineSystem
         protected override Type[] GetEvents() => new Type[]
         {
             // Skills
-            typeof(P_Skill_GrappingHookReleased)
+            typeof(P_Skill_GrappingHookRelease),
+            typeof(P_Skill_DashAttackPressed),
+            typeof(P_Skill_DashAttackExecuted)
         };
 
         public override void Enter()
@@ -68,6 +70,7 @@ namespace ThisGame.Entity.StateMachineSystem
                     _data.MaxLineDist,
                     10f
                 );
+                _initLength = _player.Joint.distance;
             }
         }
     }

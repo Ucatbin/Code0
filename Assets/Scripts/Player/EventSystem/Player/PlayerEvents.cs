@@ -36,10 +36,7 @@ public struct P_Skill_AttackPressed : ISkillEvent
     public P_AttackModel Skill;
     public Vector3 InputDirection;
 }
-public struct P_Skill_AttackExecute : ISkillEvent
-{
-    public Vector3 AttackDirection;
-}
+public struct P_Skill_AttackExecute : ISkillEvent { }
 // DoubleJump
 public struct P_Skill_DoubleJumpPressed : ISkillEvent
 {
@@ -63,9 +60,31 @@ public struct P_Skill_GrappingHookExecute : ISkillEvent
     public bool IsGrounded;
     public Vector3 TargetPosition;
 }
-public struct P_Skill_GrappingHookReleased : ISkillEvent
+public struct P_Skill_GrappingHookRelease : ISkillEvent
 {
     public P_GrappingHookModel Skill;
+}
+
+public struct P_Skill_RopeDashPressed : ISkillEvent
+{
+    public P_GrappingHookModel Skill;
+}
+public struct P_Skill_RopeDashExecute : ISkillEvent
+{
+    public int FacingDir;
+}
+// TheWorld
+public struct P_Skill_DashAttackPressed : ISkillEvent
+{
+    public P_DashAttackModel Skill;
+}
+public struct P_Skill_DashAttackExecuted : ISkillEvent
+{
+    
+}
+public struct P_Skill_TheWorldRelease : ISkillEvent
+{
+    
 }
 #endregion
 #region Checkers
@@ -91,7 +110,8 @@ public struct StateChange
 }
 public struct BeKilled
 {
-    
+    public GameObject TargetEntity;
+    public GameObject Killer;
 }
 #endregion
 #region Buffs

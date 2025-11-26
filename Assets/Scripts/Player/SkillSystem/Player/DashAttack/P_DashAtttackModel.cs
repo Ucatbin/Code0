@@ -3,10 +3,10 @@ using UnityEngine;
 
 namespace ThisGame.Entity.SkillSystem
 {
-    public class P_AttackModel : SkillModel
+    public class P_DashAttackModel : SkillModel
     {
         public Vector3 InputDir;
-        public P_AttackModel(SkillData data) : base(data)
+        public P_DashAttackModel(SkillData data) : base(data)
         {
         }
 
@@ -14,19 +14,21 @@ namespace ThisGame.Entity.SkillSystem
         {
             if (!_isReady || _currentCharges == 0) return;
 
-            if (e is P_Skill_AttackPressed thisSkill)
+            if (e is P_Skill_DashAttackPressed thisSkill)
             {
-                InputDir = thisSkill.InputDirection;
-                var attackExecute = new P_Skill_AttackExecute()
+                var skillExecute = new P_Skill_DashAttackExecuted()
                 {
+
                 };
-                EventBus.Publish(attackExecute);
-                ExecuteSkill(attackExecute);
+                EventBus.Publish(skillExecute);
+                ExecuteSkill(skillExecute);
             }
         }
         public override void ExecuteSkill(ISkillEvent e)
         {
             base.ExecuteSkill(e);
+
+            _isReady = true;
         }
         public override void StartCoolDown()
         {

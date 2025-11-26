@@ -891,7 +891,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   Rb: {fileID: 0}
-  Controllers: []
+  Controllers:
+  - {fileID: 6464942255149746581}
   currentStat: {fileID: 2096007947243875065}
   config: {fileID: 11400000, guid: 030f3dfeb92c8ad4aaba94466905eb17, type: 2}
   origin: {fileID: 4667221713356034391}
@@ -922,7 +923,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e54482957522e1449ace5b1a7a19568, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ThisGame.Entity.HealthSystem.HealthController
-  _data: {fileID: 11400000, guid: e438dd91c3c41334c82dd062baba80ac, type: 2}
+  _controllerObj: {fileID: 5924456857998512127}
+  _thisEntity: {fileID: 5924456857998512127}
+  _data: {fileID: 11400000, guid: 19ba46b92da68a34792621035dc4a28f, type: 2}
 --- !u!1 &6804747060478162051
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,11 +18,11 @@ namespace ThisGame.Entity.InputSystem
 
             if (context.performed)
             {
-                var movePressed = new MoveButtonPressed
+                var skillPressed = new MoveButtonPressed
                 {
                     MoveDirection = new Vector3(input.x, 0, input.y)
                 };
-                EventBus.Publish(movePressed);
+                EventBus.Publish(skillPressed);
             }
             if  (context.canceled)
             {
@@ -38,11 +38,11 @@ namespace ThisGame.Entity.InputSystem
                 EventBus.Publish(jumpPressedEvent);
 
                 var doubleJumpSkill = _player.GetController<SkillController>().GetSkill<P_DoubleJumpModel>();
-                var doubleJumpPressedEvent = new P_Skill_DoubleJumpPressed()
+                var skillPressed = new P_Skill_DoubleJumpPressed()
                 {
                     Skill = doubleJumpSkill
                 };
-                EventBus.Publish(doubleJumpPressedEvent);
+                EventBus.Publish(skillPressed);
             }
             if (context.canceled)
             {
@@ -56,12 +56,12 @@ namespace ThisGame.Entity.InputSystem
             if (context.performed)
             {
                 var attackSkill =  _player.GetController<SkillController>().GetSkill<P_AttackModel>();
-                var attackPressedEvent = new P_Skill_AttackPressed()
+                var skillPressed = new P_Skill_AttackPressed()
                 {
                     Skill =  attackSkill,
                     InputDirection = _player.MainCam.ScreenToWorldPoint(Input.mousePosition),
                 };
-                EventBus.Publish(attackPressedEvent);
+                EventBus.Publish(skillPressed);
             }
         }
         #endregion
@@ -70,22 +70,43 @@ namespace ThisGame.Entity.InputSystem
         {
             if (context.performed)
             {
-                var grappingHookPressedEvent = new P_Skill_GrappingHookPressed()
+                var skillPressed = new P_Skill_GrappingHookPressed()
                 {
                     Skill = _player.GetController<SkillController>().GetSkill<P_GrappingHookModel>(),
                     CurrentPosition = _player.transform.position,
                     InputDirection = _player.MainCam.ScreenToWorldPoint(Input.mousePosition),
                     IsGrounded = _player.GetController<CheckerController>().GetChecker<GroundCheckModel>().IsDetected
                 };
-                EventBus.Publish(grappingHookPressedEvent);
+                EventBus.Publish(skillPressed);
             }
             if (context.canceled)
             {
-                var grappingHookRelease = new P_Skill_GrappingHookReleased()
+                var grappingHookRelease = new P_Skill_GrappingHookRelease()
                 {
                     Skill = _player.GetController<SkillController>().GetSkill<P_GrappingHookModel>(),
                 };
                 EventBus.Publish(grappingHookRelease);
+            }
+        }
+        public void HandleRopeDash(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+                EventBus.Publish(new P_Skill_RopeDashPressed());
+        }
+        public void HandleDashAttack(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                var skillPressed = new P_Skill_DashAttackPressed()
+                {
+                    Skill = _player.GetController<SkillController>().GetSkill<P_DashAttackModel>(),
+                };
+                EventBus.Publish(skillPressed);
+            }
+            if (context.canceled)
+            {
+                var skillRelersed = new P_Skill_TheWorldRelease();
+                EventBus.Publish(skillRelersed);
             }
         }
         #endregion
