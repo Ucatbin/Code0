@@ -12,5 +12,6 @@ namespace ThisGame.Entity.MoveSystem
         public float RotationSpeed;
         public float Acceleration;
         public float Deceleration;
+        public float CoyotTime;
     }
 }

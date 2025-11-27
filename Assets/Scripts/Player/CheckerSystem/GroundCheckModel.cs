@@ -35,15 +35,6 @@ namespace ThisGame.Core.CheckerSystem
 
                 Debug.DrawRay(checkPos, data.Direction * data.Distance, hitDetected ? Color.green : Color.red);
             }
-
-            if (_wasGrounded != _isDetected)
-            {
-                var groundStateChanged = new GroundCheckChange()
-                {
-                    ChangeToGrounded = _isDetected,
-                };
-                EventBus.Publish(groundStateChanged);
-            }
         }
     }
 }

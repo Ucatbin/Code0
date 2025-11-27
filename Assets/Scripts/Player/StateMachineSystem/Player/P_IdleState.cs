@@ -40,7 +40,7 @@ namespace ThisGame.Entity.StateMachineSystem
             
             var groundCheck = _checkers.GetChecker<GroundCheckModel>();
             if (!groundCheck.IsDetected)
-                _stateMachine.ChangeState<P_AirState>();
+                _stateMachine.ChangeState<P_CoyotState>();
 
             if (_player.InputValue.x != 0 && _player.Rb.linearVelocityX != 0)
                 _stateMachine.ChangeState<P_MoveState>();

@@ -19,6 +19,12 @@ namespace ThisGame.Entity.StateMachineSystem
         {
             base.Enter();
 
+            var groundStateChanged = new GroundCheckChange()
+            {
+                ChangeToGrounded = true,
+            };
+            EventBus.Publish(groundStateChanged);
+
             var velocity = _movement.Velocity;
             velocity.y = 0f;
             _movement.SetVelocity(velocity);

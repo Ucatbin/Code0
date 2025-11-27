@@ -33,9 +33,17 @@ namespace ThisGame.Entity.EntitySystem
         
         protected override void Start()
         {
-            base.Start();
-            
+            int initializedCount = 0;
+            Debug.Log($"====== Initializing Controllers ======");
+            foreach (var controller in Controllers)
+            {
+                controller.Initialize();
+                initializedCount ++;
+                Debug.Log($"{controller} initialized");
+            }
+            Debug.Log($"{initializedCount} controllers initialized");
             RegisterStates();
+            Debug.Log($"====== Controller Initialize Finished ======");
             _stateMachine.Initialize<P_IdleState>();
         }
         
