@@ -11,7 +11,13 @@ namespace ThisGame.Entity.BuffSystem
         {
             var buff = buffInfo.ConvertTo<P_CountDownModel>();
             var data = buff.Data as P_CountDownData;
-            buff.CountdownTimer = data.MaxStacks;
+            buff.CountdownTimer = data.MaxCountDown;
+
+            var updateDisplay = new UpdateCountdownDisplay
+            {
+                TimerDisplay = data.MaxCountDown
+            };
+            Core.EventBus.Publish(updateDisplay);
         }
     }
 }

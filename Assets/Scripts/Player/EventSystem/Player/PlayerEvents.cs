@@ -108,6 +108,10 @@ public struct StateChange
     public string LastStateAnim;
     public string NewStateAnim;
 }
+public struct BeHit
+{
+    public GameObject TargetEntity;
+}
 public struct BeKilled
 {
     public GameObject TargetEntity;

@@ -15,6 +15,8 @@ namespace ThisGame.Entity.StateMachineSystem
 
         protected override Type[] GetEvents() => new Type[]
         {
+            //
+            typeof(BeHit),
             // Abilities
             typeof(JumpButtonPressed),
             // Skills
