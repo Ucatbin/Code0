@@ -8,7 +8,7 @@ namespace ThisGame.Entity.BuffSystem
     public class P_BuffController : BuffController
     {
         [SerializeField] TextMeshProUGUI _display;
-        void Start()
+        public override void RegisterModels()
         {
             var buffEntry = GlobalBuffManager.Instance.GetBuffEntry(typeof(P_CountDownModel));
             var countdown = new P_CountDownModel(buffEntry.Data as P_CountDownData, null, null, _display);

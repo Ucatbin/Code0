@@ -1,6 +1,7 @@
 using System.Linq;
 using ThisGame.Core;
 using ThisGame.Core.CheckerSystem;
+using ThisGame.Entity.BuffSystem;
 using ThisGame.Entity.SkillSystem;
 using ThisGame.Entity.StateMachineSystem;
 using UnityEngine;
@@ -105,6 +106,9 @@ namespace ThisGame.Entity.EntitySystem
             );
             _stateMachine.RegisterState<P_CoyotState>(
                 new P_CoyotState(this, _stateMachine, "Air", checkerController, moveController.Model)
+            );
+            _stateMachine.RegisterState<P_BeHitState>(
+                new P_BeHitState(this, _stateMachine, "", checkerController, moveController.Model)
             );
             // Skills
             var attackSkill = GetController<SkillController>().GetSkill<P_AttackModel>();

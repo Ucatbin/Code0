@@ -34914,6 +34914,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfb227e136d60a24c918797dc1fbc43c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1247663281 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1102494827914892880, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
+  m_PrefabInstance: {fileID: 1383833045}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19b2624edcdb3fb4f83c21a746789cbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1383833045
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34980,11 +34991,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3268368580314335178, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1
+      value: 2.13
       objectReference: {fileID: 0}
     - target: {fileID: 3268368580314335178, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.5
+      value: 1.82
       objectReference: {fileID: 0}
     - target: {fileID: 3978385919566407127, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
       propertyPath: _skillEnties.Array.size
@@ -35025,6 +35036,54 @@ PrefabInstance:
     - target: {fileID: 8319435918915207647, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
       propertyPath: Priority.Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8728462814494891936, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8728462814494891936, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_ActionId
+      value: 672be04a-f249-4164-a2a9-a7c00287b496
+      objectReference: {fileID: 0}
+    - target: {fileID: 8728462814494891936, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_ActionName
+      value: 'Normal/TheWorld[/Keyboard/shift]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8728462814494891936, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8728462814494891936, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8728462814494891936, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1247663281}
+    - target: {fileID: 8728462814494891936, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8728462814494891936, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: HandleDashAttack
+      objectReference: {fileID: 0}
+    - target: {fileID: 8728462814494891936, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ThisGame.Entity.InputSystem.InputHandler, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8728462814494891936, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8810984415828065905, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
+      propertyPath: m_fontSize
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 8810984415828065905, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 0.65
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

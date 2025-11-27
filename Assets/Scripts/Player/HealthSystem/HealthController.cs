@@ -1,6 +1,5 @@
-using System.ComponentModel;
 using ThisGame.Core;
-using ThisGame.Entity.EntitySystem;
+using ThisGame.Entity.BuffSystem;
 using UnityEngine;
 
 namespace ThisGame.Entity.HealthSystem
@@ -11,6 +10,7 @@ namespace ThisGame.Entity.HealthSystem
         [SerializeField] GameObject _thisEntity;
         [SerializeField] HealthData _data;
         public HealthModel Model;
+        [SerializeField] SimpleShatterer _shatterer;
 
         void OnEnable()
         {
@@ -29,7 +29,21 @@ namespace ThisGame.Entity.HealthSystem
         {
             if (e.TargetEntity == _controllerObj)
             {
-                Destroy(_thisEntity);
+                if (_controllerObj != null && _controllerObj.GetComponent<P_BuffController>() != null)
+                {
+                    var targetBuffController = _controllerObj.GetComponent<P_BuffController>();
+                    foreach (var buff in targetBuffController.ActiveBuffs)
+                        buff.Data.OnBekill.Apply(buff);
+                }
+                if (e.Killer != null && e.Killer.GetComponent<BuffController>() != null)
+                {
+                    var killerBuffController = e.Killer.GetComponent<BuffController>();
+                    foreach (var buff in killerBuffController.ActiveBuffs)
+                    {
+                        buff.Data.OnKill?.Apply(buff);
+                    }
+                }
+                _shatterer.ShatterOnDeath();
             }
         }
     }

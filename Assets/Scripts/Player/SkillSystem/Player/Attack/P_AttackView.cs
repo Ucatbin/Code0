@@ -19,7 +19,6 @@ namespace ThisGame.Entity.SkillSystem
         void OnEnable()
         {
             EventBus.Subscribe<AttackAnimationEvent>(this, HandleAttackAnim);
-            EventBus.Subscribe<BeKilled>(this, HandleKill);
         }
 
         void OnDisable()
@@ -69,13 +68,9 @@ namespace ThisGame.Entity.SkillSystem
             {
                 DamageSource = _player,
                 DamageTarget = target,
-                DamageAmount = 1
+                DamageAmount = 5
             };
             target.GetController<HealthController>().Model.TakeDamage(damageInfo);
-        }
-
-        void HandleKill(BeKilled @event)
-        {
         }
     }
 }

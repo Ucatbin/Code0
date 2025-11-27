@@ -107,6 +107,10 @@ namespace ThisGame.Entity.StateMachineSystem
         }
         #endregion
         #region State
+        protected virtual void HandleBeHit(BeHit @event)
+        {
+            _stateMachine.ChangeState<P_BeHitState>();
+        }
         #endregion
         #region Skills
         // Attack

@@ -9,14 +9,14 @@ namespace ThisGame.Entity.BuffSystem
     public class BuffController : BaseController
     {
         protected Dictionary<Type, BuffModel> _models;
-        [SerializeField] protected List<BuffModel> _activeBuffs;
+        [HideInInspector] public List<BuffModel> ActiveBuffs;
         SortedSet<BuffModel> _buffHeap;
 
         public override void Initialize()
         {
             _models = new Dictionary<Type, BuffModel>();
-            _activeBuffs = new List<BuffModel>();
-            _buffHeap = new SortedSet<BuffModel>(_activeBuffs);
+            ActiveBuffs = new List<BuffModel>();
+            _buffHeap = new SortedSet<BuffModel>(ActiveBuffs);
 
             RegisterModels();
         }
@@ -25,7 +25,7 @@ namespace ThisGame.Entity.BuffSystem
         public void AddBuff<T>(T thisBuff, int stacks) where T : BuffModel
         {
             Type newBuffType = thisBuff.GetType();
-            BuffModel existingBuff = _activeBuffs.FirstOrDefault(buff => buff.GetType() == newBuffType);
+            BuffModel existingBuff = ActiveBuffs.FirstOrDefault(buff => buff.GetType() == newBuffType);
 
             if (existingBuff != null && existingBuff.Data.BuffType != BuffType.Independent)
             {
@@ -79,7 +79,7 @@ namespace ThisGame.Entity.BuffSystem
                         thisBuff.Data.BuffName
                     );
                 thisBuff.Data.OnCreat?.Apply(thisBuff);
-                _activeBuffs.Add(thisBuff);
+                ActiveBuffs.Add(thisBuff);
             }
         }
         void RemoveBuff<T>(T thisBuff) where T : BuffModel
@@ -88,7 +88,7 @@ namespace ThisGame.Entity.BuffSystem
             {
                 case BuffRemoveType.Clear:
                     thisBuff.Data.OnRemove.Apply(thisBuff);
-                    _activeBuffs.Remove(thisBuff);
+                    ActiveBuffs.Remove(thisBuff);
                     TimerManager.Instance.CancelTimersWithTag(thisBuff.Data.BuffName);
                     break;
                 case BuffRemoveType.Reduce:
@@ -96,7 +96,7 @@ namespace ThisGame.Entity.BuffSystem
                     thisBuff.Data.OnRemove.Apply(thisBuff);
                     if (thisBuff.CurrentStacks == 0)
                     {
-                        _activeBuffs.Remove(thisBuff);
+                        ActiveBuffs.Remove(thisBuff);
                         TimerManager.Instance.CancelTimersWithTag(thisBuff.Data.BuffName);
                     }
                     break;
