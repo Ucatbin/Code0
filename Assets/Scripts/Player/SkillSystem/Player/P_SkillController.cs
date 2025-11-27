@@ -1,10 +1,15 @@
 
+
+using UnityEngine;
+
 namespace ThisGame.Entity.SkillSystem
 {
     public class P_SkillController : SkillController
     {
-        void Start()
+        public override void RegisterModels()
         {
+            base.RegisterModels();
+
             var attackSkillEntry = SkillManager.Instance.GetSkillEntry(typeof(P_AttackModel));
             var attack = new P_AttackModel(attackSkillEntry.Data as P_AttackData);
             UnlockSkill(attack);

@@ -38,7 +38,7 @@ public class P_AttackState : P_BaseState
         _view.HandleAttackView(attackDir);
         _movement.SetVelocity(Vector3.Scale(attackDir, _data.AttackForce));
         _player.Rb.linearVelocity = _movement.Velocity;
-        if ((attackDir.x - _player.transform.position.x) * _player.FacingDir < 0)
+        if (attackDir.x * _player.FacingDir < 0)
         {
             var viewFlip = new ViewFlip()
             {

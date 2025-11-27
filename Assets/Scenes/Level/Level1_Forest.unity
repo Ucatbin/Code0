@@ -320,7 +320,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 12
+  orthographic size: 6.55
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -35026,58 +35026,6 @@ PrefabInstance:
       propertyPath: Priority.Enabled
       value: 0
       objectReference: {fileID: 0}
-   - target: {fileID: 8728462814494891936, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
-      propertyPath: m_ActionEvents.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8728462814494891936, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
-      propertyPath: m_ActionEvents.Array.data[5].m_ActionId
-      value: 672be04a-f249-4164-a2a9-a7c00287b496
-      objectReference: {fileID: 0}
-    - target: {fileID: 8728462814494891936, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
-      propertyPath: m_ActionEvents.Array.data[5].m_ActionName
-      value: 'Normal/TheWorld[/Keyboard/shift]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 8728462814494891936, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
-      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8728462814494891936, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
-      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8728462814494891936, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
-      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 2062225642}
-    - target: {fileID: 8728462814494891936, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
-      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8728462814494891936, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
-      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: HandleTheWorld
-      objectReference: {fileID: 0}
-    - target: {fileID: 8728462814494891936, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
-      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: ThisGame.Entity.InputSystem.InputHandler, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 8728462814494891936, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
-      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 8810984415828065905, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
-      propertyPath: m_fontSize
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8810984415828065905, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
-      propertyPath: m_fontStyle
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8810984415828065905, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
-      propertyPath: m_fontSizeBase
-      value: 0.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -35150,17 +35098,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2062225642 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1102494827914892880, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
-  m_PrefabInstance: {fileID: 1383833045}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19b2624edcdb3fb4f83c21a746789cbd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

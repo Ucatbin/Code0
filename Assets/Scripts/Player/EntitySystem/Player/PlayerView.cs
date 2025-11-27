@@ -17,7 +17,8 @@ namespace ThisGame.Entity.EntitySystem
         }
         public void HandleStateChange(StateChange @event)
         {
-            Animator.SetBool(@event.LastStateAnim, false);
+            if (@event.LastStateAnim != null)
+                Animator.SetBool(@event.LastStateAnim, false);
             Animator.SetBool(@event.NewStateAnim, true);
         }
         public void HandleFlip(ViewFlip @event, PlayerController player)
