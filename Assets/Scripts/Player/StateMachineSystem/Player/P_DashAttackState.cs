@@ -12,7 +12,15 @@ namespace ThisGame.Entity.StateMachineSystem
     {
         P_DashAttackModel _skill;
         P_DashAttackData _data;
-        public P_DashAttackState(PlayerController entity, StateMachine stateMachine, string animName, CheckerController checkers, MoveModel movement, P_DashAttackModel skill) : base(entity, stateMachine, animName, checkers, movement)
+        public P_DashAttackState(
+            PlayerController entity,
+            StateMachine stateMachine,
+            string animName,
+            CheckerController checkers,
+            MoveModel movement,
+            P_DashAttackModel skill,
+            SkillEntry entry
+        ) : base(entity, stateMachine, animName, checkers, movement)
         {
             _skill = skill;
             _data = _skill.Data as P_DashAttackData;

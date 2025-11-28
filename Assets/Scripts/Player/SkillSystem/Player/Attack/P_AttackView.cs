@@ -29,9 +29,10 @@ namespace ThisGame.Entity.SkillSystem
         void Awake()
         {
             if (_attackCollider != null)
+            {
                 _attackCollider.enabled = false;
-
-            _attackCollider.callbackLayers = _canHit;
+                _attackCollider.callbackLayers = _canHit;
+            }
         }
 
         public void HandleAttackView(Vector3 attackDir)

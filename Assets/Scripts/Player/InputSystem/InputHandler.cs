@@ -37,10 +37,10 @@ namespace ThisGame.Entity.InputSystem
                 var jumpPressedEvent = new JumpButtonPressed();
                 EventBus.Publish(jumpPressedEvent);
 
-                var doubleJumpSkill = _player.GetController<SkillController>().GetSkill<P_DoubleJumpModel>();
+                var (model, entry) = _player.GetController<SkillController>().GetSkill<P_DoubleJumpModel>();
                 var skillPressed = new P_Skill_DoubleJumpPressed()
                 {
-                    Skill = doubleJumpSkill
+                    Skill = model
                 };
                 EventBus.Publish(skillPressed);
             }
@@ -55,10 +55,10 @@ namespace ThisGame.Entity.InputSystem
         {
             if (context.performed)
             {
-                var attackSkill =  _player.GetController<SkillController>().GetSkill<P_AttackModel>();
+                var (model, entity) =  _player.GetController<SkillController>().GetSkill<P_AttackModel>();
                 var skillPressed = new P_Skill_AttackPressed()
                 {
-                    Skill =  attackSkill,
+                    Skill =  model,
                     InputDirection = _player.MainCam.ScreenToWorldPoint(Input.mousePosition),
                 };
                 EventBus.Publish(skillPressed);
@@ -68,11 +68,12 @@ namespace ThisGame.Entity.InputSystem
         #region Skills
         public void HandleGrappingHook(InputAction.CallbackContext context)
         {
+            var (model, entity) =  _player.GetController<SkillController>().GetSkill<P_GrappingHookModel>();
             if (context.performed)
             {
                 var skillPressed = new P_Skill_GrappingHookPressed()
                 {
-                    Skill = _player.GetController<SkillController>().GetSkill<P_GrappingHookModel>(),
+                    Skill = model,
                     CurrentPosition = _player.transform.position,
                     InputDirection = _player.MainCam.ScreenToWorldPoint(Input.mousePosition),
                     IsGrounded = _player.GetController<CheckerController>().GetChecker<GroundCheckModel>().IsDetected
@@ -83,7 +84,7 @@ namespace ThisGame.Entity.InputSystem
             {
                 var grappingHookRelease = new P_Skill_GrappingHookRelease()
                 {
-                    Skill = _player.GetController<SkillController>().GetSkill<P_GrappingHookModel>(),
+                    Skill = model,
                 };
                 EventBus.Publish(grappingHookRelease);
             }
@@ -97,9 +98,10 @@ namespace ThisGame.Entity.InputSystem
         {
             if (context.performed)
             {
+                var (model, entity) =  _player.GetController<SkillController>().GetSkill<P_DashAttackModel>();
                 var skillPressed = new P_Skill_DashAttackPressed()
                 {
-                    Skill = _player.GetController<SkillController>().GetSkill<P_DashAttackModel>(),
+                    Skill = model,
                 };
                 EventBus.Publish(skillPressed);
             }

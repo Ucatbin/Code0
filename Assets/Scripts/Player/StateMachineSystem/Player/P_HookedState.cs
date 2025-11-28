@@ -12,13 +12,23 @@ namespace ThisGame.Entity.StateMachineSystem
     {
         P_GrappingHookModel _skill;
         P_GrappingHookData _data;
+        P_GrapplingHookView _view;
         bool _isInited => _initLength <= _data.MaxLineDist;
         float _initLength;
 
-        public P_HookedState(PlayerController entity, StateMachine stateMachine, string animName, CheckerController checkers, MoveModel movement, P_GrappingHookModel skill) : base(entity, stateMachine, animName, checkers, movement)
+        public P_HookedState(
+            PlayerController entity,
+            StateMachine stateMachine,
+            string animName,
+            CheckerController checkers,
+            MoveModel movement,
+            P_GrappingHookModel skill,
+            SkillEntry entry
+        ) : base(entity, stateMachine, animName, checkers, movement)
         {
             _skill = skill;
-            _data = _skill.Data as P_GrappingHookData;
+            _data = entry.Data as P_GrappingHookData;
+            _view = entry.View as P_GrapplingHookView;
         }
 
         protected override Type[] GetEvents() => new Type[]
@@ -41,16 +51,20 @@ namespace ThisGame.Entity.StateMachineSystem
                 };
                 EventBus.Publish(viewFlip);
             }
+
             _player.Rb.gravityScale = 4f;
             _player.Joint.connectedBody = _skill.HookPoint.GetComponent<Rigidbody2D>();
             _player.Joint.distance = Vector2.Distance(_player.transform.position, _skill.HookPoint.transform.position);
             _player.Joint.enabled = true;
             _initLength = _player.Joint.distance;
+            
+            _view.StartRope(_player.transform, _skill.HookPoint.transform);
         }
         public override void Exit()
         {
             base.Exit();
 
+            _view?.StopRope();
             _movement.SetVelocity(_player.Rb.linearVelocity);
             _player.Rb.gravityScale = 0f;
         }

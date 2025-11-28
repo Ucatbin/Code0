@@ -23,7 +23,7 @@ namespace ThisGame.Entity.StateMachineSystem
             _player.GetController<HealthController>().Model.CanHit = false;
             _player.View.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
             TimerManager.Instance.AddTimer(
-                0.12f,
+                0.22f,
                 () =>{
                     _stateMachine.ChangeState<P_IdleState>();
                     _player.View.gameObject.GetComponent<SpriteRenderer>().color = Color.white;

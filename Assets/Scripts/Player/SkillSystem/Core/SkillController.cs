@@ -8,27 +8,28 @@ namespace ThisGame.Entity.SkillSystem
 {
     public class SkillController : BaseController
     {
-        [SerializeField] protected List<SkillModel> _unlockedSkills = new List<SkillModel>();
-
+        protected Dictionary<Type, (SkillModel model, SkillEntry entry)> _unlockedSkills = new Dictionary<Type, (SkillModel model, SkillEntry entry)>();
         public override void Initialize()
         {
             RegisterModels();
         }
         public virtual void RegisterModels() { }
 
-        public void UnlockSkill<T>(T thisSkill) where T : SkillModel
+        public void UnlockSkill<T>(T model, SkillEntry entry) where T : SkillModel
         {
-            if (!thisSkill.IsUnlocked)
+            if (!model.IsUnlocked)
             {
-                thisSkill.Unlock();
-                _unlockedSkills.Add(thisSkill);
+                model.Unlock();
+                _unlockedSkills[typeof(T)] = (model, entry);
             }
             else
-                Debug.LogError($"Skill: {thisSkill} already unlocked");
+                Debug.LogError($"Skill: {model} already unlocked");
         }
-        public T GetSkill<T>() where T : SkillModel
+        public (T model, SkillEntry entry) GetSkill<T>() where T : SkillModel
         {
-            return _unlockedSkills.OfType<T>().FirstOrDefault();
+            if (_unlockedSkills.TryGetValue(typeof(T), out var skillInfo))
+                return (skillInfo.model as T, skillInfo.entry);
+            return (null, null);
         }
     }
 }
