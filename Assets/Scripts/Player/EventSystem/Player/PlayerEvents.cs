@@ -30,39 +30,27 @@ public struct FlipAction
 }
 #endregion
 #region Skills
-// Attack
-public struct P_Skill_AttackPressed : ISkillEvent
+public struct P_SkillPressed : ISkillPressedEvent
 {
-    public P_AttackModel Skill;
+    public SkillModel Skill;
     public Vector3 InputDirection;
-}
-public struct P_Skill_AttackExecute : ISkillEvent { }
-// DoubleJump
-public struct P_Skill_DoubleJumpPressed : ISkillEvent
-{
-    public P_DoubleJumpModel Skill;
-}
-public struct P_Skill_DoubleJumpExecute : ISkillEvent
-{
-    public float DoubleJumpSpeed;
-}
 
-// GrappingHook
-public struct P_Skill_GrappingHookPressed : ISkillEvent
+    public Vector3 PlayerPosition;
+}
+public struct P_SkillExecute : ISkillEvent
 {
-    public P_GrappingHookModel Skill;
-    public Vector3 CurrentPosition;
+    public SkillModel Skill;
     public Vector3 InputDirection;
-    public bool IsGrounded;
+
+    public Vector3 PlayerPosition;
 }
-public struct P_Skill_GrappingHookExecute : ISkillEvent
+public struct P_SkillReleased : ISkillPressedEvent
 {
-    public bool IsGrounded;
-    public Vector3 TargetPosition;
+    public SkillModel Skill;
 }
-public struct P_Skill_GrappingHookRelease : ISkillEvent
+public struct P_SkillStateSwitch
 {
-    public P_GrappingHookModel Skill;
+    public Type SkillState;
 }
 
 public struct P_Skill_RopeDashPressed : ISkillEvent
@@ -73,19 +61,7 @@ public struct P_Skill_RopeDashExecute : ISkillEvent
 {
     public int FacingDir;
 }
-// TheWorld
-public struct P_Skill_DashAttackPressed : ISkillEvent
-{
-    public P_DashAttackModel Skill;
-}
-public struct P_Skill_DashAttackExecuted : ISkillEvent
-{
-    
-}
-public struct P_Skill_TheWorldRelease : ISkillEvent
-{
-    
-}
+
 #endregion
 #region Checkers
 public struct GroundCheckChange

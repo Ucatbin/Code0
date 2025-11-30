@@ -13,8 +13,6 @@ namespace ThisGame.Entity.StateMachineSystem
         {
         }
 
-        protected override Type[] GetEvents() =>Array.Empty<Type>();
-        
         public override void Enter()
         {
             base.Enter();
@@ -37,7 +35,7 @@ namespace ThisGame.Entity.StateMachineSystem
 
         public override void LogicUpdate()
         {
-            _movement.UpdateMovement(_player.InputValue, Time.deltaTime);
+            _movement.UpdateMovement(_player.InputValue, SmoothTime.DeltaTime);
             _player.Rb.linearVelocity = _movement.Velocity;
         }
 

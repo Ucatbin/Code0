@@ -1,11 +1,8 @@
-using System;
-using ThisGame.Core;
-using ThisGame.Entity.MoveSystem;
-using UnityEngine;
+using ThisGame.Entity.StateMachineSystem;
 
 namespace ThisGame.Entity.SkillSystem
 {
-    public class SkillModel
+    public abstract class SkillModel
     {
         protected bool _isUnlocked;
         public bool IsUnlocked => _isUnlocked;
@@ -28,19 +25,16 @@ namespace ThisGame.Entity.SkillSystem
             _isReady = true;
         }
     
-        public virtual void HandleSkillButtonPressed(ISkillEvent e) {}
-        public virtual void ExecuteSkill(ISkillEvent e)
-        {
-            ConsumeResources(_data);
-        }
+        public void Unlock() => _isUnlocked = true;
+        public virtual void HandleSkillButtonPressed(P_SkillPressed e) { }
+        public virtual void HandleSkillButtonReleased(P_SkillReleased e) { }
+        public virtual void ExecuteSkill(P_SkillExecute e) { }
+        public virtual void ExecuteSkill() { }
         protected virtual void ConsumeResources(SkillData data)
         {
             _isReady = false;
             _currentCharges -= _data.MaxCharges == -1 ? 0 : 1;
         }
-        public virtual void StartCoolDown()
-        {
-        }
-        public void Unlock() => _isUnlocked = true;
+        public virtual void StartCoolDown() { }
     }
 }

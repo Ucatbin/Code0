@@ -10,28 +10,27 @@ namespace ThisGame.Entity.SkillSystem
         {
         }
 
-        public override void HandleSkillButtonPressed(ISkillEvent e)
+        public override void HandleSkillButtonPressed(P_SkillPressed e)
         {
             if (!_isReady || _currentCharges == 0) return;
 
-            if (e is P_Skill_AttackPressed thisSkill)
+            InputDir = e.InputDirection;
+            var stateChange = new P_SkillStateSwitch()
             {
-                InputDir = thisSkill.InputDirection;
-                var attackExecute = new P_Skill_AttackExecute()
-                {
-                };
-                EventBus.Publish(attackExecute);
-                ExecuteSkill(attackExecute);
-            }
+                SkillState = typeof(P_AttackState)
+            };
+            EventBus.Publish(stateChange);
         }
-        public override void ExecuteSkill(ISkillEvent e)
+        public override void HandleSkillButtonReleased(P_SkillReleased e)
         {
-            base.ExecuteSkill(e);
+            throw new System.NotImplementedException();
+        }
+        public override void ExecuteSkill(P_SkillExecute e)
+        {
+
         }
         public override void StartCoolDown()
         {
-            base.StartCoolDown();
-
             TimerManager.Instance.AddTimer(
                 Data.CoolDown,
                 () =>{

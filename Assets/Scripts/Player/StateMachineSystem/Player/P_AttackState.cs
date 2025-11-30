@@ -27,10 +27,6 @@ public class P_AttackState : P_BaseState
         _view = entry.View as P_AttackView;
     }
 
-    protected override Type[] GetEvents() => new Type[]
-    {
-
-    };
     public override void Enter()
     {
         base.Enter();
@@ -65,11 +61,11 @@ public class P_AttackState : P_BaseState
     }
     public override void LogicUpdate()
     {
-        _movement.UpdateMovement(Vector3.zero, Time.deltaTime);
+        _movement.UpdateMovement(Vector3.zero, SmoothTime.DeltaTime);
         _player.Rb.linearVelocity = _movement.Velocity;
     }
     public override void PhysicsUpdate()
     {
-        _movement.HandleGravity(Time.fixedDeltaTime);
+        _movement.HandleGravity(SmoothTime.FixedDeltaTime);
     }
 }

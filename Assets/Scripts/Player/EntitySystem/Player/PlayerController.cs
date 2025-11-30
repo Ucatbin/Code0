@@ -11,7 +11,6 @@ namespace ThisGame.Entity.EntitySystem
     public class PlayerController : EntityController
     {
         public Camera MainCam;
-        public DistanceJoint2D Joint;
 
         public PlayerView View;
         StateMachine _stateMachine;
@@ -105,7 +104,7 @@ namespace ThisGame.Entity.EntitySystem
                 new P_WallSlideState(this, _stateMachine, "WallSlide", checkerController, moveController.Model)
             );
             _stateMachine.RegisterState<P_CoyotState>(
-                new P_CoyotState(this, _stateMachine, "Air", checkerController, moveController.Model)
+                new P_CoyotState(this, _stateMachine, "Move", checkerController, moveController.Model)
             );
             _stateMachine.RegisterState<P_BeHitState>(
                 new P_BeHitState(this, _stateMachine, "", checkerController, moveController.Model)

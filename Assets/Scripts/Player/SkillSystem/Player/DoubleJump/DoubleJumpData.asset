@@ -16,4 +16,4 @@ MonoBehaviour:
   CoolDown: -1
   MaxCharges: 1
   IsUnlocked: 1
-  JumpSpeed: 1
+  JumpSpeed: 1.2

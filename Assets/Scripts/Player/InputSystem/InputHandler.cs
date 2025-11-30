@@ -38,7 +38,7 @@ namespace ThisGame.Entity.InputSystem
                 EventBus.Publish(jumpPressedEvent);
 
                 var (model, entry) = _player.GetController<SkillController>().GetSkill<P_DoubleJumpModel>();
-                var skillPressed = new P_Skill_DoubleJumpPressed()
+                var skillPressed = new P_SkillPressed()
                 {
                     Skill = model
                 };
@@ -53,15 +53,24 @@ namespace ThisGame.Entity.InputSystem
 
         public void HandleAttack(InputAction.CallbackContext context)
         {
+            var (attackModel, attackEntry) =  _player.GetController<SkillController>().GetSkill<P_AttackModel>();
+            var (dashAttackModel, dashAttackEntry) = _player.GetController<SkillController>().GetSkill<P_DashAttackModel>();
             if (context.performed)
             {
-                var (model, entity) =  _player.GetController<SkillController>().GetSkill<P_AttackModel>();
-                var skillPressed = new P_Skill_AttackPressed()
+                var attackPressed = new P_SkillPressed()
                 {
-                    Skill =  model,
+                    Skill =  attackModel,
                     InputDirection = _player.MainCam.ScreenToWorldPoint(Input.mousePosition),
                 };
-                EventBus.Publish(skillPressed);
+                EventBus.Publish(attackPressed);
+
+                var dashAttackExecute = new P_SkillExecute()
+                {
+                    Skill = dashAttackModel,
+                    InputDirection = _player.MainCam.ScreenToWorldPoint(Input.mousePosition),
+                    PlayerPosition = _player.transform.position
+                };
+                EventBus.Publish(dashAttackExecute);
             }
         }
         #endregion
@@ -71,22 +80,21 @@ namespace ThisGame.Entity.InputSystem
             var (model, entity) =  _player.GetController<SkillController>().GetSkill<P_GrappingHookModel>();
             if (context.performed)
             {
-                var skillPressed = new P_Skill_GrappingHookPressed()
+                var skillPressed = new P_SkillPressed()
                 {
-                    Skill = model,
-                    CurrentPosition = _player.transform.position,
+                    Skill =  model,
                     InputDirection = _player.MainCam.ScreenToWorldPoint(Input.mousePosition),
-                    IsGrounded = _player.GetController<CheckerController>().GetChecker<GroundCheckModel>().IsDetected
+                    PlayerPosition = _player.transform.position
                 };
                 EventBus.Publish(skillPressed);
             }
             if (context.canceled)
             {
-                var grappingHookRelease = new P_Skill_GrappingHookRelease()
+                var skillRelease = new P_SkillReleased()
                 {
                     Skill = model,
                 };
-                EventBus.Publish(grappingHookRelease);
+                EventBus.Publish(skillRelease);
             }
         }
         public void HandleRopeDash(InputAction.CallbackContext context)
@@ -96,19 +104,22 @@ namespace ThisGame.Entity.InputSystem
         }
         public void HandleDashAttack(InputAction.CallbackContext context)
         {
+            var (model, entity) =  _player.GetController<SkillController>().GetSkill<P_DashAttackModel>();
             if (context.performed)
             {
-                var (model, entity) =  _player.GetController<SkillController>().GetSkill<P_DashAttackModel>();
-                var skillPressed = new P_Skill_DashAttackPressed()
+                var skillPressed = new P_SkillPressed()
                 {
-                    Skill = model,
+                    Skill =  model,
                 };
                 EventBus.Publish(skillPressed);
             }
             if (context.canceled)
             {
-                var skillRelersed = new P_Skill_TheWorldRelease();
-                EventBus.Publish(skillRelersed);
+                var skillRelease = new P_SkillReleased()
+                {
+                    Skill = model,
+                };
+                EventBus.Publish(skillRelease);
             }
         }
         #endregion

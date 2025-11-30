@@ -2,6 +2,7 @@ using System;
 using ThisGame.Core.CheckerSystem;
 using ThisGame.Entity.EntitySystem;
 using ThisGame.Entity.MoveSystem;
+using ThisGame.Entity.SkillSystem;
 using UnityEngine;
 
 namespace ThisGame.Entity.StateMachineSystem
@@ -12,17 +13,18 @@ namespace ThisGame.Entity.StateMachineSystem
         {
         }
 
-        protected override Type[] GetEvents() => new Type[]
+        protected override Type[] AcceptedEvents => new Type[]
         {
-            // Skills
-            typeof(P_Skill_AttackPressed),
-            typeof(P_Skill_AttackExecute),
-            typeof(P_Skill_DoubleJumpPressed),
-            typeof(P_Skill_DoubleJumpExecute),
-            typeof(P_Skill_GrappingHookPressed),
-            typeof(P_Skill_GrappingHookExecute),
-            typeof(P_Skill_DashAttackPressed),
-            typeof(P_Skill_DashAttackExecuted)
+            typeof(JumpExecute),
+            typeof(P_SkillPressed),
+            typeof(P_SkillStateSwitch),
+        };
+        protected override Type[] AcceptedSkillPressEvents => new Type[]
+        {
+            typeof(P_AttackModel),
+            typeof(P_GrappingHookModel),
+            typeof(P_DashAttackModel),
+            typeof(P_DoubleJumpModel)
         };
 
         public override void Enter()
@@ -37,7 +39,7 @@ namespace ThisGame.Entity.StateMachineSystem
 
         public override void LogicUpdate()
         {
-            _movement.UpdateMovement(_player.InputValue, Time.deltaTime);
+            _movement.UpdateMovement(_player.InputValue, SmoothTime.DeltaTime);
             _player.Rb.linearVelocity = _movement.Velocity;
 
             var wallCheck = _checkers.GetChecker<WallCheckModel>();
@@ -56,7 +58,7 @@ namespace ThisGame.Entity.StateMachineSystem
 
         public override void PhysicsUpdate()
         {
-            _movement.HandleGravity(Time.fixedDeltaTime);
+            _movement.HandleGravity(SmoothTime.FixedDeltaTime);
         }
     }
 }

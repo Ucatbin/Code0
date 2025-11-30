@@ -12,10 +12,7 @@ namespace ThisGame.Entity.StateMachineSystem
         public P_BeHitState(PlayerController entity, StateMachine stateMachine, string animName, CheckerController checkers, MoveModel movement) : base(entity, stateMachine, animName, checkers, movement)
         {
         }
-        protected override Type[] GetEvents() => new Type[]
-        {
-
-        };
+        
         public override void Enter()
         {
             base.Enter();
@@ -43,7 +40,7 @@ namespace ThisGame.Entity.StateMachineSystem
 
         public override void PhysicsUpdate()
         {
-            _movement.HandleGravity(Time.fixedDeltaTime);
+            _movement.HandleGravity(SmoothTime.FixedDeltaTime);
             _player.Rb.linearVelocity = _movement.Velocity;
         }
     }

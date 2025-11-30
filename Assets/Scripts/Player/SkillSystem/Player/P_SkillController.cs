@@ -1,9 +1,12 @@
 
 
+using UnityEngine;
+
 namespace ThisGame.Entity.SkillSystem
 {
     public class P_SkillController : SkillController
     {
+        [SerializeField] DistanceJoint2D _joint;
         public override void RegisterModels()
         {
             base.RegisterModels();
@@ -17,7 +20,7 @@ namespace ThisGame.Entity.SkillSystem
             UnlockSkill(doubleJump, doubleJumpSkillEntry);
 
             var grappingHookSkillEntry = SkillManager.Instance.GetSkillEntry(typeof(P_GrappingHookModel));
-            var grappingHook = new P_GrappingHookModel(grappingHookSkillEntry.Data as P_GrappingHookData);
+            var grappingHook = new P_GrappingHookModel(grappingHookSkillEntry.Data as P_GrappingHookData, _joint);
             UnlockSkill(grappingHook, grappingHookSkillEntry);
 
             var dashAttackSkillEntry = SkillManager.Instance.GetSkillEntry(typeof(P_DashAttackModel));
