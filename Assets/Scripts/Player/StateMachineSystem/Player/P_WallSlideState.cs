@@ -14,15 +14,18 @@ namespace ThisGame.Entity.StateMachineSystem
         {
         }
 
-        protected override Type[] GetEvents() => new Type[]
+        protected override Type[] AcceptedEvents => new Type[]
         {
             // Abilities
             typeof(JumpButtonPressed),
             // Skills
-            typeof(P_Skill_AttackPressed),
-            typeof(P_Skill_AttackExecute),
-            typeof(P_Skill_GrappingHookPressed),
-            typeof(P_Skill_GrappingHookExecute),
+            typeof(P_SkillPressed),
+            typeof(P_SkillStateSwitch),
+        };
+        protected override Type[] AcceptedSkillPressEvents => new Type[]
+        {
+            typeof(P_AttackModel),
+            typeof(P_GrappingHookModel)
         };
         
         public override void Enter()
@@ -61,12 +64,12 @@ namespace ThisGame.Entity.StateMachineSystem
             _stateMachine.ChangeState<P_JumpState>();
             var moveData = _movement.Data as PlayerMoveData;
             var jumpDir = moveData.WallJumpDirection;
-            var jumpExecute = new JumpExecute
+            var wallJump = new JumpExecute()
             {
                 JumpType = JumpType.WallJump,
                 JumpDir = new Vector3(jumpDir.x * -_player.FacingDir, jumpDir.y)
             };
-            EventBus.Publish(jumpExecute);
+            EventBus.Publish(wallJump);
         }
     }
 }

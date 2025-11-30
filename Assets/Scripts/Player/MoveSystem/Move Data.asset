@@ -19,4 +19,4 @@ MonoBehaviour:
   RotationSpeed: 0
   Acceleration: 50
   Deceleration: 65
-  CoyotTime: 0.5
+  CoyotTime: 0

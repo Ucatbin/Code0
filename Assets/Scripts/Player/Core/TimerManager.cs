@@ -5,189 +5,177 @@ using UnityEngine;
 public class TimerManager : MonoBehaviour
 {
     public static TimerManager Instance { get; private set; }
+
     [SerializeField] List<TimerItem> _timerList = new List<TimerItem>();
     List<TimerItem> _toResume = new List<TimerItem>();
-    SortedSet<TimerItem> _timerHeap => new SortedSet<TimerItem>(_timerList);
-    float _currentTime;
+
+    SortedSet<TimerItem> _timerHeap;
+
+    float _currentTime => SmoothTime.SimulatedTime;
 
     void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            // DontDestroyOnLoad(gameObject);
+            _timerHeap = new SortedSet<TimerItem>(_timerList);
         }
         else
             Destroy(gameObject);
     }
 
-    void FixedUpdate()
+    void Update()
     {
-        _currentTime = Time.fixedTime;
+        ProcessTimers();
+    }
 
+    void ProcessTimers()
+    {
         while (_timerHeap.Count > 0)
         {
-            // Get the nearest timer trigger
             TimerItem nextTimer = _timerHeap.Min;
-            // If the nearest timer trigger havent come yet, exit the loop
+
             if (nextTimer.TriggerTime > _currentTime)
                 break;
 
-            // Invoke and remove the timer from the heap
+            _timerHeap.Remove(nextTimer);
             _timerList.Remove(nextTimer);
+
             nextTimer.Callback?.Invoke();
 
-            // If it's a looping timer, reschedule it
             if (nextTimer.IsLoop)
             {
                 nextTimer.TriggerTime = _currentTime + nextTimer.Interval;
                 _timerList.Add(nextTimer);
+                _timerHeap.Add(nextTimer);
             }
         }
     }
 
-    // Main internal method to add timers
-    void AddTimerInternal(float delayOrTime, Action callback, bool isLoop, float interval, object tag)
+    void AddTimerInternal(float delay, Action callback, bool isLoop, float interval, object tag)
     {
-        float triggerTime = _currentTime + delayOrTime;
+        float triggerTime = _currentTime + delay;
 
         TimerItem newItem = new TimerItem(triggerTime, callback, isLoop, interval, tag);
+
         _timerList.Add(newItem);
+        _timerHeap.Add(newItem);
     }
 
     #region Add Timers
     public void AddTimer(float delay, Action callback, object tag = null)
-    {
-        AddTimerInternal(delay, callback, false, 0f, tag);
-    }
+        => AddTimerInternal(delay, callback, false, 0f, tag);
+
     public void AddLoopTimer(float interval, Action callback, bool immediateFirstCall = false, object tag = null)
     {
-        float firstTriggerTime = _currentTime + (immediateFirstCall ? 0f : interval);
-        AddTimerInternal(firstTriggerTime, callback, true, interval, tag);
+        float firstTrigger = _currentTime + (immediateFirstCall ? 0f : interval);
+        AddTimerInternal(firstTrigger, callback, true, interval, tag);
     }
     #endregion
 
-    #region Extend|Set Timers
-    public void ExtendTimersWithTag(object tag, float additionalTime)
+    #region Extend | Set
+    public void ExtendTimersWithTag(object tag, float add)
     {
-        List<TimerItem> toUpdate = new List<TimerItem>();
-        
-        foreach (var timer in _timerHeap)
+        List<TimerItem> list = new List<TimerItem>();
+
+        foreach (var t in _timerHeap)
+            if (Equals(t.Tag, tag) && !t.IsPaused)
+                list.Add(t);
+
+        foreach (var t in list)
         {
-            if (Equals(timer.Tag, tag) && !timer.IsPaused)
-            {
-                toUpdate.Add(timer);
-            }
-        }
-        
-        foreach (var timer in toUpdate)
-        {
-            _timerList.Remove(timer);
-            timer.TriggerTime += additionalTime;
-            _timerList.Add(timer);
+            _timerHeap.Remove(t);
+            _timerList.Remove(t);
+
+            t.TriggerTime += add;
+
+            _timerList.Add(t);
+            _timerHeap.Add(t);
         }
     }
 
     public void SetTimersWithTag(object tag, float delay)
     {
-        List<TimerItem> toUpdate = new List<TimerItem>();
-        
-        foreach (var timer in _timerHeap)
+        List<TimerItem> list = new List<TimerItem>();
+
+        foreach (var t in _timerHeap)
+            if (Equals(t.Tag, tag) && !t.IsPaused)
+                list.Add(t);
+
+        foreach (var t in list)
         {
-            if (Equals(timer.Tag, tag) && !timer.IsPaused)
-            {
-                toUpdate.Add(timer);
-            }
-        }
-        
-        foreach (var timer in toUpdate)
-        {
-            _timerList.Remove(timer);
-            timer.TriggerTime = _currentTime + delay;
-            _timerList.Add(timer);
+            _timerHeap.Remove(t);
+            _timerList.Remove(t);
+
+            t.TriggerTime = _currentTime + delay;
+
+            _timerList.Add(t);
+            _timerHeap.Add(t);
         }
     }
     #endregion
 
-    #region Pause Timers
+    #region Pause | Resume
     public void PauseTimerWithTag(object tag)
     {
-        foreach (var timer in _timerHeap)
-        {
-            if (Equals(timer.Tag, tag) && !timer.IsPaused)
-            {
-                if (timer.IsPaused) return;
+        List<TimerItem> list = new List<TimerItem>();
 
-                timer.RemainingTime = timer.TriggerTime - _currentTime;
-                timer.IsPaused = true;
-                _toResume.Add(timer);
-                _timerList.Remove(timer);
-            }
+        foreach (var t in _timerHeap)
+            if (Equals(t.Tag, tag) && !t.IsPaused)
+                list.Add(t);
+
+        foreach (var timer in list)
+        {
+            timer.RemainingTime = timer.TriggerTime - _currentTime;
+            timer.IsPaused = true;
+
+            _timerHeap.Remove(timer);
+            _timerList.Remove(timer);
+            _toResume.Add(timer);
         }
     }
+
     public void ResumeTimerWithTag(object tag)
     {
-        foreach (var timer in _toResume)
+        List<TimerItem> list = new List<TimerItem>();
+
+        foreach (var t in _toResume)
+            if (Equals(t.Tag, tag))
+                list.Add(t);
+
+        foreach (var t in list)
         {
-            if (Equals(timer.Tag, tag) && timer.IsPaused)
-            {
-                timer.TriggerTime = _currentTime + timer.RemainingTime;
-                timer.IsPaused = false;
-                _timerList.Add(timer);
-            }
+            t.TriggerTime = _currentTime + t.RemainingTime;
+            t.IsPaused = false;
+
+            _toResume.Remove(t);
+
+            _timerList.Add(t);
+            _timerHeap.Add(t);
         }
     }
-    // public void PauseAllTimers()
-    // {
-    //     foreach (var timer in _timerHeap)
-    //     {
-    //         if (!timer.IsPaused)
-    //         {
-    //             if (timer.IsPaused) return;
-
-    //             timer.RemainingTime = timer.TriggerTime - _currentTime;
-    //             timer.IsPaused = true;
-    //             _timerList.Remove(timer);
-    //         }
-    //     }
-    // }
-    // public void ResumeAllTimers()
-    // {
-    //     List<TimerItem> toResume = new List<TimerItem>();
-    //     foreach (var timer in _timerHeap)
-    //     {
-    //         if (timer.IsPaused)
-    //             toResume.Add(timer);
-    //     }
-
-    //     foreach (var timer in toResume)
-    //     {
-    //         if (timer.IsPaused) return;
-
-    //         timer.RemainingTime = timer.TriggerTime - _currentTime;
-    //         timer.IsPaused = true;
-    //         _timerList.Remove(timer);
-    //     }
-    // }
     #endregion
 
-    # region Clear Timers
-    // Clear timers with specific tag
+    #region Clear
     public void CancelTimersWithTag(object tag)
     {
-        List<TimerItem> toRemove = new List<TimerItem>();
-        foreach (var timer in _timerHeap)
+        List<TimerItem> list = new List<TimerItem>();
+        foreach (var t in _timerHeap)
+            if (Equals(t.Tag, tag))
+                list.Add(t);
+
+        foreach (var t in list)
         {
-            if (Equals(timer.Tag, tag))
-                toRemove.Add(timer);
+            _timerHeap.Remove(t);
+            _timerList.Remove(t);
         }
-        foreach (var timer in toRemove)
-            _timerList.Remove(timer);
     }
-    // Clear all timers
+
     public void ClearAllTimers()
     {
         _timerList.Clear();
+        _timerHeap.Clear();
+        _toResume.Clear();
     }
-    # endregion
+    #endregion
 }

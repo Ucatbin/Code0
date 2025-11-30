@@ -12,10 +12,7 @@ namespace ThisGame.Entity.StateMachineSystem
         public P_BeHitState(PlayerController entity, StateMachine stateMachine, string animName, CheckerController checkers, MoveModel movement) : base(entity, stateMachine, animName, checkers, movement)
         {
         }
-        protected override Type[] GetEvents() => new Type[]
-        {
-
-        };
+        
         public override void Enter()
         {
             base.Enter();
@@ -23,7 +20,7 @@ namespace ThisGame.Entity.StateMachineSystem
             _player.GetController<HealthController>().Model.CanHit = false;
             _player.View.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
             TimerManager.Instance.AddTimer(
-                0.12f,
+                0.22f,
                 () =>{
                     _stateMachine.ChangeState<P_IdleState>();
                     _player.View.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
@@ -43,7 +40,7 @@ namespace ThisGame.Entity.StateMachineSystem
 
         public override void PhysicsUpdate()
         {
-            _movement.HandleGravity(Time.fixedDeltaTime);
+            _movement.HandleGravity(SmoothTime.FixedDeltaTime);
             _player.Rb.linearVelocity = _movement.Velocity;
         }
     }

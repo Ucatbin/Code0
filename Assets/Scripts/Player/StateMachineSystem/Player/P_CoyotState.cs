@@ -4,6 +4,7 @@ using ThisGame.Entity.EntitySystem;
 using ThisGame.Entity.MoveSystem;
 using System;
 using ThisGame.Core;
+using UnityEngine;
 
 namespace ThisGame.Entity.StateMachineSystem
 {
@@ -12,10 +13,10 @@ namespace ThisGame.Entity.StateMachineSystem
         public P_CoyotState(PlayerController entity, StateMachine stateMachine, string animName, CheckerController checkers, MoveModel movement) : base(entity, stateMachine, animName, checkers, movement)
         {
         }
-        protected override Type[] GetEvents() => new Type[]
+        protected override Type[] AcceptedEvents => new Type[]
         {
             // Abilities
-            typeof(JumpButtonPressed),
+            typeof(JumpButtonPressed)
         };
         public override void Enter()
         {
@@ -37,12 +38,12 @@ namespace ThisGame.Entity.StateMachineSystem
 
         public override void LogicUpdate()
         {
-            
+            _player.Rb.linearVelocity = _movement.Velocity;
         }
 
         public override void PhysicsUpdate()
         {
-            
+            _movement.HandleGravity(SmoothTime.FixedDeltaTime);
         }
 
         void TryEnterAirState()

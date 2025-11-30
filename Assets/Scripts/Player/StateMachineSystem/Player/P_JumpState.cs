@@ -15,23 +15,24 @@ namespace ThisGame.Entity.StateMachineSystem
         {
         }
 
-        protected override Type[] GetEvents() => new Type[]
+        protected override Type[] AcceptedEvents => new Type[]
         {
             // Input
             typeof(JumpExecute),
             typeof(JumpButtonRelease),
             // Skills
-            typeof(P_Skill_DoubleJumpExecute),
-            typeof(P_Skill_GrappingHookPressed),
-            typeof(P_Skill_DashAttackPressed),
-            typeof(P_Skill_DashAttackExecuted)
+            typeof(P_SkillPressed),
+            typeof(P_SkillStateSwitch),
+        };
+        protected override Type[] AcceptedSkillPressEvents => new Type[]
+        {
+            typeof(P_GrappingHookModel)
         };
 
         public override void Enter()
         {
             base.Enter();
 
-            _player.View.Animator.SetBool("Air", true);
             var moveData = _movement.Data as PlayerMoveData;
             TimerManager.Instance.AddTimer(
                 moveData.JumpInputWindow,

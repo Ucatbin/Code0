@@ -11,7 +11,6 @@ namespace ThisGame.Entity.EntitySystem
     public class PlayerController : EntityController
     {
         public Camera MainCam;
-        public DistanceJoint2D Joint;
 
         public PlayerView View;
         StateMachine _stateMachine;
@@ -105,23 +104,23 @@ namespace ThisGame.Entity.EntitySystem
                 new P_WallSlideState(this, _stateMachine, "WallSlide", checkerController, moveController.Model)
             );
             _stateMachine.RegisterState<P_CoyotState>(
-                new P_CoyotState(this, _stateMachine, "Air", checkerController, moveController.Model)
+                new P_CoyotState(this, _stateMachine, "Move", checkerController, moveController.Model)
             );
             _stateMachine.RegisterState<P_BeHitState>(
                 new P_BeHitState(this, _stateMachine, "", checkerController, moveController.Model)
             );
             // Skills
-            var attackSkill = GetController<SkillController>().GetSkill<P_AttackModel>();
+            var (attackModel, attackEntry) = GetController<SkillController>().GetSkill<P_AttackModel>();
             _stateMachine.RegisterState<P_AttackState>(
-                new P_AttackState(this, _stateMachine, "Attack", checkerController, moveController.Model, attackSkill)
+                new P_AttackState(this, _stateMachine, "Attack", checkerController, moveController.Model, attackModel, attackEntry)
             );
-            var grappingHookSkill = GetController<SkillController>().GetSkill<P_GrappingHookModel>();
+            var (ghookModel, ghookEntry) = GetController<SkillController>().GetSkill<P_GrappingHookModel>();
             _stateMachine.RegisterState<P_HookedState>(
-                new P_HookedState(this, _stateMachine, "Hooked", checkerController, moveController.Model, grappingHookSkill)
+                new P_HookedState(this, _stateMachine, "Hooked", checkerController, moveController.Model, ghookModel, ghookEntry)
             );
-            var dashAttackSkill = GetController<SkillController>().GetSkill<P_DashAttackModel>();
+            var (dashAttackModel, dashAttackEntry) = GetController<SkillController>().GetSkill<P_DashAttackModel>();
             _stateMachine.RegisterState<P_DashAttackState>(
-                new P_DashAttackState(this, _stateMachine, "DashAttack", checkerController, moveController.Model, dashAttackSkill)
+                new P_DashAttackState(this, _stateMachine, "DashAttack", checkerController, moveController.Model, dashAttackModel, dashAttackEntry)
             );
         }
         #endregion

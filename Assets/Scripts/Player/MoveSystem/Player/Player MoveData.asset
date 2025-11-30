@@ -18,7 +18,8 @@ MonoBehaviour:
   MaxFallSpeed: 27
   RotationSpeed: 0
   Acceleration: 50
-  Deceleration: 50
+  Deceleration: 65
+  CoyotTime: 0.2
   JumpInputWindow: 0.26
   WallSlideSpeed: -1
   WallSlideAcceleration: 35

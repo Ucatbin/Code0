@@ -18,6 +18,6 @@ MonoBehaviour:
   CheckCount: 3
   CheckWidth: 0.72
   Direction: {x: 0, y: -1}
-  Distance: 0.08
+  Distance: 0.12
   CheckRadius: 0
   Angle: 0

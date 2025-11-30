@@ -56,5 +56,38 @@ namespace ThisGame.Entity.StateMachineSystem
                 throw new ArgumentException($"State '{targetType.Name}' not found.");
             }
         }
+        public void ChangeState(Type stateType)
+        {
+            if (stateType == null)
+                throw new ArgumentNullException(nameof(stateType));
+            
+            if (!typeof(IState).IsAssignableFrom(stateType))
+                throw new ArgumentException($"Type {stateType.Name} must implement IState");
+
+            if (_currentState?.GetType() == stateType) return;
+                                
+            if (_states.TryGetValue(stateType, out IState newState))
+            {
+                Debug.Log($"Exit:'{_currentState}' Enter:'{newState}'");
+                var lastState = _currentState;
+                string lastAnimName = (lastState as BaseState)?.AnimName;
+                string newAnimName = (newState as BaseState)?.AnimName;
+
+                _currentState?.Exit();
+                _currentState = newState;
+                _currentState.Enter();
+                
+                var stateChange = new StateChange()
+                {
+                    LastStateAnim = lastAnimName,
+                    NewStateAnim = newAnimName
+                };
+                EventBus.Publish(stateChange);
+            }
+            else
+            {
+                throw new ArgumentException($"State '{stateType.Name}' not found in state dictionary.");
+            }
+        }
     }
 }

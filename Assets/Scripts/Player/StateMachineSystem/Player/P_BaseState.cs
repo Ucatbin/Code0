@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Security;
 using ThisGame.Core;
 using ThisGame.Core.CheckerSystem;
@@ -41,10 +42,13 @@ namespace ThisGame.Entity.StateMachineSystem
         public override void PhysicsUpdate() { }
 
         #region Events
-        protected abstract Type[] GetEvents();
+        protected virtual Type[] AcceptedEvents => Array.Empty<Type>();
+        protected virtual Type[] AcceptedSkillPressEvents => Array.Empty<Type>();
+        protected virtual Type[] AcceptedSkillExecuteEvents => Array.Empty<Type>();
+
         protected virtual void SubscribeAllEvents()
         {
-            var events = GetEvents();
+            var events = AcceptedEvents;
 
             foreach (var eventType in events)
                 EventBus.SubscribeByType(this, eventType);
@@ -66,6 +70,7 @@ namespace ThisGame.Entity.StateMachineSystem
         // Jump
         protected virtual void HandleJumpPressed(JumpButtonPressed @event)
         {
+            _player.View.Animator.SetBool("Air", true);
             _stateMachine.ChangeState<P_JumpState>();
             var jumpExecute = new JumpExecute
             {
@@ -113,60 +118,59 @@ namespace ThisGame.Entity.StateMachineSystem
         }
         #endregion
         #region Skills
-        // Attack
-        protected virtual void HandleAttackPressed(P_Skill_AttackPressed @event)
+        protected virtual void HandleSkillPressed(P_SkillPressed @event)
         {
-            @event.Skill.HandleSkillButtonPressed(@event);
-        }
-        protected virtual void HandleAttackExecute(P_Skill_AttackExecute @event)
-        {
-            _stateMachine.ChangeState<P_AttackState>();
-        }
-        // DoubleJump
-        protected virtual void HandleDoubleJumpPressed(P_Skill_DoubleJumpPressed @event)
-        {
-            @event.Skill.HandleSkillButtonPressed(@event);
-        }
-        protected virtual void HandleDoubleJumpExecute(P_Skill_DoubleJumpExecute @event)
-        {
-            _stateMachine.ChangeState<P_JumpState>();
-            var jumpExecute = new JumpExecute()
+            if (!AcceptedSkillPressEvents.Any(t => t == @event.Skill.GetType())) return;
+            switch (@event.Skill)
             {
-                JumpType = JumpType.DoubleJump,
-                JumpDir = new Vector3(0f, @event.DoubleJumpSpeed, 0f),
-            };
-            EventBus.Publish(jumpExecute);
+                case P_AttackModel attack:
+                    attack.HandleSkillButtonPressed(@event);
+                    break;
+                case P_DashAttackModel dashAttack:
+                    dashAttack.HandleSkillButtonPressed(@event);
+                    break;
+                case P_DoubleJumpModel doubleJump:
+                    doubleJump.HandleSkillButtonPressed(@event);
+                    break;
+                case P_GrappingHookModel ghook:
+                    ghook.HandleSkillButtonPressed(@event);
+                    break;
+            }
         }
-        // GrappingHook
-        protected virtual void HandleGrappingHookPressed(P_Skill_GrappingHookPressed @event)
+        protected virtual void HandleSkillExecute(P_SkillExecute @event)
         {
-            @event.Skill.HandleSkillButtonPressed(@event);
+            Debug.Log("1");
+            if (!AcceptedSkillExecuteEvents.Any(t => t == @event.Skill.GetType())) return;
+            switch (@event.Skill)
+            {
+                case P_DashAttackModel dashAttack:
+                    Debug.Log("21");
+                    dashAttack.ExecuteSkill(@event);
+                    break;
+            }
         }
-        protected virtual void HandleGrappingHookExecute(P_Skill_GrappingHookExecute @event)
+        protected virtual void HandleSkillCanceled(P_SkillReleased @event)
         {
-            _stateMachine.ChangeState<P_HookedState>();
+            if (!AcceptedSkillPressEvents.Any(t => t == @event.Skill.GetType())) return;
+            switch (@event.Skill)
+            {
+                case P_AttackModel attack:
+                    attack.HandleSkillButtonReleased(@event);
+                    break;
+                case P_DashAttackModel dashAttack:
+                    dashAttack.HandleSkillButtonReleased(@event);
+                    break;
+                case P_DoubleJumpModel doubleJump:
+                    doubleJump.HandleSkillButtonReleased(@event);
+                    break;
+                case P_GrappingHookModel ghook:
+                    ghook.HandleSkillButtonReleased(@event);
+                    break;
+            }
         }
-        protected virtual void HandleGrappingHookRelease(P_Skill_GrappingHookRelease @event)
+        protected virtual void HandleSwitchSkillState(P_SkillStateSwitch @event)
         {
-            _player.Joint.enabled = false;
-            _stateMachine.ChangeState<P_IdleState>();
-        }
-        protected virtual void HandleRopeDash(P_Skill_RopeDashPressed @event)
-        {
-
-        }
-        // TheWorld
-        protected virtual void HandleTheWorldPressed(P_Skill_DashAttackPressed @event)
-        {
-            @event.Skill.HandleSkillButtonPressed(@event);
-        }
-        protected virtual void HandleTheWorldExecute(P_Skill_DashAttackExecuted @event)
-        {
-            _stateMachine.ChangeState<P_DashAttackState>();
-        }
-        protected virtual void HandleTheWorldRelease(P_Skill_TheWorldRelease @event)
-        {
-            _stateMachine.ChangeState<P_AirState>();
+            _stateMachine.ChangeState(@event.SkillState);
         }
         #endregion
         #endregion

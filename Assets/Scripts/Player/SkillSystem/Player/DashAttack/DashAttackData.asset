@@ -16,5 +16,7 @@ MonoBehaviour:
   CoolDown: 0.2
   MaxCharges: -1
   IsUnlocked: 1
-  SlowTimeScale: 0.05
+  MaxDashDistance: 10
+  DashAnimationClip: {fileID: 7400000, guid: af1629d898c7e494d8c9c97971017a21, type: 2}
+  SlowTimeScale: 0
   NormalTimeScale: 1
