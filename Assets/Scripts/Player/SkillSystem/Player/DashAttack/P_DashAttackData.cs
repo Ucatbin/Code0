@@ -10,6 +10,9 @@ namespace ThisGame.Entity.SkillSystem
         public float MaxDashDistance = 10f;
         public AnimationClip DashAnimationClip;
 
+        [Header("Collision Detection")]
+        public LayerMask WallLayerMask;
+        
         [Header("Time Scale Settings")]
         public float SlowTimeScale;
         public float NormalTimeScale;

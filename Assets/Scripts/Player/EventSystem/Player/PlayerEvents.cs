@@ -35,6 +35,7 @@ public struct P_SkillPressed : ISkillPressedEvent
     public SkillModel Skill;
     public Vector3 InputDirection;
 
+    public float PressTime;
     public Vector3 PlayerPosition;
 }
 public struct P_SkillExecute : ISkillEvent
@@ -42,6 +43,7 @@ public struct P_SkillExecute : ISkillEvent
     public SkillModel Skill;
     public Vector3 InputDirection;
 
+    public float StartTime;
     public Vector3 PlayerPosition;
 }
 public struct P_SkillReleased : ISkillPressedEvent

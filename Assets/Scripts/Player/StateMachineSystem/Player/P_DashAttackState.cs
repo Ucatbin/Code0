@@ -14,10 +14,6 @@ namespace ThisGame.Entity.StateMachineSystem
         P_DashAttackData _data;
         P_DashAttackView _view;
         
-        // 冲刺相关变量
-        private float dashStartTime;
-        private bool isDashing = false;
-        
         public P_DashAttackState(
             PlayerController entity,
             StateMachine stateMachine,
@@ -54,7 +50,7 @@ namespace ThisGame.Entity.StateMachineSystem
             
             SmoothTime.SetSmoothTimeScale(_data.SlowTimeScale);
             _view.StartAiming();
-            isDashing = false;
+            _skill.IsDashing = false;
         }
         
         public override void Exit()
@@ -63,13 +59,13 @@ namespace ThisGame.Entity.StateMachineSystem
 
             SmoothTime.SetSmoothTimeScale(_data.NormalTimeScale);
             _view.StopAiming();
-            isDashing = false;
+            _skill.IsDashing = false;
         }
         
         public override void LogicUpdate()
         {
             _view.UpdateView();
-            if (!isDashing)
+            if (!_skill.IsDashing)
             {
                 _movement.UpdateMovement(Vector3.zero, Time.deltaTime);
                 _player.Rb.linearVelocity = _movement.Velocity;
@@ -79,10 +75,6 @@ namespace ThisGame.Entity.StateMachineSystem
 
             if (Input.GetMouseButtonDown(0))
             {
-                dashStartTime = Time.time;
-            
-                isDashing = true;
-                
                 _player.View.Animator.SetTrigger("DashAttackDash");   
                 _view.StopAiming();  
                 var attackDir = (_skill.DashTargetPos - _player.transform.position).normalized;
@@ -99,7 +91,7 @@ namespace ThisGame.Entity.StateMachineSystem
         
         public override void PhysicsUpdate()
         {
-            if (!isDashing)
+            if (!_skill.IsDashing)
             {
                 if (_player.Rb.linearVelocityY >= 0)
                     _movement.HandleGravity(Time.fixedDeltaTime);
@@ -110,38 +102,22 @@ namespace ThisGame.Entity.StateMachineSystem
 
         private void UpdateDashMovement()
         {
-            float elapsedTime = Time.time - dashStartTime;
+            float elapsedTime = Time.time - _skill.DashStartTime;
             float progress = Mathf.Clamp01(elapsedTime / _skill.DashDuration);
+
+            float easedProgress = 1 - (1 - progress) * (1 - progress);
             
-            // 使用缓动函数让移动更平滑
-            float easedProgress = EaseOutQuad(progress);
-            
-            // 计算当前位置
             Vector3 newPosition = Vector3.Lerp(_skill.DashStartPos, _skill.DashTargetPos, easedProgress);
-            
-            // 直接设置玩家位置
             _player.transform.parent.position = newPosition;
             
-            // // 更新刚体位置（如果需要物理交互）
-            // _player.Rb.position = newPosition;
-            
-            // 检查冲刺是否完成
             if (progress >= 1f)
-            {
                 EndDash();
-            }
         }
 
-        private void EndDash()
+        void EndDash()
         {
-            isDashing = false;
+            _skill.IsDashing = false;
             _stateMachine.ChangeState<P_AirState>();
-        }
-
-        // 缓动函数 - 二次方缓出
-        private float EaseOutQuad(float t)
-        {
-            return 1 - (1 - t) * (1 - t);
         }
     }
 }

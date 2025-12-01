@@ -9,6 +9,8 @@ namespace ThisGame.Entity.SkillSystem
         public Vector3 DashStartPos;
         public Vector3 DashTargetPos;
         public float DashDuration;
+        public float DashStartTime;
+        public bool IsDashing;
 
         public P_DashAttackModel(SkillData data) : base(data)
         {
@@ -26,6 +28,7 @@ namespace ThisGame.Entity.SkillSystem
         }
         public override void HandleSkillButtonReleased(P_SkillReleased e)
         {
+            if (IsDashing) return;
             var stateChange = new P_SkillStateSwitch()
             {
                 SkillState = typeof(P_AirState)
@@ -35,14 +38,39 @@ namespace ThisGame.Entity.SkillSystem
         public override void ExecuteSkill(P_SkillExecute e)
         {
             // ConsumeResources(Data);
+            
+            DashStartTime = e.StartTime;
+            IsDashing = true;
 
             var skillData = Data as P_DashAttackData;
             DashStartPos = e.PlayerPosition;
             DashTargetPos = e.InputDirection;
             DashDuration = skillData.DashAnimationClip.length;
+            
             Vector3 toTarget = DashTargetPos - e.PlayerPosition;
-            if (toTarget.magnitude > skillData.MaxDashDistance)
-                DashTargetPos = e.PlayerPosition + toTarget.normalized * skillData.MaxDashDistance;
+            Vector3 dashDirection = toTarget.normalized;
+            
+            float maxDashDistance = skillData.MaxDashDistance;
+            RaycastHit2D hit = Physics2D.Raycast(
+                e.PlayerPosition, 
+                dashDirection, 
+                maxDashDistance, 
+                skillData.WallLayerMask
+            );
+            
+            if (hit.collider != null)
+            {
+                float offset = 0.3f;
+                DashTargetPos = (Vector3)hit.point - (dashDirection * offset);
+                
+                float actualDistance = Vector3.Distance(e.PlayerPosition, DashTargetPos);
+                maxDashDistance = Mathf.Min(actualDistance, maxDashDistance);
+            }
+            else
+            {
+                if (toTarget.magnitude > maxDashDistance)
+                    DashTargetPos = e.PlayerPosition + dashDirection * maxDashDistance;
+            }
             
             SmoothTime.SetSmoothTimeScale(skillData.NormalTimeScale);
         }
