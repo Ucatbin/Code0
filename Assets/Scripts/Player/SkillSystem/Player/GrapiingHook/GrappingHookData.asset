@@ -16,11 +16,13 @@ MonoBehaviour:
   CoolDown: -1
   MaxCharges: 1
   IsUnlocked: 1
-  MaxDetectDist: 20
+  MaxDetectDist: 15
   CanHookLayer:
     serializedVersion: 2
     m_Bits: 65
-  MaxLineDist: 6
+  MaxLineDist: 12
+  MinLineDist: 2
+  DeltaSpeed: 1.2
   SwingForce: 15
   MaxSwingSpeed: 10
   ExtendSpeed: 6.5

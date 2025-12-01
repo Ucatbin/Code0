@@ -10,7 +10,7 @@ namespace ThisGame.Core.CheckerSystem
         public float CheckWidth;
 
         public Vector2 Direction;
-        public float Distance;
+        public float CheckDistance;
         public float CheckRadius;
         public float Angle;
     }
