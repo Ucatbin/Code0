@@ -18,5 +18,8 @@ MonoBehaviour:
   IsUnlocked: 1
   MaxDashDistance: 10
   DashAnimationClip: {fileID: 7400000, guid: af1629d898c7e494d8c9c97971017a21, type: 2}
+  WallLayerMask:
+    serializedVersion: 2
+    m_Bits: 65
   SlowTimeScale: 0
   NormalTimeScale: 1

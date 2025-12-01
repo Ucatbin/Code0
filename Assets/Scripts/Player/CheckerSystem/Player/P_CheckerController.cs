@@ -12,8 +12,9 @@ namespace ThisGame.Core.CheckerSystem
                 {
                     CheckerModel model = entry.CheckerName switch
                     {
-                        "GroundCheck" => new GroundCheckModel(entry.Data, entry.CheckPoint),
-                        "WallCheck" => new WallCheckModel(entry.Data, entry.CheckPoint),
+                        "GroundCheck" => new GroundCheckModel(entry.Data, entry.CheckPoint, true),
+                        "WallCheck" => new WallCheckModel(entry.Data, entry.CheckPoint, true),
+                        "GHookCheck" => new GHookCheckModel(entry.Data, entry.CheckPoint, false),
                         _ => null
                     };
 

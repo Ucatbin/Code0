@@ -6,11 +6,14 @@ namespace ThisGame.Core.CheckerSystem
     public class WallCheckModel : CheckerModel
     {
         bool _wasWalled;
-        public WallCheckModel(CheckerData data, Transform checkPoint) : base(data, checkPoint)
+
+        int _facingDir = 1;
+
+        public WallCheckModel(CheckerData data, Transform checkPoint, bool enabled) : base(data, checkPoint, enabled)
         {
             EventBus.Subscribe<FlipAction>(this, OnFlip);
         }
-        int _facingDir = 1;
+
         void OnFlip(FlipAction flipEvent)
         {
             _facingDir = flipEvent.FacingDir;
@@ -38,12 +41,12 @@ namespace ThisGame.Core.CheckerSystem
                     hitDetected = false;
                 else
                 {
-                    RaycastHit2D hit = Physics2D.Raycast(checkPos, data.Direction * _facingDir, data.Distance, data.CheckLayer);
+                    RaycastHit2D hit = Physics2D.Raycast(checkPos, data.Direction * _facingDir, data.CheckDistance, data.CheckLayer);
                     hitDetected = hit.collider != null;
                     _isDetected = hitDetected;
                 }
 
-                Debug.DrawRay(checkPos, data.Direction * _facingDir * data.Distance, hitDetected ? Color.green : Color.red);
+                Debug.DrawRay(checkPos, data.Direction * _facingDir * data.CheckDistance, hitDetected ? Color.green : Color.red);
             }
             
             if (_wasWalled != _isDetected)

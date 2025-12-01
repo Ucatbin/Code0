@@ -16,11 +16,11 @@ namespace ThisGame.Core.CheckerSystem
             RegisterModels();
         }
         public abstract void RegisterModels();
-
         protected void Update()
         {
             foreach (var model in _models.Values)
             {
+                if (!model.IsEnabled) return;
                 model.Check(model.Data);
             }
         }

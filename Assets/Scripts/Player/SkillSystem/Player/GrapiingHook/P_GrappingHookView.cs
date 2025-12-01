@@ -48,7 +48,7 @@ namespace ThisGame.Entity.SkillSystem
             _lineRenderer.endWidth = 0.05f;
         }
         
-        public void StartRope(Transform startPoint, Transform endPoint)
+        public void EnableRope(Transform startPoint, Transform endPoint)
         {
             _startPoint = startPoint;
             _endPoint = endPoint;
@@ -61,7 +61,7 @@ namespace ThisGame.Entity.SkillSystem
             _launchCoroutine = StartCoroutine(PlayRopeLaunchAnimation());
         }
         
-        public void StopRope()
+        public void DisableRope()
         {
             _isRopeActive = false;
             _lineRenderer.enabled = false;

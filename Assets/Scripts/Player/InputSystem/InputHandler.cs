@@ -68,6 +68,7 @@ namespace ThisGame.Entity.InputSystem
                 {
                     Skill = dashAttackModel,
                     InputDirection = _player.MainCam.ScreenToWorldPoint(Input.mousePosition),
+                    StartTime = Time.time,
                     PlayerPosition = _player.transform.position
                 };
                 EventBus.Publish(dashAttackExecute);

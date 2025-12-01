@@ -9,6 +9,8 @@ namespace ThisGame.Entity.SkillSystem
         public float MaxDetectDist;
         public LayerMask CanHookLayer;
         public float MaxLineDist;
+        public float MinLineDist;
+        public float DeltaSpeed;
         [Header("Movement")]
         public float SwingForce;
         public float MaxSwingSpeed;

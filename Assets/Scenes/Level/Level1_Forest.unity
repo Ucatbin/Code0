@@ -541,6 +541,37 @@ Transform:
   - {fileID: 963463976}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &342283476
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 342283477}
+  m_Layer: 8
+  m_Name: GHookCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &342283477
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342283476}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.8, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1271485974}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &390109016
 GameObject:
   m_ObjectHideFlags: 0
@@ -35741,6 +35772,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!4 &1271485974 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 847314299914937884, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
+  m_PrefabInstance: {fileID: 1383833045}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1329432979
 GameObject:
   m_ObjectHideFlags: 0
@@ -36094,6 +36130,22 @@ PrefabInstance:
       propertyPath: _controllerObj
       value: 
       objectReference: {fileID: 738909370}
+    - target: {fileID: 6936707077278388363, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
+      propertyPath: _checkerEntries.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6936707077278388363, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
+      propertyPath: _checkerEntries.Array.data[2].Data
+      value: 
+      objectReference: {fileID: 11400000, guid: 147207b925db8f149bf97826060d4209, type: 2}
+    - target: {fileID: 6936707077278388363, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
+      propertyPath: _checkerEntries.Array.data[2].CheckPoint
+      value: 
+      objectReference: {fileID: 342283477}
+    - target: {fileID: 6936707077278388363, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
+      propertyPath: _checkerEntries.Array.data[2].CheckerName
+      value: GHookCheck
+      objectReference: {fileID: 0}
     - target: {fileID: 6968512398489348358, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
       propertyPath: MainCam
       value: 
@@ -36181,6 +36233,9 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 847314299914937884, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 342283477}
     - targetCorrespondingSourceObject: {fileID: 1556844046106079095, guid: 248d93c14f7f84848b8a6cd6a5509031, type: 3}
       insertIndex: -1
       addedObject: {fileID: 47730216}

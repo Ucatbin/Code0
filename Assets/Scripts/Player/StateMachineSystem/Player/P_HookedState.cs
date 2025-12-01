@@ -43,7 +43,7 @@ namespace ThisGame.Entity.StateMachineSystem
         public override void Enter()
         {
             base.Enter();
-
+            _checkers.GetChecker<GHookCheckModel>().EnableChecker(true);
             if ((_skill.HookPoint.transform.position.x - _player.transform.position.x) * _player.FacingDir < 0)
             {
                 var viewFlip = new ViewFlip()
@@ -56,14 +56,13 @@ namespace ThisGame.Entity.StateMachineSystem
             _player.Rb.gravityScale = 4f;
             var length = Vector2.Distance(_player.transform.position, _skill.HookPoint.transform.position);
             _skill.EnableJoint(length);
-            
-            _view?.StartRope(_player.transform, _skill.HookPoint.transform);
+            _view?.EnableRope(_player.transform, _skill.HookPoint.transform);
         }
         public override void Exit()
         {
             base.Exit();
 
-            _view?.StopRope();
+            _view?.DisableRope();
             _movement.SetVelocity(_player.Rb.linearVelocity);
             _player.Rb.gravityScale = 0f;
         }
@@ -71,6 +70,16 @@ namespace ThisGame.Entity.StateMachineSystem
         public override void LogicUpdate()
         {
             _player.View.Animator.SetFloat("HookedDir", _player.FacingDir * _player.Rb.linearVelocityX);
+            var ghookCheck = _checkers.GetChecker<GHookCheckModel>();
+            if (ghookCheck.IsDetected)
+            {
+                var targetDistance = _skill.Joint.distance - ghookCheck.Data.CheckDistance;
+                _skill.Joint.distance = Mathf.MoveTowards(
+                    _skill.Joint.distance,
+                    _skill.Joint.distance - 0.2f,
+                    _data.DeltaSpeed
+                );
+            }
         }
         public override void PhysicsUpdate()
         {

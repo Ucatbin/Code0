@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c30e2d6102fa7d740b75af98649d5706, type: 3}
-  m_Name: GroundCheckData
+  m_Name: GHookCheckData
   m_EditorClassIdentifier: 
   CheckLayer:
     serializedVersion: 2
     m_Bits: 64
-  CheckCount: 3
-  CheckWidth: 0.72
+  CheckCount: 1
+  CheckWidth: 0
   Direction: {x: 0, y: -1}
-  CheckDistance: 0.07
+  CheckDistance: 0.75
   CheckRadius: 0
   Angle: 0

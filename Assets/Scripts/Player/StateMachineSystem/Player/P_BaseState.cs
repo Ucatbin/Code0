@@ -139,17 +139,15 @@ namespace ThisGame.Entity.StateMachineSystem
         }
         protected virtual void HandleSkillExecute(P_SkillExecute @event)
         {
-            Debug.Log("1");
             if (!AcceptedSkillExecuteEvents.Any(t => t == @event.Skill.GetType())) return;
             switch (@event.Skill)
             {
                 case P_DashAttackModel dashAttack:
-                    Debug.Log("21");
                     dashAttack.ExecuteSkill(@event);
                     break;
             }
         }
-        protected virtual void HandleSkillCanceled(P_SkillReleased @event)
+        protected virtual void HandleSkillReleased(P_SkillReleased @event)
         {
             if (!AcceptedSkillPressEvents.Any(t => t == @event.Skill.GetType())) return;
             switch (@event.Skill)
