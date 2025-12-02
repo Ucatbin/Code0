@@ -26,3 +26,13 @@ MonoBehaviour:
   SwingForce: 15
   MaxSwingSpeed: 10
   ExtendSpeed: 6.5
+  EnableAutoShortenRope: 1
+  MinGroundClearance: 1.2
+  RopeShortenSpeed: 25
+  RopeExtendSpeed: 15
+  MinRopeLength: 1.5
+  MaxRopeLength: 10
+  GroundDetectAhead: 1.5
+  GroundLayerMask:
+    serializedVersion: 2
+    m_Bits: 65

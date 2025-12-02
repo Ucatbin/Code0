@@ -27,12 +27,8 @@ namespace ThisGame.Entity.SkillSystem
         {
             if (_isRopeActive && _startPoint != null && _endPoint != null)
             {
-                // 如果不在发射动画中，使用简单的直线更新
                 if (!_isInLaunchAnimation)
-                {
                     UpdateRopePosition();
-                }
-                // 如果在发射动画中，动画协程会处理更新
             }
         }
         
